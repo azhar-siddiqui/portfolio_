@@ -256,7 +256,7 @@ export const DATA = {
     },
     {
       title: "North Eastern University → Academic Management",
-      href: "",
+      href: "https://www.northeastern.edu/",
       dates: "Apr 2022 – Jun 2023",
       active: true,
       description:
@@ -265,7 +265,7 @@ export const DATA = {
     },
     {
       title: "Glixcel → Tutor Marketplace EdTech",
-      href: "",
+      href: "https://www.behance.net/gallery/176474575/Glixcel-Online-Class",
       dates: "Aug 2020 – Sep 2021",
       active: true,
       description:

@@ -71,7 +71,7 @@ export const ResumeCard = ({
             </h3>
           </div>
           <div className="flex flex-wrap gap-2 mt-1 items-center">
-            <div className="text-xs tabular-nums text-muted-foreground text-right">
+            <div className="text-sm tabular-nums text-muted-foreground text-right">
               {period}
             </div>
             {badges && badges.length > 0
@@ -82,7 +82,7 @@ export const ResumeCard = ({
                 ))
               : null}
           </div>
-          {subtitle && <div className="font-sans text-xs mt-1">{subtitle}</div>}
+          {subtitle && <div className="font-sans text-sm mt-1">{subtitle}</div>}
         </div>
       </div>
       {description && (
@@ -96,7 +96,7 @@ export const ResumeCard = ({
             duration: 0.7,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="mt-4 text-xs"
+          className="mt-4 text-sm"
         >
           {description}
         </motion.div>
