@@ -2,9 +2,10 @@ import { DATA } from "@/data/resume";
 
 interface ResumeTemplateProps {
   theme: "light" | "dark";
+  avatarBase64?: string | null;
 }
 
-export function ResumeTemplate({ theme }: ResumeTemplateProps) {
+export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
   const isDark = theme === "dark";
 
   const colors = {
@@ -57,18 +58,19 @@ export function ResumeTemplate({ theme }: ResumeTemplateProps) {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
       <style>
-        body {
+        html, body {
           font-family: 'Inter', system-ui, sans-serif;
           background-color: ${c.bg};
           color: ${c.text};
           line-height: 1.6;
           margin: 0;
           padding: 0;
+          height: 100%;
         }
         .resume-container {
           max-width: 210mm;
           margin: 0 auto;
-          padding: 10mm;
+          padding: 20mm;
           background-color: ${c.bg};
           box-sizing: border-box;
         }
@@ -132,7 +134,7 @@ export function ResumeTemplate({ theme }: ResumeTemplateProps) {
               ).join('')}
             </div>
           </div>
-          ${DATA.avatarUrl ? `<img src="${DATA.avatarUrl}" alt="${DATA.name}" class="avatar ml-6">` : ''}
+          ${avatarBase64 ? `<img src="${avatarBase64}" alt="${DATA.name}" class="avatar ml-6">` : ''}
         </header>
 
         <!-- Summary -->

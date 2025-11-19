@@ -5,6 +5,7 @@ import chromium from '@sparticuz/chromium';
 import { ResumeTemplate } from '@/components/ResumeTemplate';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { DATA } from '@/data/resume';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -12,6 +13,19 @@ export async function GET(request: Request) {
 
   let browser = null;
   try {
+    // Read and convert avatar to base64
+    let avatarBase64 = null;
+    if (DATA.avatarUrl) {
+      try {
+        const avatarPath = path.join(process.cwd(), 'public', DATA.avatarUrl.replace('/', ''));
+        const avatarBuffer = await fs.readFile(avatarPath);
+        const mimeType = path.extname(DATA.avatarUrl).toLowerCase() === '.png' ? 'image/png' : 'image/jpeg';
+        avatarBase64 = `data:${mimeType};base64,${avatarBuffer.toString('base64')}`;
+      } catch (error) {
+        console.warn('Could not load avatar image:', error);
+      }
+    }
+
     // Launch browser with proper configuration for Vercel/serverless
     browser = await puppeteer.launch(
       process.env.VERCEL
@@ -36,7 +50,7 @@ export async function GET(request: Request) {
     const page = await browser.newPage();
 
     // Generate HTML content
-    const htmlContent = ResumeTemplate({ theme });
+    const htmlContent = ResumeTemplate({ theme, avatarBase64 });
 
     // Set content and wait for everything to load
     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
@@ -53,17 +67,17 @@ export async function GET(request: Request) {
     // Add some padding
     const pdfHeight = contentHeight + 40; // Add 40px padding
 
-    // Generate PDF with dynamic height
+    // Generate PDF with dynamic height (no margins to ensure full background coverage)
     const pdf = await page.pdf({
       width: '210mm',
       height: `${pdfHeight}px`,
       printBackground: true,
       margin: {
-        top: '10mm',
-        bottom: '10mm',
-        left: '10mm',
-        right: '10mm',
-      },
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }, // Remove margins to allow background to cover entire page
       pageRanges: '1', // Ensure single page
       preferCSSPageSize: false,
       displayHeaderFooter: false,
