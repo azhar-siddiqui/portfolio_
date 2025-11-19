@@ -34,17 +34,14 @@ export async function GET(request: Request) {
         const executablePath = await chromium.executablePath();
         launchOptions = {
           args: chromium.args,
-          defaultViewport: chromium.defaultViewport,
           executablePath,
-          headless: chromium.headless,
+          headless: true,
         };
       } catch (error) {
         console.error('Failed to get chromium executable path:', error);
         // Fallback configuration
         launchOptions = {
           args: chromium.args,
-          defaultViewport: chromium.defaultViewport,
-          headless: chromium.headless,
           channel: 'chrome',
         };
       }
