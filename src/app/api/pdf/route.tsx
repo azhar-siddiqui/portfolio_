@@ -32,7 +32,6 @@ export async function GET(request: Request) {
         ? {
             args: chromium.args,
             defaultViewport: (chromium as any).defaultViewport,
-            executablePath: await chromium.executablePath(),
             headless: (chromium as any).headless,
           }
         : {
