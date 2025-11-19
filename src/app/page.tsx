@@ -1,22 +1,21 @@
-import { HackathonCard } from "@/components/hackathon-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
+import { DownloadResumeButton } from "@/components/download-resume-button";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
-import Link from "next/link";
 import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
   return (
-    <main className="flex flex-col min-h-screen space-y-10">
+    <main id="resume-content" className="flex flex-col min-h-screen space-y-10">
       <section id="hero">
         <div className="mx-auto w-full max-w-4xl space-y-8">
-          <div className="gap-2 flex justify-between">
+          <div className="flex flex-col sm:flex-row gap-4 sm:justify-between sm:items-center">
             <div className="flex-col flex flex-1 space-y-1.5">
               <BlurFadeText
                 delay={BLUR_FADE_DELAY}
@@ -37,6 +36,7 @@ export default function Page() {
               </Avatar>
             </BlurFade>
           </div>
+          <DownloadResumeButton />
         </div>
       </section>
       <section id="about">

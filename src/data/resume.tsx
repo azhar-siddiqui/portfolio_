@@ -11,7 +11,7 @@ export const DATA = {
     "Experienced leader in building custom software solutions for maritime, logistics, education and various other industries. Skilled at creating user-friendly, scalable platforms that boost efficiency, reduce costs, and drive growth for businesses. Proven ability to solve complex business problems.",
   summary:
     "Experienced Senior Associate Consultant with a proven track record in leading frontend development for maritime, logistics, and education sectors. Skilled in creating user-friendly, scalable platforms using modern technologies like React, TypeScript, and Node.js. Demonstrated ability to solve complex business problems, enhance operational efficiency, and drive growth through innovative software solutions. Passionate about mentoring teams, collaborating with clients, and delivering high-quality, impactful software that meets business goals and improves user experiences.",
-  avatarUrl: "https://gravatar.com/avatar/402d402507b04fa69fe53dd6cec9e2c8c0dd88e7860d1446c97d8a2f1bf4d5ad?v=1763277731000&size=256&d=initials",
+  avatarUrl: "/me.png",
   skills: [
     "React",
     "React Native",
@@ -59,10 +59,7 @@ export const DATA = {
     "Caching",
     "Performance Optimization",
   ],
-  navbar: [
-    { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
-  ],
+  navbar: [{ href: "/", icon: HomeIcon, label: "Home" }],
   contact: {
     email: "reachtozahid@gmail.com",
     tel: "+91 8806544670",
@@ -71,7 +68,6 @@ export const DATA = {
         name: "GitHub",
         url: "https://github.com/The-Lone-Druid",
         icon: Icons.github,
-
         navbar: true,
       },
       LinkedIn: {
@@ -81,18 +77,11 @@ export const DATA = {
 
         navbar: true,
       },
-      Portfolio: {
-        name: "Portfolio",
-        url: "https://zahidshaik.space",
-        icon: Icons.globe,
-        navbar: true,
-      },
-      email: {
+      Email: {
         name: "Send Email",
         url: "mailto:reachtozahid@gmail.com",
         icon: Icons.email,
-
-        navbar: false,
+        navbar: true,
       },
     },
   },
@@ -140,7 +129,7 @@ export const DATA = {
       school: "Abeda Inamdar Senior College of Arts, Science and Commerce",
       href: "https://abedainamdarcollege.org.in/",
       degree: "Bachelor of Computer Applications (BCA) - CGPA: 9.00/10",
-      logoUrl: "/abeda.png",
+      logoUrl: "",
       start: "2018",
       end: "2021",
     },

@@ -142,3 +142,35 @@ code[data-line-numbers-max-digits="2"] > [data-line]::before {
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
 }
+
+@media print {
+  @page {
+    size: 8.5in 20in;
+    margin: 0.5in;
+  }
+  body {
+    font-size: 12px;
+  }
+  .no-print {
+    display: none !important;
+  }
+  a {
+    color: blue !important;
+    text-decoration: underline !important;
+  }
+  .blur-fade {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  main {
+    display: block !important;
+  }
+  section {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+}
