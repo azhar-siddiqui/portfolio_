@@ -104,8 +104,8 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           text-decoration: underline;
         }
         .avatar {
-          width: 80px;
-          height: 80px;
+          width: 120px;
+          height: 120px;
           border-radius: 50%;
           border: 3px solid ${c.accent};
           object-fit: cover;
@@ -118,7 +118,8 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     <body class="${isDark ? 'dark' : ''}">
       <div class="resume-container">
         <!-- Header -->
-        <header class="flex justify-between items-start mb-8">
+        <header class="flex items-start gap-8 mb-8">
+          ${avatarBase64 ? `<img src="${avatarBase64}" alt="${DATA.name}" class="avatar flex-shrink-0">` : ''}
           <div class="flex-1">
             <h1 class="text-4xl font-bold tracking-tight mb-2" style="color: ${c.text};">${DATA.name}</h1>
             <div class="flex flex-wrap items-center gap-3 text-sm mb-3" style="color: ${c.muted};">
@@ -134,7 +135,6 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               ).join('')}
             </div>
           </div>
-          ${avatarBase64 ? `<img src="${avatarBase64}" alt="${DATA.name}" class="avatar ml-6">` : ''}
         </header>
 
         <!-- Summary -->
