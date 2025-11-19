@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "postinstall": "node scripts/download-chromium.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "node -e \"require('@sparticuz/chromium-min')\""
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.6",
@@ -15,7 +15,7 @@
     "@radix-ui/react-separator": "^1.1.4",
     "@radix-ui/react-slot": "^1.2.0",
     "@radix-ui/react-tooltip": "^1.2.3",
-    "@sparticuz/chromium-min": "^141.0.0",
+    "@sparticuz/chromium-min": "^129.0.0",
     "@types/mdx": "^2.0.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -25,7 +25,7 @@
     "motion": "^12.7.4",
     "next": "14.2.4",
     "next-themes": "^0.3.0",
-    "puppeteer-core": "^24.30.0",
+    "puppeteer-core": "^23.5.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.1.0",
@@ -40,6 +40,7 @@
     "unified": "^11.0.5"
   },
   "devDependencies": {
+    "puppeteer": "^23.5.3",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20.17.30",
     "@types/react": "^18.3.20",
