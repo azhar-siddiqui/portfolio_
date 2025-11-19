@@ -2,15 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { Download, Loader2, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function DownloadResumeButton() {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLocal, setIsLocal] = useState(false);
 
-  // Only show in local development
-  const isLocal = typeof window !== 'undefined' && 
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+  useEffect(() => {
+    setIsLocal(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+  }, []);
 
   if (!isLocal) {
     return null;
