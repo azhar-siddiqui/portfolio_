@@ -31,19 +31,20 @@ export async function GET(request: Request) {
 
     if (process.env.VERCEL) {
       try {
+        const executablePath = await chromium.executablePath();
         launchOptions = {
           args: chromium.args,
-          defaultViewport: (chromium as any).defaultViewport,
-          executablePath: chromium.executablePath(),
-          headless: (chromium as any).headless,
+          defaultViewport: chromium.defaultViewport,
+          executablePath,
+          headless: chromium.headless,
         };
       } catch (error) {
         console.error('Failed to get chromium executable path:', error);
         // Fallback configuration
         launchOptions = {
           args: chromium.args,
-          defaultViewport: (chromium as any).defaultViewport,
-          headless: (chromium as any).headless,
+          defaultViewport: chromium.defaultViewport,
+          headless: chromium.headless,
           channel: 'chrome',
         };
       }
