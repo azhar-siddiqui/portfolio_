@@ -1,7 +1,7 @@
 // app/api/pdf/route.tsx
 import { NextResponse } from 'next/server';
 import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
+import chromium from '@sparticuz/chromium-min';
 import { ResumeTemplate } from '@/components/ResumeTemplate';
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -27,24 +27,40 @@ export async function GET(request: Request) {
     }
 
     // Launch browser with proper configuration for Vercel/serverless
-    browser = await puppeteer.launch(
-      process.env.VERCEL
-        ? {
-            args: chromium.args,
-            defaultViewport: (chromium as any).defaultViewport,
-            headless: (chromium as any).headless,
-          }
-        : {
-            executablePath:
-              process.platform === 'win32'
-                ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
-                : process.platform === 'darwin'
-                ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-                : '/usr/bin/google-chrome',
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
-          }
-    );
+    let launchOptions: any = {};
+
+    if (process.env.VERCEL) {
+      try {
+        launchOptions = {
+          args: chromium.args,
+          defaultViewport: (chromium as any).defaultViewport,
+          executablePath: chromium.executablePath(),
+          headless: (chromium as any).headless,
+        };
+      } catch (error) {
+        console.error('Failed to get chromium executable path:', error);
+        // Fallback configuration
+        launchOptions = {
+          args: chromium.args,
+          defaultViewport: (chromium as any).defaultViewport,
+          headless: (chromium as any).headless,
+          channel: 'chrome',
+        };
+      }
+    } else {
+      launchOptions = {
+        executablePath:
+          process.platform === 'win32'
+            ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+            : process.platform === 'darwin'
+            ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+            : '/usr/bin/google-chrome',
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      };
+    }
+
+    browser = await puppeteer.launch(launchOptions);
 
     const page = await browser.newPage();
 
