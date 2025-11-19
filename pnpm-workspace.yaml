@@ -1,3 +1,7 @@
+ignoredBuiltDependencies:
+  - puppeteer
+
 onlyBuiltDependencies:
   - core-js
+  - puppeteer
   - unrs-resolver

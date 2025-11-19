@@ -36,27 +36,33 @@ export const ResumeCard = ({
   };
 
   return (
-    <a
-      href={href || "#"}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block cursor-pointer"
-    >
-      <Card className="flex flex-col bg-primary/5 p-4">
-        <div className="flex flex-row gap-2">
-          <div className="flex justify-center sm:flex-none">
-            <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
-              <AvatarImage
-                src={logoUrl}
-                alt={altText}
-                className="object-contain"
-              />
-              <AvatarFallback>{altText[0]}</AvatarFallback>
-            </Avatar>
-          </div>
-          <div className="flex-grow mt-4 sm:ml-4 sm:mt-0 flex flex-col">
-            <h3 className={`font-semibold leading-none text-xs sm:text-sm ${href && href !== "#" ? "text-blue-500 hover:underline" : ""}`}>
-              {title}
+    <Card className="flex flex-col bg-primary/5 p-4">
+      <div className="flex flex-row gap-2">
+        <div className="flex justify-center sm:flex-none">
+          <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
+            <AvatarImage
+              src={logoUrl}
+              alt={altText}
+              className="object-contain"
+            />
+            <AvatarFallback>{altText[0]}</AvatarFallback>
+          </Avatar>
+        </div>
+        <div className="flex-grow mt-4 sm:ml-4 sm:mt-0 flex flex-col">
+          <div className="flex items-center justify-between gap-x-2 text-base">
+            <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
+              {href ? (
+                <Link
+                  href={href}
+                  target="_blank"
+                  className="flex items-center gap-1 hover:underline text-blue-500"
+                >
+                  {title}
+                  <ChevronRightIcon className="size-4" />
+                </Link>
+              ) : (
+                title
+              )}
               {badges && (
                 <span className="inline-flex gap-x-1 ml-2">
                   {badges.map((badge, index) => (
@@ -71,29 +77,29 @@ export const ResumeCard = ({
                 </span>
               )}
             </h3>
-            {subtitle && <div className="font-sans text-xs mt-1">{subtitle}</div>}
-            <div className="text-xs sm:text-sm tabular-nums text-muted-foreground mt-1">
+            <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
               {period}
             </div>
           </div>
+          {subtitle && <div className="font-sans text-xs mt-1">{subtitle}</div>}
         </div>
-        {description && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{
-              opacity: isExpanded ? 1 : 0,
-              height: isExpanded ? "auto" : 0,
-            }}
-            transition={{
-              duration: 0.7,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="mt-4 text-xs sm:text-sm"
-          >
-            {description}
-          </motion.div>
-        )}
-      </Card>
-    </a>
+      </div>
+      {description && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{
+            opacity: isExpanded ? 1 : 0,
+            height: isExpanded ? "auto" : 0,
+          }}
+          transition={{
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="mt-4 text-xs sm:text-sm"
+        >
+          {description}
+        </motion.div>
+      )}
+    </Card>
   );
 };
