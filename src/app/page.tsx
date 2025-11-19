@@ -8,11 +8,15 @@ import Markdown from "react-markdown";
 
 export default function Page() {
   return (
-    <main id="resume-content" className="flex flex-col min-h-screen space-y-10">
+    <main id="resume-content" className="flex flex-col min-h-screen space-y-12 sm:space-y-10">
       <section id="hero">
         <div className="mx-auto w-full max-w-4xl space-y-8">
           <div className="flex flex-col sm:flex-row gap-4 sm:justify-between sm:items-center">
-            <div className="flex-col flex flex-1 space-y-1.5">
+            <Avatar className="size-28 border sm:order-last">
+              <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+              <AvatarFallback>{DATA.initials}</AvatarFallback>
+            </Avatar>
+            <div className="flex-col flex flex-1 space-y-1.5 order-last sm:order-first">
               <span className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                 {`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
               </span>
@@ -20,10 +24,6 @@ export default function Page() {
                 {DATA.description}
               </span>
             </div>
-            <Avatar className="size-28 border">
-              <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-              <AvatarFallback>{DATA.initials}</AvatarFallback>
-            </Avatar>
           </div>
           <DownloadResumeButton />
         </div>
@@ -35,7 +35,7 @@ export default function Page() {
         </Markdown>
       </section>
       <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-3">
+        <div className="flex min-h-0 flex-col gap-y-4">
           <h2 className="text-xl font-bold">Work Experience</h2>
           {DATA.work.map((work, id) => (
             <ResumeCard
@@ -53,7 +53,7 @@ export default function Page() {
         </div>
       </section>
       <section id="education">
-        <div className="flex min-h-0 flex-col gap-y-3">
+        <div className="flex min-h-0 flex-col gap-y-4">
           <h2 className="text-xl font-bold">Education</h2>
           {DATA.education.map((education, id) => (
             <ResumeCard
@@ -81,7 +81,7 @@ export default function Page() {
       <section id="projects">
         <div className="flex min-h-0 flex-col gap-y-3">
           <h2 className="text-xl font-bold">Projects</h2>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mx-auto">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {DATA.projects.map((project, id) => (
               <ProjectCard
                 href={project.href}
@@ -90,9 +90,6 @@ export default function Page() {
                 description={project.description}
                 dates={project.dates}
                 tags={project.technologies}
-                image={project.image}
-                video={project.video}
-                links={project.links}
               />
             ))}
           </div>

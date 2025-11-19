@@ -101,7 +101,7 @@ export const DATA = {
     {
       company: "Glixcel",
       href: "",
-      badges: ["Internship → Full-time"],
+      badges: [],
       location: "Remote",
       title: "Full-Stack Developer",
       logoUrl: "",
@@ -256,6 +256,7 @@ export const DATA = {
     },
     {
       title: "North Eastern University → Academic Management",
+      href: "",
       dates: "Apr 2022 – Jun 2023",
       active: true,
       description:
@@ -264,6 +265,7 @@ export const DATA = {
     },
     {
       title: "Glixcel → Tutor Marketplace EdTech",
+      href: "",
       dates: "Aug 2020 – Sep 2021",
       active: true,
       description:

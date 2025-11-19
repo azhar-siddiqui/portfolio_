@@ -36,21 +36,27 @@ export const ResumeCard = ({
   };
 
   return (
-    <Card className="flex flex-col bg-primary/5 p-4">
+    <Card className="flex flex-col bg-primary/5 p-3 sm:p-4">
       <div className="flex flex-row gap-2">
-        <div className="flex justify-center sm:flex-none">
-          <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
-            <AvatarImage
-              src={logoUrl}
-              alt={altText}
-              className="object-contain"
-            />
-            <AvatarFallback>{altText[0]}</AvatarFallback>
-          </Avatar>
-        </div>
-        <div className="flex-grow mt-4 sm:ml-4 sm:mt-0 flex flex-col">
+        {logoUrl && (
+          <div className="flex justify-center sm:flex-none">
+            <Avatar className="border size-8 sm:size-12 m-auto bg-muted-background dark:bg-foreground">
+              <AvatarImage
+                src={logoUrl}
+                alt={altText}
+                className="object-contain"
+              />
+              <AvatarFallback>{altText[0]}</AvatarFallback>
+            </Avatar>
+          </div>
+        )}
+        <div
+          className={`flex-grow ${
+            logoUrl ? "mt-2 sm:ml-4 sm:mt-0" : ""
+          } flex flex-col`}
+        >
           <div className="flex items-center justify-between gap-x-2 text-base">
-            <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
+            <h3 className="inline-flex items-center justify-center font-semibold leading-none text-base">
               {href ? (
                 <Link
                   href={href}
@@ -58,28 +64,23 @@ export const ResumeCard = ({
                   className="flex items-center gap-1 hover:underline text-blue-500"
                 >
                   {title}
-                  <ChevronRightIcon className="size-4" />
                 </Link>
               ) : (
                 title
               )}
-              {badges && (
-                <span className="inline-flex gap-x-1 ml-2">
-                  {badges.map((badge, index) => (
-                    <Badge
-                      variant="secondary"
-                      className="align-middle text-xs"
-                      key={index}
-                    >
-                      {badge}
-                    </Badge>
-                  ))}
-                </span>
-              )}
             </h3>
-            <div className="text-xs sm:text-sm tabular-nums text-muted-foreground text-right">
+          </div>
+          <div className="flex flex-wrap gap-2 mt-1 items-center">
+            <div className="text-xs tabular-nums text-muted-foreground text-right">
               {period}
             </div>
+            {badges && badges.length > 0
+              ? badges.map((badge, index) => (
+                  <Badge variant="secondary" className="text-xs" key={index}>
+                    {badge}
+                  </Badge>
+                ))
+              : null}
           </div>
           {subtitle && <div className="font-sans text-xs mt-1">{subtitle}</div>}
         </div>
@@ -95,7 +96,7 @@ export const ResumeCard = ({
             duration: 0.7,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="mt-4 text-xs sm:text-sm"
+          className="mt-4 text-xs"
         >
           {description}
         </motion.div>
