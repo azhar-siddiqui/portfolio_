@@ -62,18 +62,18 @@ export const DATA = {
   },
 
   work: [
-    {
-      company: "Centeuno Technologies",
-      href: "https://centeuno.com",
-      badges: ["Current"],
-      location: "Pune, India",
-      title: "Co-founder & Lead Product Builder",
-      logoUrl: "",
-      start: "Nov 2025",
-      end: "Present",
-      description:
-        "Co-building the next profitable software product company from Pune. Currently defining strategic direction and shipping revenue-generating products for Indian and global clients.",
-    },
+    // {
+    //   company: "Centeuno Technologies",
+    //   href: "https://centeuno.com",
+    //   badges: ["Current"],
+    //   location: "Pune, India",
+    //   title: "Co-founder & Lead Product Builder",
+    //   logoUrl: "",
+    //   start: "Nov 2025",
+    //   end: "Present",
+    //   description:
+    //     "Co-building the next profitable software product company from Pune. Currently defining strategic direction and shipping revenue-generating products for Indian and global clients.",
+    // },
     {
       company: "Kiya.ai",
       href: "https://kiya.ai",
