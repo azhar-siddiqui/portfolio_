@@ -105,17 +105,16 @@ export default function Page() {
               Get in Touch
             </h2>
             <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Want to chat? Just shoot me a dm{" "}
+              Feel free to connect with me on{" "}
               <a
                 href={DATA.contact.social.LinkedIn.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline"
               >
-                with a direct message on LinkedIn
+                LinkedIn
               </a>{" "}
-              and I&apos;ll respond whenever I can. I will ignore all
-              soliciting.
+              for opportunities and discussions. I respond to direct messages promptly and focus exclusively on relevant professional inquiries.
             </p>
           </div>
         </div>

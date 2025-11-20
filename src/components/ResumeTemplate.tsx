@@ -70,7 +70,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         .resume-container {
           max-width: 210mm;
           margin: 0 auto;
-          padding: 20mm;
+          padding: 10mm;
           background-color: ${c.bg};
           box-sizing: border-box;
         }
