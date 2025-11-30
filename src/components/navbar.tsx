@@ -10,6 +10,7 @@ import {
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
 export default function Navbar() {
   return (
@@ -61,7 +62,7 @@ export default function Navbar() {
           ))}
         <Separator orientation="vertical" className="h-full py-2" />
         <DockIcon>
-          <ModeToggle />
+          <AnimatedThemeToggler />
         </DockIcon>
       </Dock>
     </div>

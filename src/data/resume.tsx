@@ -10,31 +10,62 @@ export const DATA = {
   description:
     "I build software that directly increases revenue, cuts operational costs, ensures regulatory compliance, and scales operations — for maritime giants, logistics operators, banks, EdTech startups, NGOs, e-commerce stores, and everything in between.",
   summary:
-    "Over the last 5 years I have delivered 15+ mission-critical products from scratch across 10 completely different industries. Every single one generated measurable ROI: 30–70% faster decisions, 40% less downtime, 3x higher user engagement, or brand-new revenue streams. I work with founders, CXOs and investors who need someone that understands both business problems and how to ship reliable, scalable solutions extremely fast.",
+    "Over the last 5 years, I've delivered 15+ mission-critical products from scratch across 10 diverse industries, generating measurable ROI like 30–70% faster decisions, 40% less downtime, 3x user engagement, or new revenue streams. I collaborate with founders, CXOs, and investors to translate business challenges into reliable, scalable solutions shipped at high velocity.",
   avatarUrl: "/me.png",
-  skills: [
-    "React",
-    "React Native",
-    "TypeScript",
-    "Node.js",
-    "Electron.js",
-    "Angular",
-    "Ionic",
-    "TanStack Stack",
-    "Redux / RTK",
-    "TailwindCSS",
-    "Shadcn/Radix",
-    "Mapbox",
-    "AG Grid",
-    "HighCharts",
-    "PWA",
-    "SQLite",
-    "Prisma",
-    "Docker",
-    "GitHub Actions",
-    "Cypress",
-    "Jest",
-  ],
+  skills: {
+    frontend: [
+      { name: "React", color: null, icon: "react" },
+      { name: "Next.js", color: "#ffffff", icon: "nextdotjs" },
+      { name: "React Native", color: null, icon: "react" },
+      { name: "Angular", color: "#dd0031", icon: "angular" },
+      { name: "Vue.js", color: null, icon: "vuedotjs" },
+      { name: "Svelte", color: null, icon: "svelte" },
+      { name: "Ionic", color: null, icon: "ionic" },
+      { name: "Capacitor.js", color: null, icon: "capacitor" },
+      { name: "TanStack", color: "#ffffff", icon: "tanstack" },
+      { name: "Redux/RTK", color: null, icon: "redux" },
+      { name: "TailwindCSS", color: null, icon: "tailwindcss" },
+      { name: "Shadcn", color: "#ffffff", icon: "radixui" },
+      { name: "Material UI", color: null, icon: "mui" },
+      { name: "Bootstrap", color: null, icon: "bootstrap" },
+      { name: "Mapbox", color: "#ffffff", icon: "mapbox" },
+      { name: "AG Grid", color: null, icon: "aggrid" },
+      { name: "HighCharts", color: null, icon: "highcharts" },
+      { name: "Chart.js", color: null, icon: "chartdotjs" },
+      { name: "PWA", color: null, icon: "pwa" },
+    ],
+    backend: [
+      { name: "Node.js", color: null, icon: "nodedotjs" },
+      { name: "TypeScript", color: null, icon: "typescript" },
+      { name: "Express.js", color: "#ffffff", icon: "express" },
+      { name: "NestJS", color: null, icon: "nestjs" },
+      { name: "Electron.js", color: null, icon: "electron" },
+      { name: "SQLite", color: null, icon: "sqlite" },
+      { name: "Prisma", color: null, icon: "prisma" },
+      { name: "Convex", color: null, icon: null },
+      { name: "Firebase", color: null, icon: "firebase" },
+      { name: "MongoDB", color: null, icon: "mongodb" },
+      { name: "PostgreSQL", color: null, icon: "postgresql" },
+    ],
+    devops: [
+      { name: "Docker", color: null, icon: "docker" },
+      { name: "Kubernetes", color: null, icon: "kubernetes" },
+      { name: "GitHub Actions", color: null, icon: "githubactions" },
+      { name: "Azure DevOps CI/CD", color: null, icon: "azuredevops" },
+      { name: "Vercel", color: "#ffffff", icon: "vercel" },
+      { name: "Netlify", color: null, icon: "netlify" },
+      { name: "AWS", color: null, icon: "amazonwebservices" },
+      { name: "New Relic", color: null, icon: "newrelic" },
+      { name: "Sentry", color: null, icon: "sentry" },
+    ],
+    testing: [
+      { name: "Cypress", color: null, icon: "cypress" },
+      { name: "Jest", color: null, icon: "jest" },
+      { name: "Playwright", color: null, icon: "playwright" },
+      { name: "Vitest", color: null, icon: "vitest" },
+      { name: "Testing Library", color: null, icon: "testinglibrary" },
+    ],
+  },
   navbar: [{ href: "/", icon: HomeIcon, label: "Home" }],
   contact: {
     email: "reachtozahid@gmail.com",
@@ -62,29 +93,17 @@ export const DATA = {
   },
 
   work: [
-    // {
-    //   company: "Centeuno Technologies",
-    //   href: "https://centeuno.com",
-    //   badges: ["Current"],
-    //   location: "Pune, India",
-    //   title: "Co-founder & Lead Product Builder",
-    //   logoUrl: "",
-    //   start: "Nov 2025",
-    //   end: "Present",
-    //   description:
-    //     "Co-building the next profitable software product company from Pune. Currently defining strategic direction and shipping revenue-generating products for Indian and global clients.",
-    // },
     {
       company: "Kiya.ai",
       href: "https://kiya.ai",
       badges: [],
       location: "Remote",
       title: "Senior Associate Consultant",
-      logoUrl: "",
+      logoUrl: "", // Add logo if available
       start: "Feb 2024",
       end: "Nov 2025",
       description:
-        "Owned and delivered custom enterprise platforms for global maritime and logistics clients (Hafnia, OceanPass). Enabled offline-first operations across 100+ tankers, automated regulatory reporting (CII, EEDI, Poseidon Principles), cut fleet decision-making time by 30%, reduced downtime 40%, and saved millions in fuel and compliance penalties.",
+        "Led delivery of custom enterprise platforms for global maritime clients like Hafnia and OceanPass. Implemented offline-first operations for 100+ tankers, automated regulatory reporting (CII, EEDI, Poseidon Principles), reduced decision time by 30%, downtime by 40%, and saved millions in fuel/compliance costs. Used Azure DevOps for CI/CD and Sentry for monitoring.",
     },
     {
       company: "Rightbrain Infotech",
@@ -92,23 +111,23 @@ export const DATA = {
       badges: [],
       location: "Remote",
       title: "Senior Software Engineer",
-      logoUrl: "",
+      logoUrl: "", // Add logo if available
       start: "Sep 2021",
       end: "Jan 2024",
       description:
-        "Designed and shipped revenue-generating platforms for finance, education, urban logistics, and social-impact organizations. Mentored teams, translated complex stakeholder requirements into working products, and consistently delivered solutions that increased user adoption, operational efficiency, and direct profit.",
+        "Designed and launched 8+ revenue-generating platforms across finance, education, logistics, and social impact. Mentored junior teams, converted stakeholder needs into efficient products, and drove gains in user adoption, efficiency, and profitability. Shipped features with real-time data handling and offline capabilities.",
     },
     {
       company: "Glixcel",
-      href: "",
+      href: "", // Add if available
       badges: [],
       location: "Remote",
       title: "Full-Stack Developer",
-      logoUrl: "",
+      logoUrl: "", // Add logo if available
       start: "Aug 2020",
       end: "Sep 2021",
       description:
-        "Built and scaled an EdTech marketplace from zero that connected thousands of tutors and students across India, integrated payments, and drove the company’s first profitable quarters.",
+        "Built and scaled an EdTech marketplace from scratch, connecting thousands of tutors and students in India. Integrated secure payments and real-time scheduling, leading to the company's first profitable quarters.",
     },
   ],
 
@@ -117,7 +136,7 @@ export const DATA = {
       school: "Abeda Inamdar Senior College of Arts, Science and Commerce",
       href: "https://abedainamdarcollege.org.in/",
       degree: "Bachelor of Computer Applications (BCA) — CGPA 9.00/10",
-      logoUrl: "",
+      logoUrl: "", // Add logo if available
       start: "2018",
       end: "2021",
     },
@@ -127,19 +146,22 @@ export const DATA = {
     {
       title: "R Batteries Store",
       href: "https://rbatteries.store/",
-      dates: "Nov 2025 – Present",
+      dates: "Nov 2025 – Nov 2025",
+      company: "",
       active: true,
       description:
-        "Built a complete e-commerce platform for Pune’s largest battery retailer. Customers now order Exide, Amaron & Luminous batteries with doorstep delivery in hours. Added reviews, battery-care guides, and instant quotes — driving 3x higher online sales in the first month.",
+        "Developed a full e-commerce platform for Pune's largest battery retailer, enabling doorstep delivery of brands like Exide, Amaron, and Luminous. Integrated reviews, care guides, and instant quotes; overcame challenges in real-time inventory sync and mobile optimization using service workers for PWA.",
       technologies: ["Next.js", "TypeScript", "TailwindCSS", "Node.js", "PWA"],
+      impact: "3x higher online sales in the first month.",
     },
     {
       title: "OceanPass → Emissions Intelligence Platform",
       href: "https://oceanpass.com",
       dates: "Feb 2025 – Jun 2025",
+      company: "Kiya.ai",
       active: true,
       description:
-        "Single-handedly created an offline-first emissions tracking and compliance platform for global shipping fleets. Automated CII, EEDI & Poseidon Principles reporting, reduced manual paperwork by 95%, cut fleet downtime 40%, and made million-dollar penalty avoidance automatic.",
+        "Solo-built an offline-first desktop app for global shipping emissions tracking. Automated reporting for CII, EEDI, and Poseidon Principles; handled offline sync via service workers and local storage for remote fleets, addressing connectivity issues in maritime environments.",
       technologies: [
         "React",
         "Electron.js",
@@ -148,14 +170,17 @@ export const DATA = {
         "Prisma",
         "TanStack Query",
       ],
+      impact:
+        "95% less paperwork, 40% reduced downtime, avoided million-dollar penalties.",
     },
     {
       title: "Hafnia Universe → Global Tanker Operations Platform",
       href: "https://hafnia.com",
       dates: "Feb 2024 – Nov 2025",
+      company: "Kiya.ai",
       active: true,
       description:
-        "Owned end-to-end delivery of a real-time operations dashboard used by one of the world’s largest tanker fleets (100+ vessels). Delivered live maps, weather routing, analytics, and sustainability tracking → accelerated decisions 30%, reduced fuel waste, and improved safety/compliance across oceans.",
+        "End-to-end ownership of a real-time dashboard for 100+ vessels. Integrated live maps, weather routing, and analytics; optimized for performance with caching and data structures like graphs for route calculations, ensuring low-latency updates across global operations.",
       technologies: [
         "React",
         "React Native",
@@ -164,14 +189,17 @@ export const DATA = {
         "AG Grid",
         "HighCharts",
       ],
+      impact:
+        "30% faster decisions, reduced fuel waste, improved safety/compliance.",
     },
     {
       title: "SpotFinder → Urban Parking Logistics",
       href: "https://apps.apple.com/in/app/spotfinder-india/id6448868015",
       dates: "Apr 2022 – Oct 2022",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Built a real-time parking reservation system that eliminated 70% of vehicle search time in metro cities and opened a brand-new revenue line for warehouse owners and truck fleet operators. Instant booking + payment + RBAC admin portal, live in 6 months.",
+        "Created a real-time parking reservation app with instant bookings and payments. Built RBAC admin portal; addressed urban scalability with geolocation APIs and payment gateways, handling high-traffic metro scenarios.",
       technologies: [
         "React",
         "React Native",
@@ -180,14 +208,17 @@ export const DATA = {
         "Stripe",
         "Razorpay",
       ],
+      impact:
+        "70% less vehicle search time, new revenue for operators; launched in 6 months.",
     },
     {
       title: "Drivers In India → On-demand Verified Chauffeurs",
       href: "http://driversinindia.com/",
       dates: "Oct 2021 – Nov 2021",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Revamped and expanded a professional driver-on-demand booking platform. Delivered new landing pages, responsive web enhancements, and a full cross-platform mobile app — enabling 24/7 verified driver hires, streamlined rental operations, and new revenue from premium services across India.",
+        "Revamped a driver-on-demand platform with new landing pages and cross-platform mobile app. Enabled 24/7 bookings and premium services; tackled responsiveness and PWA offline support for nationwide users.",
       technologies: [
         "WordPress",
         "Angular",
@@ -196,14 +227,16 @@ export const DATA = {
         "TailwindCSS",
         "PWA",
       ],
+      impact: "Streamlined operations, new revenue from premium services.",
     },
     {
       title: "Thinkster → AI Math Coaching for Kids",
       href: "https://hellothinkster.com",
       dates: "Jan 2023 – Sep 2023",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Created the entire student experience (web + mobile) for an AI-powered math learning platform. Interactive lessons, gamification, and adaptive UX increased student participation 3x and became one of their highest-retention features.",
+        "Built the full student experience for an AI math platform, including interactive lessons and gamification. Used adaptive UX with state management; resolved cross-device compatibility for web/mobile to boost retention.",
       technologies: [
         "Angular",
         "React Native",
@@ -211,14 +244,16 @@ export const DATA = {
         "TailwindCSS",
         "RxJS",
       ],
+      impact: "3x student participation, highest-retention feature.",
     },
     {
       title: "Safe Water Network → Field Operations Platform",
       href: "https://safewaternetwork.org",
       dates: "Dec 2022 – Sep 2023",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Modernized water-meter reading and consumption tracking for rural & semi-urban India. Upgraded legacy systems into offline-capable mobile + web apps, reduced operational costs, and ensured clean water reached thousands more households reliably.",
+        "Modernized legacy water tracking systems into offline-capable apps for rural India. Integrated custom UI libraries; overcame data sync challenges in low-connectivity areas to ensure reliable access for thousands of households.",
       technologies: [
         "Angular",
         "React Native",
@@ -226,50 +261,60 @@ export const DATA = {
         "PWA",
         "Custom UI Library",
       ],
+      impact: "Reduced costs, reached thousands more with clean water.",
     },
     {
       title: "BrightUp → Personal Financial Wellness",
       href: "https://brightup.life",
       dates: "Jun 2022 – Jul 2023",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Built a subscription and bill management platform that helps users save time and money every month. Mobile-first, beautiful, and instantly showed thousands of users exactly where their money was going.",
+        "Developed a mobile-first bill management platform with subscription insights. Focused on intuitive UX; handled secure data visualization for thousands of users, addressing privacy and real-time updates.",
       technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS", "PWA"],
+      impact: "Saved users time/money monthly, clear financial overviews.",
     },
     {
       title: "BetaRisk CRM → Banking & Corporate Risk",
       href: "https://www.betarisk.com",
       dates: "Nov 2021 – Nov 2022",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Delivered a full client management and risk analytics platform for banks and large corporates. Risk dashboards, lead tracking, and decision workflows used daily by credit committees.",
+        "Delivered a risk analytics CRM with dashboards and workflows. Ensured secure data handling; used testing suites to maintain reliability for daily use by credit committees in banks.",
       technologies: ["React", "TypeScript", "Material UI", "Cypress", "Jest"],
+      impact: "Improved risk decisions, daily use by committees.",
     },
     {
       title: "Reading Assistant | Gyan AI",
       href: "https://www.gyanai.com",
       dates: "Jun 2022 – Sep 2023",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Built an interactive reading and phonics platform for toddlers and early-school kids. Child-focused design and engagement features significantly improved learning outcomes and parent satisfaction.",
+        "Created an interactive phonics platform for kids with child-focused designs. Integrated engagement features; optimized for low-bandwidth PWA access to enhance learning outcomes.",
       technologies: ["React", "TypeScript", "TailwindCSS", "Redux", "PWA"],
+      impact: "Better learning outcomes, higher parent satisfaction.",
     },
     {
       title: "North Eastern University → Academic Management",
       href: "https://www.northeastern.edu/",
       dates: "Apr 2022 – Jun 2023",
+      company: "Rightbrain Infotech",
       active: true,
       description:
-        "Created student, teacher, and admin portals that reduced administrative workload by 35% and streamlined course scheduling, attendance, and grading for the entire university.",
+        "Built portals for students, teachers, and admins to streamline university operations. Automated scheduling and grading; addressed scalability for large user bases with efficient state management.",
       technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS"],
+      impact: "35% reduced administrative workload.",
     },
     {
       title: "Glixcel → Tutor Marketplace EdTech",
       href: "https://www.behance.net/gallery/176474575/Glixcel-Online-Class",
       dates: "Aug 2020 – Sep 2021",
+      company: "Glixcel",
       active: true,
       description:
-        "Built a tutor-search marketplace from scratch that connected thousands of tutors with students across India, integrated secure payments and real-time scheduling, and drove the company’s first profitable quarters.",
+        "Launched a tutor marketplace from zero, with secure payments and scheduling. Scaled to thousands of users; handled integration challenges with legacy tech to achieve profitability.",
       technologies: [
         "HTML/CSS/JS",
         "jQuery",
@@ -277,6 +322,7 @@ export const DATA = {
         "Flask",
         "Fetch API",
       ],
+      impact: "Connected thousands, first profitable quarters for company.",
     },
   ],
 } as const;

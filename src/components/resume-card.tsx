@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -18,6 +18,7 @@ interface ResumeCardProps {
   badges?: readonly string[];
   period: string;
   description?: string;
+  location?: string;
 }
 export const ResumeCard = ({
   logoUrl,
@@ -28,6 +29,7 @@ export const ResumeCard = ({
   badges,
   period,
   description,
+  location,
 }: ResumeCardProps) => {
   const [isExpanded, setIsExpanded] = React.useState(true);
 
@@ -36,7 +38,7 @@ export const ResumeCard = ({
   };
 
   return (
-    <Card className="flex flex-col bg-primary/5 p-3 sm:p-4">
+    <Card className="flex flex-col bg-card/50 backdrop-blur-sm border border-border/50 shadow-lg hover:shadow-xl transition-all duration-300 p-4 sm:p-5">
       <div className="flex flex-row gap-2">
         {logoUrl && (
           <div className="flex justify-center sm:flex-none">
@@ -61,9 +63,9 @@ export const ResumeCard = ({
                 <Link
                   href={href}
                   target="_blank"
-                  className="flex items-center gap-1 hover:underline text-blue-500"
+                  className="hover:underline text-blue-500"
                 >
-                  {title}
+                  {title} <ArrowUpRight className="inline h-4 w-4" />
                 </Link>
               ) : (
                 title
@@ -83,6 +85,7 @@ export const ResumeCard = ({
               : null}
           </div>
           {subtitle && <div className="font-sans text-sm mt-1">{subtitle}</div>}
+          {location && <div className="font-sans text-sm text-muted-foreground mt-1">{location}</div>}
         </div>
       </div>
       {description && (

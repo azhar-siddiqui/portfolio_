@@ -7,15 +7,6 @@ import { useState, useEffect } from "react";
 export function DownloadResumeButton() {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [isLocal, setIsLocal] = useState(false);
-
-  useEffect(() => {
-    setIsLocal(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-  }, []);
-
-  if (!isLocal) {
-    return null;
-  }
 
   const downloadResume = async (selectedTheme: 'light' | 'dark') => {
     try {

@@ -11,6 +11,29 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const theme = (searchParams.get("theme") as "light" | "dark") || "light";
 
+  // In production, serve static PDFs
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+    try {
+      const pdfPath = path.join(process.cwd(), 'public', 'resumes', `Zaheed-Resume-${theme}.pdf`);
+      const pdfBuffer = await fs.readFile(pdfPath);
+
+      return new NextResponse(pdfBuffer, {
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": `attachment; filename="Zaheed-Resume-${theme}.pdf"`,
+          "Cache-Control": "public, max-age=3600",
+        },
+      });
+    } catch (error) {
+      console.error("Error serving static PDF:", error);
+      return NextResponse.json(
+        { error: "Resume not available" },
+        { status: 404 }
+      );
+    }
+  }
+
+  // In development, generate PDF dynamically
   let browser = null;
   try {
     // Read and convert avatar to base64 (unchanged)
