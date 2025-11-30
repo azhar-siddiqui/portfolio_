@@ -11,12 +11,12 @@ export default function Page() {
   return (
     <main
       id="resume-content"
-      className="flex flex-col min-h-screen space-y-12 px-4"
+      className="flex flex-col min-h-screen space-y-12 px-4 py-12"
     >
       <section id="hero">
-        <div className="mx-auto w-full max-w-6xl space-y-8">
+        <div className="mx-auto w-full max-w-6xl space-y-8 pt-6">
           <div className="flex flex-col sm:flex-row gap-6 sm:justify-between sm:items-center">
-            <Avatar className="size-24 border-2 shadow-lg sm:order-last">
+            <Avatar className="size-28 md:size-48 border-2 shadow-lg sm:order-last">
               <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
               <AvatarFallback>{DATA.initials}</AvatarFallback>
             </Avatar>
