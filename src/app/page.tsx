@@ -38,7 +38,9 @@ export default function Page() {
       </section>
       <section id="about">
         <div className="mx-auto w-full max-w-6xl">
-          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">About</h2>
+          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            About
+          </h2>
           <div className="prose prose-lg text-pretty font-sans text-sm text-muted-foreground dark:prose-invert max-w-4xl">
             <Markdown>{DATA.summary}</Markdown>
           </div>
@@ -46,7 +48,9 @@ export default function Page() {
       </section>
       <section id="work">
         <div className="mx-auto w-full max-w-6xl">
-          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Work Experience</h2>
+          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Work Experience
+          </h2>
           <div className="flex min-h-0 flex-col gap-y-4">
             {DATA.work.map((work, id) => (
               <ResumeCard
@@ -65,9 +69,11 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="education" className="py-6">
+      <section id="education">
         <div className="mx-auto w-full max-w-6xl">
-          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Education</h2>
+          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Education
+          </h2>
           <div className="flex min-h-0 flex-col gap-y-4">
             {DATA.education.map((education, id) => (
               <ResumeCard
@@ -84,9 +90,11 @@ export default function Page() {
         </div>
       </section>
       <SkillsSection />
-      <section id="projects" className="py-6">
+      <section id="projects">
         <div className="mx-auto w-full max-w-6xl">
-          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Projects</h2>
+          <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Projects
+          </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {DATA.projects.map((project, id) => (
               <ProjectCard
@@ -103,7 +111,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="contact" className="py-6">
+      <section id="contact">
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12 mx-auto max-w-4xl">
           <div className="space-y-3">
             <div className="inline-block rounded-lg bg-primary text-primary-foreground px-3 py-1 text-sm font-medium">

@@ -10,8 +10,6 @@ export function SkillsSection() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { theme } = useTheme();
 
-  console.log(theme);
-
   const categories = Object.keys(DATA.skills);
   const allSkills =
     selectedCategory === "all"
@@ -31,7 +29,7 @@ export function SkillsSection() {
   };
 
   return (
-    <section id="skills" className="py-6">
+    <section id="skills">
       <div className="mx-auto w-full max-w-6xl">
         <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
           Skills
@@ -69,10 +67,8 @@ export function SkillsSection() {
                     viewBox="0 0 24 24"
                     className="w-5 h-5"
                     fill={
-                      skill?.color
-                        ? theme === "dark"
-                          ? skill.color
-                          : `#${icon.hex}`
+                      skill.color && theme === "dark"
+                        ? skill.color
                         : `#${icon.hex}`
                     }
                   >
