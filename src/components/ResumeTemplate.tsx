@@ -115,7 +115,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 
         <!-- Summary -->
         <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
-          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Professional Summary</h2>
+          <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Professional Summary</h2>
           <p class="text-sm leading-relaxed text-gray-900 dark:text-slate-50">${
             DATA.summary
           }</p>
@@ -123,7 +123,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 
         <!-- Experience -->
         <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
-          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Experience</h2>
+          <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Experience</h2>
           ${DATA.work
             .map(
               (job) => `
@@ -156,7 +156,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 
         <!-- Education -->
         <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
-          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Education</h2>
+          <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Education</h2>
           ${DATA.education
             .map(
               (edu) => `
@@ -186,7 +186,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 
         <!-- Skills -->
         <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
-          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Skills</h2>
+          <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Skills</h2>
           <div class="flex flex-wrap gap-2">
             ${Object.values(DATA.skills)
               .flat()
@@ -205,7 +205,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 
         <!-- Projects -->
         <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
-          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Projects</h2>
+          <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Projects</h2>
           <div class="grid grid-cols-2 gap-6">
             ${DATA.projects
               .map(
