@@ -22,7 +22,7 @@ export default function Page() {
             </Avatar>
             <div className="flex-col flex flex-1 space-y-3 order-last sm:order-first">
               <span className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                Hi, I'm{" "}
+                Hi, I&apos;m{" "}
                 <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                   {DATA.name.split(" ")[0]}
                 </span>{" "}

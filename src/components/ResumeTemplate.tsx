@@ -1,4 +1,5 @@
 import { DATA } from "@/data/resume";
+import * as SimpleIcons from "simple-icons";
 
 interface ResumeTemplateProps {
   theme: "light" | "dark";
@@ -8,28 +9,13 @@ interface ResumeTemplateProps {
 export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
   const isDark = theme === "dark";
 
-  const colors = {
-    light: {
-      bg: "#ffffff",
-      text: "#1f2937",
-      muted: "#6b7280",
-      accent: "#2563eb",
-      border: "#e5e7eb",
-      cardBg: "#f9fafb",
-      skillBg: "#f3f4f6",
-    },
-    dark: {
-      bg: "#0f172a",
-      text: "#f1f5f9",
-      muted: "#94a3b8",
-      accent: "#60a5fa",
-      border: "#334155",
-      cardBg: "#1e293b",
-      skillBg: "#1e293b",
-    },
+  const getIcon = (iconSlug: string | null) => {
+    if (!iconSlug) return null;
+    const iconKey = `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(
+      1
+    )}` as keyof typeof SimpleIcons;
+    return SimpleIcons[iconKey] || null;
   };
-
-  const c = isDark ? colors.dark : colors.light;
 
   const html = `
     <!DOCTYPE html>
@@ -48,7 +34,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
                 'inter': ['Inter', 'system-ui', 'sans-serif'],
               },
               colors: {
-                accent: '${c.accent}',
+                accent: '#3b82f6',
               }
             }
           }
@@ -60,54 +46,23 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
       <style>
         html, body {
           font-family: 'Inter', system-ui, sans-serif;
-          background-color: ${c.bg};
-          color: ${c.text};
           line-height: 1.6;
           margin: 0;
           padding: 0;
           height: 100%;
+          background-color: ${isDark ? "#020617" : "#ffffff"};
+          color: ${isDark ? "#f8fafc" : "#111827"};
         }
         .resume-container {
           max-width: 210mm;
           margin: 0 auto;
           padding: 10mm;
-          background-color: ${c.bg};
           box-sizing: border-box;
-        }
-        .section-title {
-          font-size: 14px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: ${c.accent};
-          margin-bottom: 12px;
-          padding-bottom: 4px;
-          border-bottom: 2px solid ${c.accent};
-        }
-        .skill-tag {
-          display: inline-block;
-          background-color: ${c.skillBg};
-          color: ${c.text};
-          padding: 4px 12px;
-          border-radius: 6px;
-          font-size: 11px;
-          font-weight: 500;
-          margin: 2px 4px 2px 0;
-          border: 1px solid ${c.border};
-        }
-        .link {
-          color: ${c.accent};
-          text-decoration: none;
-          font-weight: 500;
-        }
-        .link:hover {
-          text-decoration: underline;
         }
         .avatar {
           width: 120px;
           height: 120px;
           border-radius: 50%;
-          border: 3px solid ${c.accent};
           object-fit: cover;
         }
         @media print {
@@ -115,92 +70,174 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         }
       </style>
     </head>
-    <body class="${isDark ? 'dark' : ''}">
+    <body class=" text-gray-900 dark:text-slate-50 ${isDark ? "dark" : ""}">
       <div class="resume-container">
         <!-- Header -->
         <header class="flex items-start gap-8 mb-8">
-          ${avatarBase64 ? `<img src="${avatarBase64}" alt="${DATA.name}" class="avatar flex-shrink-0">` : ''}
+          ${
+            avatarBase64
+              ? `<img src="${avatarBase64}" alt="${DATA.name}" class="avatar border-4 border-accent flex-shrink-0">`
+              : ""
+          }
           <div class="flex-1">
-            <h1 class="text-4xl font-bold tracking-tight mb-2" style="color: ${c.text};">${DATA.name}</h1>
-            <div class="flex flex-wrap items-center gap-3 text-sm mb-3" style="color: ${c.muted};">
+            <h1 class="text-4xl font-bold tracking-tight mb-2 text-gray-900 dark:text-slate-50">${
+              DATA.name
+            }</h1>
+            <div class="flex flex-wrap items-center gap-3 text-sm mb-3 text-gray-600 dark:text-slate-400">
               <span>${DATA.location}</span>
               <span>•</span>
-              <a href="mailto:${DATA.contact.email}" class="link">${DATA.contact.email}</a>
-              ${DATA.contact.tel ? `<span>•</span><span>${DATA.contact.tel}</span>` : ''}
+              <a href="mailto:${
+                DATA.contact.email
+              }" class="text-accent hover:underline font-medium">${
+    DATA.contact.email
+  }</a>
+              ${
+                DATA.contact.tel
+                  ? `<span>•</span><span>${DATA.contact.tel}</span>`
+                  : ""
+              }
             </div>
             <div class="flex flex-wrap gap-4 text-sm">
-              ${DATA.url ? `<a href="${DATA.url}" class="link">Portfolio</a>` : ''}
-              ${Object.entries(DATA.contact.social).map(([key, social]) => 
-                `<a href="${social.url}" class="link">${social.name}</a>`
-              ).join('')}
+              ${
+                DATA.url
+                  ? `<a href="${DATA.url}" class="text-accent hover:underline font-medium">Portfolio</a>`
+                  : ""
+              }
+              ${Object.entries(DATA.contact.social)
+                .map(
+                  ([key, social]) =>
+                    `<a href="${social.url}" class="text-accent hover:underline font-medium">${social.name}</a>`
+                )
+                .join("")}
             </div>
           </div>
         </header>
 
         <!-- Summary -->
-        <section class="mb-8">
-          <h2 class="section-title">Professional Summary</h2>
-          <p class="text-sm leading-relaxed" style="color: ${c.text};">${DATA.summary}</p>
+        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Professional Summary</h2>
+          <p class="text-sm leading-relaxed text-gray-900 dark:text-slate-50">${
+            DATA.summary
+          }</p>
         </section>
 
         <!-- Experience -->
-        <section class="mb-8">
-          <h2 class="section-title">Experience</h2>
-          ${DATA.work.map(job => `
+        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Experience</h2>
+          ${DATA.work
+            .map(
+              (job) => `
             <div class="mb-6">
               <div class="flex justify-between items-start mb-2">
                 <div>
-                  <h3 class="text-lg font-semibold" style="color: ${c.text};">${job.title}</h3>
-                  <p class="text-base font-medium" style="color: ${c.accent};">
-                    ${job.href ? `<a href="${job.href}" class="link">${job.company} →</a>` : job.company}
+                  <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-50">${
+                    job.title
+                  }</h3>
+                  <p class="text-base font-medium text-accent">
+                    ${
+                      job.href
+                        ? `<a href="${job.href}" class="text-accent hover:underline">${job.company} →</a>`
+                        : job.company
+                    }
                   </p>
                 </div>
-                <span class="text-sm italic" style="color: ${c.muted};">${job.start} – ${job.end || 'Present'} | ${job.location}</span>
+                <span class="text-sm italic text-gray-600 dark:text-slate-400">${
+                  job.start
+                } – ${job.end || "Present"} | ${job.location}</span>
               </div>
-              <p class="text-sm leading-relaxed" style="color: ${c.text};">${job.description}</p>
+              <p class="text-sm leading-relaxed text-gray-900 dark:text-slate-50">${
+                job.description
+              }</p>
             </div>
-          `).join('')}
+          `
+            )
+            .join("")}
         </section>
 
         <!-- Education -->
-        <section class="mb-8">
-          <h2 class="section-title">Education</h2>
-          ${DATA.education.map(edu => `
+        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Education</h2>
+          ${DATA.education
+            .map(
+              (edu) => `
             <div class="mb-4">
               <div class="flex justify-between items-start mb-1">
                 <div>
-                  <h3 class="text-base font-semibold" style="color: ${c.text};">${edu.degree}</h3>
-                  <p class="text-sm font-medium" style="color: ${c.accent};">
-                    ${edu.href ? `<a href="${edu.href}" class="link">${edu.school} →</a>` : edu.school}
+                  <h3 class="text-base font-semibold text-gray-900 dark:text-slate-50">${
+                    edu.degree
+                  }</h3>
+                  <p class="text-sm font-medium text-accent">
+                    ${
+                      edu.href
+                        ? `<a href="${edu.href}" class="text-accent hover:underline">${edu.school} →</a>`
+                        : edu.school
+                    }
                   </p>
                 </div>
-                <span class="text-sm italic" style="color: ${c.muted};">${edu.start} – ${edu.end}</span>
+                <span class="text-sm italic text-gray-600 dark:text-slate-400">${
+                  edu.start
+                } – ${edu.end}</span>
               </div>
             </div>
-          `).join('')}
+          `
+            )
+            .join("")}
         </section>
 
         <!-- Skills -->
-        <section class="mb-8">
-          <h2 class="section-title">Skills</h2>
-          <div class="flex flex-wrap gap-1">
-            ${DATA.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Skills</h2>
+          <div class="flex flex-wrap gap-2">
+            ${Object.values(DATA.skills)
+              .flat()
+              .map((skill) => {
+                const icon = getIcon(skill.icon);
+                const iconHtml = icon
+                  ? `<svg viewBox="0 0 24 24" class="inline w-4 h-4 mr-1" fill="${
+                      skill.color && isDark ? skill.color : `#${icon.hex}`
+                    }"><path d="${icon.path}"/></svg>`
+                  : "";
+                return `<span class="inline-flex items-center bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-slate-50 px-3 py-1 rounded-lg text-sm font-medium border border-gray-300 dark:border-slate-600">${iconHtml}${skill.name}</span>`;
+              })
+              .join("")}
           </div>
         </section>
 
         <!-- Projects -->
-        <section class="mb-8">
-          <h2 class="section-title">Projects</h2>
-          ${DATA.projects.map(project => `
-            <div class="mb-5">
-              <a href="${project.href}" class="link">
-                <h3 class="text-base font-semibold mb-1">${project.title} →</h3>
-              </a>
-              <p class="text-xs mb-2" style="color: ${c.muted};">${project.dates}</p>
-              <p class="text-sm leading-relaxed mb-2" style="color: ${c.text};">${project.description}</p>
-              <p class="text-xs italic" style="color: ${c.muted};">Tech: ${project.technologies.join(' • ')}</p>
-            </div>
-          `).join('')}
+        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+          <h2 class="text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent mb-4 pb-2 border-b-2 border-accent">Projects</h2>
+          <div class="grid grid-cols-2 gap-6">
+            ${DATA.projects
+              .map(
+                (project) => `
+              <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 bg-white dark:bg-slate-900">
+                <a href="${project.href}" class="text-accent hover:underline">
+                  <h3 class="text-base font-semibold mb-1">${
+                    project.title
+                  } →</h3>
+                </a>
+                <p class="text-xs mb-1 text-gray-600 dark:text-slate-400">${
+                  project.company
+                }</p>
+                <p class="text-xs mb-2 text-gray-600 dark:text-slate-400">${
+                  project.dates
+                }</p>
+                <p class="text-sm leading-relaxed mb-2 text-gray-900 dark:text-slate-50">${
+                  project.description
+                }</p>
+                ${
+                  project.impact
+                    ? `<p class="text-xs font-semibold text-green-600 dark:text-green-400 mb-2">Impact: ${project.impact}</p>`
+                    : ""
+                }
+                <p class="text-xs italic text-gray-600 dark:text-slate-400">Tech: ${project.technologies.join(
+                  " • "
+                )}</p>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
         </section>
       </div>
     </body>
