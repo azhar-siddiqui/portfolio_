@@ -117,6 +117,10 @@ export async function GET(request: Request) {
 
     await browser.close();
 
+    // Save to public/resumes/ in development
+    const pdfPath = path.join(process.cwd(), 'public', 'resumes', `Zaheed-Resume-${theme}.pdf`);
+    await fs.writeFile(pdfPath, pdf);
+
     return new NextResponse(pdf as any, {
       headers: {
         "Content-Type": "application/pdf",
