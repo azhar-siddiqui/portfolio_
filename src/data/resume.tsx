@@ -94,6 +94,17 @@ export const DATA = {
 
   work: [
     {
+      company: "Shurutech",
+      href: "https://shurutech.com",
+      badges: ["Current"],
+      location: "Remote",
+      title: "Senior Product Engineer",
+      logoUrl: "", // Add logo if available
+      start: "Dec 2025",
+      end: "NA",
+      description: "Started as a Senior Product Engineer at Shurutech.",
+    },
+    {
       company: "Kiya.ai",
       href: "https://kiya.ai",
       badges: [],
