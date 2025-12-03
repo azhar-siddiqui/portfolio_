@@ -155,6 +155,17 @@ export const DATA = {
 
   projects: [
     {
+      title: "Kharcha → Personal Expense Tracker",
+      href: "https://kharcha.space/",
+      dates: "Dec 2025 – Dec 2025",
+      company: "",
+      active: true,
+      description:
+        "Developed a production-ready expense tracking app in 3 days using 75% AI-assisted coding. Features include real-time dashboards, budget alerts, subscription management, notifications, and PDF/Excel exports. Achieved 90%+ test coverage with 290+ automated tests, CI/CD integration, and PWA support for offline use—demonstrating rapid prototyping and high-quality delivery.",
+      technologies: ["React", "TypeScript", "TanStack Stack", "Convex", "Clerk", "TailwindCSS", "Recharts", "Vitest", "PWA"],
+      impact: "Launched MVP in 3 days with high test coverage and offline support.",
+    },
+    {
       title: "R Batteries Store",
       href: "https://rbatteries.store/",
       dates: "Nov 2025 – Nov 2025",
