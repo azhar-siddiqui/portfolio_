@@ -46,6 +46,12 @@ export const DATA = {
       { name: "Firebase", color: null, icon: "firebase" },
       { name: "MongoDB", color: null, icon: "mongodb" },
       { name: "PostgreSQL", color: null, icon: "postgresql" },
+      { name: "Axios", color: null, icon: "axios" },
+      { name: "Commander", color: null, icon: "gnubash" },
+      { name: "Dotenv", color: null, icon: "dotenv" },
+      { name: "Handlebars", color: "#ffffff", icon: "handlebarsdotjs" },
+      { name: "Winston", color: null, icon: "gnubash" },
+      { name: "Zod", color: null, icon: "zod" },
     ],
     devops: [
       { name: "Docker", color: null, icon: "docker" },
@@ -67,7 +73,10 @@ export const DATA = {
       { name: "Testing Library", color: null, icon: "testinglibrary" },
     ],
   },
-  navbar: [{ href: "/", icon: HomeIcon, label: "Home" }, { href: "/projects", icon: FolderOpen, label: "Projects" }],
+  navbar: [
+    { href: "/", icon: HomeIcon, label: "Home" },
+    { href: "/projects", icon: FolderOpen, label: "Projects" },
+  ],
   contact: {
     email: "reachtozahid@gmail.com",
     tel: "+91 8806544670",
@@ -165,6 +174,13 @@ export const DATA = {
         "TypeScript",
         "SonarQube API",
         "CLI",
+        "Axios",
+        "Chart.js",
+        "Commander",
+        "Dotenv",
+        "Handlebars",
+        "Winston",
+        "Zod",
       ],
       impact:
         "Streamlined code quality reporting for teams, eliminating the need for expensive infrastructure setups.",
