@@ -57,6 +57,7 @@ export const DATA = {
       { name: "AWS", color: null, icon: "amazonwebservices" },
       { name: "New Relic", color: null, icon: "newrelic" },
       { name: "Sentry", color: null, icon: "sentry" },
+      { name: "SonarQube", color: null, icon: null },
     ],
     testing: [
       { name: "Cypress", color: null, icon: "cypress" },
@@ -151,6 +152,24 @@ export const DATA = {
     },
   ],
   projects: [
+    {
+      title: "SonarQube Issues Exporter → NPM Package for Code Quality Metrics",
+      href: "https://www.npmjs.com/package/sonarqube-issues-exporter",
+      dates: "Aug 2025 – Sep 2025",
+      company: "",
+      active: true,
+      description:
+        "Developed an NPM package to generate and share code quality reports from SonarQube without requiring dedicated infrastructure. Addresses challenges in teams with limited DevOps resources and budgets by enabling local setup of SonarQube Community Edition and automated report generation using project tokens.",
+      technologies: [
+        "Node.js",
+        "TypeScript",
+        "SonarQube API",
+        "CLI",
+      ],
+      impact:
+        "Streamlined code quality reporting for teams, eliminating the need for expensive infrastructure setups.",
+      featured: true,
+    },
     {
       title: "Kharcha → Personal Expense Tracker",
       href: "https://kharcha.space/",
