@@ -1,6 +1,6 @@
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -62,7 +62,7 @@ export default function Navbar() {
           ))}
         <Separator orientation="vertical" className="h-full py-2" />
         <DockIcon>
-          <AnimatedThemeToggler />
+          <AnimatedThemeToggler className="size-12 rounded-full flex items-center justify-center hover:bg-accent hover:text-accent-foreground" />
         </DockIcon>
       </Dock>
     </div>

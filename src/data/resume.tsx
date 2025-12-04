@@ -8,7 +8,7 @@ export const DATA = {
   location: "Pune, India",
   locationLink: "https://www.google.com/maps/place/pune",
   description:
-    "I build software that directly increases revenue, cuts operational costs, ensures regulatory compliance, and scales operations — for maritime giants, logistics operators, banks, EdTech startups, NGOs, e-commerce stores, and everything in between.",
+    "I understand business, not just code, and I build software that directly increases revenue, cuts operational costs, ensures regulatory compliance, and scales operations — for maritime giants, logistics operators, banks, EdTech startups, NGOs, e-commerce stores, and everything in between.",
   summary:
     "Over the last 5 years, I've delivered 15+ mission-critical products from scratch across 10 diverse industries, generating measurable ROI like 30–70% faster decisions, 40% less downtime, 3x user engagement, or new revenue streams. I collaborate with founders, CXOs, and investors to translate business challenges into reliable, scalable solutions shipped at high velocity.",
   avatarUrl: "/me.png",
@@ -162,8 +162,19 @@ export const DATA = {
       active: true,
       description:
         "Developed a production-ready expense tracking app in 3 days using 75% AI-assisted coding. Features include real-time dashboards, budget alerts, subscription management, notifications, and PDF/Excel exports. Achieved 90%+ test coverage with 290+ automated tests, CI/CD integration, and PWA support for offline use—demonstrating rapid prototyping and high-quality delivery.",
-      technologies: ["React", "TypeScript", "TanStack Stack", "Convex", "Clerk", "TailwindCSS", "Recharts", "Vitest", "PWA"],
-      impact: "Launched MVP in 3 days with high test coverage and offline support.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "TanStack Stack",
+        "Convex",
+        "Clerk",
+        "TailwindCSS",
+        "Recharts",
+        "Vitest",
+        "PWA",
+      ],
+      impact:
+        "Build a solution that solves mine and others' expense tracking needs, Launched in 3 days with AI assistance with 90%+ test coverage",
     },
     {
       title: "R Batteries Store",
