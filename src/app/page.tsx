@@ -3,8 +3,8 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { SkillsSection } from "@/components/skills-section";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
+import Link from "next/link";
 import Markdown from "react-markdown";
 
 export default function Page() {
@@ -89,28 +89,39 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <SkillsSection />
       <section id="projects">
         <div className="mx-auto w-full max-w-6xl">
           <h2 className="text-3xl font-extrabold mb-6 text-left uppercase tracking-wide bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            Projects
+            Featured Projects
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {DATA.projects.map((project, id) => (
-              <ProjectCard
-                href={project.href}
-                key={project.title}
-                title={project.title}
-                description={project.description}
-                dates={project.dates}
-                tags={project.technologies}
-                impact={project.impact}
-                company={project.company}
-              />
-            ))}
+            {DATA.projects
+              .filter((project) => project.featured)
+              .slice(0, 3)
+              .map((project, id) => (
+                <ProjectCard
+                  href={project.href}
+                  key={project.title}
+                  title={project.title}
+                  description={project.description}
+                  dates={project.dates}
+                  tags={project.technologies}
+                  impact={project.impact}
+                  company={project.company}
+                />
+              ))}
+          </div>
+          <div className="mt-6 text-center">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+            >
+              View All Projects
+            </Link>
           </div>
         </div>
       </section>
+      <SkillsSection />
       <section id="contact">
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12 mx-auto max-w-4xl">
           <div className="space-y-3">

@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon } from "lucide-react";
+import { HomeIcon, FolderOpen } from "lucide-react";
 
 export const DATA = {
   name: "Zaheed Shaikh",
@@ -66,7 +66,7 @@ export const DATA = {
       { name: "Testing Library", color: null, icon: "testinglibrary" },
     ],
   },
-  navbar: [{ href: "/", icon: HomeIcon, label: "Home" }],
+  navbar: [{ href: "/", icon: HomeIcon, label: "Home" }, { href: "/projects", icon: FolderOpen, label: "Projects" }],
   contact: {
     email: "reachtozahid@gmail.com",
     tel: "+91 8806544670",
@@ -91,7 +91,6 @@ export const DATA = {
       },
     },
   },
-
   work: [
     {
       company: "Shurutech",
@@ -141,7 +140,6 @@ export const DATA = {
         "Built and scaled an EdTech marketplace from scratch, connecting thousands of tutors and students in India. Integrated secure payments and real-time scheduling, leading to the company's first profitable quarters.",
     },
   ],
-
   education: [
     {
       school: "Abeda Inamdar Senior College of Arts, Science and Commerce",
@@ -152,7 +150,6 @@ export const DATA = {
       end: "2021",
     },
   ],
-
   projects: [
     {
       title: "Kharcha → Personal Expense Tracker",
@@ -175,6 +172,7 @@ export const DATA = {
       ],
       impact:
         "Build a solution that solves mine and others' expense tracking needs, Launched in 3 days with AI assistance with 90%+ test coverage",
+      featured: true,
     },
     {
       title: "R Batteries Store",
@@ -186,6 +184,7 @@ export const DATA = {
         "Developed a full e-commerce platform for Pune's largest battery retailer, enabling doorstep delivery of brands like Exide, Amaron, and Luminous. Integrated reviews, care guides, and instant quotes; overcame challenges in real-time inventory sync and mobile optimization using service workers for PWA.",
       technologies: ["Next.js", "TypeScript", "TailwindCSS", "Node.js", "PWA"],
       impact: "3x higher online sales in the first month.",
+      featured: true,
     },
     {
       title: "OceanPass → Emissions Intelligence Platform",
@@ -205,6 +204,7 @@ export const DATA = {
       ],
       impact:
         "95% less paperwork, 40% reduced downtime, avoided million-dollar penalties.",
+      featured: true,
     },
     {
       title: "Hafnia Universe → Global Tanker Operations Platform",
@@ -224,6 +224,7 @@ export const DATA = {
       ],
       impact:
         "30% faster decisions, reduced fuel waste, improved safety/compliance.",
+      featured: false,
     },
     {
       title: "SpotFinder → Urban Parking Logistics",
@@ -243,6 +244,7 @@ export const DATA = {
       ],
       impact:
         "70% less vehicle search time, new revenue for operators; launched in 6 months.",
+      featured: false,
     },
     {
       title: "Drivers In India → On-demand Verified Chauffeurs",
@@ -261,6 +263,7 @@ export const DATA = {
         "PWA",
       ],
       impact: "Streamlined operations, new revenue from premium services.",
+      featured: false,
     },
     {
       title: "Thinkster → AI Math Coaching for Kids",
@@ -278,6 +281,7 @@ export const DATA = {
         "RxJS",
       ],
       impact: "3x student participation, highest-retention feature.",
+      featured: false,
     },
     {
       title: "Safe Water Network → Field Operations Platform",
@@ -295,6 +299,7 @@ export const DATA = {
         "Custom UI Library",
       ],
       impact: "Reduced costs, reached thousands more with clean water.",
+      featured: false,
     },
     {
       title: "BrightUp → Personal Financial Wellness",
@@ -306,6 +311,7 @@ export const DATA = {
         "Developed a mobile-first bill management platform with subscription insights. Focused on intuitive UX; handled secure data visualization for thousands of users, addressing privacy and real-time updates.",
       technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS", "PWA"],
       impact: "Saved users time/money monthly, clear financial overviews.",
+      featured: false,
     },
     {
       title: "BetaRisk CRM → Banking & Corporate Risk",
@@ -317,6 +323,7 @@ export const DATA = {
         "Delivered a risk analytics CRM with dashboards and workflows. Ensured secure data handling; used testing suites to maintain reliability for daily use by credit committees in banks.",
       technologies: ["React", "TypeScript", "Material UI", "Cypress", "Jest"],
       impact: "Improved risk decisions, daily use by committees.",
+      featured: false,
     },
     {
       title: "Reading Assistant | Gyan AI",
@@ -328,6 +335,7 @@ export const DATA = {
         "Created an interactive phonics platform for kids with child-focused designs. Integrated engagement features; optimized for low-bandwidth PWA access to enhance learning outcomes.",
       technologies: ["React", "TypeScript", "TailwindCSS", "Redux", "PWA"],
       impact: "Better learning outcomes, higher parent satisfaction.",
+      featured: false,
     },
     {
       title: "North Eastern University → Academic Management",
@@ -339,6 +347,7 @@ export const DATA = {
         "Built portals for students, teachers, and admins to streamline university operations. Automated scheduling and grading; addressed scalability for large user bases with efficient state management.",
       technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS"],
       impact: "35% reduced administrative workload.",
+      featured: false,
     },
     {
       title: "Glixcel → Tutor Marketplace EdTech",
@@ -356,6 +365,7 @@ export const DATA = {
         "Fetch API",
       ],
       impact: "Connected thousands, first profitable quarters for company.",
+      featured: false,
     },
   ],
 } as const;
