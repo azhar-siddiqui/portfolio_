@@ -114,7 +114,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         </header>
 
         <!-- Summary -->
-        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Professional Summary</h2>
           <p class="text-sm leading-relaxed text-gray-900 dark:text-slate-50">${
             DATA.summary
@@ -122,7 +122,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         </section>
 
         <!-- Experience -->
-        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Experience</h2>
           ${DATA.work
             .map(
@@ -155,7 +155,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         </section>
 
         <!-- Education -->
-        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Education</h2>
           ${DATA.education
             .map(
@@ -185,7 +185,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         </section>
 
         <!-- Skills -->
-        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Skills</h2>
           <div class="flex flex-wrap gap-2">
             ${Object.values(DATA.skills)
@@ -202,15 +202,14 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               .join("")}
           </div>
         </section>
-
-        <!-- Projects -->
-        <section class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 mb-5 shadow-sm">
+        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Projects</h2>
-          <div class="grid grid-cols-2 gap-6">
+          <div class="space-y-4">
             ${DATA.projects
+              .filter((project) => project.featured)
               .map(
                 (project) => `
-              <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 bg-white dark:bg-slate-900">
+              <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 shadow-lg">
                 <a href="${project.href}" class="text-accent hover:underline">
                   <h3 class="text-base font-semibold mb-1">${
                     project.title
@@ -237,6 +236,9 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
             `
               )
               .join("")}
+          </div>
+          <div class="text-center mt-4">
+            <a href="https://zahidshaikh.space/projects" class="inline-block bg-gradient-to-r from-accent to-accent/80 text-white px-6 py-2 rounded-lg font-medium hover:from-accent/80 hover:to-accent/60 transition-all shadow-md">View More Projects</a>
           </div>
         </section>
       </div>

@@ -110,7 +110,7 @@ export const DATA = {
       title: "Senior Product Engineer",
       logoUrl: "", // Add logo if available
       start: "Dec 2025",
-      end: "NA",
+      end: "Present",
       description: "Started as a Senior Product Engineer at Shurutech.",
     },
     {
@@ -162,31 +162,6 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "SonarQube Issues Exporter → NPM Package for Code Quality Metrics",
-      href: "https://www.npmjs.com/package/sonarqube-issues-exporter",
-      dates: "Aug 2025 – Sep 2025",
-      company: "",
-      active: true,
-      description:
-        "Developed an NPM package to generate and share code quality reports from SonarQube without requiring dedicated infrastructure. Addresses challenges in teams with limited DevOps resources and budgets by enabling local setup of SonarQube Community Edition and automated report generation using project tokens.",
-      technologies: [
-        "Node.js",
-        "TypeScript",
-        "SonarQube API",
-        "CLI",
-        "Axios",
-        "Chart.js",
-        "Commander",
-        "Dotenv",
-        "Handlebars",
-        "Winston",
-        "Zod",
-      ],
-      impact:
-        "Streamlined code quality reporting for teams, eliminating the need for expensive infrastructure setups.",
-      featured: true,
-    },
-    {
       title: "Kharcha → Personal Expense Tracker",
       href: "https://kharcha.space/",
       dates: "Dec 2025 – Dec 2025",
@@ -219,7 +194,32 @@ export const DATA = {
         "Developed a full e-commerce platform for Pune's largest battery retailer, enabling doorstep delivery of brands like Exide, Amaron, and Luminous. Integrated reviews, care guides, and instant quotes; overcame challenges in real-time inventory sync and mobile optimization using service workers for PWA.",
       technologies: ["Next.js", "TypeScript", "TailwindCSS", "Node.js", "PWA"],
       impact: "3x higher online sales in the first month.",
-      featured: true,
+      featured: false,
+    },
+    {
+      title: "SonarQube Issues Exporter → NPM Package for Code Quality Metrics",
+      href: "https://www.npmjs.com/package/sonarqube-issues-exporter",
+      dates: "Aug 2025 – Sep 2025",
+      company: "",
+      active: true,
+      description:
+        "Developed an NPM package to generate and share code quality reports from SonarQube without requiring dedicated infrastructure. Addresses challenges in teams with limited DevOps resources and budgets by enabling local setup of SonarQube Community Edition and automated report generation using project tokens.",
+      technologies: [
+        "Node.js",
+        "TypeScript",
+        "SonarQube API",
+        "CLI",
+        "Axios",
+        "Chart.js",
+        "Commander",
+        "Dotenv",
+        "Handlebars",
+        "Winston",
+        "Zod",
+      ],
+      impact:
+        "Streamlined code quality reporting for teams, eliminating the need for expensive infrastructure setups.",
+      featured: false,
     },
     {
       title: "OceanPass → Emissions Intelligence Platform",
@@ -259,7 +259,7 @@ export const DATA = {
       ],
       impact:
         "30% faster decisions, reduced fuel waste, improved safety/compliance.",
-      featured: false,
+      featured: true,
     },
     {
       title: "SpotFinder → Urban Parking Logistics",
