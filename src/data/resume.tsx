@@ -165,7 +165,7 @@ export const DATA = {
       title: "Kharcha → Personal Expense Tracker",
       href: "https://kharcha.space/",
       dates: "Dec 2025 – Dec 2025",
-      company: "",
+      company: "Personal Project",
       active: true,
       description:
         "Developed a production-ready expense tracking app in 3 days using 75% AI-assisted coding. Features include real-time dashboards, budget alerts, subscription management, notifications, and PDF/Excel exports. Achieved 90%+ test coverage with 290+ automated tests, CI/CD integration, and PWA support for offline use—demonstrating rapid prototyping and high-quality delivery.",
@@ -188,7 +188,7 @@ export const DATA = {
       title: "R Batteries Store",
       href: "https://rbatteries.store/",
       dates: "Nov 2025 – Nov 2025",
-      company: "",
+      company: "Personal Project",
       active: true,
       description:
         "Developed a full e-commerce platform for Pune's largest battery retailer, enabling doorstep delivery of brands like Exide, Amaron, and Luminous. Integrated reviews, care guides, and instant quotes; overcame challenges in real-time inventory sync and mobile optimization using service workers for PWA.",
@@ -200,7 +200,7 @@ export const DATA = {
       title: "SonarQube Issues Exporter → NPM Package for Code Quality Metrics",
       href: "https://www.npmjs.com/package/sonarqube-issues-exporter",
       dates: "Aug 2025 – Sep 2025",
-      company: "",
+      company: "Personal Project",
       active: true,
       description:
         "Developed an NPM package to generate and share code quality reports from SonarQube without requiring dedicated infrastructure. Addresses challenges in teams with limited DevOps resources and budgets by enabling local setup of SonarQube Community Edition and automated report generation using project tokens.",
@@ -222,26 +222,6 @@ export const DATA = {
       featured: false,
     },
     {
-      title: "OceanPass → Emissions Intelligence Platform",
-      href: "https://oceanpass.com",
-      dates: "Feb 2025 – Jun 2025",
-      company: "Kiya.ai",
-      active: true,
-      description:
-        "Solo-built an offline-first desktop app for global shipping emissions tracking. Automated reporting for CII, EEDI, and Poseidon Principles; handled offline sync via service workers and local storage for remote fleets, addressing connectivity issues in maritime environments.",
-      technologies: [
-        "React",
-        "Electron.js",
-        "TypeScript",
-        "SQLite",
-        "Prisma",
-        "TanStack Query",
-      ],
-      impact:
-        "95% less paperwork, 40% reduced downtime, avoided million-dollar penalties.",
-      featured: true,
-    },
-    {
       title: "Hafnia Universe → Global Tanker Operations Platform",
       href: "https://hafnia.com",
       dates: "Feb 2024 – Nov 2025",
@@ -259,6 +239,26 @@ export const DATA = {
       ],
       impact:
         "30% faster decisions, reduced fuel waste, improved safety/compliance.",
+      featured: true,
+    },
+    {
+      title: "OceanPass → Emissions Intelligence Platform",
+      href: "https://oceanpass.com",
+      dates: "Feb 2025 – Jun 2025",
+      company: "Kiya.ai",
+      active: true,
+      description:
+        "Solo-built an offline-first desktop app for global shipping emissions tracking. Automated reporting for CII, EEDI, and Poseidon Principles; handled offline sync via service workers and local storage for remote fleets, addressing connectivity issues in maritime environments.",
+      technologies: [
+        "React",
+        "Electron.js",
+        "TypeScript",
+        "SQLite",
+        "Prisma",
+        "TanStack Query",
+      ],
+      impact:
+        "95% less paperwork, 40% reduced downtime, avoided million-dollar penalties.",
       featured: true,
     },
     {

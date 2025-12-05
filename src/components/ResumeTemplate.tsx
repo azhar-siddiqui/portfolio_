@@ -88,9 +88,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               <span>•</span>
               <a href="mailto:${
                 DATA.contact.email
-              }" class="text-accent hover:underline font-medium">${
-    DATA.contact.email
-  }</a>
+              }" class="text-accent font-medium">${DATA.contact.email}</a>
               ${
                 DATA.contact.tel
                   ? `<span>•</span><span>${DATA.contact.tel}</span>`
@@ -100,13 +98,13 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
             <div class="flex flex-wrap gap-4 text-sm">
               ${
                 DATA.url
-                  ? `<a href="${DATA.url}" class="text-accent hover:underline font-medium">Portfolio</a>`
+                  ? `<a href="${DATA.url}" class="text-accent font-medium">Portfolio</a>`
                   : ""
               }
               ${Object.entries(DATA.contact.social)
                 .map(
                   ([key, social]) =>
-                    `<a href="${social.url}" class="text-accent hover:underline font-medium">${social.name}</a>`
+                    `<a href="${social.url}" class="text-accent font-medium">${social.name}</a>`
                 )
                 .join("")}
             </div>
@@ -114,20 +112,22 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         </header>
 
         <!-- Summary -->
-        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
+        <section class="mb-5">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Professional Summary</h2>
-          <p class="text-sm leading-relaxed text-gray-900 dark:text-slate-50">${
-            DATA.summary
-          }</p>
+          <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4">
+            <p class="text-sm leading-relaxed text-gray-900 dark:text-slate-50">${
+              DATA.summary
+            }</p>
+          </div>
         </section>
 
         <!-- Experience -->
-        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
+        <section class="mb-5">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Experience</h2>
           ${DATA.work
             .map(
               (job) => `
-            <div class="mb-6">
+            <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-4">
               <div class="flex justify-between items-start mb-2">
                 <div>
                   <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-50">${
@@ -136,7 +136,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
                   <p class="text-base font-medium text-accent">
                     ${
                       job.href
-                        ? `<a href="${job.href}" class="text-accent hover:underline">${job.company} →</a>`
+                        ? `<a href="${job.href}" class="text-accent">${job.company} →</a>`
                         : job.company
                     }
                   </p>
@@ -155,12 +155,12 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         </section>
 
         <!-- Education -->
-        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
+        <section class="mb-5">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Education</h2>
           ${DATA.education
             .map(
               (edu) => `
-            <div class="mb-4">
+            <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-4">
               <div class="flex justify-between items-start mb-1">
                 <div>
                   <h3 class="text-base font-semibold text-gray-900 dark:text-slate-50">${
@@ -169,7 +169,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
                   <p class="text-sm font-medium text-accent">
                     ${
                       edu.href
-                        ? `<a href="${edu.href}" class="text-accent hover:underline">${edu.school} →</a>`
+                        ? `<a href="${edu.href}" class="text-accent">${edu.school} →</a>`
                         : edu.school
                     }
                   </p>
@@ -184,33 +184,16 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
             .join("")}
         </section>
 
-        <!-- Skills -->
-        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
-          <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Skills</h2>
-          <div class="flex flex-wrap gap-2">
-            ${Object.values(DATA.skills)
-              .flat()
-              .map((skill) => {
-                const icon = getIcon(skill.icon);
-                const iconHtml = icon
-                  ? `<svg viewBox="0 0 24 24" class="inline w-4 h-4 mr-1" fill="${
-                      skill.color && isDark ? skill.color : `#${icon.hex}`
-                    }"><path d="${icon.path}"/></svg>`
-                  : "";
-                return `<span class="inline-flex items-center bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-slate-50 px-3 py-1 rounded-lg text-sm font-medium border border-gray-300 dark:border-slate-600">${iconHtml}${skill.name}</span>`;
-              })
-              .join("")}
-          </div>
-        </section>
-        <section class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-5 shadow-lg">
+        <!-- Projects -->
+        <section class="mb-5">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Projects</h2>
           <div class="space-y-4">
             ${DATA.projects
               .filter((project) => project.featured)
               .map(
                 (project) => `
-              <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 shadow-lg">
-                <a href="${project.href}" class="text-accent hover:underline">
+              <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4">
+                <a href="${project.href}" class="text-accent">
                   <h3 class="text-base font-semibold mb-1">${
                     project.title
                   } →</h3>
@@ -238,7 +221,28 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               .join("")}
           </div>
           <div class="text-center mt-4">
-            <a href="https://zahidshaikh.space/projects" class="inline-block bg-gradient-to-r from-accent to-accent/80 text-white px-6 py-2 rounded-lg font-medium hover:from-accent/80 hover:to-accent/60 transition-all shadow-md">View More Projects</a>
+            <a href="https://zahidshaikh.space/projects" class="inline-block bg-accent text-black dark:bg-gradient-to-r dark:from-accent dark:to-accent/80 dark:text-white px-6 py-2 rounded-lg font-medium border-2 border-accent">View All Projects</a>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="mb-5">
+          <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Skills</h2>
+          <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4">
+            <div class="flex flex-wrap gap-2">
+              ${Object.values(DATA.skills)
+                .flat()
+                .map((skill) => {
+                  const icon = getIcon(skill.icon);
+                  const iconHtml = icon
+                    ? `<svg viewBox="0 0 24 24" class="inline w-4 h-4 mr-1" fill="${
+                        skill.color && isDark ? skill.color : `#${icon.hex}`
+                      }"><path d="${icon.path}"/></svg>`
+                    : "";
+                  return `<span class="inline-flex items-center bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-slate-50 px-3 py-1 rounded-lg text-sm font-medium border border-gray-300 dark:border-slate-600">${iconHtml}${skill.name}</span>`;
+                })
+                .join("")}
+            </div>
           </div>
         </section>
       </div>
