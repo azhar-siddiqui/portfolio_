@@ -24,22 +24,6 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${DATA.name} - Resume</title>
-      <script src="https://cdn.tailwindcss.com"></script>
-      <script>
-        tailwind.config = {
-          darkMode: 'class',
-          theme: {
-            extend: {
-              fontFamily: {
-                'inter': ['Inter', 'system-ui', 'sans-serif'],
-              },
-              colors: {
-                accent: '#3b82f6',
-              }
-            }
-          }
-        }
-      </script>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -68,10 +52,10 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         .theme-card {
           border-radius: 0.5rem;
           padding: 1rem;
-          background: linear-gradient(to bottom right, rgba(219, 234, 254, 0.4), rgba(196, 181, 253, 0.3));
+          background: rgba(219, 234, 254, 0.5);
         }
         .dark .theme-card {
-          background: linear-gradient(to bottom right, rgba(67, 56, 202, 0.15), rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.15));
+          background: rgba(67, 56, 202, 0.2);
         }
         @media print {
           body { print-color-adjust: exact; }
@@ -254,6 +238,22 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           </div>
         </section>
       </div>
+      <script type="module" src="https://cdn.tailwindcss.com"></script>
+      <script type="module">
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              fontFamily: {
+                'inter': ['Inter', 'system-ui', 'sans-serif'],
+              },
+              colors: {
+                accent: '#3b82f6',
+              }
+            }
+          }
+        }
+      </script>
     </body>
     </html>
   `;
