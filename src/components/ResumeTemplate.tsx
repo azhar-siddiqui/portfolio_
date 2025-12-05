@@ -65,6 +65,14 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           border-radius: 50%;
           object-fit: cover;
         }
+        .theme-card {
+          border-radius: 0.5rem;
+          padding: 1rem;
+          background: linear-gradient(to bottom right, rgba(219, 234, 254, 0.4), rgba(196, 181, 253, 0.3));
+        }
+        .dark .theme-card {
+          background: linear-gradient(to bottom right, rgba(67, 56, 202, 0.15), rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.15));
+        }
         @media print {
           body { print-color-adjust: exact; }
         }
@@ -114,7 +122,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         <!-- Summary -->
         <section class="mb-5">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Professional Summary</h2>
-          <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4">
+          <div class="theme-card">
             <p class="text-sm leading-relaxed text-gray-900 dark:text-slate-50">${
               DATA.summary
             }</p>
@@ -127,7 +135,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           ${DATA.work
             .map(
               (job) => `
-            <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-4">
+            <div class="theme-card mb-4">
               <div class="flex justify-between items-start mb-2">
                 <div>
                   <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-50">${
@@ -160,7 +168,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           ${DATA.education
             .map(
               (edu) => `
-            <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4 mb-4">
+            <div class="theme-card mb-4">
               <div class="flex justify-between items-start mb-1">
                 <div>
                   <h3 class="text-base font-semibold text-gray-900 dark:text-slate-50">${
@@ -192,7 +200,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               .filter((project) => project.featured)
               .map(
                 (project) => `
-              <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4">
+              <div class="theme-card">
                 <a href="${project.href}" class="text-accent">
                   <h3 class="text-base font-semibold mb-1">${
                     project.title
@@ -228,7 +236,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         <!-- Skills -->
         <section class="mb-5">
           <h2 class="text-lg font-bold uppercase tracking-wider text-accent mb-4 pb-2 border-b-2 border-accent">Skills</h2>
-          <div class="bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 dark:from-indigo-700/15 dark:via-purple-700/10 dark:to-pink-700/15 backdrop-blur-sm border border-gray-200/20 dark:border-slate-700/20 rounded-lg p-4">
+          <div class="theme-card">
             <div class="flex flex-wrap gap-2">
               ${Object.values(DATA.skills)
                 .flat()

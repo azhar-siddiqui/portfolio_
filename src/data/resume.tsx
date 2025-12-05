@@ -181,7 +181,7 @@ export const DATA = {
         "PWA",
       ],
       impact:
-        "Build a solution that solves mine and others' expense tracking needs, Launched in 3 days with AI assistance with 90%+ test coverage",
+        "Built a solution that solves mine and others' expense tracking needs, Launched in 3 days with AI assistance with 90%+ test coverage",
       featured: true,
     },
     {
