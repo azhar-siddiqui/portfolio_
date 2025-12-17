@@ -49,7 +49,7 @@ export function ProjectCard({
   return (
     <Card
       className={
-        "flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300 ease-out h-full bg-card/50 backdrop-blur-sm border border-border/50 shadow-md p-3 sm:p-4"
+        "group flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-500 ease-out h-full bg-background/60 backdrop-blur-xl border border-border/50 shadow-md hover:scale-[1.03] hover:-translate-y-2 hover:border-primary/30"
       }
     >
       {video && (
@@ -59,7 +59,7 @@ export function ProjectCard({
           loop
           muted
           playsInline
-          className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
+          className="pointer-events-none mx-auto h-48 w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
         />
       )}
       {image && (
@@ -68,51 +68,68 @@ export function ProjectCard({
           alt={title}
           width={500}
           height={300}
-          className="h-40 w-full overflow-hidden object-cover object-top"
+          className="h-48 w-full overflow-hidden object-cover object-top transition-transform duration-500 group-hover:scale-110"
         />
       )}
-      <CardHeader className="px-2">
-        <div className="space-y-1">
-          <CardTitle className="mt-1 text-base">
+      <CardHeader className="px-4 pt-4 pb-2">
+        <div className="space-y-2">
+          <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">
             {href ? (
               <a
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline text-blue-500"
+                className="hover:underline inline-flex items-center gap-1 group/link"
               >
-                {title} <ArrowUpRight className="inline h-4 w-4" />
+                {title}
+                <ArrowUpRight className="inline h-4 w-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
               </a>
             ) : (
               title
             )}
           </CardTitle>
           {company && (
-            <p className="text-sm text-muted-foreground font-medium">{company}</p>
+            <p className="text-sm text-muted-foreground/80 font-medium flex items-center gap-1.5">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              {company}
+            </p>
           )}
-          <time className="font-sans text-sm">{dates}</time>
+          <time className="font-sans text-sm text-muted-foreground/70 flex items-center gap-1.5">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {dates}
+          </time>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
           </div>
-          <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+          <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground/80 dark:prose-invert leading-relaxed">
             {description}
           </Markdown>
           {impact && (
-            <div className="mt-3 p-2 bg-green-50 dark:bg-green-900/20 rounded-md border border-green-200 dark:border-green-800">
-              <p className="text-sm font-semibold text-green-700 dark:text-green-300">
-                Impact: {impact}
-              </p>
+            <div className="mt-3 p-3 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/40 dark:to-green-950/20 rounded-lg border border-emerald-200/50 dark:border-emerald-800/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <div>
+                  <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 mb-0.5">Impact</p>
+                  <p className="text-sm font-medium text-emerald-800 dark:text-emerald-200">{impact}</p>
+                </div>
+              </div>
             </div>
           )}
         </div>
       </CardHeader>
-      <CardContent className="mt-auto flex flex-col px-2">
+      <CardContent className="mt-auto flex flex-col px-4 pb-2">
         {tags && tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1.5">
             {tags?.map((tag) => (
               <Badge
-                className="px-1 py-0 text-[12px]"
-                variant="default"
+                className="px-2 py-1 text-[11px] font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors"
+                variant="outline"
                 key={tag}
               >
                 {tag}
@@ -121,12 +138,12 @@ export function ProjectCard({
           </div>
         )}
       </CardContent>
-      <CardFooter className="px-2 pb-2">
+      <CardFooter className="px-4 pb-4">
         {links && links.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-1">
+          <div className="flex flex-row flex-wrap items-start gap-2">
             {links?.map((link, idx) => (
               <a href={link?.href} key={idx} target="_blank" rel="noopener noreferrer">
-                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px] text-blue-500 hover:underline">
+                <Badge className="flex gap-1.5 px-3 py-1.5 text-xs font-medium hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105">
                   {link.icon}
                   {link.type}
                 </Badge>
