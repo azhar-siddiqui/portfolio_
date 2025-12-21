@@ -42,6 +42,10 @@ export function DownloadResumeButton() {
     }
   };
 
+  if (process.env.NODE_ENV !== "development") {
+    return null;
+  }
+
   return (
     <>
       <div className="flex justify-center no-print">
@@ -70,7 +74,9 @@ export function DownloadResumeButton() {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-300">
           <div className="bg-background border border-border/50 p-8 rounded-2xl shadow-2xl max-w-md w-full mx-4 animate-in zoom-in-95 duration-300">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Choose Theme</h3>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Choose Theme
+              </h3>
               <Button
                 variant="ghost"
                 size="sm"
@@ -80,14 +86,26 @@ export function DownloadResumeButton() {
                 <X className="h-5 w-5" />
               </Button>
             </div>
-            <p className="text-muted-foreground mb-6 text-sm">Select your preferred theme for the PDF resume</p>
+            <p className="text-muted-foreground mb-6 text-sm">
+              Select your preferred theme for the PDF resume
+            </p>
             <div className="flex gap-3">
               <Button
                 onClick={() => downloadResume("light")}
                 className="flex-1 py-6 bg-primary hover:bg-primary/90 text-white rounded-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
                 </svg>
                 Light Theme
               </Button>
@@ -96,8 +114,18 @@ export function DownloadResumeButton() {
                 variant="outline"
                 className="flex-1 py-6 border-2 border-primary text-primary dark:text-white rounded-lg hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
                 </svg>
                 Dark Theme
               </Button>
