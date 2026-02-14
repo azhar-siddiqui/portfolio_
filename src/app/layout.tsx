@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -58,42 +58,97 @@ export const metadata: Metadata = {
     title: `${DATA.name} — Senior Product Engineer`,
     card: "summary_large_image",
     description: DATA.description,
-  },
-  verification: {
-    google: "",
-    yandex: "",
+    creator: "@zaheedshaikh",
   },
   alternates: {
     canonical: DATA.url,
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f6fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0f1e" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
+
 function JsonLd() {
-  const structuredData = {
+  const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${DATA.url}/#person`,
     name: DATA.name,
     url: DATA.url,
     email: DATA.contact.email,
+    image: `${DATA.url}/me.png`,
+    description: DATA.description,
     jobTitle: "Senior Product Engineer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Shurutech",
+      url: "https://shurutech.com",
+    },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Abeda Inamdar Senior College",
+      url: "https://abedainamdarcollege.org.in/",
+    },
     address: {
       "@type": "PostalAddress",
-      addressLocality: DATA.location,
+      addressLocality: "Pune",
+      addressCountry: "IN",
     },
-    sameAs: Object.values(DATA.contact.social).map((s) => s.url),
+    sameAs: Object.values(DATA.contact.social)
+      .map((s) => s.url)
+      .filter((url) => !url.startsWith("mailto:")),
     knowsAbout: [
       "React",
       "Next.js",
       "TypeScript",
       "Node.js",
       "Full Stack Development",
+      "React Native",
+      "Angular",
+      "PostgreSQL",
+      "MongoDB",
+      "Docker",
+      "AWS",
     ],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${DATA.url}/#website`,
+    url: DATA.url,
+    name: `${DATA.name} — Senior Product Engineer`,
+    description: DATA.description,
+    publisher: { "@id": `${DATA.url}/#person` },
+  };
+
+  const profilePageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${DATA.url}/#profilepage`,
+    url: DATA.url,
+    name: `${DATA.name} — Portfolio`,
+    mainEntity: { "@id": `${DATA.url}/#person` },
+    dateCreated: "2024-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
   };
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify([
+          personSchema,
+          websiteSchema,
+          profilePageSchema,
+        ]),
+      }}
     />
   );
 }
