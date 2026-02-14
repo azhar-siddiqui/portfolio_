@@ -49,9 +49,11 @@ export function ProjectCard({
   return (
     <Card
       className={
-        "group flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-500 ease-out h-full bg-background/60 backdrop-blur-xl border border-border/50 shadow-md hover:scale-[1.03] hover:-translate-y-2 hover:border-primary/30"
+        "group flex flex-col overflow-hidden transition-all duration-300 ease-out h-full bg-card dark:bg-card/60 backdrop-blur-xl border-l-[3px] border border-l-accent/40 border-border/60 dark:border-border/50 hover:border-primary/30 hover:bg-accent/[0.03] dark:hover:bg-accent/[0.06]"
       }
     >
+      {/* Subtle top gradient accent line */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-primary/60 via-accent/60 to-primary/30" />
       {video && (
         <video
           src={video}
@@ -105,11 +107,13 @@ export function ProjectCard({
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
           </div>
-          <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground/80 dark:prose-invert leading-relaxed">
-            {description}
-          </Markdown>
+          <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground/80 dark:prose-invert leading-relaxed">
+            <Markdown>
+              {description}
+            </Markdown>
+          </div>
           {impact && (
-            <div className="mt-3 p-3 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/40 dark:to-green-950/20 rounded-lg border border-emerald-200/50 dark:border-emerald-800/50 transition-all duration-300 hover:shadow-md">
+            <div className="mt-3 p-3 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/40 dark:to-green-950/20 rounded-lg border border-emerald-200/50 dark:border-emerald-800/50 transition-all duration-300">
               <div className="flex items-start gap-2">
                 <svg className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />

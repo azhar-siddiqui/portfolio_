@@ -12,20 +12,34 @@ import "./globals.css";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
+    default: `${DATA.name} — Senior Product Engineer`,
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
+  keywords: [
+    "Senior Product Engineer",
+    "Full Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript",
+    DATA.name,
+    "Portfolio",
+    "Software Engineer",
+    "Web Developer",
+  ],
+  authors: [{ name: DATA.name, url: DATA.url }],
+  creator: DATA.name,
   openGraph: {
-    title: `${DATA.name}`,
+    title: `${DATA.name} — Senior Product Engineer`,
     description: DATA.description,
     url: DATA.url,
-    siteName: `${DATA.name}`,
+    siteName: DATA.name,
     locale: "en_US",
     type: "website",
   },
@@ -41,14 +55,48 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name}`,
+    title: `${DATA.name} — Senior Product Engineer`,
     card: "summary_large_image",
+    description: DATA.description,
   },
   verification: {
     google: "",
     yandex: "",
   },
+  alternates: {
+    canonical: DATA.url,
+  },
 };
+
+function JsonLd() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: DATA.name,
+    url: DATA.url,
+    email: DATA.contact.email,
+    jobTitle: "Senior Product Engineer",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: DATA.location,
+    },
+    sameAs: Object.values(DATA.contact.social).map((s) => s.url),
+    knowsAbout: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Full Stack Development",
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
 
 export default function RootLayout({
   children,
@@ -57,9 +105,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <JsonLd />
+      </head>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased max-w-full overflow-x-hidden",
           fontSans.variable
         )}
       >

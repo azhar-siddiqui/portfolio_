@@ -1,14 +1,22 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { BlurFade } from "@/components/magicui/blur-fade";
 import { DATA } from "@/data/resume";
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as SimpleIcons from "simple-icons";
+
+const BLUR_FADE_DELAY = 0.03;
 
 export function SkillsSection() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const categories = Object.keys(DATA.skills);
   const allSkills =
@@ -28,64 +36,71 @@ export function SkillsSection() {
     return SimpleIcons[iconKey] || null;
   };
 
+  const getIconColor = (skill: any, icon: any) => {
+    const isDark = theme === "dark" || (theme === "system" && systemTheme === "dark");
+    return skill.color && isDark ? skill.color : `#${icon.hex}`;
+  };
+
   return (
     <section id="skills">
       <div className="mx-auto w-full max-w-6xl">
-        <h2 className="text-4xl font-black mb-8 text-left uppercase tracking-tight bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent relative inline-block">
-          Skills
-          <div className="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-primary to-accent rounded-full"></div>
-        </h2>
-        <div className="flex flex-wrap gap-3 mb-8">
-          <Badge
-            variant={selectedCategory === "all" ? "default" : "secondary"}
-            className={`cursor-pointer px-5 py-2.5 text-base font-semibold transition-all duration-300 rounded-lg ${
-              selectedCategory === "all"
-                ? "bg-primary hover:bg-primary/90 text-white shadow-lg scale-105 border-0"
-                : "hover:scale-105 hover:bg-primary/10"
-            }`}
-            onClick={() => setSelectedCategory("all")}
-          >
-            All
-          </Badge>
-          {categories.map((cat) => (
+        <BlurFade delay={BLUR_FADE_DELAY} inView>
+          <h2 className="section-heading mb-8">
+            Skills
+            <div className="section-heading-underline"></div>
+          </h2>
+        </BlurFade>
+        <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
             <Badge
-              key={cat}
-              variant={selectedCategory === cat ? "default" : "secondary"}
-              className={`cursor-pointer px-5 py-2.5 text-base font-semibold capitalize transition-all duration-300 rounded-lg ${
-                selectedCategory === cat
-                  ? "bg-primary hover:bg-primary/90 text-white shadow-lg scale-105 border-0"
-                  : "hover:scale-105 hover:bg-primary/10"
+              variant={selectedCategory === "all" ? "default" : "secondary"}
+              className={`cursor-pointer px-4 py-2 text-sm sm:text-base font-semibold transition-all duration-300 rounded-lg ${
+                selectedCategory === "all"
+                  ? "bg-primary hover:bg-primary/90 text-white border-0"
+                  : "hover:bg-primary/10"
               }`}
-              onClick={() => setSelectedCategory(cat)}
+              onClick={() => setSelectedCategory("all")}
             >
-              {cat}
+              All
             </Badge>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-3">
+            {categories.map((cat) => (
+              <Badge
+                key={cat}
+                variant={selectedCategory === cat ? "default" : "secondary"}
+                className={`cursor-pointer px-4 py-2 text-sm sm:text-base font-semibold capitalize transition-all duration-300 rounded-lg ${
+                  selectedCategory === cat
+                    ? "bg-primary hover:bg-primary/90 text-white border-0"
+                    : "hover:bg-primary/10"
+                }`}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat}
+              </Badge>
+            ))}
+          </div>
+        </BlurFade>
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           {allSkills.map(({ skill, category }, id) => {
             const icon = getIcon(skill.icon);
             return (
-              <Badge
-                key={id}
-                variant="outline"
-                className="px-4 py-3 text-base font-medium transition-all duration-300 hover:scale-110 hover:bg-gradient-to-r hover:from-primary/20 hover:to-accent/20 hover:border-primary/50 hover:shadow-lg flex items-center gap-2.5 cursor-default group"
-              >
-                {icon ? (
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12"
-                    fill={
-                      skill.color && theme === "dark"
-                        ? skill.color
-                        : `#${icon.hex}`
-                    }
-                  >
-                    <path d={icon.path} />
-                  </svg>
-                ) : null}
-                {skill.name}
-              </Badge>
+              <BlurFade key={id} delay={BLUR_FADE_DELAY * 2 + id * 0.01} inView>
+                <Badge
+                  variant="outline"
+                  className="px-3 py-2.5 text-sm sm:text-base font-medium transition-all duration-300 hover:bg-primary/10 hover:border-primary/40 flex items-center gap-2 cursor-default group"
+                >
+                  {icon ? (
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110"
+                      fill={mounted ? getIconColor(skill, icon) : `#${icon.hex}`}
+                      suppressHydrationWarning
+                    >
+                      <path d={icon.path} />
+                    </svg>
+                  ) : null}
+                  {skill.name}
+                </Badge>
+              </BlurFade>
             );
           })}
         </div>

@@ -38,11 +38,11 @@ export const ResumeCard = ({
   };
 
   return (
-    <Card className="group flex flex-col bg-background/60 backdrop-blur-xl border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-500 p-5 sm:p-6 hover:scale-[1.02] hover:-translate-y-1 hover:border-primary/30">
+    <Card className="group flex flex-col bg-card dark:bg-card/60 backdrop-blur-xl border-l-[3px] border border-l-primary/40 border-border/60 dark:border-border/50 transition-all duration-300 p-5 sm:p-6 hover:border-primary/30 hover:bg-primary/[0.03] dark:hover:bg-primary/[0.06]">
       <div className="flex flex-row gap-4">
         {logoUrl && (
           <div className="flex justify-center sm:flex-none">
-            <Avatar className="border-2 border-border/50 size-10 sm:size-14 m-auto bg-muted transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-lg group-hover:scale-110">
+            <Avatar className="border-2 border-border/50 size-10 sm:size-14 m-auto bg-muted transition-all duration-300 group-hover:border-primary/50 group-hover:scale-110">
               <AvatarImage
                 src={logoUrl}
                 alt={altText}

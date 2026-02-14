@@ -17,36 +17,30 @@ export const AnimatedThemeToggler = ({
   duration = 400,
   ...props
 }: AnimatedThemeTogglerProps) => {
-  const { setTheme } = useTheme();
-  const [isDark, setIsDark] = useState(false);
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const updateTheme = () => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    };
-
-    updateTheme();
-
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
+    setMounted(true);
   }, []);
+
+  const isDark = resolvedTheme === "dark";
 
   const toggleTheme = useCallback(async () => {
     if (!buttonRef.current) return;
 
+    const newTheme = isDark ? "light" : "dark";
+
+    // Check if View Transitions API is supported
+    if (!document.startViewTransition) {
+      setTheme(newTheme);
+      return;
+    }
+
     await document.startViewTransition(() => {
       flushSync(() => {
-        const newTheme = !isDark;
-        setIsDark(newTheme);
-        // setTheme(newTheme ? "dark" : "light");
-        document.documentElement.classList.toggle("dark");
-        localStorage.setItem("theme", newTheme ? "dark" : "light");
+        setTheme(newTheme);
       });
     }).ready;
 
@@ -72,16 +66,27 @@ export const AnimatedThemeToggler = ({
         pseudoElement: "::view-transition-new(root)",
       }
     );
-  }, [isDark, duration]);
+  }, [isDark, duration, setTheme]);
 
   return (
     <button
       ref={buttonRef}
       onClick={toggleTheme}
-      className={cn(className)}
+      className={cn(
+        "text-foreground/80 hover:text-foreground transition-colors",
+        className
+      )}
       {...props}
     >
-      {isDark ? <SunIcon /> : <MoonIcon />}
+      {mounted ? (
+        isDark ? (
+          <SunIcon className="h-[1.2rem] w-[1.2rem]" />
+        ) : (
+          <MoonIcon className="h-[1.2rem] w-[1.2rem]" />
+        )
+      ) : (
+        <div className="h-[1.2rem] w-[1.2rem]" />
+      )}
       <span className="sr-only">Toggle theme</span>
     </button>
   );

@@ -4,23 +4,23 @@
 
 @layer base {
     :root {
-      --background: 0 0% 100%;
-      --foreground: 0 0% 0%;
+      --background: 220 20% 97%;
+      --foreground: 222 47% 11%;
 
       --card: 0 0% 100%;
-      --card-foreground: 0 0% 0%;
+      --card-foreground: 222 47% 11%;
 
       --popover: 0 0% 100%;
-      --popover-foreground: 0 0% 0%;
+      --popover-foreground: 222 47% 11%;
 
       --primary: 221 83% 53%;
       --primary-foreground: 0 0% 100%;
 
-      --secondary: 210 40% 96%;
-      --secondary-foreground: 0 0% 0%;
+      --secondary: 214 32% 93%;
+      --secondary-foreground: 222 47% 11%;
 
-      --muted: 210 40% 96%;
-      --muted-foreground: 0 0% 35%;
+      --muted: 214 32% 93%;
+      --muted-foreground: 215 20% 42%;
 
       --accent: 217 91% 60%;
       --accent-foreground: 0 0% 100%;
@@ -28,8 +28,11 @@
       --destructive: 0 84.2% 60.2%;
       --destructive-foreground: 0 0% 98%;
 
-      --border: 214 32% 91%;
-      --input: 214 32% 91%;
+      --success: 142 71% 45%;
+      --success-foreground: 0 0% 100%;
+
+      --border: 214 25% 85%;
+      --input: 214 25% 85%;
       --ring: 221 83% 53%;
 
       --chart-1: 221 83% 53%;
@@ -42,23 +45,23 @@
     }
 
     .dark {
-      --background: 222 47% 11%;
-      --foreground: 0 0% 100%;
+      --background: 222 47% 6%;
+      --foreground: 210 40% 98%;
 
-      --card: 217 33% 17%;
-      --card-foreground: 0 0% 100%;
+      --card: 222 47% 9%;
+      --card-foreground: 210 40% 98%;
 
-      --popover: 222 47% 11%;
-      --popover-foreground: 0 0% 100%;
+      --popover: 222 47% 6%;
+      --popover-foreground: 210 40% 98%;
 
       --primary: 217 91% 60%;
       --primary-foreground: 0 0% 100%;
 
-      --secondary: 217 33% 17%;
-      --secondary-foreground: 0 0% 100%;
+      --secondary: 217 33% 14%;
+      --secondary-foreground: 210 40% 98%;
 
-      --muted: 217 33% 17%;
-      --muted-foreground: 0 0% 85%;
+      --muted: 217 33% 14%;
+      --muted-foreground: 215 20% 65%;
 
       --accent: 200 98% 55%;
       --accent-foreground: 0 0% 100%;
@@ -66,8 +69,11 @@
       --destructive: 0 63% 31%;
       --destructive-foreground: 0 0% 100%;
 
-      --border: 217 33% 24%;
-      --input: 217 33% 24%;
+      --success: 142 71% 45%;
+      --success-foreground: 0 0% 100%;
+
+      --border: 217 33% 18%;
+      --input: 217 33% 18%;
       --ring: 217 91% 60%;
 
       --chart-1: 221 83% 53%;
@@ -89,6 +95,11 @@
       @apply bg-background text-foreground;
       font-feature-settings: "rlig" 1, "calt" 1;
     }
+    
+    /* Better focus-visible styles for accessibility */
+    :focus-visible {
+      @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+    }
   }
 
   @layer utilities {
@@ -101,7 +112,7 @@
     }
     
     .card-hover {
-      @apply transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1;
+      @apply transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:border-primary/30;
     }
     
     .glass-effect {
@@ -110,6 +121,49 @@
     
     .btn-gradient {
       @apply bg-gradient-to-r from-primary to-accent text-white border-0;
+    }
+
+    .section-heading {
+      @apply text-3xl sm:text-4xl font-black tracking-tight bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent relative inline-block;
+    }
+
+    .section-heading-underline {
+      @apply absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-primary to-accent rounded-full;
+    }
+
+    /* Subtle noise texture overlay */
+    .noise-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Animated gradient border for featured elements */
+    .gradient-border {
+      position: relative;
+    }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+      background-size: 200% 200%;
+      animation: gradientMove 3s ease infinite;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   }
 

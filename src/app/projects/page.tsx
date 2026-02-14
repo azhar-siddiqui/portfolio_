@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { DATA } from "@/data/resume";
 import { ProjectCard } from "@/components/project-card";
+import { BlurFade } from "@/components/magicui/blur-fade";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,10 +13,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Grid3X3, List, Filter } from "lucide-react";
+import { Grid3X3, List, Search } from "lucide-react";
 import * as chrono from "chrono-node";
 
 type ViewMode = "grid" | "list";
+
+const BLUR_FADE_DELAY = 0.03;
 
 export default function ProjectsPage() {
   const [search, setSearch] = useState("");
@@ -78,97 +81,109 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen px-4 py-12 pb-24">
+    <main className="flex flex-col min-h-screen px-4 py-12 pb-28">
       <div className="mx-auto w-full max-w-6xl space-y-10">
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl font-black tracking-tight sm:text-6xl xl:text-7xl uppercase bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            All Projects
-          </h1>
-          <p className="mt-4 text-muted-foreground/90 text-lg max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-            Explore my complete portfolio of projects across various industries
-            and technologies.
-          </p>
-        </div>
+        <BlurFade delay={BLUR_FADE_DELAY}>
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl font-black tracking-tight sm:text-5xl xl:text-6xl bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent">
+              All Projects
+            </h1>
+            <p className="mt-4 text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Explore my complete portfolio of projects across various industries
+              and technologies.
+            </p>
+          </div>
+        </BlurFade>
 
         {/* Filters */}
-        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Input
-              placeholder="Search projects..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 h-12 text-base border-2 focus:border-primary transition-colors"
-            />
-            <div className="flex gap-3 items-center">
-              <Select
-                value={sortBy}
-                onValueChange={(value) =>
-                  setSortBy(value as "newest" | "oldest" | "title")
-                }
-              >
-                <SelectTrigger className="w-full sm:w-52 h-12 border-2 font-medium">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="newest">Newest First</SelectItem>
-                  <SelectItem value="oldest">Oldest First</SelectItem>
-                  <SelectItem value="title">Alphabetical</SelectItem>
-                </SelectContent>
-              </Select>
-              <Button
-                variant={viewMode === "grid" ? "default" : "outline"}
-                size="lg"
-                onClick={() => setViewMode("grid")}
-                className="h-12 px-4 transition-all duration-300 hover:scale-105"
-              >
-                <Grid3X3 className="h-5 w-5" />
-              </Button>
-              <Button
-                variant={viewMode === "list" ? "default" : "outline"}
-                size="lg"
-                onClick={() => setViewMode("list")}
-                className="h-12 px-4 transition-all duration-300 hover:scale-105"
-              >
-                <List className="h-5 w-5" />
-              </Button>
+        <BlurFade delay={BLUR_FADE_DELAY * 3}>
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search projects..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="flex-1 h-12 pl-10 text-base border-border/50 focus:border-primary transition-colors bg-card/50"
+                />
+              </div>
+              <div className="flex gap-3 items-center">
+                <Select
+                  value={sortBy}
+                  onValueChange={(value) =>
+                    setSortBy(value as "newest" | "oldest" | "title")
+                  }
+                >
+                  <SelectTrigger className="w-full sm:w-48 h-12 border-border/50 font-medium bg-card/50">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="newest">Newest First</SelectItem>
+                    <SelectItem value="oldest">Oldest First</SelectItem>
+                    <SelectItem value="title">Alphabetical</SelectItem>
+                  </SelectContent>
+                </Select>
+                <div className="flex gap-1 p-1 bg-card/50 rounded-lg border border-border/50">
+                  <Button
+                    variant={viewMode === "grid" ? "default" : "ghost"}
+                    size="icon"
+                    onClick={() => setViewMode("grid")}
+                    className="h-10 w-10"
+                  >
+                    <Grid3X3 className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === "list" ? "default" : "ghost"}
+                    size="icon"
+                    onClick={() => setViewMode("list")}
+                    className="h-10 w-10"
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </BlurFade>
 
         {/* Projects */}
         <div
           className={
             viewMode === "grid"
-              ? "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-in fade-in duration-500"
-              : "space-y-6 animate-in fade-in duration-500"
+              ? "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              : "space-y-6"
           }
         >
           {filteredProjects.map((project, id) => (
-            <ProjectCard
-              key={project.title}
-              href={project.href}
-              title={project.title}
-              description={project.description}
-              dates={project.dates}
-              tags={project.technologies}
-              impact={project.impact}
-              company={project.company}
-            />
+            <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 3 + id * 0.02} inView>
+              <ProjectCard
+                href={project.href}
+                title={project.title}
+                description={project.description}
+                dates={project.dates}
+                tags={project.technologies}
+                impact={project.impact}
+                company={project.company}
+              />
+            </BlurFade>
           ))}
         </div>
 
         {filteredProjects.length === 0 && (
-          <div className="text-center py-20 animate-in fade-in duration-500">
-            <svg className="w-20 h-20 mx-auto mb-4 text-muted-foreground/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <p className="text-muted-foreground/80 text-lg font-medium">
-              No projects match your filters.
-            </p>
-            <p className="text-muted-foreground/60 text-sm mt-2">
-              Try adjusting your search or filters.
-            </p>
-          </div>
+          <BlurFade delay={BLUR_FADE_DELAY}>
+            <div className="text-center py-20">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+                <Search className="w-8 h-8 text-muted-foreground/50" />
+              </div>
+              <p className="text-muted-foreground text-lg font-medium">
+                No projects match your filters.
+              </p>
+              <p className="text-muted-foreground/60 text-sm mt-2">
+                Try adjusting your search or filters.
+              </p>
+            </div>
+          </BlurFade>
         )}
       </div>
     </main>
