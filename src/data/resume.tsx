@@ -111,7 +111,8 @@ export const DATA = {
       logoUrl: "", // Add logo if available
       start: "Dec 2025",
       end: "Present",
-      description: "Started as a Senior Product Engineer at Shurutech.",
+      description:
+        "Building high-performance cross-platform solutions for a leading AI and logistics company. Developing scalable UI/UX components across fragmented device ecosystems and integrating complex APIs with real-time telemetry. Driving production excellence through rigorous peer reviews, performance optimization, and modern CI/CD practices.",
     },
     {
       company: "Kiya.ai",
@@ -123,7 +124,7 @@ export const DATA = {
       start: "Feb 2024",
       end: "Nov 2025",
       description:
-        "Led delivery of custom enterprise platforms for global maritime clients like Hafnia and OceanPass. Implemented offline-first operations for 100+ tankers, automated regulatory reporting (CII, EEDI, Poseidon Principles), reduced decision time by 30%, downtime by 40%, and saved millions in fuel/compliance costs. Used Azure DevOps for CI/CD and Sentry for monitoring.",
+        "Led delivery of custom enterprise platforms for global maritime clients like Major Global Energy Transporter and Leading Global Shipping Tech. Implemented offline-first operations for 100+ tankers, automated regulatory reporting (CII, EEDI, Poseidon Principles), reduced decision time by 30%, downtime by 40%, and saved millions in fuel/compliance costs. Used Azure DevOps for CI/CD and Sentry for monitoring.",
     },
     {
       company: "Rightbrain Infotech",
@@ -222,11 +223,12 @@ export const DATA = {
       featured: false,
     },
     {
-      title: "Hafnia Universe → Global Tanker Operations Platform",
-      href: "https://hafnia.com",
+      title: "Global Tanker Fleet Management System",
+      href: "https://kiya.ai",
       dates: "Feb 2024 – Nov 2025",
       company: "Kiya.ai",
       active: true,
+      tags: ["Confidential", "NDA Protected"],
       description:
         "End-to-end ownership of a real-time dashboard for 100+ vessels. Integrated live maps, weather routing, and analytics; optimized for performance with caching and data structures like graphs for route calculations, ensuring low-latency updates across global operations.",
       technologies: [
@@ -242,11 +244,12 @@ export const DATA = {
       featured: true,
     },
     {
-      title: "OceanPass → Emissions Intelligence Platform",
-      href: "https://oceanpass.com",
+      title: "Maritime Emissions Intelligence Platform",
+      href: "https://kiya.ai",
       dates: "Feb 2025 – Jun 2025",
       company: "Kiya.ai",
       active: true,
+      tags: ["Confidential", "NDA Protected"],
       description:
         "Solo-built an offline-first desktop app for global shipping emissions tracking. Automated reporting for CII, EEDI, and Poseidon Principles; handled offline sync via service workers and local storage for remote fleets, addressing connectivity issues in maritime environments.",
       technologies: [

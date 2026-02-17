@@ -18,9 +18,8 @@ export default function Page() {
     >
       {/* ===== HERO SECTION ===== */}
       <section id="hero" className="relative">
-        {/* Clean radial gradient backdrop */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-gradient-to-br from-primary/[0.06] via-accent/[0.04] to-transparent rounded-full blur-3xl opacity-80" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full" />
         </div>
         <div className="mx-auto w-full max-w-6xl space-y-8 pt-6">
           <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 sm:justify-between sm:items-center">
@@ -47,12 +46,12 @@ export default function Page() {
                 </div>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 3}>
-                <h1 className="text-4xl font-black tracking-tight sm:text-5xl xl:text-6xl/none bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
+                <h1 className="text-4xl font-black tracking-tight sm:text-5xl xl:text-6xl/none bg-clip-text">
                   Hi, I&apos;m{" "}
                   <span className="bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent">
                     {DATA.name.split(" ")[0]}
                   </span>{" "}
-                  <span className="inline-block" style={{ WebkitTextFillColor: 'initial', WebkitBackgroundClip: 'initial' }}>👋</span>
+                  <span className="inline-block">👋</span>
                 </h1>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 5}>
