@@ -1,5 +1,4 @@
 import { DATA } from "@/data/resume";
-import * as SimpleIcons from "simple-icons";
 
 interface ResumeTemplateProps {
   theme: "light" | "dark";
@@ -9,70 +8,66 @@ interface ResumeTemplateProps {
 export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
   const isDark = theme === "dark";
 
-  const getIcon = (iconSlug: string | null) => {
-    if (!iconSlug) return null;
-    const iconKey = `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(
-      1
-    )}` as keyof typeof SimpleIcons;
-    return SimpleIcons[iconKey] || null;
-  };
-
-  // ── Color tokens ──────────────────────────────────────────────
+  // ── Color tokens (aligned with portfolio HSL system) ──────────
   const c = isDark
     ? {
         bg: "#0a0f1e",
-        bgCard: "#111827",
-        text: "#f1f5f9",
-        textSecondary: "#94a3b8",
-        accent: "#3b82f6",
-        accentLight: "rgba(59,130,246,0.12)",
-        border: "#1e293b",
-        borderAccent: "rgba(59,130,246,0.30)",
-        skillBg: "#1e293b",
-        skillBorder: "#334155",
-        impactBg: "rgba(16,185,129,0.10)",
-        impactBorder: "rgba(16,185,129,0.25)",
-        impactText: "#6ee7b7",
-        linkHover: "#60a5fa",
+        surface: "#111724",
+        fg: "#fafbfc",
+        fgDim: "#e5e7eb",
+        muted: "#9ca3af",
+        mutedDim: "#6b7385",
+        border: "#1e2533",
+        rule: "#161d2a",
+        primary: "#5b9eff",
+        primarySoft: "#1c2a47",
+        secondary: "#b488ff",
+        accentStrip: "#5b9eff",
       }
     : {
         bg: "#ffffff",
-        bgCard: "#f8fafc",
-        text: "#111827",
-        textSecondary: "#6b7280",
-        accent: "#2563eb",
-        accentLight: "rgba(37,99,235,0.06)",
-        border: "#e5e7eb",
-        borderAccent: "rgba(37,99,235,0.25)",
-        skillBg: "#f1f5f9",
-        skillBorder: "#e2e8f0",
-        impactBg: "rgba(16,185,129,0.06)",
-        impactBorder: "rgba(16,185,129,0.20)",
-        impactText: "#059669",
-        linkHover: "#1d4ed8",
+        surface: "#fafbfc",
+        fg: "#0b1020",
+        fgDim: "#1f2937",
+        muted: "#5b6473",
+        mutedDim: "#8a92a0",
+        border: "#e3e5ed",
+        rule: "#eef0f5",
+        primary: "#3b5ff7",
+        primarySoft: "#eef2ff",
+        secondary: "#7c3aed",
+        accentStrip: "#3b5ff7",
       };
 
-  // ── Skills grouped by category ────────────────────────────────
-  const skillCategories = Object.entries(DATA.skills).map(
-    ([category, skills]) => ({
-      category,
-      skills: skills.map((skill) => {
-        const icon = getIcon(skill.icon);
-        const iconSvg = icon
-          ? `<svg viewBox="0 0 24 24" style="width:13px;height:13px;margin-right:4px;flex-shrink:0;vertical-align:middle" fill="${
-              skill.color && isDark ? skill.color : `#${icon.hex}`
-            }"><path d="${icon.path}"/></svg>`
-          : "";
-        return { name: skill.name, iconSvg };
-      }),
-    })
-  );
-
-  // ── Featured projects ─────────────────────────────────────────
+  // ── Featured projects only ────────────────────────────────────
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const featuredProjects = (DATA.projects as unknown as any[]).filter(
     (p) => p.featured
   );
+
+  // ── Helpers ───────────────────────────────────────────────────
+  const eyebrow = (index: string, label: string) => `
+    <div class="eyebrow">
+      <span class="eyebrow-line"></span>
+      <span class="eyebrow-text">${index} · ${label}</span>
+    </div>`;
+
+  // Section index labels
+  const sections = {
+    summary: "01",
+    experience: "02",
+    skills: "03",
+    projects: "04",
+    education: "05",
+  };
+
+  const socialLinks = Object.entries(DATA.contact.social)
+    .filter(([key]) => key !== "Email")
+    .map(
+      ([, social]) =>
+        `<a href="${social.url}" class="meta-link">${social.name}<span class="arrow"> ↗</span></a>`
+    )
+    .join('<span class="meta-sep">·</span>');
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -80,376 +75,547 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${DATA.name} — Resume</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ── Reset & Base ────────────────────────────────────────── */
+  /* ── Reset ─────────────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Base ──────────────────────────────────────────────── */
+  :root {
+    --sans: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, "Liberation Sans", sans-serif;
+    --serif: "Iowan Old Style", "Apple Garamond", "Palatino Linotype", Georgia, "Liberation Serif", serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  }
   html, body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-size: 14px;
+    font-family: var(--sans);
+    font-size: 13.5px;
     line-height: 1.55;
     background: ${c.bg};
-    color: ${c.text};
+    color: ${c.fg};
     -webkit-font-smoothing: antialiased;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    font-feature-settings: "ss01", "cv11", "calt", "kern";
   }
-  a { color: ${c.accent}; text-decoration: none; }
-  a:hover { color: ${c.linkHover}; }
+  a { color: inherit; text-decoration: none; }
 
-  /* ── Layout ──────────────────────────────────────────────── */
+  /* ── Page ──────────────────────────────────────────────── */
   .page {
+    position: relative;
     max-width: 210mm;
     margin: 0 auto;
-    padding: 10mm 12mm;
+    padding: 16mm 14mm 14mm;
+    background: ${c.bg};
+  }
+  .page::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: ${c.accentStrip};
   }
 
-  /* ── Header ──────────────────────────────────────────────── */
-  .header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 22px;
-    padding-bottom: 18px;
-    border-bottom: 2px solid ${c.accent};
-  }
-  .avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid ${c.borderAccent};
-    flex-shrink: 0;
-  }
-  .header-info { flex: 1; }
-  .header-name {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-    margin-bottom: 4px;
-  }
-  .header-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px 12px;
-    font-size: 12px;
-    color: ${c.textSecondary};
-    margin-bottom: 6px;
-  }
-  .header-meta .dot { color: ${c.border}; }
-  .header-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  /* ── Section ─────────────────────────────────────────────── */
-  .section { margin-bottom: 18px; }
-  .section-title {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: ${c.accent};
-    padding-bottom: 6px;
-    border-bottom: 2px solid ${c.borderAccent};
-    margin-bottom: 12px;
-  }
-
-  /* ── Card (reusable block) ───────────────────────────────── */
-  .card {
-    background: ${c.bgCard};
-    border: 1px solid ${c.border};
-    border-left: 3px solid ${c.borderAccent};
-    border-radius: 6px;
-    padding: 12px 14px;
-    margin-bottom: 10px;
-  }
-  .card:last-child { margin-bottom: 0; }
-
-  /* ── Experience / Education row ──────────────────────────── */
-  .entry-header {
+  /* ── Top label ─────────────────────────────────────────── */
+  .top-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: ${c.mutedDim};
+    margin-bottom: 18px;
+  }
+  .top-row .dash { color: ${c.primary}; margin-right: 6px; }
+
+  /* ── Header ────────────────────────────────────────────── */
+  .header {
+    display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid ${c.border};
+    margin-bottom: 20px;
+  }
+  .header-info { flex: 1; min-width: 0; }
+  .header-name {
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.0;
+    margin-bottom: 10px;
+    color: ${c.fg};
+  }
+  .header-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.4;
+    color: ${c.fgDim};
+    margin-bottom: 14px;
+    max-width: 52ch;
+  }
+  .header-tagline .accent { color: ${c.primary}; font-style: italic; }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 9px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: ${c.muted};
+    text-transform: uppercase;
+  }
+  .meta-row a { color: ${c.fgDim}; }
+  .meta-row .meta-link { color: ${c.fgDim}; font-weight: 500; }
+  .meta-row .meta-sep { color: ${c.border}; }
+  .meta-row .arrow { color: ${c.primary}; }
+  .avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid ${c.border};
+    flex-shrink: 0;
+  }
+
+  /* ── Metrics strip ─────────────────────────────────────── */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid ${c.border};
+    margin-bottom: 24px;
+  }
+  .metric {
+    padding: 10px 12px;
+    border-right: 1px solid ${c.border};
+  }
+  .metric:last-child { border-right: none; }
+  .metric-index {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: ${c.mutedDim};
     margin-bottom: 4px;
   }
+  .metric-value {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: ${c.fg};
+    line-height: 1.0;
+    margin-bottom: 4px;
+  }
+  .metric-value .suffix { color: ${c.primary}; }
+  .metric-label {
+    font-size: 10px;
+    line-height: 1.35;
+    color: ${c.muted};
+  }
+
+  /* ── Section ───────────────────────────────────────────── */
+  section { margin-bottom: 22px; }
+  section:last-child { margin-bottom: 0; }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid ${c.border};
+  }
+  .eyebrow-line {
+    width: 14px;
+    height: 1px;
+    background: ${c.primary};
+  }
+  .eyebrow-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: ${c.fg};
+  }
+
+  /* ── Summary ───────────────────────────────────────────── */
+  .summary {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.6;
+    color: ${c.fgDim};
+    padding-left: 14px;
+    border-left: 2px solid ${c.primary};
+    max-width: 76ch;
+  }
+
+  /* ── Entry (experience / project / education) ──────────── */
+  .entry {
+    display: grid;
+    grid-template-columns: 102px 1fr;
+    gap: 18px;
+    padding: 11px 0;
+    border-top: 1px solid ${c.rule};
+  }
+  .entry:first-of-type { border-top: none; padding-top: 4px; }
+  .entry-rail {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: ${c.muted};
+    line-height: 1.5;
+  }
+  .entry-period {
+    color: ${c.fgDim};
+    font-weight: 500;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .entry-loc { display: block; color: ${c.mutedDim}; }
+  .entry-body { min-width: 0; }
   .entry-title {
     font-size: 14px;
     font-weight: 600;
+    letter-spacing: -0.01em;
     line-height: 1.3;
+    color: ${c.fg};
+    margin-bottom: 2px;
   }
   .entry-company {
-    font-size: 13px;
+    font-size: 12.5px;
+    color: ${c.primary};
     font-weight: 500;
-    color: ${c.accent};
+    margin-bottom: 6px;
   }
-  .entry-meta {
-    font-size: 11.5px;
-    color: ${c.textSecondary};
-    white-space: nowrap;
-    text-align: right;
-    flex-shrink: 0;
-  }
+  .entry-company .arrow { font-size: 10px; }
   .entry-desc {
     font-size: 12.5px;
-    color: ${c.textSecondary};
+    color: ${c.muted};
     line-height: 1.55;
-    margin-top: 4px;
   }
-
-  /* ── Projects ────────────────────────────────────────────── */
-  .project-title {
-    font-size: 13.5px;
-    font-weight: 600;
-    line-height: 1.3;
+  .entry-badges {
+    display: inline-flex;
+    gap: 5px;
+    margin-left: 8px;
+    vertical-align: middle;
   }
-  .project-company {
-    font-size: 11.5px;
-    color: ${c.textSecondary};
-  }
-  .project-desc {
-    font-size: 12px;
-    color: ${c.textSecondary};
-    line-height: 1.5;
-    margin-top: 4px;
-  }
-  .project-impact {
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    margin-top: 6px;
-    padding: 6px 8px;
-    background: ${c.impactBg};
-    border: 1px solid ${c.impactBorder};
-    border-radius: 4px;
-    font-size: 11.5px;
+  .badge {
+    font-family: var(--mono);
+    font-size: 8.5px;
     font-weight: 500;
-    color: ${c.impactText};
-  }
-  .project-impact svg { flex-shrink: 0; margin-top: 1px; }
-  .project-tech {
-    font-size: 11px;
-    color: ${c.textSecondary};
-    margin-top: 6px;
-    font-style: italic;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 5px;
+    border: 1px solid ${c.primary};
+    color: ${c.primary};
+    border-radius: 3px;
+    line-height: 1;
   }
 
-  /* ── Skills ──────────────────────────────────────────────── */
-  .skill-category {
-    margin-bottom: 10px;
+  /* ── Project specifics ─────────────────────────────────── */
+  .project-impact {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: ${c.fgDim};
+    margin-top: 7px;
+    padding-left: 10px;
+    border-left: 2px solid ${c.secondary};
   }
-  .skill-category:last-child { margin-bottom: 0; }
-  .skill-category-title {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: capitalize;
-    color: ${c.text};
-    margin-bottom: 6px;
-    padding-left: 2px;
+  .project-impact .label {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: ${c.secondary};
+    margin-right: 6px;
   }
-  .skill-grid {
+  .project-tech {
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: ${c.muted};
+    line-height: 1.7;
+  }
+  .project-tech .label {
+    color: ${c.mutedDim};
+    margin-right: 4px;
+  }
+  .project-tech .tech-sep { color: ${c.border}; margin: 0 5px; }
+
+  /* ── Skills ────────────────────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 102px 1fr;
+    gap: 18px 18px;
+    align-items: baseline;
+  }
+  .skills-category-label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: ${c.muted};
+    line-height: 1.6;
+    padding-top: 5px;
+  }
+  .skills-row {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid ${c.rule};
   }
-  .skill-badge {
-    display: inline-flex;
-    align-items: center;
-    background: ${c.skillBg};
-    border: 1px solid ${c.skillBorder};
-    border-radius: 4px;
-    padding: 3px 8px;
+  .skills-grid > .skills-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .skill {
     font-size: 11px;
     font-weight: 500;
-    color: ${c.text};
-    line-height: 1.3;
+    color: ${c.fgDim};
+    padding: 3px 8px;
+    border: 1px solid ${c.border};
+    border-radius: 4px;
+    background: ${c.surface};
+    line-height: 1.4;
+    letter-spacing: 0.01em;
   }
 
-  /* ── Summary card ────────────────────────────────────────── */
-  .summary-text {
-    font-size: 12.5px;
-    color: ${c.textSecondary};
-    line-height: 1.6;
+  /* ── Education ─────────────────────────────────────────── */
+  .edu-line {
+    display: grid;
+    grid-template-columns: 102px 1fr;
+    gap: 18px;
+    align-items: baseline;
   }
-
-  /* ── Footer link ─────────────────────────────────────────── */
-  .portfolio-link {
-    display: block;
-    text-align: center;
-    margin-top: 8px;
-    font-size: 11.5px;
+  .edu-school {
+    font-size: 13.5px;
     font-weight: 600;
-    color: ${c.accent};
-    letter-spacing: 0.3px;
+    color: ${c.fg};
+    margin-bottom: 2px;
+    letter-spacing: -0.005em;
   }
+  .edu-degree {
+    font-size: 12px;
+    color: ${c.muted};
+  }
+  .edu-degree .accent { color: ${c.primary}; font-weight: 500; }
 
-  /* ── Print ───────────────────────────────────────────────── */
+  /* ── Footer ────────────────────────────────────────────── */
+  .footer {
+    margin-top: 24px;
+    padding-top: 14px;
+    border-top: 1px solid ${c.border};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: ${c.mutedDim};
+  }
+  .footer a { color: ${c.primary}; }
+  .footer .arrow { margin-left: 2px; }
+
+  /* ── Print safety ──────────────────────────────────────── */
   @media print {
-    body { font-size: 13px; }
-    .page { padding: 8mm 10mm; }
+    .page { padding: 12mm 12mm; }
+    .entry, .skills-grid, section { page-break-inside: avoid; }
+    .header { page-break-after: avoid; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
+  <!-- ════ TOP LABEL ════ -->
+  <div class="top-row">
+    <div><span class="dash">—</span>Curriculum Vitae</div>
+    <div>Updated · ${new Date().toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+    })}</div>
+  </div>
+
   <!-- ════ HEADER ════ -->
   <header class="header">
+    <div class="header-info">
+      <h1 class="header-name">${DATA.name}</h1>
+      <p class="header-tagline">${DATA.tagline.replace(
+        /shipping software that pays for itself/,
+        '<span class="accent">shipping software that pays for itself</span>'
+      )}</p>
+      <div class="meta-row">
+        <span>${DATA.location}</span>
+        <span class="meta-sep">·</span>
+        <a class="meta-link" href="mailto:${DATA.contact.email}">${
+    DATA.contact.email
+  }</a>
+        ${
+          DATA.contact.tel
+            ? `<span class="meta-sep">·</span><span>${DATA.contact.tel}</span>`
+            : ""
+        }
+        <span class="meta-sep">·</span>
+        <a class="meta-link" href="${DATA.url}">Portfolio<span class="arrow"> ↗</span></a>
+        <span class="meta-sep">·</span>
+        ${socialLinks}
+      </div>
+    </div>
     ${
       avatarBase64
         ? `<img src="${avatarBase64}" alt="${DATA.name}" class="avatar">`
         : ""
     }
-    <div class="header-info">
-      <h1 class="header-name">${DATA.name}</h1>
-      <div class="header-meta">
-        <span>${DATA.location}</span>
-        <span class="dot">•</span>
-        <a href="mailto:${DATA.contact.email}">${DATA.contact.email}</a>
-        ${
-          DATA.contact.tel
-            ? `<span class="dot">•</span><span>${DATA.contact.tel}</span>`
-            : ""
-        }
-      </div>
-      <div class="header-links">
-        ${DATA.url ? `<a href="${DATA.url}">Portfolio ↗</a>` : ""}
-        ${Object.entries(DATA.contact.social)
-          .filter(([key]) => key !== "Email")
-          .map(([, social]) => `<a href="${social.url}">${social.name} ↗</a>`)
-          .join("")}
-      </div>
-    </div>
   </header>
 
+  <!-- ════ METRICS ════ -->
+  <div class="metrics">
+    ${DATA.metrics
+      .map(
+        (m, i) => `
+      <div class="metric">
+        <div class="metric-index">${String(i + 1).padStart(2, "0")}</div>
+        <div class="metric-value">${m.value}<span class="suffix">${
+          m.suffix
+        }</span></div>
+        <div class="metric-label">${m.label}</div>
+      </div>`
+      )
+      .join("")}
+  </div>
+
   <!-- ════ SUMMARY ════ -->
-  <section class="section">
-    <h2 class="section-title">Professional Summary</h2>
-    <div class="card">
-      <p class="summary-text">${DATA.summary}</p>
-    </div>
+  <section>
+    ${eyebrow(sections.summary, "Summary")}
+    <p class="summary">${DATA.summary}</p>
   </section>
 
   <!-- ════ EXPERIENCE ════ -->
-  <section class="section">
-    <h2 class="section-title">Experience</h2>
+  <section>
+    ${eyebrow(sections.experience, "Experience")}
     ${DATA.work
       .map(
         (job) => `
-    <div class="card">
-      <div class="entry-header">
-        <div>
-          <div class="entry-title">${job.title}</div>
+      <div class="entry">
+        <div class="entry-rail">
+          <span class="entry-period">${job.start}<br>${
+          job.end || "Present"
+        }</span>
+          <span class="entry-loc">${job.location}</span>
+        </div>
+        <div class="entry-body">
+          <div class="entry-title">${job.title}${
+          job.badges && job.badges.length > 0
+            ? `<span class="entry-badges">${job.badges
+                .map((b: string) => `<span class="badge">${b}</span>`)
+                .join("")}</span>`
+            : ""
+        }</div>
           <div class="entry-company">${
             job.href
-              ? `<a href="${job.href}">${job.company} ↗</a>`
+              ? `<a href="${job.href}">${job.company}<span class="arrow"> ↗</span></a>`
               : job.company
           }</div>
+          <div class="entry-desc">${job.description}</div>
         </div>
-        <div class="entry-meta">${job.start} – ${
-          job.end || "Present"
-        }<br>${job.location}</div>
-      </div>
-      <div class="entry-desc">${job.description}</div>
-    </div>`
+      </div>`
+      )
+      .join("")}
+  </section>
+
+  <!-- ════ SKILLS ════ -->
+  <section>
+    ${eyebrow(sections.skills, "Skills")}
+    <div class="skills-grid">
+      ${Object.entries(DATA.skills)
+        .map(
+          ([category, skills]) => `
+        <div class="skills-category-label">${category}</div>
+        <div class="skills-row">
+          ${skills
+            .map((s) => `<span class="skill">${s.name}</span>`)
+            .join("")}
+        </div>`
+        )
+        .join("")}
+    </div>
+  </section>
+
+  <!-- ════ FEATURED PROJECTS ════ -->
+  <section>
+    ${eyebrow(sections.projects, "Featured Projects")}
+    ${featuredProjects
+      .map(
+        (project) => `
+      <div class="entry">
+        <div class="entry-rail">
+          <span class="entry-period">${project.dates}</span>
+          <span class="entry-loc">${project.company}</span>
+        </div>
+        <div class="entry-body">
+          <div class="entry-title">${
+            project.href
+              ? `<a href="${project.href}">${project.title}<span class="arrow" style="color:${c.primary}"> ↗</span></a>`
+              : project.title
+          }</div>
+          <div class="entry-desc">${project.description}</div>
+          ${
+            project.impact
+              ? `<div class="project-impact"><span class="label">Impact</span>${project.impact}</div>`
+              : ""
+          }
+          <div class="project-tech">
+            <span class="label">Stack</span>${project.technologies
+              .map(
+                (t: string, i: number) =>
+                  `${i > 0 ? '<span class="tech-sep">·</span>' : ""}${t}`
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>`
       )
       .join("")}
   </section>
 
   <!-- ════ EDUCATION ════ -->
-  <section class="section">
-    <h2 class="section-title">Education</h2>
+  <section>
+    ${eyebrow(sections.education, "Education")}
     ${DATA.education
       .map(
         (edu) => `
-    <div class="card">
-      <div class="entry-header">
+      <div class="edu-line">
+        <div class="entry-rail">
+          <span class="entry-period">${edu.start}<br>${edu.end}</span>
+        </div>
         <div>
-          <div class="entry-title">${edu.degree}</div>
-          <div class="entry-company">${
+          <div class="edu-school">${
             edu.href
-              ? `<a href="${edu.href}">${edu.school} ↗</a>`
+              ? `<a href="${edu.href}">${edu.school}<span class="arrow" style="color:${c.primary}"> ↗</span></a>`
               : edu.school
           }</div>
+          <div class="edu-degree">${edu.degree}</div>
         </div>
-        <div class="entry-meta">${edu.start} – ${edu.end}</div>
-      </div>
-    </div>`
+      </div>`
       )
       .join("")}
   </section>
 
-  <!-- ════ FEATURED PROJECTS ════ -->
-  <section class="section">
-    <h2 class="section-title">Featured Projects</h2>
-    ${featuredProjects
-      .map(
-        (project) => `
-    <div class="card">
-      <div class="entry-header">
-        <div>
-          <div class="project-title">${
-            project.href
-              ? `<a href="${project.href}">${project.title} ↗</a>`
-              : project.title
-          }</div>
-          <div class="project-company">${project.company} · ${
-          project.dates
-        }</div>
-        </div>
-      </div>
-      <div class="project-desc">${project.description}</div>
-      ${
-        project.impact
-          ? `<div class="project-impact">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="${c.impactText}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-        <span>${project.impact}</span>
-      </div>`
-          : ""
-      }
-      <div class="project-tech">Tech: ${project.technologies.join(
-        " · "
-      )}</div>
-    </div>`
-      )
-      .join("")}
-    <div class="portfolio-link">
-      <a href="${DATA.url}/projects">View all projects at ${
-    DATA.url
-  }/projects</a>
-    </div>
-  </section>
-
-  <!-- ════ SKILLS ════ -->
-  <section class="section">
-    <h2 class="section-title">Skills</h2>
-    <div class="card">
-      ${skillCategories
-        .map(
-          ({ category, skills }) => `
-      <div class="skill-category">
-        <div class="skill-category-title">${category}</div>
-        <div class="skill-grid">
-          ${skills
-            .map(
-              (s) =>
-                `<span class="skill-badge">${s.iconSvg}${s.name}</span>`
-            )
-            .join("")}
-        </div>
-      </div>`
-        )
-        .join("")}
-    </div>
-  </section>
+  <!-- ════ FOOTER ════ -->
+  <div class="footer">
+    <div>© ${new Date().getFullYear()} · ${DATA.name}</div>
+    <div><a href="${DATA.url}/projects">All projects<span class="arrow"> ↗</span></a></div>
+  </div>
 
 </div>
 </body>

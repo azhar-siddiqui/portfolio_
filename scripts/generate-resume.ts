@@ -36,7 +36,7 @@ async function generatePdf(
   try {
     const html = ResumeTemplate({ theme, avatarBase64 });
 
-    await page.setContent(html, { waitUntil: "networkidle0" });
+    await page.setContent(html, { waitUntil: "load" });
     await page.emulateMediaType("print");
     await page.setViewport({ width: 794, height: 2000, deviceScaleFactor: 1 });
 
@@ -52,6 +52,8 @@ async function generatePdf(
       preferCSSPageSize: false,
       displayHeaderFooter: false,
       scale: 1,
+      tagged: false,
+      outline: false,
     });
 
     const outPath = path.join(OUTPUT_DIR, `Zaheed-Resume-${theme}.pdf`);
