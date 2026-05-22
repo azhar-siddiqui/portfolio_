@@ -1,3 +1,5 @@
+"use client";
+
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -16,7 +18,7 @@ export default function Navbar() {
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14 no-print">
       <div className="fixed bottom-0 inset-x-0 h-20 w-full"></div>
-      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 bg-card/95 dark:bg-background/90 backdrop-blur-xl border border-border/70 dark:border-border/60 transform-gpu transition-all duration-300">
+      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 bg-card/80 dark:bg-card/60 backdrop-blur-xl border border-border/60 dark:border-border/50 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.4)] transform-gpu transition-all duration-300">
         {DATA.navbar.map((item) => (
           <DockIcon key={item.href}>
             <Tooltip>

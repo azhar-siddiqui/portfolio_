@@ -1,101 +1,74 @@
-import { DownloadResumeButton } from "@/components/download-resume-button";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import { Hero } from "@/components/hero";
+import { IndustriesMarquee } from "@/components/industries-marquee";
+import { MetricsStrip } from "@/components/metrics-strip";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
+import { SectionEyebrow } from "@/components/section-eyebrow";
 import { SkillsSection } from "@/components/skills-section";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
-import { BlurFade } from "@/components/magicui/blur-fade";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { ArrowUpRight } from "lucide-react";
 
-const BLUR_FADE_DELAY = 0.03;
+const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
   return (
     <main
       id="resume-content"
-      className="flex flex-col min-h-screen space-y-20 sm:space-y-28 px-4 py-12 pb-28"
+      className="flex flex-col min-h-screen px-4 sm:px-6 pb-32"
     >
-      {/* ===== HERO SECTION ===== */}
-      <section id="hero" className="relative">
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full" />
-        </div>
-        <div className="mx-auto w-full max-w-6xl space-y-8 pt-6">
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 sm:justify-between sm:items-center">
-            <BlurFade delay={BLUR_FADE_DELAY}>
-              <Avatar className="size-32 md:size-48 border-4 border-primary/20 sm:order-last ring-4 ring-primary/10 transition-all duration-500 hover:scale-105 hover:ring-primary/30 hover:border-primary/40">
-                <AvatarImage
-                  alt={DATA.name}
-                  src={DATA.avatarUrl}
-                  className="object-cover"
-                />
-                <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-primary to-accent text-white">
-                  {DATA.initials}
-                </AvatarFallback>
-              </Avatar>
-            </BlurFade>
-            <div className="flex-col flex flex-1 space-y-5 order-last sm:order-first">
-              <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium w-fit mb-2 border border-primary/20">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                  </span>
-                  Building &amp; Shipping Products
-                </div>
-              </BlurFade>
-              <BlurFade delay={BLUR_FADE_DELAY * 3}>
-                <h1 className="text-4xl font-black tracking-tight sm:text-5xl xl:text-6xl/none bg-clip-text">
-                  Hi, I&apos;m{" "}
-                  <span className="bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent">
-                    {DATA.name.split(" ")[0]}
-                  </span>{" "}
-                  <span className="inline-block">👋</span>
-                </h1>
-              </BlurFade>
-              <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                <p className="max-w-[640px] text-base sm:text-lg text-muted-foreground leading-relaxed">
-                  {DATA.description}
-                </p>
-              </BlurFade>
-              <BlurFade delay={BLUR_FADE_DELAY * 7}>
-                <DownloadResumeButton />
-              </BlurFade>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* ===== ABOUT SECTION ===== */}
-      <section id="about">
+      <Hero />
+
+      <div className="mt-24 sm:mt-32">
+        <MetricsStrip metrics={DATA.metrics} />
+      </div>
+
+      <section id="about" className="mt-24 sm:mt-32">
         <div className="mx-auto w-full max-w-6xl">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <h2 className="section-heading mb-8">
-              About
-              <div className="section-heading-underline"></div>
-            </h2>
+            <SectionEyebrow index="01" label="About" />
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-            <div className="prose prose-lg text-pretty font-sans text-base text-muted-foreground dark:prose-invert max-w-4xl leading-relaxed">
+            <h2 className="section-heading mb-6 max-w-2xl">
+              Engineering at the intersection of code and business outcomes.
+            </h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
+            <div className="prose prose-lg text-pretty font-sans text-base text-muted-foreground dark:prose-invert max-w-2xl leading-relaxed">
               <Markdown>{DATA.summary}</Markdown>
             </div>
           </BlurFade>
+          {DATA.work[0] && (
+            <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
+              <p className="mt-8 font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                Currently · {DATA.work[0].title} at {DATA.work[0].company}
+              </p>
+            </BlurFade>
+          )}
         </div>
       </section>
-      {/* ===== WORK EXPERIENCE SECTION ===== */}
-      <section id="work">
+
+      <div className="mt-16 sm:mt-24">
+        <IndustriesMarquee items={DATA.industries} />
+      </div>
+
+      <section id="work" className="mt-16 sm:mt-24">
         <div className="mx-auto w-full max-w-6xl">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <h2 className="section-heading mb-8">
-              Work Experience
-              <div className="section-heading-underline"></div>
+            <SectionEyebrow index="02" label="Experience" />
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
+            <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
+              Five years of shipping for teams that need outcomes, not output.
             </h2>
           </BlurFade>
-          <div className="flex min-h-0 flex-col gap-y-5">
+          <div className="flex flex-col">
             {DATA.work.map((work, id) => (
               <BlurFade
                 key={work.company}
-                delay={BLUR_FADE_DELAY * 2 + id * 0.05}
+                delay={BLUR_FADE_DELAY * (2 + id * 0.5)}
                 inView
               >
                 <ResumeCard
@@ -105,7 +78,7 @@ export default function Page() {
                   subtitle={work.title}
                   href={work.href}
                   badges={work.badges}
-                  period={`${work.start} - ${work.end ?? "Present"}`}
+                  period={`${work.start} — ${work.end ?? "Present"}`}
                   description={work.description}
                   location={work.location}
                 />
@@ -114,20 +87,17 @@ export default function Page() {
           </div>
         </div>
       </section>
-      {/* ===== EDUCATION SECTION ===== */}
-      <section id="education">
+
+      <section id="education" className="mt-24 sm:mt-32">
         <div className="mx-auto w-full max-w-6xl">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <h2 className="section-heading mb-8">
-              Education
-              <div className="section-heading-underline"></div>
-            </h2>
+            <SectionEyebrow index="03" label="Education" />
           </BlurFade>
-          <div className="flex min-h-0 flex-col gap-y-5">
+          <div className="flex flex-col">
             {DATA.education.map((education, id) => (
               <BlurFade
                 key={education.school}
-                delay={BLUR_FADE_DELAY * 2 + id * 0.05}
+                delay={BLUR_FADE_DELAY * (2 + id * 0.5)}
                 inView
               >
                 <ResumeCard
@@ -136,30 +106,36 @@ export default function Page() {
                   altText={education.school}
                   title={education.school}
                   subtitle={education.degree}
-                  period={`${education.start} - ${education.end}`}
+                  period={`${education.start} — ${education.end}`}
                 />
               </BlurFade>
             ))}
           </div>
         </div>
       </section>
-      {/* ===== FEATURED PROJECTS SECTION ===== */}
-      <section id="projects">
+
+      <section id="skills" className="mt-24 sm:mt-32">
+        <SkillsSection />
+      </section>
+
+      <section id="projects" className="mt-24 sm:mt-32">
         <div className="mx-auto w-full max-w-6xl">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <h2 className="section-heading mb-8">
-              Featured Projects
-              <div className="section-heading-underline"></div>
+            <SectionEyebrow index="05" label="Selected work" />
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
+            <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
+              A few projects that moved the numbers.
             </h2>
           </BlurFade>
-          <div className="flex flex-col gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {DATA.projects
               .filter((project) => project.featured)
-              .slice(0, 3)
+              .slice(0, 4)
               .map((project, id) => (
                 <BlurFade
                   key={project.title}
-                  delay={BLUR_FADE_DELAY * 2 + id * 0.05}
+                  delay={BLUR_FADE_DELAY * (2 + id * 0.4)}
                   inView
                 >
                   <ProjectCard
@@ -175,123 +151,91 @@ export default function Page() {
               ))}
           </div>
           <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
-            <div className="mt-10 text-center">
+            <div className="mt-12">
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-all duration-300 font-semibold"
+                className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-foreground animated-underline"
               >
-                View All Projects
-                <svg
-                  className="w-5 h-5 transition-transform group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
+                View all projects
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
           </BlurFade>
         </div>
       </section>
-      {/* ===== SKILLS SECTION ===== */}
-      <SkillsSection />
-      {/* ===== CONTACT SECTION ===== */}
-      <section id="contact" className="relative">
-        <div className="relative mx-auto max-w-4xl rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm p-8 sm:p-12">
-          {/* Subtle top gradient line */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          <div className="grid items-center justify-center gap-6 text-center w-full">
+
+      <section id="contact" className="mt-24 sm:mt-32">
+        <div className="mx-auto w-full max-w-6xl">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-2 text-sm font-semibold text-primary">
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                Let&apos;s Talk
-              </div>
-              <h2 className="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent">
-                Get In Touch
-              </h2>
-              <p className="mx-auto max-w-[600px] text-muted-foreground text-base sm:text-lg leading-relaxed">
-                I&apos;m always open to discussing new opportunities, innovative
-                projects, or partnerships. Feel free to reach out on{" "}
-                <a
-                  href={DATA.contact.social.LinkedIn.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-primary hover:text-accent font-semibold transition-colors underline decoration-primary/30 hover:decoration-primary underline-offset-4"
-                >
-                  LinkedIn
-                  <svg
-                    className="w-3.5 h-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>{" "}
-                for professional inquiries.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center pt-4">
-                <a
-                  href={DATA.contact.social.LinkedIn.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-all duration-300 font-semibold"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                  Connect on LinkedIn
-                </a>
-                <a
-                  href={`mailto:${DATA.contact.email}`}
-                  className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-primary/30 hover:border-primary text-foreground rounded-lg hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  Send Email
-                </a>
-              </div>
-            </div>
+            <SectionEyebrow index="06" label="Contact" />
           </BlurFade>
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16">
+            <div>
+              <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
+                <h2 className="text-3xl sm:text-5xl font-medium tracking-[-0.03em] leading-[1.05] text-foreground max-w-[18ch]">
+                  Open to senior engineering and consulting roles.
+                </h2>
+              </BlurFade>
+              <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
+                <p className="mt-6 text-base text-muted-foreground leading-relaxed max-w-md">
+                  If you&apos;re building something where engineering decisions
+                  meet business outcomes, I&apos;d like to hear about it.
+                </p>
+              </BlurFade>
+              <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
+                <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3">
+                  <a
+                    href={DATA.contact.social.LinkedIn.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-5 h-11 bg-foreground text-background rounded-full font-medium text-sm transition-colors duration-200 hover:bg-foreground/85 active:bg-foreground/75"
+                  >
+                    Connect on LinkedIn
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                  <a
+                    href={`mailto:${DATA.contact.email}`}
+                    className="group inline-flex items-center gap-2 px-5 h-11 border border-border rounded-full font-medium text-sm transition-colors duration-200 hover:bg-foreground/[0.06] hover:border-foreground/40 active:bg-foreground/[0.1]"
+                  >
+                    Send email
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </div>
+              </BlurFade>
+            </div>
+            <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
+              <dl className="grid grid-cols-1 gap-6 sm:gap-8 border-t md:border-t-0 md:border-l border-border/60 pt-8 md:pt-0 md:pl-10">
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
+                    Response time
+                  </dt>
+                  <dd className="text-sm sm:text-base text-foreground">
+                    Usually within 24 hours
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
+                    Timezone
+                  </dt>
+                  <dd className="text-sm sm:text-base text-foreground">
+                    IST · UTC+5:30
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
+                    Email
+                  </dt>
+                  <dd>
+                    <a
+                      href={`mailto:${DATA.contact.email}`}
+                      className="text-sm sm:text-base text-foreground animated-underline"
+                    >
+                      {DATA.contact.email}
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </BlurFade>
           </div>
         </div>
       </section>

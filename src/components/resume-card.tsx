@@ -1,13 +1,8 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { ChevronRightIcon, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 interface ResumeCardProps {
   logoUrl: string;
@@ -20,6 +15,7 @@ interface ResumeCardProps {
   description?: string;
   location?: string;
 }
+
 export const ResumeCard = ({
   logoUrl,
   altText,
@@ -31,86 +27,81 @@ export const ResumeCard = ({
   description,
   location,
 }: ResumeCardProps) => {
-  const [isExpanded, setIsExpanded] = React.useState(true);
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    // Removed expand functionality to allow direct navigation
-  };
-
   return (
-    <Card className="group flex flex-col bg-card dark:bg-card/60 backdrop-blur-xl border-l-[3px] border border-l-primary/40 border-border/60 dark:border-border/50 transition-all duration-300 p-5 sm:p-6 hover:border-primary/30 hover:bg-primary/[0.03] dark:hover:bg-primary/[0.06]">
-      <div className="flex flex-row gap-4">
-        {logoUrl && (
-          <div className="flex justify-center sm:flex-none">
-            <Avatar className="border-2 border-border/50 size-10 sm:size-14 m-auto bg-muted transition-all duration-300 group-hover:border-primary/50 group-hover:scale-110">
-              <AvatarImage
-                src={logoUrl}
-                alt={altText}
-                className="object-contain"
-              />
-              <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20 font-semibold">{altText[0]}</AvatarFallback>
-            </Avatar>
-          </div>
-        )}
-        <div
-          className={`flex-grow ${
-            logoUrl ? "sm:ml-2" : ""
-          } flex flex-col`}
-        >
-          <div className="flex items-start justify-between gap-x-2 text-base">
-            <h3 className="inline-flex items-center justify-center font-bold leading-none text-base sm:text-lg group-hover:text-primary transition-colors">
-              {href ? (
-                <Link
-                  href={href}
-                  target="_blank"
-                  className="hover:underline inline-flex items-center gap-1 group/link"
-                >
-                  {title}
-                  <ArrowUpRight className="inline h-4 w-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                </Link>
-              ) : (
-                title
+    <article className="group relative border-t border-border/60 first:border-t-0 py-6 sm:py-7 -mx-3 px-3 rounded-md transition-colors hover:bg-foreground/[0.015]">
+      <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-y-4 sm:gap-x-10">
+        {/* Period — eyebrow on mobile, left rail on desktop */}
+        <div className="flex items-center gap-2 sm:block sm:pt-1">
+          <span
+            aria-hidden
+            className="sm:hidden h-1.5 w-1.5 rounded-full bg-foreground/40"
+          />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.14em] text-muted-foreground tabular-nums">
+            {period}
+          </span>
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col gap-2 min-w-0">
+          <div className="flex items-start gap-3">
+            {logoUrl && (
+              <Avatar className="border border-border/60 size-8 sm:size-9 mt-0.5 bg-muted shrink-0">
+                <AvatarImage
+                  src={logoUrl}
+                  alt={altText}
+                  className="object-contain"
+                />
+                <AvatarFallback className="text-[10px] font-medium">
+                  {altText[0]}
+                </AvatarFallback>
+              </Avatar>
+            )}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-[15px] sm:text-lg font-medium tracking-[-0.01em] text-foreground inline-flex items-center flex-wrap gap-x-2 gap-y-1 leading-snug">
+                {href ? (
+                  <Link
+                    href={href}
+                    target="_blank"
+                    className="inline-flex items-center gap-1 animated-underline"
+                  >
+                    {title}
+                    <ArrowUpRight className="inline h-3.5 w-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                ) : (
+                  title
+                )}
+                {badges && badges.length > 0 && (
+                  <span className="inline-flex flex-wrap gap-1.5">
+                    {badges.map((badge) => (
+                      <span
+                        key={badge}
+                        className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.12em] px-1.5 py-0.5 rounded-sm border border-primary/40 text-primary"
+                      >
+                        {badge}
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </h3>
+              {subtitle && (
+                <p className="text-[13px] sm:text-sm text-muted-foreground mt-1 leading-snug">
+                  {subtitle}
+                </p>
               )}
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-2 mt-2 items-center">
-            <div className="text-sm font-medium tabular-nums text-muted-foreground/80">
-              {period}
+              {location && (
+                <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-muted-foreground/70 mt-1.5">
+                  {location}
+                </p>
+              )}
             </div>
-            {badges && badges.length > 0
-              ? badges.map((badge, index) => (
-                  <Badge variant="secondary" className="text-xs font-semibold px-2.5 py-0.5 bg-primary/10 text-primary border-primary/20" key={index}>
-                    {badge}
-                  </Badge>
-                ))
-              : null}
           </div>
-          {subtitle && <div className="font-sans text-sm sm:text-base mt-2 font-medium text-foreground/90">{subtitle}</div>}
-          {location && <div className="font-sans text-sm text-muted-foreground/70 mt-1 flex items-center gap-1">
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            {location}
-          </div>}
+          {description && (
+            <p className="text-[13px] sm:text-base text-muted-foreground/90 leading-relaxed mt-2 max-w-2xl">
+              {description}
+            </p>
+          )}
         </div>
       </div>
-      {description && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{
-            opacity: isExpanded ? 1 : 0,
-            height: isExpanded ? "auto" : 0,
-          }}
-          transition={{
-            duration: 0.7,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="mt-4 text-sm sm:text-base text-muted-foreground/80 leading-relaxed"
-        >
-          {description}
-        </motion.div>
-      )}
-    </Card>
+    </article>
   );
 };

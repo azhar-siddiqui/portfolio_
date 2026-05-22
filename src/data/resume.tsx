@@ -7,10 +7,34 @@ export const DATA = {
   url: "https://zahidshaikh.space",
   location: "Pune, India",
   locationLink: "https://www.google.com/maps/place/pune",
+  tagline: "Senior Product Engineer shipping software that pays for itself.",
   description:
     "I understand business, not just code, and I build software that directly increases revenue, cuts operational costs, ensures regulatory compliance, and scales operations — for maritime giants, logistics operators, banks, EdTech startups, NGOs, e-commerce stores, and everything in between.",
   summary:
     "Over the last 5 years, I've delivered 15+ mission-critical products from scratch across 10 diverse industries, generating measurable ROI like 30–70% faster decisions, 40% less downtime, 3x user engagement, or new revenue streams. I collaborate with founders, CXOs, and investors to translate business challenges into reliable, scalable solutions shipped at high velocity.",
+  metrics: [
+    { value: 5, suffix: "+", label: "Years shipping production software" },
+    { value: 15, suffix: "+", label: "Mission-critical products delivered" },
+    { value: 10, suffix: "", label: "Industries · maritime to fintech" },
+    { value: 40, suffix: "%", label: "Avg. operational downtime cut" },
+  ],
+  industries: [
+    "Maritime",
+    "Banking",
+    "EdTech",
+    "Logistics",
+    "Energy",
+    "Healthcare",
+    "E-commerce",
+    "NGO",
+    "Compliance",
+  ],
+  testimonials: [] as ReadonlyArray<{
+    quote: string;
+    name: string;
+    role: string;
+    company: string;
+  }>,
   avatarUrl: "/me.png",
   skills: {
     frontend: [

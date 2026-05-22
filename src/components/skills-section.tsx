@@ -1,16 +1,69 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { BlurFade } from "@/components/magicui/blur-fade";
+import { SectionEyebrow } from "@/components/section-eyebrow";
 import { DATA } from "@/data/resume";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as SimpleIcons from "simple-icons";
 
 const BLUR_FADE_DELAY = 0.03;
 
+type SkillEntry = { name: string; color?: string | null; icon?: string | null };
+type CategoryKey = keyof typeof DATA.skills;
+
+const CATEGORY_LABELS: Record<CategoryKey, string> = {
+  frontend: "Frontend",
+  backend: "Backend & Data",
+  devops: "DevOps & Cloud",
+  testing: "Testing & QA",
+};
+
+function getIcon(iconSlug?: string | null) {
+  if (!iconSlug) return null;
+  const iconKey = `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(
+    1
+  )}` as keyof typeof SimpleIcons;
+  return (SimpleIcons[iconKey] as { path: string; hex: string }) || null;
+}
+
+function SkillChip({
+  skill,
+  isDark,
+  delay,
+}: {
+  skill: SkillEntry;
+  isDark: boolean;
+  delay: number;
+}) {
+  const icon = getIcon(skill.icon);
+  const color = skill.color && isDark ? skill.color : icon ? `#${icon.hex}` : undefined;
+
+  return (
+    <BlurFade delay={delay} inView>
+      <div className="group flex items-center gap-2 rounded-md border border-border/60 bg-background/40 px-3 py-2 transition-all duration-300 hover:border-foreground/30 hover:bg-foreground/[0.03]">
+        {icon ? (
+          <svg
+            viewBox="0 0 24 24"
+            className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
+            fill={color}
+            suppressHydrationWarning
+            aria-hidden
+          >
+            <path d={skill.icon ? icon.path : ""} />
+          </svg>
+        ) : (
+          <span aria-hidden className="w-4 h-4 rounded-sm bg-muted" />
+        )}
+        <span className="text-xs sm:text-sm font-medium text-foreground/85">
+          {skill.name}
+        </span>
+      </div>
+    </BlurFade>
+  );
+}
+
 export function SkillsSection() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -18,88 +71,45 @@ export function SkillsSection() {
     setMounted(true);
   }, []);
 
-  const categories = Object.keys(DATA.skills);
-  const allSkills =
-    selectedCategory === "all"
-      ? Object.entries(DATA.skills).flatMap(([cat, skills]) =>
-          skills.map((skill) => ({ skill, category: cat }))
-        )
-      : DATA.skills[selectedCategory as keyof typeof DATA.skills]?.map(
-          (skill) => ({ skill, category: selectedCategory })
-        ) || [];
-
-  const getIcon = (iconSlug: string | null) => {
-    if (!iconSlug) return null;
-    const iconKey = `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(
-      1
-    )}` as keyof typeof SimpleIcons;
-    return SimpleIcons[iconKey] || null;
-  };
-
-  const getIconColor = (skill: any, icon: any) => {
-    const isDark = theme === "dark" || (theme === "system" && systemTheme === "dark");
-    return skill.color && isDark ? skill.color : `#${icon.hex}`;
-  };
+  const isDark =
+    mounted && (theme === "dark" || (theme === "system" && systemTheme === "dark"));
 
   return (
     <section id="skills">
       <div className="mx-auto w-full max-w-6xl">
         <BlurFade delay={BLUR_FADE_DELAY} inView>
-          <h2 className="section-heading mb-8">
-            Skills
-            <div className="section-heading-underline"></div>
-          </h2>
+          <SectionEyebrow index="04" label="Toolkit" />
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
-            <Badge
-              variant={selectedCategory === "all" ? "default" : "secondary"}
-              className={`cursor-pointer px-4 py-2 text-sm sm:text-base font-semibold transition-all duration-300 rounded-lg ${
-                selectedCategory === "all"
-                  ? "bg-primary hover:bg-primary/90 text-white border-0"
-                  : "hover:bg-primary/10"
-              }`}
-              onClick={() => setSelectedCategory("all")}
-            >
-              All
-            </Badge>
-            {categories.map((cat) => (
-              <Badge
-                key={cat}
-                variant={selectedCategory === cat ? "default" : "secondary"}
-                className={`cursor-pointer px-4 py-2 text-sm sm:text-base font-semibold capitalize transition-all duration-300 rounded-lg ${
-                  selectedCategory === cat
-                    ? "bg-primary hover:bg-primary/90 text-white border-0"
-                    : "hover:bg-primary/10"
-                }`}
-                onClick={() => setSelectedCategory(cat)}
-              >
-                {cat}
-              </Badge>
-            ))}
-          </div>
+          <h2 className="section-heading mb-10 sm:mb-12 max-w-2xl">
+            The stack I reach for, by problem space.
+          </h2>
         </BlurFade>
-        <div className="flex flex-wrap gap-2 sm:gap-3">
-          {allSkills.map(({ skill, category }, id) => {
-            const icon = getIcon(skill.icon);
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/60 border border-border/60 rounded-xl overflow-hidden">
+          {(Object.keys(DATA.skills) as CategoryKey[]).map((cat, ci) => {
+            const skills = DATA.skills[cat] as readonly SkillEntry[];
             return (
-              <BlurFade key={id} delay={BLUR_FADE_DELAY * 2 + id * 0.01} inView>
-                <Badge
-                  variant="outline"
-                  className="px-3 py-2.5 text-sm sm:text-base font-medium transition-all duration-300 hover:bg-primary/10 hover:border-primary/40 flex items-center gap-2 cursor-default group"
-                >
-                  {icon ? (
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:scale-110"
-                      fill={mounted ? getIconColor(skill, icon) : `#${icon.hex}`}
-                      suppressHydrationWarning
-                    >
-                      <path d={icon.path} />
-                    </svg>
-                  ) : null}
-                  {skill.name}
-                </Badge>
+              <BlurFade key={cat} delay={BLUR_FADE_DELAY * (3 + ci)} inView>
+                <div className="bg-background/50 backdrop-blur-sm p-6 sm:p-8 h-full flex flex-col gap-5">
+                  <div className="flex items-baseline justify-between">
+                    <h3 className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                      {CATEGORY_LABELS[cat]}
+                    </h3>
+                    <span className="font-mono text-[10px] sm:text-xs text-muted-foreground/60 tabular-nums">
+                      {String(skills.length).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill, i) => (
+                      <SkillChip
+                        key={skill.name}
+                        skill={skill}
+                        isDark={isDark}
+                        delay={BLUR_FADE_DELAY * (4 + ci) + i * 0.01}
+                      />
+                    ))}
+                  </div>
+                </div>
               </BlurFade>
             );
           })}

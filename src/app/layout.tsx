@@ -1,10 +1,15 @@
 import Navbar from "@/components/navbar";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata, Viewport } from "next";
-import { Inter as FontSans } from "next/font/google";
+import {
+  Geist as FontSans,
+  Geist_Mono as FontMono,
+  Instrument_Serif as FontSerif,
+} from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -12,6 +17,19 @@ import "./globals.css";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const fontMono = FontMono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const fontSerif = FontSerif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -136,18 +154,22 @@ function JsonLd() {
     name: `${DATA.name} — Portfolio`,
     mainEntity: { "@id": `${DATA.url}/#person` },
     dateCreated: "2024-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: "2026-05-23",
   };
 
+  const payload = JSON.stringify([
+    personSchema,
+    websiteSchema,
+    profilePageSchema,
+  ]).replace(/</g, "\\u003c");
+
   return (
-    <script
-      type="application/ld+json"
+    <div
+      hidden
+      aria-hidden
+      suppressHydrationWarning
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify([
-          personSchema,
-          websiteSchema,
-          profilePageSchema,
-        ]),
+        __html: `<script type="application/ld+json">${payload}</script>`,
       }}
     />
   );
@@ -160,21 +182,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <JsonLd />
-      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-full overflow-x-hidden",
-          fontSans.variable
+          fontSans.variable,
+          fontMono.variable,
+          fontSerif.variable
         )}
       >
+        <JsonLd />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={true}
         >
           <TooltipProvider delayDuration={0}>
+            <ScrollProgress />
             {children}
             <Navbar />
           </TooltipProvider>
