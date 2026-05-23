@@ -395,6 +395,27 @@ export const DATA = {
     },
     // ── PERSONAL PROJECTS ───────────────────────────────────────────────────
     {
+      title: "BizDro → AI-Powered Business Card Scanner & CRM",
+      href: "https://play.google.com/store/apps/details?id=com.bizdro.businesscardscanner",
+      dates: "Nov 2025 – Nov 2025",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Solo-built and shipped an AI-native mobile app to Google Play Store for professional networking. Features AI-powered business card scanning (OCR + Gemini extraction), AI note taker, meeting scheduler with calendar integration, and a digital contact book. Firebase handles auth, real-time sync, and storage; Cloud Functions with GenKit orchestrate the Gemini AI pipelines on the backend.",
+      technologies: [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Firebase Cloud Functions",
+        "Gemini GenKit",
+        "Google ML Kit",
+        "Google Calendar API",
+      ],
+      impact:
+        "100+ downloads on Google Play with 60–70 active users daily; eliminated manual business card transcription with AI extraction, turning paper contacts into structured, searchable CRM data in seconds.",
+      featured: true,
+    },
+    {
       title: "Kharcha → Personal Expense Tracker",
       href: "https://kharcha.space/",
       dates: "Dec 2025 – Dec 2025",

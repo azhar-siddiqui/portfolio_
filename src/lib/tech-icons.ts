@@ -47,6 +47,19 @@ const TECH_ALIASES: Record<string, { slug: string | null; color?: string | null 
   "custom ui library": { slug: null },
   commander: { slug: "gnubash" },
   winston: { slug: "gnubash" },
+  // Mobile / Flutter
+  flutter: { slug: "flutter" },
+  dart: { slug: "dart" },
+  // Firebase services (no dedicated icons — all map to firebase brand)
+  firestore: { slug: "firebase" },
+  "firebase cloud functions": { slug: "firebase" },
+  "firebase storage": { slug: "firebase" },
+  "firebase auth": { slug: "firebase" },
+  // Google AI & services
+  "gemini genkit": { slug: "googlegemini" },
+  "google gemini api": { slug: "googlegemini" },
+  "google ml kit": { slug: "google" },
+  "google calendar api": { slug: "googlecalendar" },
 };
 
 function normalize(name: string): string {
