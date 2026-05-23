@@ -13,6 +13,12 @@ import { ArrowUpRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 
+const PINNED_PROJECT_TITLES = [
+  "Hafnia → Real-Time Fleet Intelligence Platform",
+  "OceanPass → Maritime Compliance Desktop Platform",
+  "Thinkster → AI Math Coaching for Kids",
+];
+
 export default function Page() {
   return (
     <main
@@ -131,6 +137,14 @@ export default function Page() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {DATA.projects
               .filter((project) => project.featured)
+              .sort((a, b) => {
+                const ai = PINNED_PROJECT_TITLES.indexOf(a.title);
+                const bi = PINNED_PROJECT_TITLES.indexOf(b.title);
+                if (ai !== -1 && bi !== -1) return ai - bi;
+                if (ai !== -1) return -1;
+                if (bi !== -1) return 1;
+                return 0;
+              })
               .slice(0, 4)
               .map((project, id) => (
                 <BlurFade
@@ -173,7 +187,7 @@ export default function Page() {
             <div>
               <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
                 <h2 className="text-3xl sm:text-5xl font-medium tracking-[-0.03em] leading-[1.05] text-foreground max-w-[18ch]">
-                  Open to senior engineering and consulting roles.
+                  Let's build something together.
                 </h2>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 3} inView>

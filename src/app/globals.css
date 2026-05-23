@@ -47,14 +47,14 @@
   }
 
   .dark {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 98%;
+    --background: 225 16% 6%;
+    --foreground: 0 0% 96%;
 
-    --card: 240 8% 7%;
-    --card-foreground: 0 0% 98%;
+    --card: 225 14% 9%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 240 10% 4%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 225 16% 6%;
+    --popover-foreground: 0 0% 96%;
 
     --primary: 217 91% 65%;
     --primary-foreground: 0 0% 100%;
@@ -78,7 +78,7 @@
     --input: 240 6% 16%;
     --ring: 217 91% 65%;
 
-    --grid-line: 240 6% 14%;
+    --grid-line: 225 10% 13%;
 
     --chart-1: 221 83% 53%;
     --chart-2: 212 95% 68%;

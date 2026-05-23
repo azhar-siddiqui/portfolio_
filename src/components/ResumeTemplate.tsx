@@ -1,4 +1,35 @@
 import { DATA } from "@/data/resume";
+import * as SimpleIcons from "simple-icons";
+
+type CategoryKey = keyof typeof DATA.skills;
+
+const CATEGORY_LABELS: Record<CategoryKey, string> = {
+  ai: "AI Native & LLMs",
+  frontend: "Frontend",
+  backend: "Backend & Data",
+  devops: "DevOps & Cloud",
+  testing: "Testing & QA",
+};
+
+const PINNED_PROJECT_TITLES = [
+  "Hafnia → Real-Time Fleet Intelligence Platform",
+  "OceanPass → Maritime Compliance Desktop Platform",
+  "Thinkster → AI Math Coaching for Kids",
+];
+
+function getIconSvg(
+  iconSlug: string | null | undefined,
+  overrideColor: string | null | undefined,
+  isDark: boolean
+): string {
+  if (!iconSlug) return "";
+  const key =
+    `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(1)}` as keyof typeof SimpleIcons;
+  const icon = SimpleIcons[key] as { path: string; hex: string } | undefined;
+  if (!icon) return "";
+  const fill = overrideColor && isDark ? overrideColor : `#${icon.hex}`;
+  return `<svg viewBox="0 0 24 24" width="11" height="11" fill="${fill}" style="display:inline-block;flex-shrink:0;vertical-align:middle" aria-hidden="true"><path d="${icon.path}"/></svg>`;
+}
 
 interface ResumeTemplateProps {
   theme: "light" | "dark";
@@ -39,11 +70,18 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         accentStrip: "#3b5ff7",
       };
 
-  // ── Featured projects only ────────────────────────────────────
+  // ── Featured projects only, pinned order ─────────────────────
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const featuredProjects = (DATA.projects as unknown as any[]).filter(
-    (p) => p.featured
-  );
+  const featuredProjects = (DATA.projects as unknown as any[])
+    .filter((p) => p.featured)
+    .sort((a: any, b: any) => {
+      const ai = PINNED_PROJECT_TITLES.indexOf(a.title);
+      const bi = PINNED_PROJECT_TITLES.indexOf(b.title);
+      if (ai !== -1 && bi !== -1) return ai - bi;
+      if (ai !== -1) return -1;
+      if (bi !== -1) return 1;
+      return 0;
+    });
 
   // ── Helpers ───────────────────────────────────────────────────
   const eyebrow = (index: string, label: string) => `
@@ -320,28 +358,35 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 
   /* ── Project specifics ─────────────────────────────────── */
   .project-impact {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 12.5px;
-    line-height: 1.45;
-    color: ${c.fgDim};
-    margin-top: 7px;
-    padding-left: 10px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: ${isDark ? "rgba(91,158,255,0.07)" : "rgba(59,95,247,0.05)"};
     border-left: 2px solid ${c.secondary};
+    border-radius: 0 4px 4px 0;
   }
   .project-impact .label {
     font-family: var(--mono);
-    font-style: normal;
-    font-size: 9px;
+    font-size: 8.5px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: ${c.secondary};
-    margin-right: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .project-impact .value {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    line-height: 1.45;
+    color: ${c.fgDim};
   }
   .project-tech {
-    margin-top: 8px;
+    margin-top: 7px;
     font-family: var(--mono);
-    font-size: 9.5px;
+    font-size: 9px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: ${c.muted};
@@ -351,43 +396,48 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     color: ${c.mutedDim};
     margin-right: 4px;
   }
-  .project-tech .tech-sep { color: ${c.border}; margin: 0 5px; }
+  .project-tech .tech-sep { color: ${c.border}; margin: 0 4px; }
 
   /* ── Skills ────────────────────────────────────────────── */
   .skills-grid {
     display: grid;
-    grid-template-columns: 102px 1fr;
-    gap: 18px 18px;
-    align-items: baseline;
+    grid-template-columns: 116px 1fr;
+    gap: 14px 18px;
+    align-items: start;
   }
   .skills-category-label {
     font-family: var(--mono);
-    font-size: 9.5px;
+    font-size: 9px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: ${c.muted};
     line-height: 1.6;
-    padding-top: 5px;
+    padding-top: 6px;
   }
   .skills-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    padding-bottom: 8px;
+    gap: 4px 5px;
+    padding-bottom: 12px;
     border-bottom: 1px solid ${c.rule};
   }
+  .skills-grid > div:nth-last-child(-n+2) .skills-row,
   .skills-grid > .skills-row:last-child { border-bottom: none; padding-bottom: 0; }
   .skill {
-    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
     font-weight: 500;
     color: ${c.fgDim};
-    padding: 3px 8px;
+    padding: 2.5px 7px;
     border: 1px solid ${c.border};
     border-radius: 4px;
     background: ${c.surface};
-    line-height: 1.4;
+    line-height: 1.45;
     letter-spacing: 0.01em;
   }
+  .skill svg { flex-shrink: 0; }
 
   /* ── Education ─────────────────────────────────────────── */
   .edu-line {
@@ -540,10 +590,13 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
       ${Object.entries(DATA.skills)
         .map(
           ([category, skills]) => `
-        <div class="skills-category-label">${category}</div>
+        <div class="skills-category-label">${CATEGORY_LABELS[category as CategoryKey] ?? category}</div>
         <div class="skills-row">
           ${skills
-            .map((s) => `<span class="skill">${s.name}</span>`)
+            .map((s) => {
+              const iconSvg = getIconSvg(s.icon, s.color, isDark);
+              return `<span class="skill">${iconSvg}${s.name}</span>`;
+            })
             .join("")}
         </div>`
         )
@@ -571,7 +624,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           <div class="entry-desc">${project.description}</div>
           ${
             project.impact
-              ? `<div class="project-impact"><span class="label">Impact</span>${project.impact}</div>`
+              ? `<div class="project-impact"><span class="label">Impact ↗</span><span class="value">${project.impact}</span></div>`
               : ""
           }
           <div class="project-tech">

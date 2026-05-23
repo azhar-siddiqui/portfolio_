@@ -13,6 +13,7 @@ type SkillEntry = { name: string; color?: string | null; icon?: string | null };
 type CategoryKey = keyof typeof DATA.skills;
 
 const CATEGORY_LABELS: Record<CategoryKey, string> = {
+  ai: "AI Native & LLMs",
   frontend: "Frontend",
   backend: "Backend & Data",
   devops: "DevOps & Cloud",
@@ -86,10 +87,11 @@ export function SkillsSection() {
           </h2>
         </BlurFade>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/60 border border-border/60 rounded-xl overflow-hidden">
-          {(Object.keys(DATA.skills) as CategoryKey[]).map((cat, ci) => {
+          {(Object.keys(DATA.skills) as CategoryKey[]).map((cat, ci, all) => {
             const skills = DATA.skills[cat] as readonly SkillEntry[];
+            const isOrphan = all.length % 2 !== 0 && ci === all.length - 1;
             return (
-              <BlurFade key={cat} delay={BLUR_FADE_DELAY * (3 + ci)} inView>
+              <BlurFade key={cat} delay={BLUR_FADE_DELAY * (3 + ci)} inView className={isOrphan ? "md:col-span-2" : undefined}>
                 <div className="bg-background/50 backdrop-blur-sm p-6 sm:p-8 h-full flex flex-col gap-5">
                   <div className="flex items-baseline justify-between">
                     <h3 className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-foreground">

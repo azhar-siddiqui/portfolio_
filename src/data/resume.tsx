@@ -37,6 +37,22 @@ export const DATA = {
   }>,
   avatarUrl: "/me.png",
   skills: {
+    ai: [
+      { name: "Claude Code CLI", color: "#CC785C", icon: "anthropic" },
+      { name: "Anthropic API", color: "#CC785C", icon: "anthropic" },
+      { name: "Cursor", color: null, icon: null },
+      { name: "GitHub Copilot", color: null, icon: "githubcopilot" },
+      { name: "Gemini", color: "#4285F4", icon: "googlegemini" },
+      { name: "ChatGPT", color: null, icon: "openai" },
+      { name: "v0 by Vercel", color: "#ffffff", icon: "vercel" },
+      { name: "Perplexity", color: null, icon: "perplexity" },
+      { name: "Vercel AI SDK", color: "#ffffff", icon: "vercel" },
+      { name: "LangChain", color: null, icon: "langchain" },
+      { name: "Prompt Engineering", color: null, icon: null },
+      { name: "LLM Orchestration", color: null, icon: null },
+      { name: "RAG Pipelines", color: null, icon: null },
+      { name: "AI-assisted TDD", color: null, icon: null },
+    ],
     frontend: [
       { name: "React", color: null, icon: "react" },
       { name: "Next.js", color: "#ffffff", icon: "nextdotjs" },
@@ -88,6 +104,7 @@ export const DATA = {
       { name: "New Relic", color: null, icon: "newrelic" },
       { name: "Sentry", color: null, icon: "sentry" },
       { name: "SonarQube", color: null, icon: null },
+      { name: "Bitrise", color: null, icon: "bitrise" },
     ],
     testing: [
       { name: "Cypress", color: null, icon: "cypress" },
@@ -95,6 +112,9 @@ export const DATA = {
       { name: "Playwright", color: null, icon: "playwright" },
       { name: "Vitest", color: null, icon: "vitest" },
       { name: "Testing Library", color: null, icon: "testinglibrary" },
+      { name: "Appium", color: null, icon: "appium" },
+      { name: "WebdriverIO", color: null, icon: "webdriverio" },
+      { name: "AWS Device Farm", color: null, icon: null },
     ],
   },
   navbar: [
@@ -131,12 +151,12 @@ export const DATA = {
       href: "https://shurutech.com",
       badges: ["Current"],
       location: "Remote",
-      title: "Senior Product Engineer",
+      title: "Senior AI Native Product Engineer",
       logoUrl: "", // Add logo if available
       start: "Dec 2025",
       end: "Present",
       description:
-        "Building high-performance cross-platform solutions for a leading AI and logistics company. Developing scalable UI/UX components across fragmented device ecosystems and integrating complex APIs with real-time telemetry. Driving production excellence through rigorous peer reviews, performance optimization, and modern CI/CD practices.",
+        "Leading AI-native product engineering at Shurutech — building robust architectures and systems around LLMs and AI tooling to ship high-quality software at velocity. Not building foundational models, but leveraging AI as a core engineering multiplier to drive concrete product outcomes. Currently overseeing cross-platform application development and maintenance for a Logistics Client, a leading AI-powered heavy equipment marketplace, managing complex multi-platform ecosystems across web and mobile.",
     },
     {
       company: "Kiya.ai",
@@ -186,75 +206,16 @@ export const DATA = {
     },
   ],
   projects: [
+    // ── MARITIME ────────────────────────────────────────────────────────────
     {
-      title: "Kharcha → Personal Expense Tracker",
-      href: "https://kharcha.space/",
-      dates: "Dec 2025 – Dec 2025",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Developed a production-ready expense tracking app in 3 days using 75% AI-assisted coding. Features include real-time dashboards, budget alerts, subscription management, notifications, and PDF/Excel exports. Achieved 90%+ test coverage with 290+ automated tests, CI/CD integration, and PWA support for offline use—demonstrating rapid prototyping and high-quality delivery.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "TanStack Stack",
-        "Convex",
-        "Clerk",
-        "TailwindCSS",
-        "Recharts",
-        "Vitest",
-        "PWA",
-      ],
-      impact:
-        "Built a solution that solves mine and others' expense tracking needs, Launched in 3 days with AI assistance with 90%+ test coverage",
-      featured: true,
-    },
-    {
-      title: "R Batteries Store",
-      href: "https://rbatteries.store/",
-      dates: "Nov 2025 – Nov 2025",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Developed a full e-commerce platform for Pune's largest battery retailer, enabling doorstep delivery of brands like Exide, Amaron, and Luminous. Integrated reviews, care guides, and instant quotes; overcame challenges in real-time inventory sync and mobile optimization using service workers for PWA.",
-      technologies: ["Next.js", "TypeScript", "TailwindCSS", "Node.js", "PWA"],
-      impact: "3x higher online sales in the first month.",
-      featured: false,
-    },
-    {
-      title: "SonarQube Issues Exporter → NPM Package for Code Quality Metrics",
-      href: "https://www.npmjs.com/package/sonarqube-issues-exporter",
-      dates: "Aug 2025 – Sep 2025",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Developed an NPM package to generate and share code quality reports from SonarQube without requiring dedicated infrastructure. Addresses challenges in teams with limited DevOps resources and budgets by enabling local setup of SonarQube Community Edition and automated report generation using project tokens.",
-      technologies: [
-        "Node.js",
-        "TypeScript",
-        "SonarQube API",
-        "CLI",
-        "Axios",
-        "Chart.js",
-        "Commander",
-        "Dotenv",
-        "Handlebars",
-        "Winston",
-        "Zod",
-      ],
-      impact:
-        "Streamlined code quality reporting for teams, eliminating the need for expensive infrastructure setups.",
-      featured: false,
-    },
-    {
-      title: "Global Tanker Fleet Management System",
+      title: "Hafnia → Real-Time Fleet Intelligence Platform",
       href: "https://kiya.ai",
       dates: "Feb 2024 – Nov 2025",
       company: "Kiya.ai",
       active: true,
       tags: ["Confidential", "NDA Protected"],
       description:
-        "End-to-end ownership of a real-time dashboard for 100+ vessels. Integrated live maps, weather routing, and analytics; optimized for performance with caching and data structures like graphs for route calculations, ensuring low-latency updates across global operations.",
+        "Architected and delivered a real-time fleet intelligence platform for Hafnia — one of the world's largest product tanker operators. The system gives shore-side operations teams a unified command center: live AIS vessel tracking across 100+ tankers, weather-optimised routing overlays, voyage performance analytics, and bunkering insights. Engineered high-throughput data pipelines with graph-based route calculations and intelligent caching layers, guaranteeing sub-second latency across a globally distributed fleet.",
       technologies: [
         "React",
         "React Native",
@@ -264,18 +225,18 @@ export const DATA = {
         "HighCharts",
       ],
       impact:
-        "30% faster decisions, reduced fuel waste, improved safety/compliance.",
+        "30% faster operational decisions, measurable reduction in fuel waste, improved safety and emissions compliance fleet-wide.",
       featured: true,
     },
     {
-      title: "Maritime Emissions Intelligence Platform",
+      title: "OceanPass → Maritime Compliance Desktop Platform",
       href: "https://kiya.ai",
       dates: "Feb 2025 – Jun 2025",
       company: "Kiya.ai",
       active: true,
       tags: ["Confidential", "NDA Protected"],
       description:
-        "Solo-built an offline-first desktop app for global shipping emissions tracking. Automated reporting for CII, EEDI, and Poseidon Principles; handled offline sync via service workers and local storage for remote fleets, addressing connectivity issues in maritime environments.",
+        "Solo-architected and delivered OceanPass — an offline-first Electron desktop application built for a leading global maritime technology company. The platform automates regulatory compliance reporting across CII, EEDI, and Poseidon Principles frameworks, processing voyage data entirely offline and syncing when connectivity is restored — purpose-built for vessel officers operating in remote maritime environments. Eliminated manual, error-prone paperwork workflows and automated complex multi-regulation calculations, shielding the client from multi-million dollar regulatory penalties and delivering transformative operational cost savings.",
       technologies: [
         "React",
         "Electron.js",
@@ -285,9 +246,10 @@ export const DATA = {
         "TanStack Query",
       ],
       impact:
-        "95% less paperwork, 40% reduced downtime, avoided million-dollar penalties.",
+        "95% reduction in compliance paperwork, 40% less operational downtime, saved the client millions in potential regulatory penalties and manual processing costs.",
       featured: true,
     },
+    // ── LOGISTICS ───────────────────────────────────────────────────────────
     {
       title: "SpotFinder → Urban Parking Logistics",
       href: "https://apps.apple.com/in/app/spotfinder-india/id6448868015",
@@ -327,6 +289,32 @@ export const DATA = {
       impact: "Streamlined operations, new revenue from premium services.",
       featured: false,
     },
+    // ── BANKING & FINANCE ───────────────────────────────────────────────────
+    {
+      title: "BetaRisk CRM → Banking & Corporate Risk",
+      href: "https://www.betarisk.com",
+      dates: "Nov 2021 – Nov 2022",
+      company: "Rightbrain Infotech",
+      active: true,
+      description:
+        "Delivered a risk analytics CRM with dashboards and workflows. Ensured secure data handling; used testing suites to maintain reliability for daily use by credit committees in banks.",
+      technologies: ["React", "TypeScript", "Material UI", "Cypress", "Jest"],
+      impact: "Improved risk decisions, daily use by committees.",
+      featured: false,
+    },
+    {
+      title: "BrightUp → Personal Financial Wellness",
+      href: "https://brightup.life",
+      dates: "Jun 2022 – Jul 2023",
+      company: "Rightbrain Infotech",
+      active: true,
+      description:
+        "Developed a mobile-first bill management platform with subscription insights. Focused on intuitive UX; handled secure data visualization for thousands of users, addressing privacy and real-time updates.",
+      technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS", "PWA"],
+      impact: "Saved users time/money monthly, clear financial overviews.",
+      featured: false,
+    },
+    // ── EDTECH & SOCIAL IMPACT ──────────────────────────────────────────────
     {
       title: "Thinkster → AI Math Coaching for Kids",
       href: "https://hellothinkster.com",
@@ -343,6 +331,18 @@ export const DATA = {
         "RxJS",
       ],
       impact: "3x student participation, highest-retention feature.",
+      featured: true,
+    },
+    {
+      title: "Reading Assistant | Gyan AI",
+      href: "https://www.gyanai.com",
+      dates: "Jun 2022 – Sep 2023",
+      company: "Rightbrain Infotech",
+      active: true,
+      description:
+        "Created an interactive phonics platform for kids with child-focused designs. Integrated engagement features; optimized for low-bandwidth PWA access to enhance learning outcomes.",
+      technologies: ["React", "TypeScript", "TailwindCSS", "Redux", "PWA"],
+      impact: "Better learning outcomes, higher parent satisfaction.",
       featured: false,
     },
     {
@@ -361,42 +361,6 @@ export const DATA = {
         "Custom UI Library",
       ],
       impact: "Reduced costs, reached thousands more with clean water.",
-      featured: false,
-    },
-    {
-      title: "BrightUp → Personal Financial Wellness",
-      href: "https://brightup.life",
-      dates: "Jun 2022 – Jul 2023",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Developed a mobile-first bill management platform with subscription insights. Focused on intuitive UX; handled secure data visualization for thousands of users, addressing privacy and real-time updates.",
-      technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS", "PWA"],
-      impact: "Saved users time/money monthly, clear financial overviews.",
-      featured: false,
-    },
-    {
-      title: "BetaRisk CRM → Banking & Corporate Risk",
-      href: "https://www.betarisk.com",
-      dates: "Nov 2021 – Nov 2022",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Delivered a risk analytics CRM with dashboards and workflows. Ensured secure data handling; used testing suites to maintain reliability for daily use by credit committees in banks.",
-      technologies: ["React", "TypeScript", "Material UI", "Cypress", "Jest"],
-      impact: "Improved risk decisions, daily use by committees.",
-      featured: false,
-    },
-    {
-      title: "Reading Assistant | Gyan AI",
-      href: "https://www.gyanai.com",
-      dates: "Jun 2022 – Sep 2023",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Created an interactive phonics platform for kids with child-focused designs. Integrated engagement features; optimized for low-bandwidth PWA access to enhance learning outcomes.",
-      technologies: ["React", "TypeScript", "TailwindCSS", "Redux", "PWA"],
-      impact: "Better learning outcomes, higher parent satisfaction.",
       featured: false,
     },
     {
@@ -427,6 +391,68 @@ export const DATA = {
         "Fetch API",
       ],
       impact: "Connected thousands, first profitable quarters for company.",
+      featured: false,
+    },
+    // ── PERSONAL PROJECTS ───────────────────────────────────────────────────
+    {
+      title: "Kharcha → Personal Expense Tracker",
+      href: "https://kharcha.space/",
+      dates: "Dec 2025 – Dec 2025",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Developed a production-ready expense tracking app in 3 days using 75% AI-assisted coding. Features include real-time dashboards, budget alerts, subscription management, notifications, and PDF/Excel exports. Achieved 90%+ test coverage with 290+ automated tests, CI/CD integration, and PWA support for offline use—demonstrating rapid prototyping and high-quality delivery.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "TanStack Stack",
+        "Convex",
+        "Clerk",
+        "TailwindCSS",
+        "Recharts",
+        "Vitest",
+        "PWA",
+      ],
+      impact:
+        "Built a solution that solves mine and others' expense tracking needs, Launched in 3 days with AI assistance with 90%+ test coverage",
+      featured: true,
+    },
+    {
+      title: "SonarQube Issues Exporter → NPM Package for Code Quality Metrics",
+      href: "https://www.npmjs.com/package/sonarqube-issues-exporter",
+      dates: "Aug 2025 – Sep 2025",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Developed an NPM package to generate and share code quality reports from SonarQube without requiring dedicated infrastructure. Addresses challenges in teams with limited DevOps resources and budgets by enabling local setup of SonarQube Community Edition and automated report generation using project tokens.",
+      technologies: [
+        "Node.js",
+        "TypeScript",
+        "SonarQube API",
+        "CLI",
+        "Axios",
+        "Chart.js",
+        "Commander",
+        "Dotenv",
+        "Handlebars",
+        "Winston",
+        "Zod",
+      ],
+      impact:
+        "Streamlined code quality reporting for teams, eliminating the need for expensive infrastructure setups.",
+      featured: false,
+    },
+    {
+      title: "R Batteries Auto Electrical Works → Local SEO Landing Page",
+      href: "https://rbatteries.store/",
+      dates: "Nov 2025 – Nov 2025",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Built a hyper-local SEO-optimised landing page for R Batteries Auto Electrical Works, a Pune-based mobile auto electrical and battery service business. Engineered for high-intent local discovery — featuring 21 neighbourhood-specific pages for area-level search dominance, WhatsApp-integrated service request flows for frictionless onboarding, live Google Reviews (197+ reviews, 4.9-star rating), and clear service listings covering Emergency Jumpstart, Battery Replacement, Inverter Battery servicing, and Auto-Electrical repairs for cars and bikes.",
+      technologies: ["Next.js", "TypeScript", "TailwindCSS", "PWA"],
+      impact:
+        "Driving 500+ customer calls per month (and growing), significantly boosted Google Maps visibility and local search rankings across 21 Pune neighbourhoods.",
       featured: false,
     },
   ],

@@ -6,7 +6,7 @@ import { HeroMeshBackground } from "@/components/hero-mesh-background";
 import { useMagnetic } from "@/hooks/use-magnetic";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
-import { ArrowUpRight, ArrowDown } from "lucide-react";
+import { ArrowUpRight, ArrowDown, MapPin } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -22,37 +22,36 @@ export function Hero() {
       <HeroMeshBackground />
       <div className="mx-auto w-full max-w-6xl">
         <BlurFade delay={BLUR_FADE_DELAY}>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <Avatar className="size-8 border border-border/60 shrink-0">
-              <AvatarImage
-                alt={DATA.name}
-                src={DATA.avatarUrl}
-                className="object-cover"
-              />
-              <AvatarFallback className="text-[10px] font-medium">
-                {DATA.initials}
-              </AvatarFallback>
-            </Avatar>
-            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-muted-foreground flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="inline-flex items-center gap-1.5">
-                <span
-                  className="size-1.5 rounded-full bg-emerald-500"
-                  aria-hidden
-                />
-                Available for work
-              </span>
-              <span className="text-muted-foreground/40" aria-hidden>
-                ·
-              </span>
-              <span>{DATA.location.toUpperCase()}</span>
+          <div className="flex items-center gap-1.5">
+            <MapPin className="h-3 w-3 text-muted-foreground/60 shrink-0" />
+            <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-muted-foreground">
+              {DATA.location.toUpperCase()}
             </span>
           </div>
         </BlurFade>
 
         <BlurFade delay={BLUR_FADE_DELAY * 2}>
-          <h1 className="mt-5 sm:mt-10 text-[2.25rem] sm:text-6xl md:text-7xl xl:text-8xl font-medium tracking-[-0.04em] leading-[1] sm:leading-[0.95] text-foreground max-w-[14ch] break-words">
-            {DATA.name}
-          </h1>
+          <div className="flex items-center gap-4 sm:gap-6 mt-5 sm:mt-10">
+            <div className="relative shrink-0">
+              <div
+                aria-hidden
+                className="absolute inset-[-3px] rounded-full bg-gradient-to-br from-blue-500/30 via-violet-500/20 to-cyan-500/30 blur-sm"
+              />
+              <Avatar className="relative size-20 sm:size-28 border border-border/60">
+                <AvatarImage
+                  alt={DATA.name}
+                  src={DATA.avatarUrl}
+                  className="object-cover"
+                />
+                <AvatarFallback className="text-[10px] font-medium">
+                  {DATA.initials}
+                </AvatarFallback>
+              </Avatar>
+            </div>
+            <h1 className="text-[2rem] sm:text-6xl md:text-7xl xl:text-8xl font-medium tracking-[-0.04em] leading-[1] sm:leading-[0.95] text-foreground max-w-[14ch] break-words">
+              {DATA.name}
+            </h1>
+          </div>
         </BlurFade>
 
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
