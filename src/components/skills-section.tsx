@@ -53,9 +53,7 @@ function SkillChip({
           >
             <path d={skill.icon ? icon.path : ""} />
           </svg>
-        ) : (
-          <span aria-hidden className="w-4 h-4 rounded-sm bg-muted" />
-        )}
+        ) : null}
         <span className="text-xs sm:text-sm font-medium text-foreground/85">
           {skill.name}
         </span>

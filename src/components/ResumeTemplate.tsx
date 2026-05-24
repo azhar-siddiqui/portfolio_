@@ -12,6 +12,9 @@ const CATEGORY_LABELS: Record<CategoryKey, string> = {
 };
 
 const PINNED_PROJECT_TITLES = [
+  "Tenderd Scout → Equipment Intelligence App",
+  "Tenderd OpsPro → Operations Workflow App",
+  "Tenderd → Asset Tracking App",
   "Hafnia → Real-Time Fleet Intelligence Platform",
   "OceanPass → Maritime Compliance Desktop Platform",
   "Thinkster → AI Math Coaching for Kids",

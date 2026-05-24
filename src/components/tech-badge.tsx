@@ -49,12 +49,7 @@ export function TechBadge({ name, size = "sm" }: Props) {
         >
           <path d={icon.path} />
         </svg>
-      ) : (
-        <span
-          aria-hidden
-          className={"shrink-0 rounded-sm bg-muted " + (isMd ? "w-3.5 h-3.5" : "w-3 h-3")}
-        />
-      )}
+      ) : null}
       <span
         className={
           "font-medium text-foreground/80 leading-none " +

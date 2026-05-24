@@ -29,6 +29,9 @@ const PRIMARY_TECH_FILTERS = [
 ];
 
 const PINNED_PROJECT_TITLES = [
+  "Tenderd Scout → Equipment Intelligence App",
+  "Tenderd OpsPro → Operations Workflow App",
+  "Tenderd → Asset Tracking App",
   "Hafnia → Real-Time Fleet Intelligence Platform",
   "OceanPass → Maritime Compliance Desktop Platform",
   "Thinkster → AI Math Coaching for Kids",
@@ -168,6 +171,7 @@ export function ProjectsGrid() {
                   description={project.description}
                   dates={project.dates}
                   tags={project.technologies}
+                  resourceLinks={project.resourceLinks}
                   impact={project.impact}
                   company={project.company}
                 />

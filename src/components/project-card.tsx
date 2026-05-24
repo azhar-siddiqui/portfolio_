@@ -9,6 +9,10 @@ interface Props {
   description: string;
   dates: string;
   tags: readonly string[];
+  resourceLinks?: readonly {
+    label: string;
+    href: string;
+  }[];
   link?: string;
   image?: string;
   video?: string;
@@ -28,6 +32,7 @@ export function ProjectCard({
   description,
   dates,
   tags,
+  resourceLinks,
   link,
   image,
   video,
@@ -105,6 +110,21 @@ export function ProjectCard({
           <div className="flex flex-wrap gap-1.5 mt-2 pt-4 border-t border-border/50">
             {tags.map((tag) => (
               <TechBadge key={tag} name={tag} />
+            ))}
+          </div>
+        )}
+        {resourceLinks && resourceLinks.length > 0 && (
+          <div className="flex flex-row flex-wrap items-start gap-2 mt-3">
+            {resourceLinks.map((l, idx) => (
+              <a
+                href={l.href}
+                key={idx}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-foreground/80 hover:text-foreground transition-colors animated-underline"
+              >
+                {l.label}
+              </a>
             ))}
           </div>
         )}

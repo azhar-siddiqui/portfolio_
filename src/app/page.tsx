@@ -14,6 +14,9 @@ import { ArrowUpRight } from "lucide-react";
 const BLUR_FADE_DELAY = 0.04;
 
 const PINNED_PROJECT_TITLES = [
+  "Tenderd Scout → Equipment Intelligence App",
+  "Tenderd OpsPro → Operations Workflow App",
+  "Tenderd → Asset Tracking App",
   "Hafnia → Real-Time Fleet Intelligence Platform",
   "OceanPass → Maritime Compliance Desktop Platform",
   "Thinkster → AI Math Coaching for Kids",
@@ -158,6 +161,7 @@ export default function Page() {
                     description={project.description}
                     dates={project.dates}
                     tags={project.technologies}
+                    resourceLinks={project.resourceLinks}
                     impact={project.impact}
                     company={project.company}
                   />

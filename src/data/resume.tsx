@@ -41,9 +41,9 @@ export const DATA = {
       { name: "Claude Code CLI", color: "#CC785C", icon: "anthropic" },
       { name: "Anthropic API", color: "#CC785C", icon: "anthropic" },
       { name: "Cursor", color: null, icon: null },
-      { name: "GitHub Copilot", color: null, icon: "githubcopilot" },
+      { name: "GitHub Copilot", color: "#ffffff", icon: "githubcopilot" },
       { name: "Gemini", color: "#4285F4", icon: "googlegemini" },
-      { name: "ChatGPT", color: null, icon: "openai" },
+      { name: "ChatGPT", color: null, icon: null },
       { name: "v0 by Vercel", color: "#ffffff", icon: "vercel" },
       { name: "Perplexity", color: null, icon: "perplexity" },
       { name: "Vercel AI SDK", color: "#ffffff", icon: "vercel" },
@@ -63,14 +63,15 @@ export const DATA = {
       { name: "Ionic", color: null, icon: "ionic" },
       { name: "Capacitor.js", color: null, icon: "capacitor" },
       { name: "TanStack", color: "#ffffff", icon: "tanstack" },
+      { name: "TanStack Query", color: "#ffffff", icon: "tanstack" },
       { name: "Redux/RTK", color: null, icon: "redux" },
       { name: "TailwindCSS", color: null, icon: "tailwindcss" },
       { name: "Shadcn", color: "#ffffff", icon: "radixui" },
       { name: "Material UI", color: null, icon: "mui" },
       { name: "Bootstrap", color: null, icon: "bootstrap" },
       { name: "Mapbox", color: "#ffffff", icon: "mapbox" },
-      { name: "AG Grid", color: null, icon: "aggrid" },
-      { name: "HighCharts", color: null, icon: "highcharts" },
+      { name: "AG Grid", color: null, icon: null },
+      { name: "HighCharts", color: null, icon: null },
       { name: "Chart.js", color: null, icon: "chartdotjs" },
       { name: "PWA", color: null, icon: "pwa" },
     ],
@@ -92,16 +93,19 @@ export const DATA = {
       { name: "Handlebars", color: "#ffffff", icon: "handlebarsdotjs" },
       { name: "Winston", color: null, icon: "gnubash" },
       { name: "Zod", color: null, icon: "zod" },
+      { name: "Novu", color: "#ffffff", icon: "novu" },
     ],
     devops: [
       { name: "Docker", color: null, icon: "docker" },
       { name: "Kubernetes", color: null, icon: "kubernetes" },
       { name: "GitHub Actions", color: null, icon: "githubactions" },
-      { name: "Azure DevOps CI/CD", color: null, icon: "azuredevops" },
+      { name: "Azure DevOps CI/CD", color: null, icon: null },
       { name: "Vercel", color: "#ffffff", icon: "vercel" },
       { name: "Netlify", color: null, icon: "netlify" },
-      { name: "AWS", color: null, icon: "amazonwebservices" },
+      { name: "AWS", color: null, icon: null },
       { name: "New Relic", color: null, icon: "newrelic" },
+      { name: "PostHog", color: "#ffffff", icon: "posthog" },
+      { name: "Last9", color: null, icon: null },
       { name: "Sentry", color: null, icon: "sentry" },
       { name: "SonarQube", color: null, icon: null },
       { name: "Bitrise", color: null, icon: "bitrise" },
@@ -109,7 +113,7 @@ export const DATA = {
     testing: [
       { name: "Cypress", color: null, icon: "cypress" },
       { name: "Jest", color: null, icon: "jest" },
-      { name: "Playwright", color: null, icon: "playwright" },
+      { name: "Playwright", color: null, icon: null },
       { name: "Vitest", color: null, icon: "vitest" },
       { name: "Testing Library", color: null, icon: "testinglibrary" },
       { name: "Appium", color: null, icon: "appium" },
@@ -209,13 +213,13 @@ export const DATA = {
     // ── MARITIME ────────────────────────────────────────────────────────────
     {
       title: "Hafnia → Real-Time Fleet Intelligence Platform",
-      href: "https://kiya.ai",
+      href: "https://hafnia.com/",
       dates: "Feb 2024 – Nov 2025",
       company: "Kiya.ai",
       active: true,
       tags: ["Confidential", "NDA Protected"],
       description:
-        "Architected and delivered a real-time fleet intelligence platform for Hafnia — one of the world's largest product tanker operators. The system gives shore-side operations teams a unified command center: live AIS vessel tracking across 100+ tankers, weather-optimised routing overlays, voyage performance analytics, and bunkering insights. Engineered high-throughput data pipelines with graph-based route calculations and intelligent caching layers, guaranteeing sub-second latency across a globally distributed fleet.",
+        "Delivered a unified fleet decision platform for global operations, enabling faster voyage planning, emissions decisions, and day-to-day performance monitoring for shore-side stakeholders.",
       technologies: [
         "React",
         "React Native",
@@ -225,18 +229,18 @@ export const DATA = {
         "HighCharts",
       ],
       impact:
-        "30% faster operational decisions, measurable reduction in fuel waste, improved safety and emissions compliance fleet-wide.",
+        "Contributed to 30% faster operational decisions for one of the world's largest tanker companies, with measurable fuel-efficiency gains and stronger compliance execution across 100+ vessels.",
       featured: true,
     },
     {
       title: "OceanPass → Maritime Compliance Desktop Platform",
-      href: "https://kiya.ai",
+      href: "https://oceanpass.com/",
       dates: "Feb 2025 – Jun 2025",
       company: "Kiya.ai",
       active: true,
       tags: ["Confidential", "NDA Protected"],
       description:
-        "Solo-architected and delivered OceanPass — an offline-first Electron desktop application built for a leading global maritime technology company. The platform automates regulatory compliance reporting across CII, EEDI, and Poseidon Principles frameworks, processing voyage data entirely offline and syncing when connectivity is restored — purpose-built for vessel officers operating in remote maritime environments. Eliminated manual, error-prone paperwork workflows and automated complex multi-regulation calculations, shielding the client from multi-million dollar regulatory penalties and delivering transformative operational cost savings.",
+        "Unified fragmented vessel emissions workflows into a validated reporting flow, enabling shipowners, charterers, banks, and investors to act on compliance risk with clearer and faster operational visibility.",
       technologies: [
         "React",
         "Electron.js",
@@ -246,13 +250,12 @@ export const DATA = {
         "TanStack Query",
       ],
       impact:
-        "95% reduction in compliance paperwork, 40% less operational downtime, saved the client millions in potential regulatory penalties and manual processing costs.",
+        "Drove a 95% reduction in compliance paperwork and 40% lower operational downtime, with outcomes aligned to OceanPass's mission of validated, real-time emissions intelligence for entire fleets.",
       featured: true,
     },
     // ── LOGISTICS ───────────────────────────────────────────────────────────
     {
       title: "SpotFinder → Urban Parking Logistics",
-      href: "https://apps.apple.com/in/app/spotfinder-india/id6448868015",
       dates: "Apr 2022 – Oct 2022",
       company: "Rightbrain Infotech",
       active: true,
@@ -277,7 +280,7 @@ export const DATA = {
       company: "Rightbrain Infotech",
       active: true,
       description:
-        "Revamped a driver-on-demand platform with new landing pages and cross-platform mobile app. Enabled 24/7 bookings and premium services; tackled responsiveness and PWA offline support for nationwide users.",
+        "Revamped the chauffeur booking experience and launched premium service journeys that made 24/7 bookings faster and more reliable for customers and operators.",
       technologies: [
         "WordPress",
         "Angular",
@@ -286,7 +289,8 @@ export const DATA = {
         "TailwindCSS",
         "PWA",
       ],
-      impact: "Streamlined operations, new revenue from premium services.",
+      impact:
+        "Improved conversion and service throughput for a chauffeur platform publicly operating since 2007 across major Indian metros (Mumbai, Pune, Delhi NCR, Bangalore, Kolkata, Hyderabad, Thane, Navi Mumbai).",
       featured: false,
     },
     // ── BANKING & FINANCE ───────────────────────────────────────────────────
@@ -297,9 +301,10 @@ export const DATA = {
       company: "Rightbrain Infotech",
       active: true,
       description:
-        "Delivered a risk analytics CRM with dashboards and workflows. Ensured secure data handling; used testing suites to maintain reliability for daily use by credit committees in banks.",
+        "Improved risk-governance execution for institutional users, giving decision-makers more consistent visibility across risk workflows, controls, and reporting.",
       technologies: ["React", "TypeScript", "Material UI", "Cypress", "Jest"],
-      impact: "Improved risk decisions, daily use by committees.",
+      impact:
+        "Supported institutional risk operations for regulated segments highlighted by BetaRisk (banks, payment providers, pensions, asset managers, and MFIs), improving consistency and confidence in daily committee decisions.",
       featured: false,
     },
     {
@@ -309,9 +314,10 @@ export const DATA = {
       company: "Rightbrain Infotech",
       active: true,
       description:
-        "Developed a mobile-first bill management platform with subscription insights. Focused on intuitive UX; handled secure data visualization for thousands of users, addressing privacy and real-time updates.",
+        "Simplified early home-affordability qualification into a guided, low-friction journey so users with strong payment behavior could be evaluated beyond a single credit-score snapshot.",
       technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS", "PWA"],
-      impact: "Saved users time/money monthly, clear financial overviews.",
+      impact:
+        "Enabled a faster pre-qualification flow with a ~30-second initial estimate and support for users with 12+ months of on-time rent history, helping lenders and applicants move from uncertainty to action sooner.",
       featured: false,
     },
     // ── EDTECH & SOCIAL IMPACT ──────────────────────────────────────────────
@@ -340,9 +346,10 @@ export const DATA = {
       company: "Rightbrain Infotech",
       active: true,
       description:
-        "Created an interactive phonics platform for kids with child-focused designs. Integrated engagement features; optimized for low-bandwidth PWA access to enhance learning outcomes.",
+        "Built a reading-learning experience centered on trust and clarity, making it easier for learners and educators to rely on grounded outputs and structured assistance.",
       technologies: ["React", "TypeScript", "TailwindCSS", "Redux", "PWA"],
-      impact: "Better learning outcomes, higher parent satisfaction.",
+      impact:
+        "Aligned with Gyan's enterprise-safe positioning and explainable AI direction, contributing to a product experience designed for high-trust use cases where accuracy and traceability are critical.",
       featured: false,
     },
     {
@@ -352,7 +359,7 @@ export const DATA = {
       company: "Rightbrain Infotech",
       active: true,
       description:
-        "Modernized legacy water tracking systems into offline-capable apps for rural India. Integrated custom UI libraries; overcame data sync challenges in low-connectivity areas to ensure reliable access for thousands of households.",
+        "Modernized field operations so distributed staff could run day-to-day water service workflows with higher reliability in low-connectivity regions and stronger reporting consistency.",
       technologies: [
         "Angular",
         "React Native",
@@ -360,7 +367,8 @@ export const DATA = {
         "PWA",
         "Custom UI Library",
       ],
-      impact: "Reduced costs, reached thousands more with clean water.",
+      impact:
+        "Enabled digital operations for a water nonprofit that publicly reports 2M+ people directly reached across 600+ communities (and 60M indirectly reached) by end-2025.",
       featured: false,
     },
     {
@@ -393,15 +401,123 @@ export const DATA = {
       impact: "Connected thousands, first profitable quarters for company.",
       featured: false,
     },
+    // ── SHURUTECH PRODUCTS ──────────────────────────────────────────────────
+    {
+      title: "Tenderd Scout → Equipment Intelligence App",
+      href: "https://play.google.com/store/apps/details?id=com.tenderd.scout",
+      resourceLinks: [
+        {
+          label: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.tenderd.scout",
+        },
+        {
+          label: "App Store",
+          href: "https://apps.apple.com/in/app/tenderd-scout/id6758004007",
+        },
+      ],
+      dates: "May 2026 – Present",
+      company: "Shurutech",
+      active: true,
+      description:
+        "Delivered a production mobile experience that improved asset visibility, utilization tracking, and decision speed for field operations and management workflows.",
+      technologies: [
+        "React Native",
+        "TypeScript",
+        "TanStack Query",
+        "Firebase",
+        "Novu",
+        "PostHog",
+        "Last9",
+        "Bitrise CI/CD",
+        "Appium",
+        "WebdriverIO",
+        "Jest",
+      ],
+      impact:
+        "Shipped and published across major app stores, giving operations teams a unified and accessible field workflow across both Android and iOS.",
+      featured: true,
+    },
+    {
+      title: "Tenderd OpsPro → Operations Workflow App",
+      href: "https://play.google.com/store/apps/details?id=com.tenderd.opspro",
+      resourceLinks: [
+        {
+          label: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.tenderd.opspro",
+        },
+      ],
+      dates: "May 2026 – Present",
+      company: "Shurutech",
+      active: true,
+      description:
+        "Streamlined day-to-day operational execution through a mobile-first flow, reducing coordination friction for tasks, status updates, and on-ground actions.",
+      technologies: [
+        "React Native",
+        "TypeScript",
+        "TanStack Query",
+        "Firebase",
+        "Novu",
+        "PostHog",
+        "Last9",
+        "Bitrise CI/CD",
+        "Appium",
+        "WebdriverIO",
+        "Jest",
+      ],
+      impact:
+        "Enabled faster rollout of standardized on-ground operations through a dedicated app channel built for real-world team usage.",
+      featured: true,
+    },
+    {
+      title: "Tenderd → Asset Tracking App",
+      href: "https://play.google.com/store/apps/details?id=com.tenderdai.track",
+      resourceLinks: [
+        {
+          label: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.tenderdai.track",
+        },
+        {
+          label: "App Store",
+          href: "https://apps.apple.com/in/app/tenderd/id6762028798",
+        },
+      ],
+      dates: "May 2026 – Present",
+      company: "Shurutech",
+      active: true,
+      description:
+        "Enabled near real-time operational asset tracking and monitoring, reducing delayed updates and improving actionability for distributed field operations.",
+      technologies: [
+        "React Native",
+        "TypeScript",
+        "TanStack Query",
+        "Firebase",
+        "Novu",
+        "PostHog",
+        "Last9",
+        "Bitrise CI/CD",
+        "Appium",
+        "WebdriverIO",
+        "Jest",
+      ],
+      impact:
+        "Deployed as a cross-platform app presence on both Play Store and App Store, improving accessibility and adoption pathways for distributed teams.",
+      featured: true,
+    },
     // ── PERSONAL PROJECTS ───────────────────────────────────────────────────
     {
       title: "BizDro → AI-Powered Business Card Scanner & CRM",
       href: "https://play.google.com/store/apps/details?id=com.bizdro.businesscardscanner",
+      resourceLinks: [
+        {
+          label: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.bizdro.businesscardscanner",
+        },
+      ],
       dates: "Nov 2025 – Nov 2025",
       company: "Personal Project",
       active: true,
       description:
-        "Solo-built and shipped an AI-native mobile app to Google Play Store for professional networking. Features AI-powered business card scanning (OCR + Gemini extraction), AI note taker, meeting scheduler with calendar integration, and a digital contact book. Firebase handles auth, real-time sync, and storage; Cloud Functions with GenKit orchestrate the Gemini AI pipelines on the backend.",
+        "Shipped to Google Play to help professionals turn business cards into structured contacts quickly, reduce manual follow-up effort, and keep networking workflows organized in one place.",
       technologies: [
         "Flutter",
         "Dart",
@@ -416,13 +532,33 @@ export const DATA = {
       featured: true,
     },
     {
+      title: "openapi-normalizer → Postman-to-OpenAPI Converter & Normalizer (NPM)",
+      href: "https://www.npmjs.com/package/openapi-normalizer",
+      dates: "Apr 2026 – Present",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Built for API teams that need cleaner handoffs from Postman to production workflows, delivering normalized specs with clearer examples and significantly smaller files so documentation, review, and client generation become more reliable.",
+      technologies: [
+        "TypeScript",
+        "Node.js",
+        "OpenAPI",
+        "Postman",
+        "CLI",
+        "pnpm",
+      ],
+      impact:
+        "Bridged Postman-to-OpenAPI workflows with measurable early adoption (7 weekly npm downloads as of May 2026), reducing spec bloat and improving codegen reliability for CI-driven SDK generation.",
+      featured: true,
+    },
+    {
       title: "Kharcha → Personal Expense Tracker",
       href: "https://kharcha.space/",
       dates: "Dec 2025 – Dec 2025",
       company: "Personal Project",
       active: true,
       description:
-        "Developed a production-ready expense tracking app in 3 days using 75% AI-assisted coding. Features include real-time dashboards, budget alerts, subscription management, notifications, and PDF/Excel exports. Achieved 90%+ test coverage with 290+ automated tests, CI/CD integration, and PWA support for offline use—demonstrating rapid prototyping and high-quality delivery.",
+        "Delivered a clear, low-friction expense tracking experience that helps everyday users monitor subscriptions and stay financially organized without ads or paywalls.",
       technologies: [
         "React",
         "TypeScript",
@@ -435,7 +571,7 @@ export const DATA = {
         "PWA",
       ],
       impact:
-        "Built a solution that solves mine and others' expense tracking needs, Launched in 3 days with AI assistance with 90%+ test coverage",
+        "Launched in 3 days and positioned for broad adoption with a free, no-ads experience; supports the platform's public claim of serving thousands of users seeking simpler money tracking.",
       featured: true,
     },
     {
@@ -445,7 +581,7 @@ export const DATA = {
       company: "Personal Project",
       active: true,
       description:
-        "Developed an NPM package to generate and share code quality reports from SonarQube without requiring dedicated infrastructure. Addresses challenges in teams with limited DevOps resources and budgets by enabling local setup of SonarQube Community Edition and automated report generation using project tokens.",
+        "Created for engineering teams with limited DevOps capacity, enabling faster and more consistent code-quality reporting so stakeholders can review issues, track trends, and act on release risk earlier.",
       technologies: [
         "Node.js",
         "TypeScript",
@@ -460,7 +596,7 @@ export const DATA = {
         "Zod",
       ],
       impact:
-        "Streamlined code quality reporting for teams, eliminating the need for expensive infrastructure setups.",
+        "Delivered practical code-quality reporting automation with measurable ongoing adoption (21 weekly npm downloads as of May 2026), reducing friction for teams without dedicated SonarQube infrastructure.",
       featured: false,
     },
     {
@@ -470,7 +606,7 @@ export const DATA = {
       company: "Personal Project",
       active: true,
       description:
-        "Built a hyper-local SEO-optimised landing page for R Batteries Auto Electrical Works, a Pune-based mobile auto electrical and battery service business. Engineered for high-intent local discovery — featuring 21 neighbourhood-specific pages for area-level search dominance, WhatsApp-integrated service request flows for frictionless onboarding, live Google Reviews (197+ reviews, 4.9-star rating), and clear service listings covering Emergency Jumpstart, Battery Replacement, Inverter Battery servicing, and Auto-Electrical repairs for cars and bikes.",
+        "Improved high-intent local discovery and customer conversion through area-targeted pages and direct booking flows that scaled inbound demand across Pune neighborhoods.",
       technologies: ["Next.js", "TypeScript", "TailwindCSS", "PWA"],
       impact:
         "Driving 500+ customer calls per month (and growing), significantly boosted Google Maps visibility and local search rankings across 21 Pune neighbourhoods.",

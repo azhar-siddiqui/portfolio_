@@ -165,14 +165,35 @@
   }
 
   .animated-underline {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 1px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.3s ease;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: hsl(var(--primary) / 0.45);
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease,
+      text-underline-offset 0.2s ease;
   }
   .animated-underline:hover {
-    background-size: 100% 1px;
+    color: hsl(var(--primary));
+    text-decoration-color: hsl(var(--primary) / 0.9);
+    text-underline-offset: 4px;
+  }
+
+  .link-visible {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: hsl(var(--primary) / 0.55);
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease,
+      text-underline-offset 0.2s ease;
+  }
+  .link-visible:hover {
+    color: hsl(var(--primary));
+    text-decoration-color: hsl(var(--primary));
+    text-underline-offset: 4px;
   }
 
   .marquee-track {
@@ -194,6 +215,24 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+.prose a {
+  color: hsl(var(--foreground));
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: hsl(var(--primary) / 0.6);
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease,
+    text-underline-offset 0.2s ease;
+}
+
+.prose a:hover {
+  color: hsl(var(--primary));
+  text-decoration-color: hsl(var(--primary));
+  text-underline-offset: 4px;
 }
 
 h3 code {
