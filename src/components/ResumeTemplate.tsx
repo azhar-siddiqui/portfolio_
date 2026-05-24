@@ -84,7 +84,8 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
       if (ai !== -1) return -1;
       if (bi !== -1) return 1;
       return 0;
-    });
+    })
+    .slice(0, 4);
 
   // ── Helpers ───────────────────────────────────────────────────
   const eyebrow = (index: string, label: string) => `
@@ -334,6 +335,25 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     font-weight: 500;
     margin-bottom: 6px;
   }
+  .entry-company a,
+  .entry-title a,
+  .edu-school a,
+  .footer a,
+  .meta-link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    text-decoration-color: ${isDark ? "rgba(91,158,255,0.55)" : "rgba(59,95,247,0.45)"};
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+  .entry-company a:hover,
+  .entry-title a:hover,
+  .edu-school a:hover,
+  .footer a:hover,
+  .meta-link:hover {
+    color: ${c.primary};
+    text-decoration-color: ${c.primary};
+  }
   .entry-company .arrow { font-size: 10px; }
   .entry-desc {
     font-size: 12.5px;
@@ -400,6 +420,51 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     margin-right: 4px;
   }
   .project-tech .tech-sep { color: ${c.border}; margin: 0 4px; }
+  .projects-cta {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border: 1px solid ${c.border};
+    background: ${c.surface};
+    border-left: 3px solid ${c.primary};
+    border-radius: 4px;
+    font-size: 12px;
+    color: ${c.fgDim};
+  }
+  .projects-cta a {
+    color: ${c.primary};
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .projects-cta a:hover {
+    opacity: 0.85;
+  }
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: ${c.fgDim};
+    border: 1px solid ${c.border};
+    border-radius: 999px;
+    background: ${c.surface};
+    padding: 3px 8px;
+    text-decoration: none;
+  }
+  .project-link .arrow { color: ${c.primary}; }
+  .project-link:hover {
+    color: ${c.primary};
+    border-color: ${c.primary};
+  }
 
   /* ── Skills ────────────────────────────────────────────── */
   .skills-grid {
@@ -625,6 +690,26 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               : project.title
           }</div>
           <div class="entry-desc">${project.description}</div>
+          ${(() => {
+            const resourceLinks = Array.isArray(project.resourceLinks)
+              ? project.resourceLinks
+              : [];
+            const links =
+              resourceLinks.length > 0
+                ? resourceLinks
+                : project.href
+                ? [{ label: "Project Link", href: project.href }]
+                : [];
+            if (links.length === 0) return "";
+            return `<div class="project-links">${links
+              .map(
+                (l: { label?: string; href: string }, i: number) =>
+                  `<a class="project-link" href="${l.href}">${
+                    l.label || `Link ${i + 1}`
+                  }<span class="arrow">↗</span></a>`
+              )
+              .join("")}</div>`;
+          })()}
           ${
             project.impact
               ? `<div class="project-impact"><span class="label">Impact ↗</span><span class="value">${project.impact}</span></div>`
@@ -642,6 +727,10 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
       </div>`
       )
       .join("")}
+    <div class="projects-cta">
+      Explore all projects, live demos, and platform links on
+      <a href="${DATA.url}/projects">${DATA.url}/projects <span class="arrow">↗</span></a>
+    </div>
   </section>
 
   <!-- ════ EDUCATION ════ -->

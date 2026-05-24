@@ -415,7 +415,7 @@ export const DATA = {
           href: "https://apps.apple.com/in/app/tenderd-scout/id6758004007",
         },
       ],
-      dates: "May 2026 – Present",
+      dates: "Dec 2025 – Present",
       company: "Shurutech",
       active: true,
       description:
@@ -446,7 +446,7 @@ export const DATA = {
           href: "https://play.google.com/store/apps/details?id=com.tenderd.opspro",
         },
       ],
-      dates: "May 2026 – Present",
+      dates: "Dec 2025 – Present",
       company: "Shurutech",
       active: true,
       description:
@@ -481,7 +481,7 @@ export const DATA = {
           href: "https://apps.apple.com/in/app/tenderd/id6762028798",
         },
       ],
-      dates: "May 2026 – Present",
+      dates: "Dec 2025 – Present",
       company: "Shurutech",
       active: true,
       description:
@@ -597,6 +597,26 @@ export const DATA = {
       ],
       impact:
         "Delivered practical code-quality reporting automation with measurable ongoing adoption (21 weekly npm downloads as of May 2026), reducing friction for teams without dedicated SonarQube infrastructure.",
+      featured: false,
+    },
+    {
+      title: "Battery Tools",
+      dates: "May 2026 – Present",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Built a daily operations platform for my father's battery shop to centralize customer handling, quotations, inventory lookup, service workflows, and billing into one fast, installable web experience.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "Firebase",
+        "PWA",
+        "CRM",
+        "RBAC",
+        "WCAG",
+      ],
+      impact:
+        "Reduced manual coordination and day-to-day friction through workflow automation, faster lookup tools, and offline-capable operations, improving service speed, accuracy, and repeat-customer experience at the shop.",
       featured: false,
     },
     {
