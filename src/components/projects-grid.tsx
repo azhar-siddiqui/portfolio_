@@ -166,12 +166,14 @@ export function ProjectsGrid() {
                 }}
               >
                 <ProjectCard
-                  href={project.href}
+                  href={"href" in project ? project.href : undefined}
                   title={project.title}
                   description={project.description}
                   dates={project.dates}
                   tags={project.technologies}
-                  resourceLinks={project.resourceLinks}
+                  resourceLinks={
+                    "resourceLinks" in project ? project.resourceLinks : undefined
+                  }
                   impact={project.impact}
                   company={project.company}
                 />

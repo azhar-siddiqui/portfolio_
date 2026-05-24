@@ -160,7 +160,7 @@ export const DATA = {
       start: "Dec 2025",
       end: "Present",
       description:
-        "Leading AI-native product engineering at Shurutech — building robust architectures and systems around LLMs and AI tooling to ship high-quality software at velocity. Not building foundational models, but leveraging AI as a core engineering multiplier to drive concrete product outcomes. Currently overseeing cross-platform application development and maintenance for a Logistics Client, a leading AI-powered heavy equipment marketplace, managing complex multi-platform ecosystems across web and mobile.",
+        "Driving AI-native product delivery at Shurutech with a focus on measurable business outcomes, not experimentation. Leading cross-platform execution for logistics and heavy-equipment workflows, including production mobile products shipped to Play Store and App Store, while embedding quality gates, observability, and release discipline to sustain high-velocity delivery.",
     },
     {
       company: "Kiya.ai",
@@ -172,7 +172,7 @@ export const DATA = {
       start: "Feb 2024",
       end: "Nov 2025",
       description:
-        "Led delivery of custom enterprise platforms for global maritime clients like Major Global Energy Transporter and Leading Global Shipping Tech. Implemented offline-first operations for 100+ tankers, automated regulatory reporting (CII, EEDI, Poseidon Principles), reduced decision time by 30%, downtime by 40%, and saved millions in fuel/compliance costs. Used Azure DevOps for CI/CD and Sentry for monitoring.",
+        "Led enterprise maritime product delivery for global shipping stakeholders, turning fragmented vessel workflows into decision-grade operational platforms. Delivered fleet intelligence and emissions-compliance solutions used across 100+ vessels, helping reduce decision latency by 30%, operational downtime by 40%, and compliance-processing overhead at scale.",
     },
     {
       company: "Rightbrain Infotech",
@@ -184,7 +184,7 @@ export const DATA = {
       start: "Sep 2021",
       end: "Jan 2024",
       description:
-        "Designed and launched 8+ revenue-generating platforms across finance, education, logistics, and social impact. Mentored junior teams, converted stakeholder needs into efficient products, and drove gains in user adoption, efficiency, and profitability. Shipped features with real-time data handling and offline capabilities.",
+        "Built and scaled multi-domain digital products across finance, logistics, EdTech, and social impact, consistently converting ambiguous business asks into shipping software with clear ROI. Delivered high-retention user experiences, operational workflow automation, and offline-capable systems that improved adoption, reliability, and commercial outcomes.",
     },
     {
       company: "Glixcel",
@@ -196,7 +196,7 @@ export const DATA = {
       start: "Aug 2020",
       end: "Sep 2021",
       description:
-        "Built and scaled an EdTech marketplace from scratch, connecting thousands of tutors and students in India. Integrated secure payments and real-time scheduling, leading to the company's first profitable quarters.",
+        "Built an EdTech marketplace from the ground up and helped take it from concept to commercial traction. Delivered core booking, payment, and scheduling flows that connected thousands of tutors and learners and contributed to the company reaching its first profitable quarters.",
     },
   ],
   education: [
