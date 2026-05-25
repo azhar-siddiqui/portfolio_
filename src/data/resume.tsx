@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, FolderOpen } from "lucide-react";
+import { HomeIcon, FolderOpen, NotebookPen } from "lucide-react";
 
 export const DATA = {
   name: "Zaheed Shaikh",
@@ -124,6 +124,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/projects", icon: FolderOpen, label: "Projects" },
+    { href: "/blog", icon: NotebookPen, label: "Writing" },
   ],
   contact: {
     email: "reachtozahid@gmail.com",

@@ -4,87 +4,101 @@
 
 @layer base {
   :root {
-    --background: 220 20% 98%;
-    --foreground: 240 10% 8%;
+    --background: 36 38% 97%;
+    --foreground: 232 30% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 8%;
+    --card: 38 50% 99%;
+    --card-foreground: 232 30% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 8%;
+    --popover: 38 50% 99%;
+    --popover-foreground: 232 30% 12%;
 
-    --primary: 221 83% 53%;
+    --primary: 230 78% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 5% 94%;
-    --secondary-foreground: 240 10% 8%;
+    --secondary: 38 35% 93%;
+    --secondary-foreground: 232 30% 12%;
 
-    --muted: 240 5% 94%;
-    --muted-foreground: 240 4% 46%;
+    --muted: 35 25% 92%;
+    --muted-foreground: 232 14% 38%;
 
-    --accent: 263 70% 56%;
+    --accent: 282 72% 56%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --success: 142 71% 45%;
+    --success: 152 64% 42%;
     --success-foreground: 0 0% 100%;
 
-    --border: 240 5% 88%;
-    --input: 240 5% 88%;
-    --ring: 221 83% 53%;
+    --warm: 22 95% 58%;
+    --cool: 198 90% 56%;
 
-    --grid-line: 240 6% 88%;
+    --border: 32 22% 86%;
+    --input: 32 22% 86%;
+    --ring: 230 78% 56%;
 
-    --chart-1: 221 83% 53%;
-    --chart-2: 212 95% 68%;
-    --chart-3: 216 92% 60%;
-    --chart-4: 210 98% 78%;
-    --chart-5: 212 97% 87%;
+    --grid-line: 32 22% 86%;
+
+    --chart-1: 230 78% 56%;
+    --chart-2: 282 72% 56%;
+    --chart-3: 198 90% 56%;
+    --chart-4: 22 95% 58%;
+    --chart-5: 152 64% 42%;
+
+    --aura-1: 230 90% 70%;
+    --aura-2: 282 78% 70%;
+    --aura-3: 22 95% 70%;
 
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 225 16% 6%;
-    --foreground: 0 0% 96%;
+    --background: 232 32% 7%;
+    --foreground: 36 20% 96%;
 
-    --card: 225 14% 9%;
-    --card-foreground: 0 0% 96%;
+    --card: 232 28% 10%;
+    --card-foreground: 36 20% 96%;
 
-    --popover: 225 16% 6%;
-    --popover-foreground: 0 0% 96%;
+    --popover: 232 32% 7%;
+    --popover-foreground: 36 20% 96%;
 
-    --primary: 217 91% 65%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 224 92% 70%;
+    --primary-foreground: 232 40% 8%;
 
-    --secondary: 240 6% 12%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 232 22% 14%;
+    --secondary-foreground: 36 15% 96%;
 
-    --muted: 240 6% 12%;
-    --muted-foreground: 240 5% 60%;
+    --muted: 232 22% 14%;
+    --muted-foreground: 232 10% 66%;
 
-    --accent: 263 70% 65%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 282 78% 72%;
+    --accent-foreground: 232 40% 8%;
 
-    --destructive: 0 63% 31%;
+    --destructive: 0 63% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 71% 45%;
-    --success-foreground: 0 0% 100%;
+    --success: 152 64% 56%;
+    --success-foreground: 232 40% 8%;
 
-    --border: 240 6% 16%;
-    --input: 240 6% 16%;
-    --ring: 217 91% 65%;
+    --warm: 22 95% 68%;
+    --cool: 198 90% 66%;
 
-    --grid-line: 225 10% 13%;
+    --border: 232 18% 20%;
+    --input: 232 18% 20%;
+    --ring: 224 92% 70%;
 
-    --chart-1: 221 83% 53%;
-    --chart-2: 212 95% 68%;
-    --chart-3: 216 92% 60%;
-    --chart-4: 210 98% 78%;
-    --chart-5: 212 97% 87%;
+    --grid-line: 232 18% 18%;
+
+    --chart-1: 224 92% 70%;
+    --chart-2: 282 78% 72%;
+    --chart-3: 198 90% 66%;
+    --chart-4: 22 95% 68%;
+    --chart-5: 152 64% 56%;
+
+    --aura-1: 224 92% 60%;
+    --aura-2: 282 78% 62%;
+    --aura-3: 198 90% 56%;
   }
 }
 
@@ -99,13 +113,70 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "cv11" 1;
     background-image:
-      radial-gradient(circle, hsl(var(--grid-line)) 1px, transparent 1px);
+      radial-gradient(circle, hsl(var(--grid-line) / 0.7) 1px, transparent 1px);
     background-size: 28px 28px;
     background-position: 0 0;
     background-attachment: fixed;
   }
 
+  /* Colorful ambient aura — large soft blobs fixed in the viewport so the page
+     never feels flat-white (or flat-black) regardless of which section you are
+     scrolled to. Layered under everything via z-index: -1. */
   body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(
+        45rem 30rem at 8% 4%,
+        hsl(var(--aura-1) / 0.22),
+        transparent 60%
+      ),
+      radial-gradient(
+        40rem 28rem at 92% 18%,
+        hsl(var(--aura-2) / 0.20),
+        transparent 65%
+      ),
+      radial-gradient(
+        36rem 26rem at 12% 78%,
+        hsl(var(--aura-3) / 0.18),
+        transparent 65%
+      ),
+      radial-gradient(
+        42rem 30rem at 88% 96%,
+        hsl(var(--aura-1) / 0.18),
+        transparent 65%
+      );
+  }
+  .dark body::before {
+    background:
+      radial-gradient(
+        45rem 30rem at 8% 4%,
+        hsl(var(--aura-1) / 0.18),
+        transparent 60%
+      ),
+      radial-gradient(
+        40rem 28rem at 92% 18%,
+        hsl(var(--aura-2) / 0.18),
+        transparent 65%
+      ),
+      radial-gradient(
+        36rem 26rem at 12% 78%,
+        hsl(var(--aura-3) / 0.14),
+        transparent 65%
+      ),
+      radial-gradient(
+        42rem 30rem at 88% 96%,
+        hsl(var(--aura-1) / 0.14),
+        transparent 65%
+      );
+  }
+
+  /* Soft top→bottom fade so the dot-grid and aura settle into the background
+     near the page edges instead of fighting the content. */
+  body::after {
     content: "";
     position: fixed;
     inset: 0;
@@ -114,8 +185,8 @@
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      hsl(var(--background) / 0.6) 40%,
-      hsl(var(--background)) 100%
+      hsl(var(--background) / 0.35) 55%,
+      hsl(var(--background) / 0.85) 100%
     );
   }
 
@@ -160,8 +231,48 @@
     @apply bg-gradient-to-r from-foreground via-foreground to-accent bg-clip-text text-transparent;
   }
 
+  .gradient-text-warm {
+    background-image: linear-gradient(
+      110deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 50%,
+      hsl(var(--warm)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .glass-effect {
     @apply bg-background/60 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Colorful tinted card: a thin gradient ring behind the surface plus a
+     subtle accent wash. Use on hero callouts, blog cards, post hero, etc. */
+  .surface-tinted {
+    @apply relative bg-card/70 backdrop-blur-sm border border-border/60;
+    background-image:
+      linear-gradient(
+        135deg,
+        hsl(var(--primary) / 0.06) 0%,
+        transparent 35%,
+        hsl(var(--accent) / 0.05) 100%
+      );
+  }
+
+  /* Pill-shaped, icon-friendly external link used by ProjectCard and anywhere
+     a "go check this out" affordance needs to be obvious. Visually consistent
+     with the outline-button aesthetic used across the site. */
+  .link-pill {
+    @apply inline-flex items-center gap-1.5 h-8 px-3 rounded-full border text-[12px] font-medium tracking-tight transition-colors duration-200;
+    border-color: hsl(var(--border));
+    background-color: hsl(var(--card) / 0.5);
+    color: hsl(var(--foreground) / 0.85);
+  }
+  .link-pill:hover {
+    border-color: hsl(var(--foreground) / 0.35);
+    background-color: hsl(var(--foreground) / 0.06);
+    color: hsl(var(--foreground));
   }
 
   .animated-underline {
@@ -215,6 +326,20 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+.mermaid-diagram {
+  @apply my-6 flex justify-center rounded-lg border border-border/60 bg-card/40 p-4 overflow-x-auto;
+}
+.mermaid-diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+.mermaid-fallback {
+  @apply font-mono text-[12px] text-muted-foreground whitespace-pre-wrap;
+}
+.mermaid-rendered .mermaid-fallback {
+  display: none;
 }
 
 .prose a {

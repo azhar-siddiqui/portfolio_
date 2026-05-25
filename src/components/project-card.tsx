@@ -2,6 +2,7 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
 import { TechBadge } from "@/components/tech-badge";
+import { LinkButton } from "@/components/link-button";
 
 interface Props {
   title: string;
@@ -40,8 +41,11 @@ export function ProjectCard({
   impact,
   company,
 }: Props) {
+  const hasAnyLink =
+    !!href || (resourceLinks && resourceLinks.length > 0) || (links && links.length > 0);
+
   return (
-    <article className="group flex flex-col h-full overflow-hidden rounded-lg border border-border/60 bg-card/40 backdrop-blur-sm transition-all duration-300 hover:border-foreground/30 hover:bg-card/60 hover:-translate-y-0.5">
+    <article className="group flex flex-col h-full overflow-hidden rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_hsl(var(--primary)/0.45)]">
       {(video || image) && (
         <div className="relative w-full overflow-hidden aspect-[16/10] bg-muted/40">
           {video && (
@@ -113,34 +117,16 @@ export function ProjectCard({
             ))}
           </div>
         )}
-        {resourceLinks && resourceLinks.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-2 mt-3">
-            {resourceLinks.map((l, idx) => (
-              <a
-                href={l.href}
-                key={idx}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-foreground/80 hover:text-foreground transition-colors animated-underline"
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
-        )}
-        {links && links.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-2 mt-3">
-            {links.map((l, idx) => (
-              <a
-                href={l.href}
-                key={idx}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-foreground/80 hover:text-foreground transition-colors animated-underline"
-              >
-                {l.icon}
-                {l.type}
-              </a>
+        {hasAnyLink && (
+          <div className="flex flex-row flex-wrap items-center gap-2 mt-4 pt-4 border-t border-border/40">
+            {href && <LinkButton href={href} />}
+            {resourceLinks?.map((l, idx) =>
+              l.href !== href ? (
+                <LinkButton key={`r-${idx}`} href={l.href} label={l.label} />
+              ) : null
+            )}
+            {links?.map((l, idx) => (
+              <LinkButton key={`l-${idx}`} href={l.href} label={l.type} />
             ))}
           </div>
         )}
