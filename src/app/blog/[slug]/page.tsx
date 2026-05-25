@@ -5,6 +5,9 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CalendarDays, Clock3 } from "lucide-react";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { BlogPostContent } from "@/components/blog-post-content";
+import { BlogShare } from "@/components/blog-share";
+import { BlogToc } from "@/components/blog-toc";
+import { BackToTop } from "@/components/back-to-top";
 import { getAllPosts, getAllSlugs, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 
@@ -68,7 +71,8 @@ export default async function BlogPostPage({ params }: RouteParams) {
   if (!post || (post.frontmatter.draft && process.env.NODE_ENV === "production")) {
     notFound();
   }
-  const { frontmatter, html, readingTime } = post;
+  const { frontmatter, html, readingTime, headings } = post;
+  const postUrl = `${DATA.url}/blog/${slug}`;
 
   const all = await getAllPosts();
   const idx = all.findIndex((p) => p.slug === slug);
@@ -77,123 +81,155 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
   return (
     <main className="flex flex-col min-h-screen px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
-      <article className="mx-auto w-full max-w-3xl">
-        <BlurFade delay={BLUR_FADE_DELAY} inView>
-          <Link
-            href="/blog"
-            className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-0.5" />
-            All writing
-          </Link>
-        </BlurFade>
+      {/* xl+ : 3-column grid (empty left rail keeps the prose visually centred
+          while the TOC lives on the right). lg and below: single column. */}
+      <div className="mx-auto w-full max-w-[88rem] grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,720px)_minmax(0,1fr)] xl:gap-10">
+        <div className="hidden xl:block" aria-hidden />
 
-        <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-          {frontmatter.tags.length > 0 && (
-            <div className="mt-10 flex flex-wrap gap-1.5">
-              {frontmatter.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center rounded-full border border-border/60 bg-secondary/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground/75"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </BlurFade>
-
-        <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
-          <h1 className="mt-5 text-3xl sm:text-5xl font-medium tracking-[-0.025em] leading-[1.08] text-foreground gradient-text-warm">
-            {frontmatter.title}
-          </h1>
-        </BlurFade>
-
-        {frontmatter.description && (
-          <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
-            <p className="mt-5 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              {frontmatter.description}
-            </p>
+        <article className="mx-auto w-full max-w-3xl xl:max-w-none">
+          <BlurFade delay={BLUR_FADE_DELAY} inView>
+            <Link
+              href="/blog"
+              className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-0.5" />
+              All writing
+            </Link>
           </BlurFade>
-        )}
 
-        <BlurFade delay={BLUR_FADE_DELAY * 5} inView>
-          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground/85">
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarDays className="h-3 w-3" />
-              {formatDate(frontmatter.publishedAt)}
-            </span>
-            <span aria-hidden className="text-muted-foreground/40">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <Clock3 className="h-3 w-3" />
-              {readingTime.minutes} min read
-            </span>
-            {frontmatter.author && (
-              <>
-                <span aria-hidden className="text-muted-foreground/40">·</span>
-                <span>by {frontmatter.author}</span>
-              </>
+          <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
+            {frontmatter.tags.length > 0 && (
+              <div className="mt-10 flex flex-wrap gap-1.5">
+                {frontmatter.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center rounded-full border border-border/60 bg-secondary/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground/75"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             )}
-          </div>
-        </BlurFade>
+          </BlurFade>
 
-        {frontmatter.cover && (
+          <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
+            <h1 className="mt-5 text-3xl sm:text-5xl font-medium tracking-[-0.025em] leading-[1.08] text-foreground gradient-text-warm">
+              {frontmatter.title}
+            </h1>
+          </BlurFade>
+
+          {frontmatter.description && (
+            <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
+              <p className="mt-5 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+                {frontmatter.description}
+              </p>
+            </BlurFade>
+          )}
+
+          <BlurFade delay={BLUR_FADE_DELAY * 5} inView>
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground/85">
+              <span className="inline-flex items-center gap-1.5">
+                <CalendarDays className="h-3 w-3" />
+                {formatDate(frontmatter.publishedAt)}
+              </span>
+              <span aria-hidden className="text-muted-foreground/40">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Clock3 className="h-3 w-3" />
+                {readingTime.minutes} min read
+              </span>
+              {frontmatter.author && (
+                <>
+                  <span aria-hidden className="text-muted-foreground/40">·</span>
+                  <span>by {frontmatter.author}</span>
+                </>
+              )}
+            </div>
+          </BlurFade>
+
           <BlurFade delay={BLUR_FADE_DELAY * 6} inView>
-            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border border-border/60 mt-10 bg-muted/40">
-              <Image
-                src={frontmatter.cover}
-                alt={frontmatter.title}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 768px"
-                className="object-cover"
+            <div className="mt-6">
+              <BlogShare
+                title={frontmatter.title}
+                description={frontmatter.description}
+                url={postUrl}
               />
             </div>
           </BlurFade>
-        )}
 
-        <BlurFade delay={BLUR_FADE_DELAY * 7} inView>
-          <div className="mt-12">
-            <BlogPostContent html={html} />
+          {frontmatter.cover && (
+            <BlurFade delay={BLUR_FADE_DELAY * 7} inView>
+              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border border-border/60 mt-10 bg-muted/40">
+                <Image
+                  src={frontmatter.cover}
+                  alt={frontmatter.title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 720px"
+                  className="object-cover"
+                />
+              </div>
+            </BlurFade>
+          )}
+
+          <BlurFade delay={BLUR_FADE_DELAY * 8} inView>
+            <div className="mt-12">
+              <BlogPostContent html={html} />
+            </div>
+          </BlurFade>
+
+          <div className="mt-16 pt-10 border-t border-border/60">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-4">
+              Liked this? Share it.
+            </p>
+            <BlogShare
+              title={frontmatter.title}
+              description={frontmatter.description}
+              url={postUrl}
+            />
           </div>
-        </BlurFade>
 
-        {(prev || next) && (
-          <nav
-            aria-label="More posts"
-            className="mt-20 grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
-            {prev && (
-              <Link
-                href={`/blog/${prev.slug}`}
-                className="group flex flex-col gap-1 rounded-xl border border-border/60 bg-card/60 p-5 transition-all duration-200 hover:border-primary/40 hover:-translate-y-0.5"
-              >
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground inline-flex items-center gap-1.5">
-                  <ArrowLeft className="h-3 w-3" />
-                  Previous
-                </span>
-                <span className="text-sm sm:text-base font-medium text-foreground leading-snug">
-                  {prev.frontmatter.title}
-                </span>
-              </Link>
-            )}
-            {next && (
-              <Link
-                href={`/blog/${next.slug}`}
-                className="group flex flex-col items-end gap-1 rounded-xl border border-border/60 bg-card/60 p-5 transition-all duration-200 hover:border-primary/40 hover:-translate-y-0.5 text-right sm:col-start-2"
-              >
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground inline-flex items-center gap-1.5">
-                  Next
-                  <ArrowUpRight className="h-3 w-3" />
-                </span>
-                <span className="text-sm sm:text-base font-medium text-foreground leading-snug">
-                  {next.frontmatter.title}
-                </span>
-              </Link>
-            )}
-          </nav>
-        )}
-      </article>
+          {(prev || next) && (
+            <nav
+              aria-label="More posts"
+              className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              {prev && (
+                <Link
+                  href={`/blog/${prev.slug}`}
+                  className="group flex flex-col gap-1 rounded-xl border border-border/60 bg-card/60 p-5 transition-all duration-200 hover:border-primary/40 hover:-translate-y-0.5"
+                >
+                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground inline-flex items-center gap-1.5">
+                    <ArrowLeft className="h-3 w-3" />
+                    Previous
+                  </span>
+                  <span className="text-sm sm:text-base font-medium text-foreground leading-snug">
+                    {prev.frontmatter.title}
+                  </span>
+                </Link>
+              )}
+              {next && (
+                <Link
+                  href={`/blog/${next.slug}`}
+                  className="group flex flex-col items-end gap-1 rounded-xl border border-border/60 bg-card/60 p-5 transition-all duration-200 hover:border-primary/40 hover:-translate-y-0.5 text-right sm:col-start-2"
+                >
+                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground inline-flex items-center gap-1.5">
+                    Next
+                    <ArrowUpRight className="h-3 w-3" />
+                  </span>
+                  <span className="text-sm sm:text-base font-medium text-foreground leading-snug">
+                    {next.frontmatter.title}
+                  </span>
+                </Link>
+              )}
+            </nav>
+          )}
+        </article>
+
+        {/* Right rail TOC + mobile drawer trigger (component owns both). */}
+        <BlogToc headings={headings} />
+      </div>
+
+      <BackToTop />
     </main>
   );
 }

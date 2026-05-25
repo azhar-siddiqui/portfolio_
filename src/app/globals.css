@@ -328,18 +328,184 @@
   }
 }
 
+/* Mermaid: before the client renders, we show a thin neutral container with
+   the raw source as a fallback. Once rendered, the diagram becomes an
+   interactive pan/zoom canvas (see MermaidRenderer). */
 .mermaid-diagram {
-  @apply my-6 flex justify-center rounded-lg border border-border/60 bg-card/40 p-4 overflow-x-auto;
-}
-.mermaid-diagram svg {
-  max-width: 100%;
-  height: auto;
+  @apply my-6 rounded-lg border border-border/60 bg-card/40;
+  padding: 1rem;
 }
 .mermaid-fallback {
   @apply font-mono text-[12px] text-muted-foreground whitespace-pre-wrap;
 }
+.mermaid-rendered {
+  padding: 0;
+  overflow: hidden;
+}
 .mermaid-rendered .mermaid-fallback {
   display: none;
+}
+
+.mermaid-canvas {
+  position: relative;
+  width: 100%;
+  height: clamp(280px, 50vh, 520px);
+  overflow: hidden;
+  background:
+    radial-gradient(
+      hsl(var(--border) / 0.45) 1px,
+      transparent 1px
+    );
+  background-size: 18px 18px;
+  background-position: 0 0;
+}
+.mermaid-canvas:fullscreen,
+.mermaid-canvas:-webkit-full-screen {
+  height: 100vh;
+  background-color: hsl(var(--background));
+}
+
+.mermaid-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  /* panzoom respects this — single-finger vertical scroll passes through,
+     two-finger pinch is captured for zoom. */
+  touch-action: pan-y;
+  will-change: transform;
+}
+.mermaid-stage:active {
+  cursor: grabbing;
+}
+.mermaid-stage > svg {
+  width: 90%;
+  height: 90%;
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: none;
+}
+
+.mermaid-controls {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--card) / 0.85);
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px -6px hsl(var(--foreground) / 0.18);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+.mermaid-canvas:hover .mermaid-controls,
+.mermaid-canvas:focus-within .mermaid-controls,
+.mermaid-canvas:fullscreen .mermaid-controls {
+  opacity: 1;
+}
+@media (hover: none) {
+  /* On touch devices, controls stay visible since there's no hover. */
+  .mermaid-controls {
+    opacity: 1;
+  }
+}
+
+.mermaid-btn {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: hsl(var(--foreground) / 0.75);
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.mermaid-btn:hover {
+  color: hsl(var(--primary));
+  background-color: hsl(var(--primary) / 0.1);
+}
+.mermaid-btn:active {
+  background-color: hsl(var(--primary) / 0.18);
+}
+.mermaid-btn:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+.mermaid-hint {
+  position: absolute;
+  bottom: 0.65rem;
+  left: 0.75rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.mermaid-canvas:hover .mermaid-hint,
+.mermaid-canvas:focus-within .mermaid-hint {
+  opacity: 0.85;
+}
+@media (max-width: 640px) {
+  .mermaid-hint {
+    display: none;
+  }
+}
+
+/* Headings rendered inside a post need scroll-margin so anchor jumps don't
+   hide them beneath the fixed top-right controls. The :target rule gives a
+   brief highlight after a hash navigation so the reader's eye lands cleanly. */
+.prose h2[id],
+.prose h3[id],
+.prose h4[id] {
+  scroll-margin-top: 6rem;
+}
+.prose h2[id]:target,
+.prose h3[id]:target,
+.prose h4[id]:target {
+  animation: heading-target 1.6s ease-out;
+}
+@keyframes heading-target {
+  0%   { background-color: hsl(var(--primary) / 0.18); }
+  100% { background-color: transparent; }
+}
+
+/* The little "#" permalink rehype-autolink-headings appends. Invisible until
+   the heading is hovered so headings stay clean while the affordance is there
+   when someone wants it. */
+.prose .heading-anchor {
+  margin-left: 0.4em;
+  opacity: 0;
+  text-decoration: none !important;
+  color: hsl(var(--muted-foreground));
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+.prose .heading-anchor:hover,
+.prose .heading-anchor:focus-visible {
+  color: hsl(var(--primary));
+}
+.prose h2:hover .heading-anchor,
+.prose h3:hover .heading-anchor,
+.prose h4:hover .heading-anchor,
+.prose .heading-anchor:focus-visible {
+  opacity: 1;
+}
+.prose .heading-anchor-icon {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 400;
 }
 
 .prose a {

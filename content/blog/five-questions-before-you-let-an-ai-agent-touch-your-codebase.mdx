@@ -8,8 +8,6 @@ draft: false
 author: Zaheed Shaikh
 ---
 
-*Using React Native as the case study — but the workflow applies to any complex frontend project.*
-
 ---
 
 There are two camps forming in software. One thinks AI agents will replace engineers. The other thinks engineers, given the right setup, can ship in weeks what used to take months — without compromising on what "production-ready" actually means. This post is from the second camp, and it's two years of figuring out what "the right setup" actually requires when you're shipping to real users.
@@ -114,40 +112,40 @@ This is the part of the post that has nothing to do with React Native.
 
 If your type system has escape hatches — `any`, loose API responses, runtime-inferred shapes — the agent fills the gaps with plausible guesses. Sometimes right. Often wrong.
 
-| Mine | Other stacks |
-| --- | --- |
+| Mine                                                                                                                                                                                  | Other stacks                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | TypeScript strict mode + full API codegen from OpenAPI. No gap to guess at. → [The Foundation](#the-foundation-typescript-strict-mode), [The API Layer](#the-api-layer-100-automated) | tRPC, GraphQL with typed codegen, shared Zod schemas. The contract has to be explicit, machine-readable, and structurally impossible to drift. |
 
 **2. Has the AI been trained on this pattern at massive scale?**
 
 Models produce better output for patterns they've seen millions of times than ones they've seen a few hundred. Tailwind sits in a significant slice of every public codebase. A bespoke internal styling system sits in zero of them. Every departure from what the model knows well is a departure from where it performs best.
 
-| Mine | Other stacks |
-| --- | --- |
+| Mine                                                                                                                                                                   | Other stacks                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | NativeWind, conventional commits, standard REST, TanStack Query's documented patterns. → [The Frontend Foundation](#the-frontend-foundation-where-3040-gets-automated) | Standard Vue composition API, idiomatic Rails, well-documented Nuxt conventions — better starting points than custom abstractions that exist only in your codebase. |
 
 **3. Can I draw a hard, enforced boundary between generated and hand-crafted code?**
 
 When an agent can't tell the two apart, it eventually edits the wrong one — confidently.
 
-| Mine | Other stacks |
-| --- | --- |
+| Mine                                                                                                                                                                                                                     | Other stacks                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | The generated directory is excluded from lint, excluded from typecheck, and listed as protected in `AGENTS.md` with the reason stated. Three enforcement layers. → [Security and Maintenance](#security-and-maintenance) | Prisma client, GraphQL fragments, any codegen output. Same treatment: explicit, enforced, reasoned. |
 
 **4. Do my quality gates run automatically, with no bypass available?**
 
 A gate that can be skipped under pressure isn't a gate. Agents don't skip them out of laziness — they skip them when the constitution allows it.
 
-| Mine | Other stacks |
-| --- | --- |
+| Mine                                                                                                                                                                                                                                         | Other stacks                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Husky hooks on every commit. `--no-verify` listed as prohibited in `AGENTS.md`. TypeScript, ESLint, and the full Jest suite run for every contributor, human or AI. → [The Quality Loop](#the-quality-loop-guardrails-that-cant-be-bypassed) | Husky works everywhere JavaScript lives. The prohibition in the agent's operating rules is the load-bearing part, not the tool. |
 
 **5. Is the project's context written down in a form every AI tool can read?**
 
 Every agent starts from zero context unless you provide it. If that context lives in one tool's config (a `.github/copilot-instructions.md` that Cursor can't read), you've created a split brain.
 
-| Mine | Other stacks |
-| --- | --- |
+| Mine                                                                                                                                                                   | Other stacks                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | A single `AGENTS.md` generated by Spec Kit, committed to the repo. Every AI that reads context reads it. → [Giving AI the Right Context](#giving-ai-the-right-context) | Completely stack-independent. The most directly transferable piece of the entire workflow. |
 
 These five questions are the actual workflow. Everything else is just how I answered them for a React Native project. Your answers will look different. The workflow they produce will be just as effective.
@@ -160,7 +158,7 @@ With that framing established, here's the implementation.
 
 ## The Foundation: TypeScript Strict Mode
 
-*Answers question 1 — the agent writes against types, and those types have to be accurate.*
+_Answers question 1 — the agent writes against types, and those types have to be accurate._
 
 Every other part of this workflow depends on TypeScript being strict. Not just `strict: true` in your tsconfig — the ESLint config enforces the same discipline.
 
@@ -194,7 +192,7 @@ When the codegen step runs, the generated types land in a codebase that's alread
 
 ## Giving AI the Right Context
 
-*Answers question 5 — covers steps 2 and 3 from the overview.*
+_Answers question 5 — covers steps 2 and 3 from the overview._
 
 The most common mistake when adopting AI agents is giving them no project awareness. The agent doesn't know which files are protected, which directory is generated, what package manager the project uses, or what a valid commit looks like. You have to provide that context explicitly — in a form every tool can read.
 
@@ -244,6 +242,7 @@ When you initialize a project using `specify init`, your workspace gets pre-conf
 Because `AGENTS.md` is an open repository-level standard recognized by Codex CLI, Cursor, and Copilot CLI, it serves as your universal source of truth [[3]](#ref-3). However, if you are using Claude Code, it looks natively for a `CLAUDE.md` file [[3]](#ref-3).
 
 To avoid split-brain configurations where you have to duplicate rules across `AGENTS.md` and `CLAUDE.md`, use a **Layered Context Strategy** [[4]](#ref-4):
+
 1. Maintain your detailed rules in the universal `AGENTS.md` file.
 2. Keep a minimal `CLAUDE.md` that simply points Claude Code to the shared file.
 
@@ -255,6 +254,7 @@ Here is what the minimal `CLAUDE.md` looks like:
 Strictly follow the project rules and conventions defined in ./AGENTS.md.
 
 ## Claude-Specific Preferences
+
 - When compacting, preserve the full list of modified files.
 - Prefer subagents for deep research tasks.
 ```
@@ -273,7 +273,7 @@ And here is the canonical `AGENTS.md` generated by Spec Kit's `/constitution` co
 ## Agent-Eligible Paths (no approval needed)
 
 src/components/ src/hooks/ src/features/ src/stores/
-src/navigation/ src/lib/ docs/ src/**/*.test.{ts,tsx}
+src/navigation/ src/lib/ docs/ src/\*_/_.test.{ts,tsx}
 
 ## Protected Paths — Ask Before Touching
 
@@ -323,7 +323,7 @@ One thing on test quality that comes out of this: AI-generated tests have a reli
 
 ## The API Layer: 100% Automated
 
-*Answers questions 1 and 3 — step 4 from the overview.*
+_Answers questions 1 and 3 — step 4 from the overview._
 
 I've come to codegen the way you come to most things in this work — by doing the alternative for years first. Five years of writing API code by hand, across banking, logistics, maritime, e-commerce, and more. The pattern that keeps surfacing: a backend engineer renames three fields, three screens silently break. You write throttle and debounce logic by hand, get it almost right, then realize on the third project that you've reinvented stale-while-revalidate. You tune request lifecycle for performance, then re-tune it when quality slips on a slow 3G connection. You add retry semantics, then add deduplication on top of the retries, then chase down a memory leak in your own cache layer. Every project, the same tax, paid by hand. I know these tools because I've used the alternatives — codegen replaced the entire layer once the pain compounded enough to make the trade obvious.
 
@@ -369,13 +369,13 @@ Modern versions of `@hey-api/openapi-ts` (v0.63+) use a clean, plugin-based arch
 
 ```typescript
 // openapi-ts.config.ts
-import { defineConfig } from '@hey-api/openapi-ts';
+import { defineConfig } from "@hey-api/openapi-ts";
 
 export default defineConfig({
-  input: 'src/services/codegen/OpenAPI-Specs.json',
-  output: 'src/services/codegen/generated',
+  input: "src/services/codegen/OpenAPI-Specs.json",
+  output: "src/services/codegen/generated",
   plugins: [
-    '@tanstack/react-query', // Generates the TanStack Query options & hooks
+    "@tanstack/react-query", // Generates the TanStack Query options & hooks
   ],
 });
 ```
@@ -436,9 +436,9 @@ No custom hook. No manual types. The agent writing this works from the same grou
 
 ```typescript
 const allPostsQuery = useInfiniteQuery({
-  queryKey: ['posts-infinite', { accountId }],
+  queryKey: ["posts-infinite", { accountId }],
   initialPageParam: 1,
-  getNextPageParam: lastPage => {
+  getNextPageParam: (lastPage) => {
     const meta = lastPage?.data?.metaData;
     return meta && meta.currentPage < meta.totalPages
       ? meta.currentPage + 1
@@ -470,8 +470,8 @@ Debouncing, stale-while-revalidate, request deduplication — TanStack Query han
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 30,        // 30s — data is fresh
-      gcTime: 1000 * 60 * 2,       // 2 min — release inactive queries quickly
+      staleTime: 1000 * 30, // 30s — data is fresh
+      gcTime: 1000 * 60 * 2, // 2 min — release inactive queries quickly
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
       retry: 2,
@@ -487,25 +487,25 @@ export const queryClient = new QueryClient({
 
 ## The Frontend Foundation: Where 30–40% Gets Automated
 
-*Answers question 2 — step 5 from the overview.*
+_Answers question 2 — step 5 from the overview._
 
 The API layer is fully generated. The UI layer is where human judgment matters most — layout, interaction design, how a screen feels. But once the component foundation is right, 30–40% of a typical feature is AI-written, because the agent has clear patterns to follow and typed boundaries to work within.
 
 Three tools form the foundation:
 
-| Tool | Role |
-|---|---|
-| **NativeWind v4+** | Tailwind CSS for React Native. Utility classes compile directly into style objects, bypassing runtime overhead [[8]](#ref-8) [[10]](#ref-10). |
-| **@rn-primitives** | Unstyled, accessible primitive components — the React Native equivalent of Radix UI [[7]](#ref-7). |
-| **class-variance-authority (cva)** | Typed component variants at zero runtime cost. |
+| Tool                               | Role                                                                                                                                          |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **NativeWind v4+**                 | Tailwind CSS for React Native. Utility classes compile directly into style objects, bypassing runtime overhead [[8]](#ref-8) [[10]](#ref-10). |
+| **@rn-primitives**                 | Unstyled, accessible primitive components — the React Native equivalent of Radix UI [[7]](#ref-7).                                            |
+| **class-variance-authority (cva)** | Typed component variants at zero runtime cost.                                                                                                |
 
 Why not `react-native-paper` or Expo's UI library? Both ship with opinionated design systems. For client work you spend more time fighting defaults than building. @rn-primitives + NativeWind starts from zero, and Tailwind's massive training data footprint means AI agents reason about `className` strings correctly — they don't guess at StyleSheet pixel values.
 
 The `cn()` utility ties everything together:
 
 ```typescript
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -584,9 +584,9 @@ For client UI state (filter values, modal visibility, selected tabs) I use `@tan
 
 ## The Quality Loop: Guardrails That Can't Be Bypassed
 
-*Answers question 4 — step 6 from the overview.*
+_Answers question 4 — step 6 from the overview._
 
-> *"A gate that can be skipped under pressure isn't a gate."*
+> _"A gate that can be skipped under pressure isn't a gate."_
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'primaryColor':'#ffffff','primaryTextColor':'#0f172a','primaryBorderColor':'#94a3b8','lineColor':'#475569','clusterBkg':'#f8fafc','clusterBorder':'#cbd5e1','edgeLabelBackground':'#ffffff','fontFamily':'ui-sans-serif,system-ui,sans-serif','fontSize':'14px'},'flowchart':{'nodeSpacing':50,'rankSpacing':65,'padding':14,'useMaxWidth':true,'htmlLabels':true,'curve':'basis'}}}%%
@@ -631,33 +631,33 @@ Commitlint enforces `feat:`, `fix:`, `chore:`, `refactor:`, `test:` — which fe
 
 ## Testing: QA-Driven, AI-Implemented
 
-*Part of the quality loop, but the pattern deserves its own section.*
+_Part of the quality loop, but the pattern deserves its own section._
 
 AI-generated tests have a reliable failure mode: they test implementation details instead of observable behaviour. Coverage numbers go up, confidence doesn't — the tests document how the AI wrote the code, not what the feature should do.
 
 The fix is a division of ownership. QA defines what needs to be tested, in the issue template, before development starts. Engineers and AI agents implement those tests. One constraint eliminates an entire class of tests that look thorough and prove nothing.
 
 ```typescript
-describe('profile.repository', () => {
-  it('saves and reads a full profile', () => {
+describe("profile.repository", () => {
+  it("saves and reads a full profile", () => {
     const profile: CachedProfile = {
-      name: 'John Doe',
-      email: 'john@example.com',
-      accessLevel: 'admin',
+      name: "John Doe",
+      email: "john@example.com",
+      accessLevel: "admin",
     };
     saveProfile(profile);
     mockGetString.mockReturnValue(JSON.stringify(profile));
     expect(readProfile()).toEqual(profile);
   });
 
-  it('returns null when stored data is corrupt JSON', () => {
-    mockGetString.mockReturnValue('not-valid-json{{{');
+  it("returns null when stored data is corrupt JSON", () => {
+    mockGetString.mockReturnValue("not-valid-json{{{");
     expect(readProfile()).toBeNull();
   });
 
-  it('clears the profile on logout', () => {
+  it("clears the profile on logout", () => {
     clearProfile();
-    expect(mockRemove).toHaveBeenCalledWith('profile.cached');
+    expect(mockRemove).toHaveBeenCalledWith("profile.cached");
   });
 });
 ```
@@ -682,8 +682,8 @@ Two security rules worth calling out. Auth tokens never touch the fast key-value
 
 ## What This Workflow Ships
 
-| **100k+** | **3** | **6 mo** | **0** |
-| :---: | :---: | :---: | :---: |
+|   **100k+**   |       **3**        | **6 mo** |         **0**          |
+| :-----------: | :----------------: | :------: | :--------------------: |
 | lines of code | apps in production | at Shuru | hand-written API hooks |
 
 Three production React Native apps live in six months — all shipped to Play Store, two also on App Store, the third's iOS build in flight — all inheriting the same workflow. The strongest signal yet that this is a repeatable system, not a one-off optimization for the first codebase. Real-time data, offline-capable screens, maps and geospatial views, charts and analytics, push notifications, camera and QR scanning, multi-layer auth with RBAC. Type drift eliminated as a category of production bug — 100% of API integration code generated from the OpenAPI spec. Weekly Dependabot patches. Versioning and CHANGELOG fully automated.
@@ -696,22 +696,22 @@ The ratio underneath those numbers is the thing that actually matters:
 
 That ratio is the entire wedge. Three workflows, three different trade-offs:
 
-| Workflow | Volume work (30–40%) | Judgment work (60–70%) | What you ship |
-| --- | --- | --- | --- |
-| Pure-AI | Generated confidently | Generated confidently, but wrong | Fast output that decays the moment it meets a real user |
-| Pure-human | Boilerplate tax paid by hand, every sprint | Shipped well | Slow, every sprint, every feature, indefinitely |
-| **This workflow** | Generated under tight constraints | Shipped undiluted | Weeks pulled out per feature, without compromising what ships |
+| Workflow          | Volume work (30–40%)                       | Judgment work (60–70%)           | What you ship                                                 |
+| ----------------- | ------------------------------------------ | -------------------------------- | ------------------------------------------------------------- |
+| Pure-AI           | Generated confidently                      | Generated confidently, but wrong | Fast output that decays the moment it meets a real user       |
+| Pure-human        | Boilerplate tax paid by hand, every sprint | Shipped well                     | Slow, every sprint, every feature, indefinitely               |
+| **This workflow** | Generated under tight constraints          | Shipped undiluted                | Weeks pulled out per feature, without compromising what ships |
 
 That's the part that's hard to copy by adding more AI tools — it's the part that takes engineers who've thought carefully about what their agents need.
 
 **On Copilot agent vs Claude Code.** I ran primarily on GitHub Copilot's agent mode for the first stretch, then ran both side by side. Where they differ:
 
-|  | GitHub Copilot agent mode | Claude Code CLI |
-| --- | --- | --- |
-| **Strongest at** | Feature scaffolding, well-scoped tasks, smooth VS Code integration | Cross-cutting reasoning, deep feature hierarchies, catching type mismatches across the stack |
-| **Where it slipped** | Forgot project rules mid-task; edited the generated directory more than once | Less seamless inside the IDE |
-| **Constitution behavior** | Workspace context it happens to have loaded | Rules it actively enforces on itself mid-task |
-| **What I use it for today** | Tasks scoped within the IDE | Anything requiring reasoning across the full project |
+|                             | GitHub Copilot agent mode                                                    | Claude Code CLI                                                                              |
+| --------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Strongest at**            | Feature scaffolding, well-scoped tasks, smooth VS Code integration           | Cross-cutting reasoning, deep feature hierarchies, catching type mismatches across the stack |
+| **Where it slipped**        | Forgot project rules mid-task; edited the generated directory more than once | Less seamless inside the IDE                                                                 |
+| **Constitution behavior**   | Workspace context it happens to have loaded                                  | Rules it actively enforces on itself mid-task                                                |
+| **What I use it for today** | Tasks scoped within the IDE                                                  | Anything requiring reasoning across the full project                                         |
 
 If I had to pick one for complex production work, it wouldn't be close.
 
@@ -746,12 +746,12 @@ flowchart TB
 
 **Figure 5.** The four-layer architecture — each layer depends on the one below it.
 
-| Layer | What it provides | What it enables above |
-| --- | --- | --- |
-| 1 — [TypeScript Strict](#the-foundation-typescript-strict-mode) | Accurate types, no escape hatches | The agent has something correct to reason against |
-| 2 — [Project Context](#giving-ai-the-right-context) | `AGENTS.md` + issue templates | The agent knows which paths are generated and which are protected |
-| 3 — [API Codegen](#the-api-layer-100-automated) | Typed hooks generated from the OpenAPI spec | There's verifiable output to gate on |
-| 4 — [Quality Loop](#the-quality-loop-guardrails-that-cant-be-bypassed) | Non-bypassable checks on every commit | Output that holds up after merge |
+| Layer                                                                  | What it provides                            | What it enables above                                             |
+| ---------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------------------- |
+| 1 — [TypeScript Strict](#the-foundation-typescript-strict-mode)        | Accurate types, no escape hatches           | The agent has something correct to reason against                 |
+| 2 — [Project Context](#giving-ai-the-right-context)                    | `AGENTS.md` + issue templates               | The agent knows which paths are generated and which are protected |
+| 3 — [API Codegen](#the-api-layer-100-automated)                        | Typed hooks generated from the OpenAPI spec | There's verifiable output to gate on                              |
+| 4 — [Quality Loop](#the-quality-loop-guardrails-that-cant-be-bypassed) | Non-bypassable checks on every commit       | Output that holds up after merge                                  |
 
 ---
 
@@ -761,19 +761,19 @@ Four moves, one per week. Each maps to one of the five questions and makes every
 
 ### Week 1 — TypeScript strict + `no-explicit-any` + Husky + commitlint
 
-*Answers Q4.* Accurate types to reason from, a commit format to follow, gates that can't be bypassed.
+_Answers Q4._ Accurate types to reason from, a commit format to follow, gates that can't be bypassed.
 
 ### Week 2 — OpenAPI spec + `@hey-api/openapi-ts`, then delete every hand-written API hook
 
-*Answers Q1 and Q3.* The type drift problem disappears structurally, not through discipline.
+_Answers Q1 and Q3._ The type drift problem disappears structurally, not through discipline.
 
 ### Week 3 — Spec Kit `/constitution` + committed `AGENTS.md` (and a minimal `CLAUDE.md` that points to it)
 
-*Answers Q5.* Every agent on the project starts from the same rules.
+_Answers Q5._ Every agent on the project starts from the same rules.
 
 ### Week 4 — Agent Eligibility section in issue templates + QA-defined test cases
 
-*Answers Q2.* Tests verify behaviour, not AI output.
+_Answers Q2._ Tests verify behaviour, not AI output.
 
 If your stack is different — Next.js, tRPC, Pinia — don't translate the tools. Go back to the five questions and answer them for your own stack. The tools are specific. The questions are yours to keep.
 
@@ -785,7 +785,7 @@ The shift isn't about replacing engineering judgment — it's about what that ju
 
 It scales down, too. The workflow shipping production React Native apps at Shuru is the same one I used in spare weekends to build my father's battery shop a full operations stack: GST calculator, jumpstart tracking, warranty card storage, an SEO-tuned site.
 
-> *"If a workflow only works at scale, it isn't a workflow. It's a luxury."*
+> _"If a workflow only works at scale, it isn't a workflow. It's a luxury."_
 
 The difference between an engineer who uses AI tools and an engineer who designs their project for AI agents is whether they've thought carefully about what their agents need, built the infrastructure that gives them that, and drawn hard lines around the work that still requires judgment. That's the bet Shuru runs on, and it's what this post has been about.
 
@@ -793,9 +793,9 @@ The difference between an engineer who uses AI tools and an engineer who designs
 
 ---
 
-*Zaheed Shaikh is a Senior AI Native Product Engineer at [Shuru](https://shurutech.com), specialising in building high-performance cross-platform solutions. Over five years and ten-plus industries — maritime, banking, EdTech, logistics, energy, healthcare, e-commerce, NGO, and compliance — he has shipped production-grade software that balances engineering rigour with real business outcomes.*
+_Zaheed Shaikh is a Senior AI Native Product Engineer at [Shuru](https://shurutech.com), specialising in building high-performance cross-platform solutions. Over five years and ten-plus industries — maritime, banking, EdTech, logistics, energy, healthcare, e-commerce, NGO, and compliance — he has shipped production-grade software that balances engineering rigour with real business outcomes._
 
-*→ [zahidshaikh.space](https://zahidshaikh.space) · [github.com/The-Lone-Druid](https://github.com/The-Lone-Druid)*
+_→ [zahidshaikh.space](https://zahidshaikh.space) · [github.com/The-Lone-Druid](https://github.com/The-Lone-Druid)_
 
 ---
 

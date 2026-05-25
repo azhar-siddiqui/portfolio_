@@ -1,8 +1,12 @@
 import fs from "fs";
+import GithubSlugger from "github-slugger";
 import matter from "gray-matter";
 import path from "path";
 import readingTime from "reading-time";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeRaw from "rehype-raw";
+import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
@@ -21,6 +25,14 @@ export type PostFrontmatter = {
   author?: string;
 };
 
+export type Heading = {
+  /** 2 for h2, 3 for h3, … */
+  depth: number;
+  text: string;
+  /** GitHub-flavoured slug, matches the `id` attribute on the rendered heading. */
+  slug: string;
+};
+
 export type Post = {
   slug: string;
   frontmatter: PostFrontmatter;
@@ -29,6 +41,8 @@ export type Post = {
   /** Raw markdown source, useful for editor preview / re-rendering. */
   raw: string;
   readingTime: { text: string; minutes: number; words: number };
+  /** Sequenced headings (depth 2–4) for the in-page TOC. */
+  headings: Heading[];
 };
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -41,22 +55,79 @@ function ensureBlogDir() {
 
 /**
  * Convert raw markdown source to HTML using the project's unified pipeline:
- * GFM features, syntax-highlighted code via shiki / rehype-pretty-code, and a
- * Mermaid placeholder transform so the client can render diagrams on mount.
+ *  - GFM features (tables, task lists, strikethrough)
+ *  - allowDangerousHtml + rehype-raw so authors can inline <a id="…">,
+ *    <kbd>, <details>, etc. without losing them at the boundary.
+ *  - rehype-slug stamps each heading with a stable GitHub-style id so anchor
+ *    links and the TOC sidebar can target them.
+ *  - rehype-autolink-headings adds a small ¶ link beside each heading on
+ *    hover, the standard convention for documentation-quality blog posts.
+ *  - Mermaid placeholder transform (client renders SVG + pan/zoom on mount).
+ *  - Shiki via rehype-pretty-code last so code-block transforms run on the
+ *    final AST.
  */
 export async function markdownToHTML(markdown: string): Promise<string> {
   const processed = await unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype, { allowDangerousHtml: false })
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, {
+      behavior: "append",
+      properties: {
+        className: ["heading-anchor"],
+        ariaLabel: "Permalink to this section",
+      },
+      content: {
+        type: "element",
+        tagName: "span",
+        properties: { className: ["heading-anchor-icon"], ariaHidden: "true" },
+        children: [{ type: "text", value: "#" }],
+      },
+    })
     .use(rehypeMermaid)
     .use(rehypePrettyCode, {
       theme: { light: "min-light", dark: "min-dark" },
       keepBackground: false,
     })
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
   return processed.toString();
+}
+
+/**
+ * Extract h2-h4 headings from the markdown source for the in-page TOC. Slugs
+ * are produced with GithubSlugger — the same algorithm rehype-slug uses — so
+ * the ids in the rendered HTML and the hrefs in the TOC stay in lockstep,
+ * including duplicate suffixing (-1, -2, …).
+ */
+export function extractHeadings(markdown: string): Heading[] {
+  const slugger = new GithubSlugger();
+  const lines = markdown.split("\n");
+  const headings: Heading[] = [];
+  let inFence = false;
+  for (const line of lines) {
+    if (/^\s*```/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    const m = line.match(/^(#{2,4})\s+(.+?)\s*#*\s*$/);
+    if (!m) continue;
+    const depth = m[1].length;
+    // Strip basic markdown emphasis / code marks so the TOC reads cleanly.
+    const text = m[2]
+      .replace(/`([^`]+)`/g, "$1")
+      .replace(/\*\*([^*]+)\*\*/g, "$1")
+      .replace(/__([^_]+)__/g, "$1")
+      .replace(/\*([^*]+)\*/g, "$1")
+      .replace(/_([^_]+)_/g, "$1")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .trim();
+    headings.push({ depth, text, slug: slugger.slug(text) });
+  }
+  return headings;
 }
 
 function normalizeFrontmatter(
@@ -106,6 +177,7 @@ export async function getPost(slug: string): Promise<Post | null> {
   const { content: raw, data } = matter(source);
   const frontmatter = normalizeFrontmatter(data, slug);
   const html = await markdownToHTML(raw);
+  const headings = extractHeadings(raw);
   const stats = readingTime(raw);
 
   return {
@@ -113,6 +185,7 @@ export async function getPost(slug: string): Promise<Post | null> {
     frontmatter,
     html,
     raw,
+    headings,
     readingTime: {
       text: stats.text,
       minutes: Math.max(1, Math.round(stats.minutes)),
