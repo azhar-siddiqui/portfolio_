@@ -132,17 +132,22 @@
     @apply border-border;
   }
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth bg-background text-foreground;
+    /* Paint the document root with the theme background so mobile browsers
+       never reveal a white flash above the fixed bottom nav when the address
+       bar collapses and the visual viewport temporarily exceeds <body>. */
   }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "cv11" 1;
-    /* Subtle dot-grid — kept, but softer. */
+    /* Subtle dot-grid — kept, but softer. `background-attachment: fixed`
+       intentionally avoided here: it causes severe flicker on iOS/Android
+       browsers while their chrome animates in/out. The aura layer below is
+       already `position: fixed` and provides the parallax feel. */
     background-image:
       radial-gradient(circle, hsl(var(--grid-line) / 0.55) 1px, transparent 1px);
     background-size: 32px 32px;
     background-position: 0 0;
-    background-attachment: fixed;
   }
 
   /* Atmospheric aurora — 4 soft blobs drifting slowly in the background.

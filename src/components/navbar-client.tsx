@@ -50,7 +50,6 @@ export function NavbarClient({ items }: NavbarClientProps) {
       <nav
         aria-label="Primary"
         className="pointer-events-none fixed inset-x-0 bottom-0 z-30 no-print flex justify-center"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <ul
           className={cn(
@@ -61,6 +60,10 @@ export function NavbarClient({ items }: NavbarClientProps) {
             "shadow-card",
             "transition-colors"
           )}
+          // Bottom-pad with the safe-area inset *inside* the glass surface so
+          // the bar visually extends through the iOS home-indicator / Android
+          // gesture-bar region instead of leaving a transparent gap below.
+          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         >
           {items.map((item) => {
             const active = isActive(item.href);

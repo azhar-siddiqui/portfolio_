@@ -32,7 +32,7 @@ export default async function BlogIndexPage() {
   const [posts, tags] = await Promise.all([getAllPosts(), getAllTags()]);
 
   return (
-    <main className="flex flex-col min-h-screen px-4 sm:px-6 pb-32 pt-16 sm:pt-24">
+    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-16 sm:pt-24">
       <div className="mx-auto w-full max-w-6xl">
         <BlurFade delay={BLUR_FADE_DELAY} inView>
           <SectionEyebrow index="∞" label="Writing" />

@@ -90,6 +90,9 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
+  // Let the page paint behind the system status / home-indicator bars so our
+  // safe-area-inset padding actually positions content correctly on iOS/Android.
+  viewportFit: "cover",
 };
 
 function JsonLd() {
@@ -184,7 +187,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-full overflow-x-hidden",
+          "min-h-dvh bg-background font-sans antialiased max-w-full overflow-x-hidden",
           fontSans.variable,
           fontMono.variable,
           fontSerif.variable

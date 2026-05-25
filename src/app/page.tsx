@@ -26,7 +26,7 @@ export default function Page() {
   return (
     <main
       id="resume-content"
-      className="flex flex-col min-h-screen px-4 sm:px-6 pb-32"
+      className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32"
     >
       <Hero />
 

@@ -118,7 +118,7 @@ export default function BlogEditorClient() {
   }, []);
 
   return (
-    <main className="flex flex-col min-h-screen px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
+    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link

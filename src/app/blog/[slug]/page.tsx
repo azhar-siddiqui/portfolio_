@@ -88,7 +88,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
   const next = idx >= 0 ? all[idx - 1] : undefined;
 
   return (
-    <main className="flex flex-col min-h-screen px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
+    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
       {/* xl+ : 3-column grid (empty left rail keeps the prose visually centred
           while the TOC lives on the right). lg and below: single column. */}
       <div className="mx-auto w-full max-w-[88rem] grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,720px)_minmax(0,1fr)] xl:gap-10">

@@ -9,7 +9,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function ProjectsPage() {
   return (
-    <main className="flex flex-col min-h-screen px-4 sm:px-6 py-16 sm:py-24 pb-32">
+    <main className="flex flex-col min-h-dvh px-4 sm:px-6 py-16 sm:py-24 pb-32">
       <div className="mx-auto w-full max-w-6xl">
         <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
           <Link
