@@ -22,11 +22,11 @@ export function TestimonialsSection() {
               <figure className="group flex flex-col gap-6 border-t border-border/60 pt-8">
                 <span
                   aria-hidden
-                  className="font-serif text-6xl leading-none text-muted-foreground/40 -mb-4"
+                  className="font-serif text-7xl leading-none text-primary/30 -mb-4"
                 >
                   &ldquo;
                 </span>
-                <blockquote className="font-serif italic text-xl sm:text-2xl leading-snug text-foreground/90">
+                <blockquote className="font-serif italic text-xl sm:text-2xl leading-snug text-foreground/90 tracking-[-0.01em]">
                   {t.quote}
                 </blockquote>
                 <figcaption className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">

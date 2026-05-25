@@ -41,7 +41,9 @@ export default function Page() {
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
             <h2 className="section-heading mb-6 max-w-2xl">
-              Engineering at the intersection of code and business outcomes.
+              Engineering at the{" "}
+              <span className="serif-accent text-foreground">intersection</span>{" "}
+              of code and business outcomes.
             </h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
@@ -137,7 +139,7 @@ export default function Page() {
               A few projects that moved the numbers.
             </h2>
           </BlurFade>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bento-grid">
             {DATA.projects
               .filter((project) => project.featured)
               .sort((a, b) => {
@@ -148,27 +150,39 @@ export default function Page() {
                 if (bi !== -1) return 1;
                 return 0;
               })
-              .slice(0, 4)
-              .map((project, id) => (
-                <BlurFade
-                  key={project.title}
-                  delay={BLUR_FADE_DELAY * (2 + id * 0.4)}
-                  inView
-                >
-                  <ProjectCard
-                    href={"href" in project ? project.href : undefined}
-                    title={project.title}
-                    description={project.description}
-                    dates={project.dates}
-                    tags={project.technologies}
-                    resourceLinks={
-                      "resourceLinks" in project ? project.resourceLinks : undefined
-                    }
-                    impact={project.impact}
-                    company={project.company}
-                  />
-                </BlurFade>
-              ))}
+              .slice(0, 5)
+              .map((project, id) => {
+                // First card is the bento "feature" hero (large, 2-row tall on lg+).
+                // Next two are wide half-rows; the last two fill the bottom row.
+                const span =
+                  id === 0
+                    ? "bento-feature"
+                    : id === 1 || id === 2
+                      ? "bento-half"
+                      : "bento-half";
+                return (
+                  <BlurFade
+                    key={project.title}
+                    delay={BLUR_FADE_DELAY * (2 + id * 0.4)}
+                    inView
+                    className={span}
+                  >
+                    <ProjectCard
+                      href={"href" in project ? project.href : undefined}
+                      title={project.title}
+                      description={project.description}
+                      dates={project.dates}
+                      tags={project.technologies}
+                      resourceLinks={
+                        "resourceLinks" in project ? project.resourceLinks : undefined
+                      }
+                      impact={project.impact}
+                      company={project.company}
+                      featured={id === 0}
+                    />
+                  </BlurFade>
+                );
+              })}
           </div>
           <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
             <div className="mt-12">
@@ -193,7 +207,9 @@ export default function Page() {
             <div>
               <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
                 <h2 className="text-3xl sm:text-5xl font-medium tracking-[-0.03em] leading-[1.05] text-foreground max-w-[18ch]">
-                  Let's build something together.
+                  Let&apos;s build{" "}
+                  <span className="serif-accent text-foreground">something</span>{" "}
+                  together.
                 </h2>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 3} inView>

@@ -42,7 +42,7 @@ function SkillChip({
 
   return (
     <BlurFade delay={delay} inView>
-      <div className="group flex items-center gap-2 rounded-md border border-border/60 bg-background/40 px-3 py-2 transition-all duration-300 hover:border-foreground/30 hover:bg-foreground/[0.03]">
+      <div className="group flex items-center gap-2 rounded-md border border-border/60 bg-card/45 backdrop-blur-sm px-3 py-2 transition-all duration-300 hover:border-foreground/30 hover:bg-foreground/[0.04]">
         {icon ? (
           <svg
             viewBox="0 0 24 24"
@@ -84,13 +84,13 @@ export function SkillsSection() {
             The stack I reach for, by problem space.
           </h2>
         </BlurFade>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/60 border border-border/60 rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/60 border border-border/60 rounded-2xl overflow-hidden shadow-card">
           {(Object.keys(DATA.skills) as CategoryKey[]).map((cat, ci, all) => {
             const skills = DATA.skills[cat] as readonly SkillEntry[];
             const isOrphan = all.length % 2 !== 0 && ci === all.length - 1;
             return (
               <BlurFade key={cat} delay={BLUR_FADE_DELAY * (3 + ci)} inView className={isOrphan ? "md:col-span-2" : undefined}>
-                <div className="bg-background/50 backdrop-blur-sm p-6 sm:p-8 h-full flex flex-col gap-5">
+                <div className="bg-card/60 backdrop-blur-md p-6 sm:p-8 h-full flex flex-col gap-5">
                   <div className="flex items-baseline justify-between">
                     <h3 className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-foreground">
                       {CATEGORY_LABELS[cat]}

@@ -10,10 +10,14 @@ import { BlogToc } from "@/components/blog-toc";
 import { BackToTop } from "@/components/back-to-top";
 import { getAllPosts, getAllSlugs, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
+import { isBlogEnabled } from "@/lib/feature-flags";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export async function generateStaticParams() {
+  // When the blog feature flag is off, we don't pre-render any posts.
+  // Runtime requests still hit notFound() via the gate inside the page.
+  if (!(await isBlogEnabled())) return [];
   const slugs = await getAllSlugs();
   return slugs.map((slug) => ({ slug }));
 }
@@ -23,6 +27,7 @@ type RouteParams = { params: Promise<{ slug: string }> };
 export async function generateMetadata(
   { params }: RouteParams,
 ): Promise<Metadata> {
+  if (!(await isBlogEnabled())) return { title: "Post not found" };
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return { title: "Post not found" };
@@ -66,6 +71,9 @@ function formatDate(iso: string) {
 }
 
 export default async function BlogPostPage({ params }: RouteParams) {
+  if (!(await isBlogEnabled())) {
+    notFound();
+  }
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post || (post.frontmatter.draft && process.env.NODE_ENV === "production")) {
@@ -101,10 +109,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
             {frontmatter.tags.length > 0 && (
               <div className="mt-10 flex flex-wrap gap-1.5">
                 {frontmatter.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center rounded-full border border-border/60 bg-secondary/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground/75"
-                  >
+                  <span key={tag} className="chip">
                     {tag}
                   </span>
                 ))}
@@ -113,7 +118,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
           </BlurFade>
 
           <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
-            <h1 className="mt-5 text-3xl sm:text-5xl font-medium tracking-[-0.025em] leading-[1.08] text-foreground gradient-text-warm">
+            <h1 className="mt-5 text-3xl sm:text-5xl font-medium tracking-[-0.025em] leading-[1.08] gradient-text-warm">
               {frontmatter.title}
             </h1>
           </BlurFade>
@@ -158,7 +163,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
           {frontmatter.cover && (
             <BlurFade delay={BLUR_FADE_DELAY * 7} inView>
-              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border border-border/60 mt-10 bg-muted/40">
+              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl border border-border/60 mt-10 bg-muted/40 shadow-card">
                 <Image
                   src={frontmatter.cover}
                   alt={frontmatter.title}
@@ -196,7 +201,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
               {prev && (
                 <Link
                   href={`/blog/${prev.slug}`}
-                  className="group flex flex-col gap-1 rounded-xl border border-border/60 bg-card/60 p-5 transition-all duration-200 hover:border-primary/40 hover:-translate-y-0.5"
+                  className="bento-card group flex flex-col gap-1 p-5"
                 >
                   <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground inline-flex items-center gap-1.5">
                     <ArrowLeft className="h-3 w-3" />
@@ -210,7 +215,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
               {next && (
                 <Link
                   href={`/blog/${next.slug}`}
-                  className="group flex flex-col items-end gap-1 rounded-xl border border-border/60 bg-card/60 p-5 transition-all duration-200 hover:border-primary/40 hover:-translate-y-0.5 text-right sm:col-start-2"
+                  className="bento-card group flex flex-col items-end gap-1 p-5 text-right sm:col-start-2"
                 >
                   <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground inline-flex items-center gap-1.5">
                     Next

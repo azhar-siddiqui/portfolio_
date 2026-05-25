@@ -32,7 +32,7 @@ export function TechBadge({ name, size = "sm" }: Props) {
   return (
     <span
       className={
-        "group/badge inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-background/40 transition-colors duration-200 hover:border-foreground/30 hover:bg-foreground/[0.04] " +
+        "group/badge inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-card/45 backdrop-blur-sm transition-colors duration-200 hover:border-foreground/30 hover:bg-foreground/[0.04] " +
         (isMd ? "px-2.5 py-1.5" : "px-2 py-1")
       }
     >

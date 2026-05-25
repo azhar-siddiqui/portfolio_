@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, CalendarDays, Clock3 } from "lucide-react";
 import type { Post } from "@/data/blog";
+import { cn } from "@/lib/utils";
 
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -13,39 +14,70 @@ function formatDate(iso: string) {
   });
 }
 
-export function BlogPostCard({ post }: { post: Post }) {
+interface BlogPostCardProps {
+  post: Post;
+  /** Bento-only: scale the title up for the featured hero card. */
+  featured?: boolean;
+}
+
+export function BlogPostCard({ post, featured }: BlogPostCardProps) {
   const { slug, frontmatter, readingTime } = post;
+
+  const horizontalHero = !!(featured && frontmatter.cover);
 
   return (
     <Link
       href={`/blog/${slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_hsl(var(--primary)/0.45)]"
+      className={cn(
+        "bento-card group flex h-full",
+        horizontalHero ? "flex-col lg:flex-row" : "flex-col",
+      )}
     >
       {frontmatter.cover && (
-        <div className="relative w-full overflow-hidden aspect-[16/9] bg-muted/40">
+        <div
+          className={cn(
+            "relative overflow-hidden bg-muted/40",
+            horizontalHero
+              ? "w-full aspect-[16/9] lg:w-[55%] lg:aspect-auto lg:self-stretch"
+              : "w-full aspect-[16/9]",
+          )}
+        >
           <Image
             src={frontmatter.cover}
             alt={frontmatter.title}
             fill
-            sizes="(max-width: 768px) 100vw, 600px"
+            sizes={
+              horizontalHero
+                ? "(max-width: 1024px) 100vw, 600px"
+                : "(max-width: 768px) 100vw, 600px"
+            }
             className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
           />
         </div>
       )}
-      <div className="flex flex-col flex-1 gap-3 p-5 sm:p-6">
+      <div
+        className={cn(
+          "flex flex-col flex-1 gap-3 p-5 sm:p-6",
+          horizontalHero && "lg:p-7 lg:justify-center",
+        )}
+      >
         {frontmatter.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {frontmatter.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center rounded-full border border-border/60 bg-secondary/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground/75"
-              >
+              <span key={tag} className="chip">
                 {tag}
               </span>
             ))}
           </div>
         )}
-        <h3 className="text-lg sm:text-xl font-medium tracking-[-0.01em] text-foreground leading-snug">
+        <h3
+          className={
+            "font-medium tracking-[-0.01em] text-foreground leading-snug " +
+            (featured
+              ? "text-2xl sm:text-3xl"
+              : "text-lg sm:text-xl")
+          }
+        >
           <span className="inline-flex items-baseline gap-1.5">
             <span className="animated-underline">{frontmatter.title}</span>
             <ArrowUpRight className="inline h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -69,9 +101,7 @@ export function BlogPostCard({ post }: { post: Post }) {
           {frontmatter.draft && (
             <>
               <span aria-hidden className="text-muted-foreground/40">·</span>
-              <span className="inline-flex items-center rounded-full border border-warm/40 bg-warm/10 px-1.5 py-0.5 text-warm">
-                Draft
-              </span>
+              <span className="chip-warm chip">Draft</span>
             </>
           )}
         </div>

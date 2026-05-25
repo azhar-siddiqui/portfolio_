@@ -23,14 +23,16 @@ const maskStyle = {
     "linear-gradient(to bottom, black 0%, black 45%, rgba(0,0,0,0.55) 75%, transparent 100%)",
 };
 
+// Aurora-borealis mood for the dark hero — electric lavender, magenta, teal.
 const DARK_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(217 91% 60% / 0.38), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(263 70% 65% / 0.32), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(199 89% 60% / 0.22), transparent 70%)";
+  "radial-gradient(55% 55% at 38% 28%, hsl(248 92% 64% / 0.42), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(286 80% 60% / 0.32), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(188 86% 55% / 0.24), transparent 70%)";
 
+// Warm sunrise for the light hero — clay, honey, indigo-mist.
 const LIGHT_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(217 75% 65% / 0.12), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(263 60% 70% / 0.09), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(199 75% 65% / 0.07), transparent 70%)";
+  "radial-gradient(55% 55% at 38% 28%, hsl(28 92% 72% / 0.20), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(232 86% 76% / 0.16), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(38 90% 74% / 0.14), transparent 70%)";
 
-const DARK_MESH_COLORS = ["#0a0f1e", "#2563eb", "#7c3aed", "#06b6d4", "#0a0f1e"] as const;
-const LIGHT_MESH_COLORS = ["#dbeafe", "#93c5fd", "#c4b5fd", "#a5f3fc", "#ede9fe"] as const;
+const DARK_MESH_COLORS = ["#0b0c1a", "#5b4bff", "#a855f7", "#0ea5b7", "#0b0c1a"] as const;
+const LIGHT_MESH_COLORS = ["#fff3e2", "#f5c79e", "#c9bfff", "#e0eef0", "#fff7eb"] as const;
 
 export function HeroMeshBackground() {
   const [enabled, setEnabled] = useState(false);

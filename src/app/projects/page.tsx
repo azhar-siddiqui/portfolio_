@@ -24,8 +24,10 @@ export default function ProjectsPage() {
           <SectionEyebrow index="*" label="Projects archive" />
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 2}>
-          <h1 className="text-4xl sm:text-6xl font-medium tracking-[-0.03em] leading-[1] max-w-3xl">
-            Everything I&apos;ve shipped, indexed.
+          <h1 className="display-heading max-w-3xl">
+            Everything I&apos;ve{" "}
+            <span className="serif-accent text-foreground">shipped</span>,
+            indexed.
           </h1>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 3}>

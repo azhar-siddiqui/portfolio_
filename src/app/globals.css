@@ -4,101 +4,126 @@
 
 @layer base {
   :root {
-    --background: 36 38% 97%;
-    --foreground: 232 30% 12%;
+    /* Light theme — "Cloud Dancer" warm white base with earthy clay accents,
+       a deep indigo primary, and a mellow aurora wash. Inspired by Pantone's
+       2026 Cloud Dancer + warm-earth direction. All values are HSL triplets
+       consumed via `hsl(var(--token))` in Tailwind. */
+    --background: 36 44% 96%;
+    --foreground: 230 32% 14%;
 
-    --card: 38 50% 99%;
-    --card-foreground: 232 30% 12%;
+    --card: 38 60% 99%;
+    --card-foreground: 230 32% 14%;
 
-    --popover: 38 50% 99%;
-    --popover-foreground: 232 30% 12%;
+    --popover: 38 60% 99%;
+    --popover-foreground: 230 32% 14%;
 
-    --primary: 230 78% 56%;
-    --primary-foreground: 0 0% 100%;
+    /* Indigo, slightly warmer than before so it sits next to clay better. */
+    --primary: 232 72% 52%;
+    --primary-foreground: 36 50% 98%;
 
-    --secondary: 38 35% 93%;
-    --secondary-foreground: 232 30% 12%;
+    --secondary: 34 44% 92%;
+    --secondary-foreground: 230 32% 14%;
 
-    --muted: 35 25% 92%;
-    --muted-foreground: 232 14% 38%;
+    --muted: 34 30% 90%;
+    --muted-foreground: 230 12% 38%;
 
-    --accent: 282 72% 56%;
-    --accent-foreground: 0 0% 100%;
+    /* Earthy clay — the new "warm" accent on the light side. */
+    --accent: 18 78% 58%;
+    --accent-foreground: 36 50% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 78% 52%;
+    --destructive-foreground: 0 0% 100%;
 
-    --success: 152 64% 42%;
+    --success: 152 58% 38%;
     --success-foreground: 0 0% 100%;
 
-    --warm: 22 95% 58%;
-    --cool: 198 90% 56%;
+    /* Semantic temperature tokens kept; renamed values for warmth + sage cool. */
+    --warm: 16 88% 56%;
+    --cool: 188 70% 42%;
 
-    --border: 32 22% 86%;
-    --input: 32 22% 86%;
-    --ring: 230 78% 56%;
+    /* New: clay token — exposed so components can reach for it directly. */
+    --clay: 18 78% 58%;
+    --sand: 34 56% 86%;
+    --soil: 24 36% 28%;
 
-    --grid-line: 32 22% 86%;
+    --border: 30 24% 84%;
+    --input: 30 24% 84%;
+    --ring: 232 72% 52%;
 
-    --chart-1: 230 78% 56%;
-    --chart-2: 282 72% 56%;
-    --chart-3: 198 90% 56%;
-    --chart-4: 22 95% 58%;
-    --chart-5: 152 64% 42%;
+    --grid-line: 30 22% 84%;
 
-    --aura-1: 230 90% 70%;
-    --aura-2: 282 78% 70%;
-    --aura-3: 22 95% 70%;
+    --chart-1: 232 72% 52%;
+    --chart-2: 18 78% 58%;
+    --chart-3: 188 70% 42%;
+    --chart-4: 42 92% 56%;
+    --chart-5: 152 58% 38%;
 
-    --radius: 0.75rem;
+    /* Aurora palette — light mode reads as warm sunrise: clay → ochre → indigo */
+    --aura-1: 28 92% 72%;   /* clay-ochre */
+    --aura-2: 38 90% 74%;   /* honey */
+    --aura-3: 232 86% 76%;  /* indigo-mist */
+    --aura-4: 188 72% 70%;  /* sea-glass */
+
+    --radius: 0.875rem;
   }
 
   .dark {
-    --background: 232 32% 7%;
-    --foreground: 36 20% 96%;
+    /* Dark theme — deep indigo-violet so the aurora reads. We push slightly
+       cooler than before and lift the foreground a touch to keep contrast
+       comfortable against the richer base. */
+    --background: 235 36% 6%;
+    --foreground: 36 24% 96%;
 
-    --card: 232 28% 10%;
-    --card-foreground: 36 20% 96%;
+    --card: 234 30% 9%;
+    --card-foreground: 36 24% 96%;
 
-    --popover: 232 32% 7%;
-    --popover-foreground: 36 20% 96%;
+    --popover: 234 32% 8%;
+    --popover-foreground: 36 24% 96%;
 
-    --primary: 224 92% 70%;
-    --primary-foreground: 232 40% 8%;
+    /* Vivid lavender primary — readable against deep indigo. */
+    --primary: 248 92% 76%;
+    --primary-foreground: 235 40% 8%;
 
-    --secondary: 232 22% 14%;
-    --secondary-foreground: 36 15% 96%;
+    --secondary: 234 22% 14%;
+    --secondary-foreground: 36 22% 96%;
 
-    --muted: 232 22% 14%;
-    --muted-foreground: 232 10% 66%;
+    --muted: 234 22% 14%;
+    --muted-foreground: 232 14% 68%;
 
-    --accent: 282 78% 72%;
-    --accent-foreground: 232 40% 8%;
+    /* Peachy clay carried across themes. */
+    --accent: 18 88% 70%;
+    --accent-foreground: 235 40% 8%;
 
-    --destructive: 0 63% 50%;
+    --destructive: 0 70% 56%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 152 64% 56%;
-    --success-foreground: 232 40% 8%;
+    --success: 152 62% 60%;
+    --success-foreground: 235 40% 8%;
 
-    --warm: 22 95% 68%;
-    --cool: 198 90% 66%;
+    --warm: 18 92% 70%;
+    --cool: 188 80% 64%;
 
-    --border: 232 18% 20%;
-    --input: 232 18% 20%;
-    --ring: 224 92% 70%;
+    --clay: 18 88% 70%;
+    --sand: 34 36% 80%;
+    --soil: 24 30% 70%;
 
-    --grid-line: 232 18% 18%;
+    --border: 234 20% 18%;
+    --input: 234 20% 18%;
+    --ring: 248 92% 76%;
 
-    --chart-1: 224 92% 70%;
-    --chart-2: 282 78% 72%;
-    --chart-3: 198 90% 66%;
-    --chart-4: 22 95% 68%;
-    --chart-5: 152 64% 56%;
+    --grid-line: 234 20% 16%;
 
-    --aura-1: 224 92% 60%;
-    --aura-2: 282 78% 62%;
-    --aura-3: 198 90% 56%;
+    --chart-1: 248 92% 76%;
+    --chart-2: 18 88% 70%;
+    --chart-3: 188 80% 64%;
+    --chart-4: 42 92% 70%;
+    --chart-5: 152 62% 60%;
+
+    /* Aurora palette — dark mode reads as aurora borealis: teal → violet → magenta */
+    --aura-1: 248 92% 64%;  /* electric lavender */
+    --aura-2: 286 80% 60%;  /* magenta */
+    --aura-3: 188 86% 50%;  /* teal */
+    --aura-4: 168 72% 46%;  /* aurora green */
   }
 }
 
@@ -112,66 +137,75 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "cv11" 1;
+    /* Subtle dot-grid — kept, but softer. */
     background-image:
-      radial-gradient(circle, hsl(var(--grid-line) / 0.7) 1px, transparent 1px);
-    background-size: 28px 28px;
+      radial-gradient(circle, hsl(var(--grid-line) / 0.55) 1px, transparent 1px);
+    background-size: 32px 32px;
     background-position: 0 0;
     background-attachment: fixed;
   }
 
-  /* Colorful ambient aura — large soft blobs fixed in the viewport so the page
-     never feels flat-white (or flat-black) regardless of which section you are
-     scrolled to. Layered under everything via z-index: -1. */
+  /* Atmospheric aurora — 4 soft blobs drifting slowly in the background.
+     Light mode = warm sunrise; dark mode = aurora borealis. The drift is
+     paused for users with prefers-reduced-motion. */
   body::before {
     content: "";
     position: fixed;
-    inset: 0;
+    inset: -10%;
     pointer-events: none;
     z-index: -1;
     background:
       radial-gradient(
-        45rem 30rem at 8% 4%,
-        hsl(var(--aura-1) / 0.22),
+        46rem 32rem at 6% 6%,
+        hsl(var(--aura-1) / 0.32),
         transparent 60%
       ),
       radial-gradient(
-        40rem 28rem at 92% 18%,
-        hsl(var(--aura-2) / 0.20),
+        42rem 30rem at 94% 18%,
+        hsl(var(--aura-2) / 0.28),
         transparent 65%
       ),
       radial-gradient(
-        36rem 26rem at 12% 78%,
-        hsl(var(--aura-3) / 0.18),
+        38rem 28rem at 12% 78%,
+        hsl(var(--aura-3) / 0.22),
         transparent 65%
       ),
       radial-gradient(
-        42rem 30rem at 88% 96%,
-        hsl(var(--aura-1) / 0.18),
+        44rem 32rem at 88% 96%,
+        hsl(var(--aura-4) / 0.22),
         transparent 65%
       );
+    animation: aurora-drift 55s ease-in-out infinite alternate;
+    will-change: transform;
   }
   .dark body::before {
     background:
       radial-gradient(
-        45rem 30rem at 8% 4%,
-        hsl(var(--aura-1) / 0.18),
+        46rem 32rem at 6% 6%,
+        hsl(var(--aura-1) / 0.28),
         transparent 60%
       ),
       radial-gradient(
-        40rem 28rem at 92% 18%,
-        hsl(var(--aura-2) / 0.18),
+        42rem 30rem at 94% 18%,
+        hsl(var(--aura-2) / 0.22),
         transparent 65%
       ),
       radial-gradient(
-        36rem 26rem at 12% 78%,
-        hsl(var(--aura-3) / 0.14),
+        38rem 28rem at 12% 78%,
+        hsl(var(--aura-3) / 0.18),
         transparent 65%
       ),
       radial-gradient(
-        42rem 30rem at 88% 96%,
-        hsl(var(--aura-1) / 0.14),
+        44rem 32rem at 88% 96%,
+        hsl(var(--aura-4) / 0.18),
         transparent 65%
       );
+  }
+
+  @keyframes aurora-drift {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(-2%, 1.5%, 0) scale(1.04); }
+    100% { transform: translate3d(2%, -1.5%, 0) scale(1.02); }
   }
 
   /* Soft top→bottom fade so the dot-grid and aura settle into the background
@@ -185,8 +219,8 @@
     background: linear-gradient(
       to bottom,
       transparent 0%,
-      hsl(var(--background) / 0.35) 55%,
-      hsl(var(--background) / 0.85) 100%
+      hsl(var(--background) / 0.25) 55%,
+      hsl(var(--background) / 0.78) 100%
     );
   }
 
@@ -195,7 +229,7 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.25);
+    background: hsl(var(--primary) / 0.28);
     color: hsl(var(--foreground));
   }
 }
@@ -208,6 +242,17 @@
   .font-mono {
     font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
     font-feature-settings: "ss01" 1, "ss03" 1;
+  }
+
+  /* Instrument Serif — used as an accent face for italicised display words
+     and section-eyebrow numerals. The font is loaded in `src/app/layout.tsx`. */
+  .font-serif {
+    font-family: var(--font-serif), ui-serif, Georgia, serif;
+  }
+  .serif-accent {
+    font-family: var(--font-serif), ui-serif, Georgia, serif;
+    font-style: italic;
+    letter-spacing: -0.01em;
   }
 
   .eyebrow {
@@ -223,8 +268,16 @@
     @apply h-px w-8 bg-border;
   }
 
+  /* Unified heading scale — used across every section so the type rhythm
+     reads as one system. */
+  .display-heading {
+    @apply text-4xl sm:text-6xl md:text-7xl font-medium tracking-[-0.035em] leading-[1] text-foreground;
+  }
   .section-heading {
     @apply text-3xl sm:text-4xl font-medium tracking-[-0.02em] text-foreground;
+  }
+  .subsection-heading {
+    @apply text-xl sm:text-2xl font-medium tracking-[-0.015em] text-foreground leading-snug;
   }
 
   .gradient-text {
@@ -235,12 +288,38 @@
     background-image: linear-gradient(
       110deg,
       hsl(var(--primary)) 0%,
-      hsl(var(--accent)) 50%,
+      hsl(var(--accent)) 55%,
       hsl(var(--warm)) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  /* Aurora text gradient — for the rare hero-tier accent word. */
+  .gradient-text-aurora {
+    background-image: linear-gradient(
+      120deg,
+      hsl(var(--aura-3)) 0%,
+      hsl(var(--aura-1)) 55%,
+      hsl(var(--aura-2)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Liquid glass — a translucent surface used for floating UI (navbar, theme
+     toggle, back-to-top, toc trigger). Layered on top of the aurora it reads
+     as a soft frosted pane. */
+  .glass-surface {
+    @apply backdrop-blur-xl backdrop-saturate-150;
+    background-color: hsl(var(--card) / 0.7);
+    border: 1px solid hsl(var(--border) / 0.7);
+  }
+  .dark .glass-surface {
+    background-color: hsl(var(--card) / 0.65);
+    border-color: hsl(var(--border) / 0.55);
   }
 
   .glass-effect {
@@ -254,10 +333,119 @@
     background-image:
       linear-gradient(
         135deg,
-        hsl(var(--primary) / 0.06) 0%,
+        hsl(var(--primary) / 0.07) 0%,
         transparent 35%,
-        hsl(var(--accent) / 0.05) 100%
+        hsl(var(--accent) / 0.06) 100%
       );
+  }
+
+  /* Bento card — the unified card surface used by ProjectCard, BlogPostCard,
+     ResumeCard's hover state, and any inline panel. Single source of truth
+     for radius, border, blur, hover lift, and the liquid-glass tint. */
+  .bento-card {
+    @apply relative isolate overflow-hidden rounded-2xl border border-border/60 backdrop-blur-md transition-all duration-300;
+    background-color: hsl(var(--card) / 0.62);
+    box-shadow: 0 1px 0 hsl(var(--foreground) / 0.02);
+  }
+  .bento-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(
+        60% 80% at 0% 0%,
+        hsl(var(--primary) / 0.07),
+        transparent 60%
+      ),
+      radial-gradient(
+        50% 70% at 100% 100%,
+        hsl(var(--accent) / 0.06),
+        transparent 60%
+      );
+    opacity: 0.9;
+    transition: opacity 0.35s ease;
+  }
+  .bento-card:hover {
+    border-color: hsl(var(--primary) / 0.45);
+    transform: translateY(-2px);
+    background-color: hsl(var(--card) / 0.85);
+    box-shadow:
+      0 1px 0 hsl(var(--foreground) / 0.03),
+      0 22px 48px -28px hsl(var(--primary) / 0.45),
+      0 4px 12px -6px hsl(var(--foreground) / 0.08);
+  }
+  .bento-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Bento grid — auto-flowing 12-col layout with generous gaps. Cards opt
+     into spans via `bento-feature` / `bento-wide` / `bento-tall` classes. */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+    .bento-feature { grid-column: span 6 / span 6; }
+    .bento-wide    { grid-column: span 6 / span 6; }
+    .bento-half    { grid-column: span 3 / span 3; }
+  }
+  @media (min-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    /* Feature spans the full row — its prominence comes from horizontal
+       cards inside (image left / content right), not from a tall row-span
+       that would otherwise leave dead vertical whitespace. */
+    .bento-feature { grid-column: span 6 / span 6; }
+    .bento-wide    { grid-column: span 6 / span 6; }
+    /* Halves sit below the feature in a clean 2-up rhythm. */
+    .bento-half    { grid-column: span 3 / span 3; }
+  }
+
+  /* Impact callout — used on ProjectCard to keep outcome / metric copy from
+     getting lost between description and tags. Tinted success surface +
+     left-border accent so it reads as a distinct "what changed" signal
+     instead of a regular paragraph. */
+  .impact-callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    padding: 0.625rem 0.75rem 0.625rem 0.75rem;
+    border-radius: 0.625rem;
+    border: 1px solid hsl(var(--success) / 0.28);
+    border-left-width: 3px;
+    background:
+      linear-gradient(
+        135deg,
+        hsl(var(--success) / 0.12),
+        hsl(var(--success) / 0.05) 60%,
+        transparent
+      );
+  }
+  .impact-callout-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.125rem;
+    color: hsl(var(--success));
+    flex-shrink: 0;
+  }
+  .impact-callout-text {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: hsl(var(--foreground) / 0.92);
+    font-weight: 500;
+  }
+  @media (min-width: 640px) {
+    .impact-callout-text {
+      font-size: 0.875rem;
+    }
   }
 
   /* Pill-shaped, icon-friendly external link used by ProjectCard and anywhere
@@ -266,13 +454,31 @@
   .link-pill {
     @apply inline-flex items-center gap-1.5 h-8 px-3 rounded-full border text-[12px] font-medium tracking-tight transition-colors duration-200;
     border-color: hsl(var(--border));
-    background-color: hsl(var(--card) / 0.5);
+    background-color: hsl(var(--card) / 0.55);
     color: hsl(var(--foreground) / 0.85);
   }
   .link-pill:hover {
     border-color: hsl(var(--foreground) / 0.35);
     background-color: hsl(var(--foreground) / 0.06);
     color: hsl(var(--foreground));
+  }
+
+  /* Unified tag/chip vocabulary — used by blog tags, project tags, eyebrow
+     metadata. Matches the link-pill aesthetic but at a smaller scale. */
+  .chip {
+    @apply inline-flex items-center rounded-full border border-border/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em];
+    background-color: hsl(var(--card) / 0.5);
+    color: hsl(var(--foreground) / 0.78);
+  }
+  .chip-primary {
+    border-color: hsl(var(--primary) / 0.4);
+    background-color: hsl(var(--primary) / 0.08);
+    color: hsl(var(--primary));
+  }
+  .chip-warm {
+    border-color: hsl(var(--warm) / 0.4);
+    background-color: hsl(var(--warm) / 0.1);
+    color: hsl(var(--warm));
   }
 
   .animated-underline {
@@ -325,6 +531,23 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Unified shadow recipe — only these three elevations are allowed across
+     the site. Anything else is a one-off bug, fix it. */
+  .shadow-soft {
+    box-shadow: 0 1px 2px 0 hsl(var(--foreground) / 0.04);
+  }
+  .shadow-card {
+    box-shadow:
+      0 1px 0 hsl(var(--foreground) / 0.03),
+      0 8px 28px -16px hsl(var(--foreground) / 0.12);
+  }
+  .shadow-glow {
+    box-shadow:
+      0 1px 0 hsl(var(--foreground) / 0.03),
+      0 18px 40px -22px hsl(var(--primary) / 0.5),
+      0 6px 16px -8px hsl(var(--accent) / 0.18);
   }
 }
 
@@ -526,6 +749,24 @@
   text-underline-offset: 4px;
 }
 
+/* Prose blockquote — leans into the new serif accent for a confident
+   editorial tone instead of the muted gray default. */
+.prose blockquote {
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.125em;
+  line-height: 1.55;
+  border-left-width: 2px;
+  border-left-color: hsl(var(--primary) / 0.5);
+  color: hsl(var(--foreground) / 0.85);
+  quotes: none;
+}
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: "";
+}
+
 h3 code {
   @apply !text-lg md:!text-xl;
 }
@@ -602,6 +843,9 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
     scroll-behavior: auto !important;
   }
   .marquee-track {
+    animation: none !important;
+  }
+  body::before {
     animation: none !important;
   }
 }

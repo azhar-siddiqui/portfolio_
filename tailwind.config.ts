@@ -64,11 +64,23 @@ const config = {
         },
         warm: "hsl(var(--warm))",
         cool: "hsl(var(--cool))",
+        clay: "hsl(var(--clay))",
+        sand: "hsl(var(--sand))",
+        soil: "hsl(var(--soil))",
+        aurora: {
+          1: "hsl(var(--aura-1))",
+          2: "hsl(var(--aura-2))",
+          3: "hsl(var(--aura-3))",
+          4: "hsl(var(--aura-4))",
+        },
       },
       borderRadius: {
+        sm: "calc(var(--radius) - 6px)",
+        md: "calc(var(--radius) - 4px)",
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        xl: "calc(var(--radius) + 4px)",
+        "2xl": "calc(var(--radius) + 8px)",
+        "3xl": "calc(var(--radius) + 16px)",
       },
       keyframes: {
         "accordion-down": {
@@ -99,6 +111,15 @@ const config = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "aurora-drift": {
+          "0%":   { transform: "translate3d(0, 0, 0) scale(1)" },
+          "50%":  { transform: "translate3d(-2%, 1.5%, 0) scale(1.04)" },
+          "100%": { transform: "translate3d(2%, -1.5%, 0) scale(1.02)" },
+        },
+        "shimmer": {
+          "0%":   { backgroundPosition: "200% 0" },
+          "100%": { backgroundPosition: "-200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -108,6 +129,8 @@ const config = {
         "slide-in-right": "slide-in-right 0.5s ease-out forwards",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "float": "float 3s ease-in-out infinite",
+        "aurora-drift": "aurora-drift 55s ease-in-out infinite alternate",
+        "shimmer": "shimmer 8s linear infinite",
       },
     },
   },

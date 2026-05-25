@@ -35,9 +35,9 @@ export function Hero() {
             <div className="relative shrink-0">
               <div
                 aria-hidden
-                className="absolute inset-[-3px] rounded-full bg-gradient-to-br from-blue-500/30 via-violet-500/20 to-cyan-500/30 blur-sm"
+                className="absolute inset-[-4px] rounded-full bg-gradient-to-br from-aurora-1/35 via-aurora-3/25 to-aurora-2/35 blur-md"
               />
-              <Avatar className="relative size-20 sm:size-28 border border-border/60">
+              <Avatar className="relative size-20 sm:size-28 border border-border/60 shadow-card">
                 <AvatarImage
                   alt={DATA.name}
                   src={DATA.avatarUrl}
@@ -57,7 +57,7 @@ export function Hero() {
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
           <p className="mt-4 sm:mt-8 text-lg sm:text-2xl xl:text-3xl font-light tracking-[-0.015em] text-foreground/80 max-w-[22ch] sm:max-w-[24ch] leading-[1.25] sm:leading-[1.2]">
             Senior Product Engineer{" "}
-            <span className="font-serif italic text-foreground/95">
+            <span className="serif-accent text-foreground/95 text-[1.15em]">
               shipping
             </span>{" "}
             software that pays for itself.

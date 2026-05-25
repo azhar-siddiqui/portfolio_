@@ -3,6 +3,7 @@ import Markdown from "react-markdown";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
 import { TechBadge } from "@/components/tech-badge";
 import { LinkButton } from "@/components/link-button";
+import { cn } from "@/lib/utils";
 
 interface Props {
   title: string;
@@ -25,6 +26,9 @@ interface Props {
   className?: string;
   impact?: string;
   company?: string;
+  /** Optional emphasis variant — used by the home page bento to call out a
+   *  hero card. Stretches the title to a heavier subsection size. */
+  featured?: boolean;
 }
 
 export function ProjectCard({
@@ -40,14 +44,29 @@ export function ProjectCard({
   links,
   impact,
   company,
+  featured,
 }: Props) {
   const hasAnyLink =
     !!href || (resourceLinks && resourceLinks.length > 0) || (links && links.length > 0);
+  const hasMedia = !!(video || image);
+  const horizontalHero = featured && hasMedia;
 
   return (
-    <article className="group flex flex-col h-full overflow-hidden rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_hsl(var(--primary)/0.45)]">
-      {(video || image) && (
-        <div className="relative w-full overflow-hidden aspect-[16/10] bg-muted/40">
+    <article
+      className={cn(
+        "bento-card group flex h-full",
+        horizontalHero ? "flex-col lg:flex-row" : "flex-col",
+      )}
+    >
+      {hasMedia && (
+        <div
+          className={cn(
+            "relative overflow-hidden bg-muted/40",
+            horizontalHero
+              ? "w-full aspect-[16/10] lg:w-[55%] lg:aspect-auto lg:self-stretch"
+              : "w-full aspect-[16/10]",
+          )}
+        >
           {video && (
             <video
               src={video}
@@ -63,15 +82,31 @@ export function ProjectCard({
               src={image}
               alt={title}
               fill
-              sizes="(max-width: 768px) 100vw, 600px"
+              sizes={
+                horizontalHero
+                  ? "(max-width: 1024px) 100vw, 600px"
+                  : "(max-width: 768px) 100vw, 600px"
+              }
               className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
           )}
         </div>
       )}
-      <div className="flex flex-col flex-1 gap-3 p-4 sm:p-6">
+      <div
+        className={cn(
+          "flex flex-col flex-1 gap-3 p-5 sm:p-6",
+          horizontalHero && "lg:p-7 lg:justify-center",
+        )}
+      >
         <div className="flex items-baseline justify-between gap-3">
-          <h3 className="text-base sm:text-lg font-medium tracking-[-0.01em] text-foreground flex-1 leading-snug">
+          <h3
+            className={
+              "font-medium tracking-[-0.01em] text-foreground flex-1 leading-snug " +
+              (featured
+                ? "text-xl sm:text-2xl"
+                : "text-base sm:text-lg")
+            }
+          >
             {href ? (
               <a
                 href={href}
@@ -100,11 +135,9 @@ export function ProjectCard({
           <Markdown>{description}</Markdown>
         </div>
         {impact && (
-          <div className="flex items-start gap-2 mt-1">
-            <TrendingUp className="w-3.5 h-3.5 mt-0.5 text-emerald-500 dark:text-emerald-400 shrink-0" />
-            <span className="text-[13px] sm:text-sm text-foreground/85 leading-snug">
-              {impact}
-            </span>
+          <div className="impact-callout mt-1">
+            <TrendingUp className="impact-callout-icon" />
+            <span className="impact-callout-text">{impact}</span>
           </div>
         )}
         <div className="hidden font-sans text-xs underline print:visible">

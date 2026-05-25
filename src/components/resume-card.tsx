@@ -28,7 +28,7 @@ export const ResumeCard = ({
   location,
 }: ResumeCardProps) => {
   return (
-    <article className="group relative border-t border-border/60 first:border-t-0 py-6 sm:py-7 -mx-3 px-3 rounded-md transition-colors hover:bg-foreground/[0.015]">
+    <article className="group relative border-t border-border/60 first:border-t-0 py-6 sm:py-7 -mx-3 px-3 rounded-lg transition-colors hover:bg-foreground/[0.025]">
       <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-y-4 sm:gap-x-10">
         {/* Period — eyebrow on mobile, left rail on desktop */}
         <div className="flex items-center gap-2 sm:block sm:pt-1">
@@ -73,10 +73,7 @@ export const ResumeCard = ({
                 {badges && badges.length > 0 && (
                   <span className="inline-flex flex-wrap gap-1.5">
                     {badges.map((badge) => (
-                      <span
-                        key={badge}
-                        className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.12em] px-1.5 py-0.5 rounded-sm border border-primary/40 text-primary"
-                      >
+                      <span key={badge} className="chip chip-primary">
                         {badge}
                       </span>
                     ))}

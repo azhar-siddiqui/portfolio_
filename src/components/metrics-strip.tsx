@@ -47,7 +47,7 @@ export function MetricsStrip({ metrics }: { metrics: readonly Metric[] }) {
               key={m.label}
               className="px-4 py-7 sm:px-8 sm:py-10 flex flex-col gap-2.5 sm:gap-3 group"
             >
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/70">
+              <div className="font-serif italic text-base sm:text-lg leading-none text-muted-foreground/70 tabular-nums">
                 {String(i + 1).padStart(2, "0")}
               </div>
               <div className="font-mono text-[2rem] sm:text-5xl font-medium tracking-[-0.03em] text-foreground leading-none">

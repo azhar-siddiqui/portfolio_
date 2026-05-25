@@ -101,7 +101,7 @@ export function BlogToc({ headings }: Props) {
         onClick={() => setDrawerOpen(true)}
         aria-label="Open table of contents"
         aria-expanded={drawerOpen}
-        className="xl:hidden fixed bottom-24 right-4 z-40 inline-flex items-center gap-2 h-11 pl-4 pr-5 rounded-full border border-border/60 bg-card/85 backdrop-blur-xl text-foreground/85 hover:text-foreground hover:bg-card/95 shadow-[0_10px_28px_-12px_hsl(var(--primary)/0.3)] transition-colors"
+        className="glass-surface xl:hidden fixed bottom-24 right-4 z-40 inline-flex items-center gap-2 h-11 pl-4 pr-5 rounded-full text-foreground/85 hover:text-foreground shadow-card transition-colors"
         style={{ marginBottom: "env(safe-area-inset-bottom)" }}
       >
         <List className="h-4 w-4" />
@@ -123,7 +123,7 @@ export function BlogToc({ headings }: Props) {
             onClick={() => setDrawerOpen(false)}
             aria-hidden
           />
-          <div className="relative w-full sm:max-w-md max-h-[70vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl border border-border/60 bg-card/95 backdrop-blur-xl p-5 sm:m-4 shadow-2xl">
+          <div className="glass-surface relative w-full sm:max-w-md max-h-[70vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl p-5 sm:m-4 shadow-glow">
             <div className="flex items-center justify-between mb-4">
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                 On this page

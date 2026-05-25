@@ -105,7 +105,7 @@ export function ProjectsGrid() {
                 placeholder="Search by title, tech, or keyword…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="h-11 pl-10 text-sm border-border/60 bg-card/40 backdrop-blur-sm rounded-full focus-visible:border-foreground/40"
+                className="h-11 pl-10 text-sm border-border/60 bg-card/50 backdrop-blur-md rounded-full focus-visible:border-foreground/40"
               />
             </div>
             <Select
@@ -114,7 +114,7 @@ export function ProjectsGrid() {
                 setSortBy(value as "newest" | "oldest" | "title")
               }
             >
-              <SelectTrigger className="w-full sm:w-44 h-11 border-border/60 bg-card/40 backdrop-blur-sm rounded-full text-sm">
+              <SelectTrigger className="w-full sm:w-44 h-11 border-border/60 bg-card/50 backdrop-blur-md rounded-full text-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -135,7 +135,7 @@ export function ProjectsGrid() {
                   className={`h-9 px-4 rounded-full font-mono text-[11px] uppercase tracking-[0.14em] transition-all duration-200 border ${
                     active
                       ? "bg-foreground text-background border-foreground"
-                      : "bg-card/40 backdrop-blur-sm text-muted-foreground hover:text-foreground border-border/60 hover:border-foreground/30"
+                      : "bg-card/50 backdrop-blur-md text-muted-foreground hover:text-foreground border-border/60 hover:border-foreground/30"
                   }`}
                 >
                   {f.label}
@@ -149,7 +149,7 @@ export function ProjectsGrid() {
       <div className="mt-12 sm:mt-16">
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 auto-rows-min"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, id) => (

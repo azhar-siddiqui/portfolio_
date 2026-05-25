@@ -42,9 +42,39 @@ export function MermaidRenderer({
       ]);
       if (cancelled) return;
 
+      // Mermaid measures text widths in an offscreen DOM pass during layout.
+      // If our web font (Geist Sans) hasn't loaded yet, it measures with the
+      // fallback font, freezes the layout, then the real font swaps in —
+      // producing the "boxes too small / edges misaligned" prod-only symptom.
+      // Wait until the document declares fonts ready before the first render,
+      // then yield a frame so Mermaid's measurement DOM sees the loaded font.
+      if (typeof document !== "undefined" && "fonts" in document) {
+        try {
+          await document.fonts.ready;
+        } catch {
+          /* non-fatal: fall through and render with whatever's available */
+        }
+      }
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      );
+      if (cancelled) return;
+
+      // Mermaid embeds this string directly into the SVG `font-family`
+      // attribute. CSS variables like `var(--font-sans)` are NOT resolved in
+      // that context, so the SVG text would silently fall back to the browser
+      // default. Hardcode the actual font (Geist) loaded by next/font in
+      // src/app/layout.tsx so prod renders match the page font.
+      const mermaidFontFamily =
+        '"Geist", "Geist Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+
       mermaid.initialize({
         startOnLoad: false,
-        securityLevel: "strict",
+        // We control the diagram source (it comes from our own MDX), so the
+        // stricter sandbox isn't needed. `loose` keeps Mermaid v11's internals
+        // on the well-tested path and avoids subtle layout differences seen
+        // with `strict` in production builds.
+        securityLevel: "loose",
         theme: resolvedTheme === "dark" ? "dark" : "default",
         themeVariables:
           resolvedTheme === "dark"
@@ -54,7 +84,7 @@ export function MermaidRenderer({
                 primaryTextColor: "#eef2ff",
                 primaryBorderColor: "#3b82f6",
                 lineColor: "#94a3b8",
-                fontFamily: "var(--font-sans), system-ui, sans-serif",
+                fontFamily: mermaidFontFamily,
               }
             : {
                 background: "transparent",
@@ -62,9 +92,9 @@ export function MermaidRenderer({
                 primaryTextColor: "#1e1b4b",
                 primaryBorderColor: "#6366f1",
                 lineColor: "#475569",
-                fontFamily: "var(--font-sans), system-ui, sans-serif",
+                fontFamily: mermaidFontFamily,
               },
-        fontFamily: "var(--font-sans), system-ui, sans-serif",
+        fontFamily: mermaidFontFamily,
       });
 
       for (const node of Array.from(placeholders)) {
@@ -164,6 +194,14 @@ export function MermaidRenderer({
           });
         } catch (err) {
           if (cancelled) return;
+          // Surface the underlying failure in the browser console — the
+          // placeholder text alone is easy to miss in production, and silent
+          // failures are exactly what masked this issue originally.
+          // eslint-disable-next-line no-console
+          console.warn("[MermaidRenderer] render failed", err, {
+            id,
+            source,
+          });
           node.innerHTML = `<div class="text-sm text-destructive font-mono">Mermaid render error: ${
             err instanceof Error ? err.message : "unknown"
           }</div><pre class="text-xs opacity-80">${source.replace(

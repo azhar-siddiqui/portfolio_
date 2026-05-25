@@ -28,7 +28,7 @@ export function BackToTop({ threshold = 600 }: { threshold?: number }) {
       }
       aria-label="Back to top"
       className={cn(
-        "fixed bottom-24 left-4 z-40 size-11 inline-flex items-center justify-center rounded-full border border-border/60 bg-card/85 backdrop-blur-xl text-foreground/80 hover:text-foreground hover:bg-card/95 shadow-[0_10px_28px_-12px_hsl(var(--primary)/0.3)] transition-all duration-200",
+        "glass-surface fixed bottom-24 left-4 z-40 size-11 inline-flex items-center justify-center rounded-full text-foreground/80 hover:text-foreground shadow-card transition-all duration-200",
         visible
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 translate-y-3 pointer-events-none",
