@@ -693,6 +693,230 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   ZoomableImageRenderer — inline thumbnail + click-to-fullscreen lightbox
+   --------------------------------------------------------------------------- */
+
+/* Static placeholder emitted by the markdown pipeline */
+figure.zoomable-image {
+  @apply my-6;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Wrapper holds the thumbnail + expand button */
+.zi-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  /* Always use a light border/background — SVG diagrams are designed for
+     light backgrounds so dark-mode card colors make them unreadable. */
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  cursor: zoom-in;
+}
+.dark .zi-wrapper {
+  border-color: #334155;
+  background-color: #f1f5f9;
+}
+
+.zi-thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: filter 0.2s ease;
+  /* prose-img:border and prose-img:rounded-xl would add a second border and
+     radius inside zi-wrapper's own border — suppress them here. */
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+.zi-wrapper:hover .zi-thumbnail {
+  filter: brightness(0.97);
+}
+
+/* Expand affordance — visible on hover */
+.zi-expand-btn {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem 0.3rem 0.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--card) / 0.88);
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(8px);
+  color: hsl(var(--foreground) / 0.8);
+  font-size: 11px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.15s ease;
+  z-index: 2;
+}
+.zi-wrapper:hover .zi-expand-btn,
+.zi-wrapper:focus-within .zi-expand-btn {
+  opacity: 1;
+}
+@media (hover: none) {
+  .zi-expand-btn { opacity: 1; }
+}
+.zi-expand-btn:hover {
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+.zi-expand-btn:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Figure caption */
+.zi-caption {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------------------
+   Lightbox overlay
+   --------------------------------------------------------------------------- */
+.zi-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: hsl(var(--background) / 0.92);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  touch-action: none;
+}
+.zi-overlay-visible {
+  opacity: 1;
+}
+
+.zi-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zi-stage {
+  /* Not position:absolute — stays in flex flow so zi-canvas centres it.
+     transform is still applied by JS for pan/zoom from that centred origin. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  will-change: transform;
+  transform-origin: center center;
+  user-select: none;
+  /* Light background so SVG diagram colours are legible even in dark mode */
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+}
+.dark .zi-stage {
+  background-color: #f1f5f9;
+}
+.zi-stage:active {
+  cursor: grabbing;
+}
+
+.zi-img {
+  /* Explicit width (not just max-width) so SVGs without intrinsic pixel
+     dimensions get a concrete size to render at. */
+  display: block;
+  width: 90vw;
+  max-width: min(90vw, 1200px);
+  height: auto;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 24px 64px -16px hsl(var(--foreground) / 0.25);
+  pointer-events: none;
+}
+
+/* Controls bar inside lightbox */
+.zi-controls {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--card) / 0.9);
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px -6px hsl(var(--foreground) / 0.2);
+  z-index: 10000;
+}
+
+.zi-btn {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: hsl(var(--foreground) / 0.75);
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.zi-btn:hover {
+  color: hsl(var(--primary));
+  background-color: hsl(var(--primary) / 0.1);
+}
+.zi-btn:active {
+  background-color: hsl(var(--primary) / 0.18);
+}
+.zi-btn:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+.zi-btn-close {
+  color: hsl(var(--muted-foreground));
+}
+.zi-btn-close:hover {
+  color: hsl(var(--destructive));
+  background-color: hsl(var(--destructive) / 0.1);
+}
+
+/* Hint text at bottom-left of lightbox */
+.zi-hint {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  pointer-events: none;
+  z-index: 10000;
+}
+@media (max-width: 640px) {
+  .zi-hint { display: none; }
+}
+
 /* Headings rendered inside a post need scroll-margin so anchor jumps don't
    hide them beneath the fixed top-right controls. The :target rule gives a
    brief highlight after a hash navigation so the reader's eye lands cleanly. */

@@ -58,37 +58,7 @@ One thing I want to be clear about before we get into any specifics: the tools I
 
 Before TypeScript config, before codegen, before any of the tooling — here's what this workflow looks like when it runs. One feature, end to end.
 
-```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#ffffff','primaryTextColor':'#0f172a','primaryBorderColor':'#94a3b8','lineColor':'#475569','edgeLabelBackground':'#ffffff','fontFamily':'ui-sans-serif,system-ui,sans-serif','fontSize':'14px'},'flowchart':{'nodeSpacing':50,'rankSpacing':65,'padding':14,'useMaxWidth':true,'htmlLabels':true,'curve':'basis'}}}%%
-flowchart LR
-    A(["1 · Issue created"])
-    B(["2 · AGENTS.md loaded"])
-    C(["3 · Issue read by agent"])
-    D{"4 · API spec changed?"}
-    E(["Run codegen"])
-    F(["5 · Agent implements"])
-    G{"6 · Pre-commit gates"}
-    H(["7 · PR + Copilot review"])
-    I(["8 · Human review + merge"])
-    J(["9 · Semantic release"])
-
-    A --> B --> C --> D
-    D -->|yes| E --> F
-    D -->|no| F
-    F --> G
-    G -->|fail| F
-    G -->|pass| H --> I --> J
-
-    classDef context fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#78350F;
-    classDef decision fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#1E3A8A;
-    classDef done fill:#D1FAE5,stroke:#059669,stroke-width:2px,color:#064E3B;
-
-    class B,C context
-    class D,G decision
-    class J done
-```
-
-**Figure 1.** The full AI-native feature delivery workflow — from ticket to merged PR.
+<figure class="zoomable-image" data-src="/blog/five-questions-before-you-let-an-ai-agent-touch-your-codebase/agent-issue-review-pipeline.svg" data-alt="Figure 1. The full AI-native feature delivery workflow — from ticket to merged PR." data-caption="Figure 1. The full AI-native feature delivery workflow — from ticket to merged PR."></figure>
 
 Each node has specific infrastructure behind it. The rest of this post explains each one in the order they depend on each other.
 
@@ -198,40 +168,7 @@ The most common mistake when adopting AI agents is giving them no project awaren
 
 Two things deliver it: the project constitution (project-wide rules) and the issue template (per-feature rules).
 
-```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#ffffff','primaryTextColor':'#0f172a','primaryBorderColor':'#94a3b8','lineColor':'#475569','clusterBkg':'#f8fafc','clusterBorder':'#cbd5e1','edgeLabelBackground':'#ffffff','fontFamily':'ui-sans-serif,system-ui,sans-serif','fontSize':'14px'},'flowchart':{'nodeSpacing':50,'rankSpacing':65,'padding':14,'useMaxWidth':true,'htmlLabels':true,'curve':'basis'}}}%%
-flowchart TB
-    REQ(["Client requirements"])
-
-    subgraph PROJ["AGENTS.md · project-wide rules"]
-        direction LR
-        P1["Agent-eligible paths"]
-        P2["Protected paths"]
-        P3["Pre-flight checklist"]
-    end
-
-    subgraph FEAT["GitHub issue · per-feature rules"]
-        direction LR
-        I1["Affected paths"]
-        I2["Acceptance criteria"]
-        I3["Validation commands"]
-    end
-
-    AGENT(["Agent with full context"])
-
-    REQ --> PROJ
-    REQ --> FEAT
-    PROJ --> AGENT
-    FEAT --> AGENT
-
-    classDef agent fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#1E3A8A;
-    classDef req fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#78350F;
-
-    class AGENT agent
-    class REQ req
-```
-
-**Figure 2.** Context delivery flow — from client requirements to an agent that knows what to build, how to build it, and what not to touch.
+<figure class="zoomable-image" data-src="/blog/five-questions-before-you-let-an-ai-agent-touch-your-codebase/agent-context-workflow.svg" data-alt="Figure 2. Context delivery flow — from client requirements to an agent that knows what to build, how to build it, and what not to touch." data-caption="Figure 2. Context delivery flow — from client requirements to an agent that knows what to build, how to build it, and what not to touch."></figure>
 
 ### The Project Constitution — Spec Kit + AGENTS.md
 
@@ -329,41 +266,7 @@ I've come to codegen the way you come to most things in this work — by doing t
 
 Your backend exposes an OpenAPI spec. `@hey-api/openapi-ts` reads the spec and generates TypeScript types, SDK fetch functions, and TanStack Query hooks [[5]](#ref-5) [[6]](#ref-6). TanStack Query consumes those hooks and handles caching, background refresh, pagination, and request lifecycle [[6]](#ref-6).
 
-```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#ffffff','primaryTextColor':'#0f172a','primaryBorderColor':'#94a3b8','lineColor':'#475569','clusterBkg':'#f8fafc','clusterBorder':'#cbd5e1','edgeLabelBackground':'#ffffff','fontFamily':'ui-sans-serif,system-ui,sans-serif','fontSize':'14px'},'flowchart':{'nodeSpacing':50,'rankSpacing':65,'padding':14,'useMaxWidth':true,'htmlLabels':true,'curve':'basis'}}}%%
-flowchart LR
-    SPEC(["Backend OpenAPI spec"])
-    GEN["@hey-api/openapi-ts"]
-
-    subgraph GENERATED["src/services/codegen/generated · never hand-edit"]
-        direction TB
-        T["types.gen.ts"]
-        S["sdk.gen.ts"]
-        R["react-query.gen.ts"]
-    end
-
-    HOOK(["Typed query & mutation hooks"])
-    COMP(["Feature components"])
-
-    SPEC --> GEN
-    GEN --> T
-    GEN --> S
-    GEN --> R
-    T --> HOOK
-    S --> HOOK
-    R --> HOOK
-    HOOK --> COMP
-
-    classDef spec fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#78350F;
-    classDef generated fill:#FEE2E2,stroke:#DC2626,stroke-width:2px,color:#7F1D1D;
-    classDef output fill:#D1FAE5,stroke:#059669,stroke-width:2px,color:#064E3B;
-
-    class SPEC spec
-    class T,S,R generated
-    class COMP output
-```
-
-**Figure 3.** API codegen pipeline — from OpenAPI spec to fully-typed feature components with zero hand-written API code.
+<figure class="zoomable-image" data-src="/blog/five-questions-before-you-let-an-ai-agent-touch-your-codebase/api-layer.svg" data-alt="Figure 3. API codegen pipeline — from OpenAPI spec to fully-typed feature components with zero hand-written API code." data-caption="Figure 3. API codegen pipeline — from OpenAPI spec to fully-typed feature components with zero hand-written API code."></figure>
 
 Modern versions of `@hey-api/openapi-ts` (v0.63+) use a clean, plugin-based architecture [[5]](#ref-5). The entire configuration looks like this:
 
@@ -588,38 +491,7 @@ _Answers question 4 — step 6 from the overview._
 
 > _"A gate that can be skipped under pressure isn't a gate."_
 
-```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#ffffff','primaryTextColor':'#0f172a','primaryBorderColor':'#94a3b8','lineColor':'#475569','clusterBkg':'#f8fafc','clusterBorder':'#cbd5e1','edgeLabelBackground':'#ffffff','fontFamily':'ui-sans-serif,system-ui,sans-serif','fontSize':'14px'},'flowchart':{'nodeSpacing':50,'rankSpacing':65,'padding':14,'useMaxWidth':true,'htmlLabels':true,'curve':'basis'}}}%%
-flowchart LR
-    COMMIT(["git commit · human or AI"])
-
-    subgraph CHECKS["Husky pre-commit · no --no-verify"]
-        direction TB
-        LINT["ESLint auto-fix"]
-        FMT["Prettier + Tailwind sort"]
-        TC["TypeScript check"]
-        TEST["Jest test suite"]
-    end
-
-    GATE{"All gates pass?"}
-    OK(["Commit accepted"])
-    BLOCK(["Commit blocked"])
-
-    COMMIT --> CHECKS --> GATE
-    GATE -->|yes| OK
-    GATE -->|no| BLOCK
-    BLOCK -.->|fix and retry| COMMIT
-
-    classDef ok fill:#D1FAE5,stroke:#059669,stroke-width:2px,color:#064E3B;
-    classDef fail fill:#FEE2E2,stroke:#DC2626,stroke-width:2px,color:#7F1D1D;
-    classDef decision fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#1E3A8A;
-
-    class OK ok
-    class BLOCK fail
-    class GATE decision
-```
-
-**Figure 4.** The quality loop — every commit triggers automated checks; nothing lands without passing all of them.
+<figure class="zoomable-image" data-src="/blog/five-questions-before-you-let-an-ai-agent-touch-your-codebase/commit-workflow.svg" data-alt="Figure 4. The quality loop — every commit triggers automated checks; nothing lands without passing all of them." data-caption="Figure 4. The quality loop — every commit triggers automated checks; nothing lands without passing all of them."></figure>
 
 Every commit — human or AI — runs ESLint auto-fix, Prettier formatting (including Tailwind class sorting via `prettier-plugin-tailwindcss`), TypeScript check, and the Jest suite. The `AGENTS.md` constitution says `--no-verify` is not permitted. No exceptions.
 
@@ -721,30 +593,7 @@ If I had to pick one for complex production work, it wouldn't be close.
 
 Each layer exists to make the one above it possible — remove any one and the ones above become unreliable.
 
-```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#ffffff','primaryTextColor':'#0f172a','primaryBorderColor':'#94a3b8','lineColor':'#475569','edgeLabelBackground':'#ffffff','fontFamily':'ui-sans-serif,system-ui,sans-serif','fontSize':'14px'},'flowchart':{'nodeSpacing':40,'rankSpacing':55,'padding':16,'useMaxWidth':true,'htmlLabels':true}}}%%
-flowchart TB
-    L4["Layer 4 · Quality Loop<br/>Gates that can't be bypassed"]
-    L3["Layer 3 · API Codegen<br/>OpenAPI → typed hooks"]
-    L2["Layer 2 · Project Context<br/>AGENTS.md + issue templates"]
-    L1["Layer 1 · TypeScript Strict<br/>No escape hatches"]
-
-    L4 -->|depends on| L3
-    L3 -->|depends on| L2
-    L2 -->|depends on| L1
-
-    classDef l4 fill:#D1FAE5,stroke:#059669,stroke-width:2px,color:#064E3B;
-    classDef l3 fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#1E3A8A;
-    classDef l2 fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#78350F;
-    classDef l1 fill:#FAE8FF,stroke:#9333EA,stroke-width:2px,color:#581C87;
-
-    class L1 l1
-    class L2 l2
-    class L3 l3
-    class L4 l4
-```
-
-**Figure 5.** The four-layer architecture — each layer depends on the one below it.
+<figure class="zoomable-image" data-src="/blog/five-questions-before-you-let-an-ai-agent-touch-your-codebase/four-layer-workflow.svg" data-alt="Figure 5. The four-layer architecture — each layer depends on the one below it." data-caption="Figure 5. The four-layer architecture — each layer depends on the one below it."></figure>
 
 | Layer                                                                  | What it provides                            | What it enables above                                             |
 | ---------------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------------------- |

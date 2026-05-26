@@ -9,7 +9,7 @@ const nextConfig = {
 
 if(process.env.NODE_ENV === "development") {
   nextConfig.allowedDevOrigins = [
-    "192.168.1.42"
+    "192.168.1.35"
   ]
 }
 
