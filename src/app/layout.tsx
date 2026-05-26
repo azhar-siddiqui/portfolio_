@@ -185,6 +185,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <head>
+        {/*
+          Sync the theme class onto <html> BEFORE the browser paints <body>.
+          next-themes injects an equivalent script, but it lives inside the
+          provider (which is in <body>) — by that point the browser has often
+          already committed the first paint using :root (light) tokens,
+          causing a flash of the wrong background pattern, gradient colors,
+          and Shiki code highlights on statically pre-rendered pages.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('theme');var d;if(s==='dark')d=true;else if(s==='light')d=false;else if(s==='system')d=window.matchMedia('(prefers-color-scheme: dark)').matches;else d=true;document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light';}catch(e){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}})();`,
+          }}
+        />
+      </head>
       <body
         className={cn(
           "min-h-dvh bg-background font-sans antialiased max-w-full overflow-x-hidden",

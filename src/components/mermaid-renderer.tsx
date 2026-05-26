@@ -25,10 +25,21 @@ export function MermaidRenderer({
 
   useEffect(() => {
     if (!rootRef.current) return;
+    // Wait until next-themes has resolved the actual theme on the client.
+    // `resolvedTheme` is `undefined` for the very first render — initialising
+    // Mermaid then would lock every diagram into the light palette and the
+    // subsequent re-run would be a no-op because of `.mermaid-rendered`.
+    if (!resolvedTheme) return;
     const host = rootRef.current;
     let cancelled = false;
     let renderId = 0;
     const cleanupFns: Array<() => void> = [];
+
+    // On re-runs (theme toggle, MDX hot-reload), un-mark previously rendered
+    // placeholders so the new theme actually propagates into their SVGs.
+    host
+      .querySelectorAll<HTMLElement>(".mermaid-diagram.mermaid-rendered")
+      .forEach((node) => node.classList.remove("mermaid-rendered"));
 
     (async () => {
       const placeholders = host.querySelectorAll<HTMLElement>(
@@ -45,14 +56,32 @@ export function MermaidRenderer({
       // Mermaid measures text widths in an offscreen DOM pass during layout.
       // If our web font (Geist Sans) hasn't loaded yet, it measures with the
       // fallback font, freezes the layout, then the real font swaps in —
-      // producing the "boxes too small / edges misaligned" prod-only symptom.
-      // Wait until the document declares fonts ready before the first render,
-      // then yield a frame so Mermaid's measurement DOM sees the loaded font.
+      // producing the "boxes too small / edges misaligned / scattered" symptom
+      // most visible on Windows / cold-cache machines.
+      //
+      // `document.fonts.ready` alone is insufficient: it only awaits *pending*
+      // font loads. If no element above the fold has triggered Geist yet, it
+      // resolves immediately with Geist still unloaded. We explicitly request
+      // Geist at the weights/sizes Mermaid will measure, *then* await ready.
       if (typeof document !== "undefined" && "fonts" in document) {
+        // next/font registers Geist under an internal hashed family name, not
+        // literally "Geist", so document.fonts.load('"Geist"') resolves empty
+        // immediately and never triggers the actual download.  Inserting a
+        // hidden DOM probe that uses var(--font-sans) causes the browser to
+        // resolve the real family name and start loading the font; then
+        // document.fonts.ready reliably waits for it to finish.
+        const probe = document.createElement("span");
+        probe.setAttribute("aria-hidden", "true");
+        probe.style.cssText =
+          "position:absolute;left:-9999px;visibility:hidden;font-size:14px;font-family:var(--font-sans)";
+        probe.textContent = "Ag";
+        document.body.appendChild(probe);
         try {
           await document.fonts.ready;
         } catch {
-          /* non-fatal: fall through and render with whatever's available */
+          /* non-fatal */
+        } finally {
+          probe.parentNode?.removeChild(probe);
         }
       }
       await new Promise<void>((resolve) =>

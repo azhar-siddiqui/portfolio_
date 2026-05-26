@@ -798,12 +798,14 @@ code[data-theme*=" "] span {
   background-color: var(--shiki-light-bg);
 }
 
-@media (prefers-color-scheme: dark) {
-  code[data-theme*=" "],
-  code[data-theme*=" "] span {
-    color: var(--shiki-dark);
-    background-color: var(--shiki-dark-bg);
-  }
+/* Class-based dark mode — must match the .dark toggle used by next-themes
+   and the blocking head script.  The old media-query form diverged from
+   class-based theming: on machines whose system theme is light but site
+   default is dark the code blocks rendered with light palette. */
+.dark code[data-theme*=" "],
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
 }
 
 code[data-line-numbers] {
