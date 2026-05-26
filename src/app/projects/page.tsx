@@ -1,6 +1,7 @@
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { SectionEyebrow } from "@/components/section-eyebrow";
 import { ProjectsGrid } from "@/components/projects-grid";
+import { SiteFooter } from "@/components/site-footer";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -11,15 +12,6 @@ export default function ProjectsPage() {
   return (
     <main className="flex flex-col min-h-dvh px-4 sm:px-6 py-16 sm:py-24 pb-32">
       <div className="mx-auto w-full max-w-6xl">
-        <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-foreground animated-underline"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            Back to Home
-          </Link>
-        </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY}>
           <SectionEyebrow index="*" label="Projects archive" />
         </BlurFade>
@@ -39,6 +31,7 @@ export default function ProjectsPage() {
 
         <ProjectsGrid />
       </div>
+      <SiteFooter />
     </main>
   );
 }

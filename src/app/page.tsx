@@ -6,7 +6,10 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { SectionEyebrow } from "@/components/section-eyebrow";
 import { SkillsSection } from "@/components/skills-section";
+import { BlogPostCard } from "@/components/blog-post-card";
 import { DATA } from "@/data/resume";
+import { getAllPosts } from "@/data/blog";
+import { isBlogEnabled } from "@/lib/feature-flags";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { ArrowUpRight } from "lucide-react";
@@ -22,7 +25,9 @@ const PINNED_PROJECT_TITLES = [
   "Thinkster → AI Math Coaching for Kids",
 ];
 
-export default function Page() {
+export default async function Page() {
+  const blogEnabled = await isBlogEnabled();
+  const latestPosts = blogEnabled ? (await getAllPosts()).slice(0, 3) : [];
   return (
     <main
       id="resume-content"
@@ -198,10 +203,57 @@ export default function Page() {
         </div>
       </section>
 
+      {latestPosts.length > 0 && (
+        <section id="writing" className="mt-24 sm:mt-32">
+          <div className="mx-auto w-full max-w-6xl">
+            <BlurFade delay={BLUR_FADE_DELAY} inView>
+              <SectionEyebrow index="06" label="Latest writing" />
+            </BlurFade>
+            <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
+              <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
+                Notes from the build.
+              </h2>
+            </BlurFade>
+            {latestPosts.length === 1 ? (
+              <BlurFade delay={BLUR_FADE_DELAY * 2.5} inView>
+                <BlogPostCard post={latestPosts[0]} featured />
+              </BlurFade>
+            ) : (
+              <div
+                className={`grid grid-cols-1 gap-4 sm:gap-5 ${
+                  latestPosts.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"
+                }`}
+              >
+                {latestPosts.map((post, id) => (
+                  <BlurFade
+                    key={post.slug}
+                    delay={BLUR_FADE_DELAY * (2 + id * 0.5)}
+                    inView
+                  >
+                    <BlogPostCard post={post} />
+                  </BlurFade>
+                ))}
+              </div>
+            )}
+            <BlurFade delay={BLUR_FADE_DELAY * 5} inView>
+              <div className="mt-10">
+                <Link
+                  href="/blog"
+                  className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-foreground animated-underline"
+                >
+                  Read all posts
+                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+              </div>
+            </BlurFade>
+          </div>
+        </section>
+      )}
+
       <section id="contact" className="mt-24 sm:mt-32">
         <div className="mx-auto w-full max-w-6xl">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <SectionEyebrow index="06" label="Contact" />
+            <SectionEyebrow index="07" label="Contact" />
           </BlurFade>
           <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16">
             <div>

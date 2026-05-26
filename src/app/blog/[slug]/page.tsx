@@ -8,6 +8,7 @@ import { BlogPostContent } from "@/components/blog-post-content";
 import { BlogShare } from "@/components/blog-share";
 import { BlogToc } from "@/components/blog-toc";
 import { BackToTop } from "@/components/back-to-top";
+import { SiteFooter } from "@/components/site-footer";
 import { getAllPosts, getAllSlugs, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
@@ -89,18 +90,18 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
   return (
     <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
-      {/* xl+ : 3-column grid (empty left rail keeps the prose visually centred
-          while the TOC lives on the right). lg and below: single column. */}
-      <div className="mx-auto w-full max-w-[88rem] grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,720px)_minmax(0,1fr)] xl:gap-10">
-        <div className="hidden xl:block" aria-hidden />
+      {/* xl+ : 2-column grid — TOC left rail, article fills the right. */}
+      <div className="mx-auto w-full max-w-6xl grid grid-cols-1 xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-12 xl:items-start">
+        {/* TOC on the left — the component handles sticky + mobile drawer. */}
+        <BlogToc headings={headings} />
 
-        <article className="mx-auto w-full max-w-3xl xl:max-w-none">
+        <article className="mx-auto w-full max-w-3xl xl:max-w-none min-w-0">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
             <Link
               href="/blog"
-              className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors"
+              className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-foreground animated-underline"
             >
-              <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-0.5" />
+              <ArrowLeft className="w-3.5 h-3.5" />
               All writing
             </Link>
           </BlurFade>
@@ -229,11 +230,9 @@ export default async function BlogPostPage({ params }: RouteParams) {
             </nav>
           )}
         </article>
-
-        {/* Right rail TOC + mobile drawer trigger (component owns both). */}
-        <BlogToc headings={headings} />
       </div>
 
+      <SiteFooter />
       <BackToTop />
     </main>
   );

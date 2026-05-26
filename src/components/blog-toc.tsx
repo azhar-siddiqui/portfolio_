@@ -9,17 +9,6 @@ interface Props {
   headings: Heading[];
 }
 
-/**
- * In-page navigation for a blog post. Renders twice:
- *
- *   1. A sticky right-rail panel on `xl+` viewports.
- *   2. A floating "Contents" button on smaller screens that opens a centered
- *      drawer. Tapping a link in either dismisses the drawer and smooth-scrolls
- *      to the heading.
- *
- * Active section tracking is implemented with a single IntersectionObserver
- * keyed on the heading ids that `rehype-slug` stamped onto the rendered HTML.
- */
 export function BlogToc({ headings }: Props) {
   const [active, setActive] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -38,14 +27,9 @@ export function BlogToc({ headings }: Props) {
           if (entry.isIntersecting) set.add(id);
           else set.delete(id);
         }
-        // Of all currently visible headings, pick the one that appears earliest
-        // in document order — feels right when sections are nested.
         const firstVisible = ids.find((id) => set.has(id));
         if (firstVisible) setActive(firstVisible);
       },
-      // Top offset accounts for the fixed theme toggle (~64px) plus comfortable
-      // breathing room; bottom margin shrinks the spy zone so the active item
-      // updates a touch before the heading scrolls off-screen.
       { rootMargin: "-96px 0px -65% 0px", threshold: 0 },
     );
 
@@ -67,7 +51,6 @@ export function BlogToc({ headings }: Props) {
   const onLinkClick = useCallback((slug: string) => {
     setDrawerOpen(false);
     setActive(slug);
-    // Close any open hash so subsequent click on the same item still scrolls.
     if (typeof window !== "undefined" && window.location.hash) {
       history.replaceState(null, "", window.location.pathname);
     }
@@ -80,19 +63,33 @@ export function BlogToc({ headings }: Props) {
 
   if (headings.length === 0) return null;
 
+  const sectionCount = headings.filter((h) => h.depth === 2).length;
+
   return (
     <>
-      {/* Desktop sticky rail (visible from xl up — large screens have the
-          horizontal room without crowding the prose column). */}
+      {/* Desktop left-rail panel — sticky, scrollable if list is long. */}
       <aside
         aria-label="Table of contents"
-        className="hidden xl:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2"
+        className="hidden xl:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm"
       >
-        <TocList
-          headings={headings}
-          active={active}
-          onLinkClick={onLinkClick}
-        />
+        <div className="p-5">
+          <div className="mb-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              On this page
+            </p>
+            {sectionCount > 0 && (
+              <p className="mt-0.5 font-mono text-[10px] text-muted-foreground/50 uppercase tracking-[0.14em]">
+                {sectionCount} section{sectionCount !== 1 ? "s" : ""}
+              </p>
+            )}
+          </div>
+          <div className="h-px bg-border/60 mb-4" />
+          <TocList
+            headings={headings}
+            active={active}
+            onLinkClick={onLinkClick}
+          />
+        </div>
       </aside>
 
       {/* Mobile floating trigger */}
@@ -125,9 +122,16 @@ export function BlogToc({ headings }: Props) {
           />
           <div className="glass-surface relative w-full sm:max-w-md max-h-[70vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl p-5 sm:m-4 shadow-glow">
             <div className="flex items-center justify-between mb-4">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                On this page
-              </span>
+              <div>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  On this page
+                </span>
+                {sectionCount > 0 && (
+                  <span className="ml-2 font-mono text-[10px] text-muted-foreground/50 uppercase tracking-[0.14em]">
+                    · {sectionCount} section{sectionCount !== 1 ? "s" : ""}
+                  </span>
+                )}
+              </div>
               <button
                 type="button"
                 onClick={() => setDrawerOpen(false)}
@@ -137,11 +141,11 @@ export function BlogToc({ headings }: Props) {
                 <X className="h-4 w-4" />
               </button>
             </div>
+            <div className="h-px bg-border/60 mb-3" />
             <TocList
               headings={headings}
               active={active}
               onLinkClick={onLinkClick}
-              showEyebrow={false}
             />
           </div>
         </div>
@@ -154,46 +158,57 @@ function TocList({
   headings,
   active,
   onLinkClick,
-  showEyebrow = true,
 }: {
   headings: Heading[];
   active: string | null;
   onLinkClick: (slug: string) => void;
-  showEyebrow?: boolean;
 }) {
   return (
-    <nav>
-      {showEyebrow && (
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">
-          On this page
-        </p>
-      )}
-      <ul className="flex flex-col gap-0.5 text-sm border-l border-border/60">
-        {headings.map((h) => {
-          const isActive = h.slug === active;
-          return (
-            <li key={h.slug}>
-              <a
-                href={`#${h.slug}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onLinkClick(h.slug);
-                }}
+    <ul className="flex flex-col gap-0.5">
+      {headings.map((h) => {
+        const isActive = h.slug === active;
+        return (
+          <li key={h.slug}>
+            <a
+              href={`#${h.slug}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onLinkClick(h.slug);
+              }}
+              className={cn(
+                "group flex items-start gap-2.5 py-1.5 px-3 rounded-lg leading-snug transition-all duration-150",
+                h.depth === 2 && "text-sm",
+                h.depth === 3 && "pl-6 text-[0.8rem]",
+                h.depth >= 4 && "pl-9 text-[0.75rem]",
+                isActive
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:text-foreground hover:bg-foreground/[0.05]",
+              )}
+            >
+              {/* Dot marker — filled circle for h2, small dot for h3+ */}
+              <span
                 className={cn(
-                  "group relative flex items-start gap-2 -ml-px py-1.5 pl-3 pr-2 border-l-2 border-transparent leading-snug transition-colors",
-                  isActive
-                    ? "border-primary text-primary"
-                    : "text-muted-foreground hover:text-foreground hover:border-foreground/30",
-                  h.depth === 3 && "pl-6",
-                  h.depth >= 4 && "pl-9",
+                  "shrink-0 rounded-full transition-colors mt-[5px]",
+                  h.depth === 2
+                    ? cn(
+                        "h-1.5 w-1.5 border",
+                        isActive
+                          ? "bg-primary border-primary"
+                          : "border-muted-foreground/40 group-hover:border-foreground/60",
+                      )
+                    : cn(
+                        "h-1 w-1",
+                        isActive
+                          ? "bg-primary"
+                          : "bg-muted-foreground/30 group-hover:bg-foreground/50",
+                      ),
                 )}
-              >
-                <span className="truncate">{h.text}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+              />
+              <span className="truncate">{h.text}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

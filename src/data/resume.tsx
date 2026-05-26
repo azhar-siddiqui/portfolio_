@@ -3,6 +3,7 @@ import { HomeIcon, FolderOpen, NotebookPen } from "lucide-react";
 
 export const DATA = {
   name: "Zaheed Shaikh",
+  alias: "Zahid",
   initials: "ZS",
   url: "https://zahidshaikh.space",
   location: "Pune, India",

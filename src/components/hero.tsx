@@ -54,6 +54,13 @@ export function Hero() {
           </div>
         </BlurFade>
 
+        <BlurFade delay={BLUR_FADE_DELAY * 2.5}>
+          <p className="mt-2 sm:mt-3 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-muted-foreground/55">
+            Known as{" "}
+            <span className="text-muted-foreground/80">{DATA.alias}</span>
+          </p>
+        </BlurFade>
+
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
           <p className="mt-4 sm:mt-8 text-lg sm:text-2xl xl:text-3xl font-light tracking-[-0.015em] text-foreground/80 max-w-[22ch] sm:max-w-[24ch] leading-[1.25] sm:leading-[1.2]">
             Senior Product Engineer{" "}

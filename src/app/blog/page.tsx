@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { SectionEyebrow } from "@/components/section-eyebrow";
 import { BlogPostCard } from "@/components/blog-post-card";
+import { SiteFooter } from "@/components/site-footer";
 import { getAllPosts, getAllTags } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
@@ -104,6 +105,7 @@ export default async function BlogIndexPage() {
           )}
         </div>
       </div>
+      <SiteFooter />
     </main>
   );
 }
