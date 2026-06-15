@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://azharsayyed.dev/sitemap.xml
+Sitemap: https://azharsayyed.in/sitemap.xml
