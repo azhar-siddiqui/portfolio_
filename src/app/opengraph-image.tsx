@@ -18,7 +18,7 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "60px 80px",
-          background: "linear-gradient(135deg, #0a0f1e 0%, #111827 50%, #0a0f1e 100%)",
+          background: "linear-gradient(135deg, #0f1419 0%, #171c24 50%, #0f1419 100%)",
           fontFamily: "system-ui, -apple-system, sans-serif",
           position: "relative",
           overflow: "hidden",
@@ -32,7 +32,7 @@ export default async function Image() {
             left: 0,
             right: 0,
             height: "4px",
-            background: "linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6)",
+            background: "#284563",
           }}
         />
         <div
@@ -43,7 +43,7 @@ export default async function Image() {
             width: "200px",
             height: "200px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(40,69,99,0.18) 0%, transparent 70%)",
           }}
         />
 
@@ -52,7 +52,7 @@ export default async function Image() {
           style={{
             fontSize: "64px",
             fontWeight: 800,
-            color: "#f1f5f9",
+            color: "#f5f5f4",
             letterSpacing: "-2px",
             lineHeight: 1.1,
             marginBottom: "16px",
@@ -66,7 +66,7 @@ export default async function Image() {
           style={{
             fontSize: "32px",
             fontWeight: 600,
-            color: "#3b82f6",
+            color: "#7a9ec8",
             marginBottom: "24px",
           }}
         >
@@ -78,7 +78,7 @@ export default async function Image() {
           style={{
             fontSize: "20px",
             fontWeight: 400,
-            color: "#94a3b8",
+            color: "#a8a29e",
             lineHeight: 1.5,
             maxWidth: "800px",
           }}
@@ -105,7 +105,7 @@ export default async function Image() {
             style={{
               fontSize: "18px",
               fontWeight: 500,
-              color: "#64748b",
+              color: "#78716c",
             }}
           >
             {DATA.url.replace("https://", "")}
@@ -121,7 +121,7 @@ export default async function Image() {
               style={{
                 fontSize: "16px",
                 fontWeight: 500,
-                color: "#64748b",
+                color: "#78716c",
               }}
             >
               {DATA.location}

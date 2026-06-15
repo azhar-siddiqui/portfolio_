@@ -109,18 +109,18 @@ export function MermaidRenderer({
           resolvedTheme === "dark"
             ? {
                 background: "transparent",
-                primaryColor: "#1d2645",
-                primaryTextColor: "#eef2ff",
-                primaryBorderColor: "#3b82f6",
-                lineColor: "#94a3b8",
+                primaryColor: "#1c2430",
+                primaryTextColor: "#f5f5f4",
+                primaryBorderColor: "#7a9ec8",
+                lineColor: "#a8a29e",
                 fontFamily: mermaidFontFamily,
               }
             : {
                 background: "transparent",
-                primaryColor: "#eef2ff",
-                primaryTextColor: "#1e1b4b",
-                primaryBorderColor: "#6366f1",
-                lineColor: "#475569",
+                primaryColor: "#f5f5f4",
+                primaryTextColor: "#1c1917",
+                primaryBorderColor: "#284563",
+                lineColor: "#57534e",
                 fontFamily: mermaidFontFamily,
               },
         fontFamily: mermaidFontFamily,

@@ -1,30 +1,40 @@
-import type { Metadata } from "next";
 import { BlurFade } from "@/components/magicui/blur-fade";
+import { JsonLd } from "@/components/json-ld";
 import { SectionEyebrow } from "@/components/section-eyebrow";
 import { BlogPostCard } from "@/components/blog-post-card";
 import { SiteFooter } from "@/components/site-footer";
 import { getAllPosts, getAllTags } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
+import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
+import type { Metadata } from "next";
 import { ComingSoon } from "./_components/coming-soon";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export const metadata: Metadata = {
-  title: "Writing",
-  description:
-    "Long-form notes on shipping product engineering, AI-native development, and the systems behind reliable software.",
-  openGraph: {
-    title: `Writing · ${DATA.name}`,
-    description:
-      "Long-form notes on shipping product engineering, AI-native development, and the systems behind reliable software.",
-    url: `${DATA.url}/blog`,
-    type: "website",
-  },
-  alternates: {
-    canonical: `${DATA.url}/blog`,
-  },
-};
+const BLOG_DESCRIPTION =
+  "Long-form notes on shipping product engineering, AI-native development, and the systems behind reliable software.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const blogEnabled = await isBlogEnabled();
+
+  return buildPageMetadata({
+    title: "Writing — Engineering Notes & Insights",
+    description: BLOG_DESCRIPTION,
+    path: "/blog",
+    keywords: [
+      "software engineering blog",
+      "AI-native development",
+      "product engineering notes",
+      "React TypeScript engineering",
+    ],
+    noIndex: !blogEnabled,
+  });
+}
 
 export default async function BlogIndexPage() {
   if (!(await isBlogEnabled())) {
@@ -34,6 +44,19 @@ export default async function BlogIndexPage() {
 
   return (
     <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-16 sm:pt-24">
+      <JsonLd
+        data={[
+          buildCollectionPageSchema({
+            path: "/blog",
+            name: `${DATA.name} — Writing`,
+            description: BLOG_DESCRIPTION,
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Writing", path: "/blog" },
+          ]),
+        ]}
+      />
       <div className="mx-auto w-full max-w-6xl">
         <BlurFade delay={BLUR_FADE_DELAY} inView>
           <SectionEyebrow index="∞" label="Writing" />
@@ -88,7 +111,6 @@ export default async function BlogIndexPage() {
           ) : (
             <div className="bento-grid">
               {posts.map((post, id) => {
-                // First post becomes the bento feature; the rest fill half-row cells.
                 const span = id === 0 ? "bento-feature" : "bento-half";
                 return (
                   <BlurFade

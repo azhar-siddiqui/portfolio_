@@ -4,115 +4,114 @@
 
 @layer base {
   :root {
-    /* Light theme — crisp slate & corporate blue. Clean, confident, and
-       readable for a professional engineering portfolio. */
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    /* Light theme — warm stone neutrals with a restrained navy accent. */
+    --background: 40 10% 98%;
+    --foreground: 222 22% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 222 22% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 222 22% 14%;
 
-    --primary: 217 91% 45%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 220 42% 28%;
+    --primary-foreground: 40 10% 98%;
 
-    --secondary: 214 32% 94%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 40 8% 94%;
+    --secondary-foreground: 222 22% 14%;
 
-    --muted: 214 32% 93%;
-    --muted-foreground: 215 16% 42%;
+    --muted: 40 8% 93%;
+    --muted-foreground: 220 9% 42%;
 
-    --accent: 199 89% 42%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 200 18% 38%;
+    --accent-foreground: 40 10% 98%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 65% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 160 84% 32%;
+    --success: 158 42% 32%;
     --success-foreground: 0 0% 100%;
 
-    --warm: 32 95% 44%;
-    --cool: 199 89% 42%;
+    --warm: 38 52% 40%;
+    --cool: 200 18% 38%;
 
-    --clay: 32 95% 44%;
-    --sand: 214 32% 90%;
-    --soil: 222 30% 22%;
+    --clay: 38 52% 40%;
+    --sand: 40 8% 90%;
+    --soil: 222 18% 24%;
 
-    --border: 214 32% 88%;
-    --input: 214 32% 88%;
-    --ring: 217 91% 45%;
+    --border: 40 8% 88%;
+    --input: 40 8% 88%;
+    --ring: 220 42% 28%;
 
-    --grid-line: 214 28% 90%;
+    --grid-line: 40 8% 91%;
 
-    --chart-1: 217 91% 45%;
-    --chart-2: 199 89% 42%;
-    --chart-3: 160 84% 32%;
-    --chart-4: 32 95% 44%;
-    --chart-5: 262 83% 58%;
+    --chart-1: 220 42% 28%;
+    --chart-2: 200 18% 38%;
+    --chart-3: 158 42% 32%;
+    --chart-4: 38 52% 40%;
+    --chart-5: 222 18% 42%;
 
-    /* Ambient wash — subtle blue/slate depth, not decorative aurora. */
-    --aura-1: 217 91% 72%;
-    --aura-2: 199 89% 68%;
-    --aura-3: 214 32% 82%;
-    --aura-4: 222 47% 72%;
+    /* Ambient wash — neutral depth, barely perceptible. */
+    --aura-1: 220 20% 82%;
+    --aura-2: 40 12% 88%;
+    --aura-3: 200 14% 78%;
+    --aura-4: 222 18% 72%;
 
     --radius: 0.75rem;
   }
 
   .dark {
-    /* Dark theme — deep slate navy with refined blue highlights. */
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    /* Dark theme — charcoal navy with soft steel-blue highlights. */
+    --background: 222 28% 7%;
+    --foreground: 40 10% 96%;
 
-    --card: 222 40% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 222 24% 10%;
+    --card-foreground: 40 10% 96%;
 
-    --popover: 222 40% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 222 24% 9%;
+    --popover-foreground: 40 10% 96%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 8%;
+    --primary: 213 32% 58%;
+    --primary-foreground: 222 28% 8%;
 
-    --secondary: 217 33% 14%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 222 20% 14%;
+    --secondary-foreground: 40 10% 96%;
 
-    --muted: 217 33% 14%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 222 20% 14%;
+    --muted-foreground: 220 10% 62%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 8%;
+    --accent: 200 16% 48%;
+    --accent-foreground: 222 28% 8%;
 
-    --destructive: 0 63% 55%;
+    --destructive: 0 58% 52%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 160 72% 45%;
-    --success-foreground: 222 47% 8%;
+    --success: 158 38% 42%;
+    --success-foreground: 222 28% 8%;
 
-    --warm: 32 95% 55%;
-    --cool: 199 89% 48%;
+    --warm: 38 48% 52%;
+    --cool: 200 16% 48%;
 
-    --clay: 32 95% 55%;
-    --sand: 217 25% 22%;
-    --soil: 215 20% 72%;
+    --clay: 38 48% 52%;
+    --sand: 222 18% 20%;
+    --soil: 220 10% 72%;
 
-    --border: 217 33% 16%;
-    --input: 217 33% 16%;
-    --ring: 217 91% 60%;
+    --border: 222 18% 16%;
+    --input: 222 18% 16%;
+    --ring: 213 32% 58%;
 
-    --grid-line: 217 33% 14%;
+    --grid-line: 222 18% 14%;
 
-    --chart-1: 217 91% 60%;
-    --chart-2: 199 89% 48%;
-    --chart-3: 160 72% 45%;
-    --chart-4: 32 95% 55%;
-    --chart-5: 262 83% 65%;
+    --chart-1: 213 32% 58%;
+    --chart-2: 200 16% 48%;
+    --chart-3: 158 38% 42%;
+    --chart-4: 38 48% 52%;
+    --chart-5: 222 18% 55%;
 
-    --aura-1: 217 91% 55%;
-    --aura-2: 199 89% 45%;
-    --aura-3: 222 47% 28%;
-    --aura-4: 217 33% 22%;
+    --aura-1: 222 22% 22%;
+    --aura-2: 220 18% 18%;
+    --aura-3: 213 20% 24%;
+    --aura-4: 222 18% 16%;
   }
 }
 
@@ -134,12 +133,12 @@
        browsers while their chrome animates in/out. The aura layer below is
        already `position: fixed` and provides the parallax feel. */
     background-image:
-      radial-gradient(circle, hsl(var(--grid-line) / 0.4) 1px, transparent 1px);
-    background-size: 28px 28px;
+      radial-gradient(circle, hsl(var(--grid-line) / 0.28) 1px, transparent 1px);
+    background-size: 32px 32px;
     background-position: 0 0;
   }
 
-  /* Subtle ambient depth — restrained blue wash for a polished corporate feel. */
+  /* Subtle ambient depth — static neutral wash, no motion. */
   body::before {
     content: "";
     position: fixed;
@@ -148,39 +147,37 @@
     z-index: -1;
     background:
       radial-gradient(
-        50rem 36rem at 8% 0%,
-        hsl(var(--aura-1) / 0.14),
-        transparent 62%
-      ),
-      radial-gradient(
-        44rem 32rem at 92% 12%,
-        hsl(var(--aura-2) / 0.1),
-        transparent 65%
-      ),
-      radial-gradient(
-        40rem 30rem at 50% 100%,
-        hsl(var(--aura-3) / 0.08),
+        52rem 38rem at 10% -5%,
+        hsl(var(--aura-1) / 0.1),
         transparent 68%
+      ),
+      radial-gradient(
+        46rem 34rem at 90% 8%,
+        hsl(var(--aura-2) / 0.07),
+        transparent 70%
+      ),
+      radial-gradient(
+        42rem 32rem at 50% 100%,
+        hsl(var(--aura-3) / 0.06),
+        transparent 72%
       );
-    animation: aurora-drift 60s ease-in-out infinite alternate;
-    will-change: transform;
   }
   .dark body::before {
     background:
       radial-gradient(
-        50rem 36rem at 8% 0%,
-        hsl(var(--aura-1) / 0.12),
-        transparent 62%
-      ),
-      radial-gradient(
-        44rem 32rem at 92% 12%,
-        hsl(var(--aura-2) / 0.08),
-        transparent 65%
-      ),
-      radial-gradient(
-        40rem 30rem at 50% 100%,
-        hsl(var(--aura-3) / 0.1),
+        52rem 38rem at 10% -5%,
+        hsl(var(--aura-1) / 0.14),
         transparent 68%
+      ),
+      radial-gradient(
+        46rem 34rem at 90% 8%,
+        hsl(var(--aura-2) / 0.08),
+        transparent 70%
+      ),
+      radial-gradient(
+        42rem 32rem at 50% 100%,
+        hsl(var(--aura-3) / 0.1),
+        transparent 72%
       );
   }
 
@@ -263,29 +260,15 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent;
+    @apply text-foreground;
   }
 
   .gradient-text-warm {
-    background-image: linear-gradient(
-      110deg,
-      hsl(var(--primary)) 0%,
-      hsl(var(--accent)) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: hsl(var(--primary));
   }
 
   .gradient-text-aurora {
-    background-image: linear-gradient(
-      120deg,
-      hsl(var(--primary)) 0%,
-      hsl(var(--accent)) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: hsl(var(--primary));
   }
 
   /* Liquid glass — a translucent surface used for floating UI (navbar, theme
@@ -346,12 +329,12 @@
     transition: opacity 0.35s ease;
   }
   .bento-card:hover {
-    border-color: hsl(var(--primary) / 0.35);
+    border-color: hsl(var(--primary) / 0.28);
     transform: translateY(-2px);
     background-color: hsl(var(--card));
     box-shadow:
       0 1px 0 hsl(var(--foreground) / 0.03),
-      0 20px 40px -24px hsl(var(--primary) / 0.28),
+      0 16px 36px -24px hsl(var(--foreground) / 0.14),
       0 4px 12px -6px hsl(var(--foreground) / 0.06);
   }
   .bento-card:hover::before {
@@ -524,8 +507,8 @@
   .shadow-glow {
     box-shadow:
       0 1px 0 hsl(var(--foreground) / 0.03),
-      0 18px 40px -22px hsl(var(--primary) / 0.5),
-      0 6px 16px -8px hsl(var(--accent) / 0.18);
+      0 14px 32px -20px hsl(var(--foreground) / 0.16),
+      0 4px 12px -6px hsl(var(--foreground) / 0.08);
   }
 }
 

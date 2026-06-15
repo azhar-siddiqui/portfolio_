@@ -8,10 +8,17 @@ import { BlogPostContent } from "@/components/blog-post-content";
 import { BlogShare } from "@/components/blog-share";
 import { BlogToc } from "@/components/blog-toc";
 import { BackToTop } from "@/components/back-to-top";
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { getAllPosts, getAllSlugs, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
+import {
+  absoluteUrl,
+  buildBlogPostingSchema,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -34,31 +41,21 @@ export async function generateMetadata(
   if (!post) return { title: "Post not found" };
   const { frontmatter } = post;
   const ogImage = frontmatter.cover
-    ? new URL(frontmatter.cover, DATA.url).toString()
-    : `${DATA.url}/me.png`;
-  return {
+    ? absoluteUrl(frontmatter.cover)
+    : absoluteUrl(DATA.avatarUrl);
+
+  return buildPageMetadata({
     title: frontmatter.title,
     description: frontmatter.description,
-    openGraph: {
-      title: frontmatter.title,
-      description: frontmatter.description,
-      type: "article",
-      url: `${DATA.url}/blog/${slug}`,
-      publishedTime: frontmatter.publishedAt,
-      modifiedTime: frontmatter.updatedAt,
-      tags: frontmatter.tags,
-      images: [{ url: ogImage }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: frontmatter.title,
-      description: frontmatter.description,
-      images: [ogImage],
-    },
-    alternates: {
-      canonical: `${DATA.url}/blog/${slug}`,
-    },
-  };
+    path: `/blog/${slug}`,
+    keywords: frontmatter.tags,
+    ogImage,
+    ogType: "article",
+    publishedTime: frontmatter.publishedAt,
+    modifiedTime: frontmatter.updatedAt,
+    tags: frontmatter.tags,
+    authors: [frontmatter.author ?? DATA.name],
+  });
 }
 
 function formatDate(iso: string) {
@@ -90,12 +87,35 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
   return (
     <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
+      <JsonLd
+        data={[
+          buildBlogPostingSchema({
+            slug,
+            title: frontmatter.title,
+            description: frontmatter.description,
+            publishedAt: frontmatter.publishedAt,
+            updatedAt: frontmatter.updatedAt,
+            cover: frontmatter.cover,
+            author: frontmatter.author,
+            tags: frontmatter.tags,
+          }),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Writing", path: "/blog" },
+            { name: frontmatter.title, path: `/blog/${slug}` },
+          ]),
+        ]}
+      />
       {/* xl+ : 2-column grid — TOC left rail, article fills the right. */}
       <div className="mx-auto w-full max-w-6xl grid grid-cols-1 xl:grid-cols-[260px_minmax(0,1fr)] xl:gap-12 xl:items-start">
         {/* TOC on the left — the component handles sticky + mobile drawer. */}
         <BlogToc headings={headings} />
 
-        <article className="mx-auto w-full max-w-3xl xl:max-w-none min-w-0">
+        <article
+          className="mx-auto w-full max-w-3xl xl:max-w-none min-w-0"
+          itemScope
+          itemType="https://schema.org/BlogPosting"
+        >
           <BlurFade delay={BLUR_FADE_DELAY} inView>
             <Link
               href="/blog"
@@ -134,10 +154,13 @@ export default async function BlogPostPage({ params }: RouteParams) {
 
           <BlurFade delay={BLUR_FADE_DELAY * 5} inView>
             <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground/85">
-              <span className="inline-flex items-center gap-1.5">
+              <time
+                dateTime={frontmatter.publishedAt}
+                className="inline-flex items-center gap-1.5"
+              >
                 <CalendarDays className="h-3 w-3" />
                 {formatDate(frontmatter.publishedAt)}
-              </span>
+              </time>
               <span aria-hidden className="text-muted-foreground/40">·</span>
               <span className="inline-flex items-center gap-1.5">
                 <Clock3 className="h-3 w-3" />

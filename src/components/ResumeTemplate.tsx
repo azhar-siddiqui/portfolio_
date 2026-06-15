@@ -42,37 +42,37 @@ interface ResumeTemplateProps {
 export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
   const isDark = theme === "dark";
 
-  // ── Color tokens (aligned with portfolio slate/blue theme) ────
+  // ── Color tokens (aligned with portfolio navy/stone theme) ────
   const c = isDark
     ? {
-        bg: "#0a0f1e",
-        surface: "#111827",
-        fg: "#f8fafc",
-        fgDim: "#e2e8f0",
-        muted: "#94a3b8",
-        mutedDim: "#64748b",
-        border: "#1e293b",
-        rule: "#172033",
-        primary: "#60a5fa",
-        primarySoft: "#172033",
-        accent: "#22d3ee",
-        success: "#34d399",
-        accentStrip: "#3b82f6",
+        bg: "#0f1419",
+        surface: "#171c24",
+        fg: "#f5f5f4",
+        fgDim: "#e7e5e4",
+        muted: "#a8a29e",
+        mutedDim: "#78716c",
+        border: "#292524",
+        rule: "#1c1917",
+        primary: "#7a9ec8",
+        primarySoft: "#1c2430",
+        accent: "#6b8fa3",
+        success: "#4d9a7a",
+        accentStrip: "#284563",
       }
     : {
-        bg: "#f8fafc",
+        bg: "#fafaf9",
         surface: "#ffffff",
-        fg: "#0f172a",
-        fgDim: "#1e293b",
-        muted: "#5b6b7d",
-        mutedDim: "#7b8a9a",
-        border: "#dbe4ee",
-        rule: "#e8eef4",
-        primary: "#2563eb",
-        primarySoft: "#eff6ff",
-        accent: "#0891b2",
-        success: "#059669",
-        accentStrip: "#2563eb",
+        fg: "#1c1917",
+        fgDim: "#292524",
+        muted: "#57534e",
+        mutedDim: "#78716c",
+        border: "#e7e5e4",
+        rule: "#f5f5f4",
+        primary: "#284563",
+        primarySoft: "#f5f5f4",
+        accent: "#3d5a73",
+        success: "#2f6f54",
+        accentStrip: "#284563",
       };
 
   // ── Featured projects only, pinned order ─────────────────────

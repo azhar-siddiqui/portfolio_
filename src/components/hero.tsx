@@ -32,7 +32,7 @@ export function Hero() {
             <div className="relative shrink-0">
               <div
                 aria-hidden
-                className="absolute inset-[-4px] rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-primary/25 blur-md"
+                className="absolute inset-[-4px] rounded-full bg-primary/15 blur-md"
               />
               <Avatar className="relative size-20 sm:size-28 border-2 border-primary/20 shadow-card ring-2 ring-background">
                 <AvatarImage

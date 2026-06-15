@@ -1,10 +1,16 @@
 import Navbar from "@/components/navbar";
+import { JsonLd } from "@/components/json-ld";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
+import {
+  buildPersonSchema,
+  buildProfilePageSchema,
+  buildRootMetadata,
+  buildWebSiteSchema,
+} from "@/lib/seo";
 import { cn } from "@/lib/utils";
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 import {
   Geist as FontSans,
   Geist_Mono as FontMono,
@@ -33,151 +39,17 @@ const fontSerif = FontSerif({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(DATA.url),
-  title: {
-    default: `${DATA.name} — ${DATA.title}`,
-    template: `%s | ${DATA.name}`,
-  },
-  description: DATA.description,
-  keywords: [
-    DATA.title,
-    "Full Stack Developer",
-    "React Developer",
-    "Next.js Developer",
-    "TypeScript",
-    DATA.name,
-    DATA.alias,
-    "Portfolio",
-    "Software Engineer",
-    "Web Developer",
-  ],
-  authors: [{ name: DATA.name, url: DATA.url }],
-  creator: DATA.name,
-  openGraph: {
-    title: `${DATA.name} — ${DATA.title}`,
-    description: DATA.description,
-    url: DATA.url,
-    siteName: DATA.name,
-    locale: "en_US",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  twitter: {
-    title: `${DATA.name} — ${DATA.title}`,
-    card: "summary_large_image",
-    description: DATA.description,
-  },
-  alternates: {
-    canonical: DATA.url,
-  },
-};
+export const metadata = buildRootMetadata();
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0f1e" },
+    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f1419" },
   ],
   width: "device-width",
   initialScale: 1,
-  // Let the page paint behind the system status / home-indicator bars so our
-  // safe-area-inset padding actually positions content correctly on iOS/Android.
   viewportFit: "cover",
 };
-
-function JsonLd() {
-  const personSchema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": `${DATA.url}/#person`,
-    name: DATA.name,
-    alternateName: [DATA.alias, `Sayyed ${DATA.alias}`],
-    url: DATA.url,
-    email: DATA.contact.email,
-    image: `${DATA.url}/me.png`,
-    description: DATA.description,
-    jobTitle: DATA.title,
-    worksFor: {
-      "@type": "Organization",
-      name: "Kiya.ai",
-      url: "https://kiya.ai",
-    },
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Savitribai Phule Pune University",
-      url: "https://www.unipune.ac.in/",
-    },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Pune",
-      addressCountry: "IN",
-    },
-    sameAs: Object.values(DATA.contact.social)
-      .map((s) => s.url)
-      .filter((url) => !url.startsWith("mailto:")),
-    knowsAbout: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Node.js",
-      "Full Stack Development",
-      "React Native",
-      "Angular",
-      "PostgreSQL",
-      "MongoDB",
-      "Docker",
-      "AWS",
-    ],
-  };
-
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${DATA.url}/#website`,
-    url: DATA.url,
-    name: `${DATA.name} — ${DATA.title}`,
-    description: DATA.description,
-    publisher: { "@id": `${DATA.url}/#person` },
-  };
-
-  const profilePageSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "@id": `${DATA.url}/#profilepage`,
-    url: DATA.url,
-    name: `${DATA.name} — Portfolio`,
-    mainEntity: { "@id": `${DATA.url}/#person` },
-    dateCreated: "2024-01-01",
-    dateModified: "2026-05-23",
-  };
-
-  const payload = JSON.stringify([
-    personSchema,
-    websiteSchema,
-    profilePageSchema,
-  ]).replace(/</g, "\\u003c");
-
-  return (
-    <div
-      hidden
-      aria-hidden
-      suppressHydrationWarning
-      dangerouslySetInnerHTML={{
-        __html: `<script type="application/ld+json">${payload}</script>`,
-      }}
-    />
-  );
-}
 
 export default function RootLayout({
   children,
@@ -187,14 +59,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        {/*
-          Sync the theme class onto <html> BEFORE the browser paints <body>.
-          next-themes injects an equivalent script, but it lives inside the
-          provider (which is in <body>) — by that point the browser has often
-          already committed the first paint using :root (light) tokens,
-          causing a flash of the wrong background pattern, gradient colors,
-          and Shiki code highlights on statically pre-rendered pages.
-        */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var s=localStorage.getItem('theme');var d;if(s==='dark')d=true;else if(s==='light')d=false;else if(s==='system')d=window.matchMedia('(prefers-color-scheme: dark)').matches;else d=true;document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light';}catch(e){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}})();`,
@@ -202,6 +66,7 @@ export default function RootLayout({
         />
       </head>
       <body
+        suppressHydrationWarning
         className={cn(
           "min-h-dvh bg-background font-sans antialiased max-w-full overflow-x-hidden",
           fontSans.variable,
@@ -209,7 +74,13 @@ export default function RootLayout({
           fontSerif.variable
         )}
       >
-        <JsonLd />
+        <JsonLd
+          data={[
+            buildPersonSchema(),
+            buildWebSiteSchema(),
+            buildProfilePageSchema(),
+          ]}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -221,9 +92,9 @@ export default function RootLayout({
             <Navbar />
           </TooltipProvider>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
-      <Analytics />
-      <SpeedInsights />
     </html>
   );
 }

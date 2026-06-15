@@ -1,23 +1,20 @@
 import { DATA } from "@/data/resume";
-import type { Metadata } from "next";
+import { buildPageMetadata, ogImageUrl } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description: `Explore ${DATA.name}'s complete portfolio — 15+ mission-critical products across maritime, logistics, fintech, EdTech, e-commerce, and more.`,
-  openGraph: {
-    title: `Projects | ${DATA.name}`,
-    description: `Explore ${DATA.name}'s complete portfolio — 15+ mission-critical products across maritime, logistics, fintech, EdTech, e-commerce, and more.`,
-    url: `${DATA.url}/projects`,
-    type: "website",
-  },
-  twitter: {
-    title: `Projects | ${DATA.name}`,
-    description: `Explore ${DATA.name}'s complete portfolio — 15+ mission-critical products across maritime, logistics, fintech, EdTech, e-commerce, and more.`,
-  },
-  alternates: {
-    canonical: `${DATA.url}/projects`,
-  },
-};
+export const metadata = buildPageMetadata({
+  title: "Projects — Software Portfolio",
+  description: `Explore ${DATA.projects.length} mission-critical products by ${DATA.name} across maritime, logistics, healthcare, hospitality, EdTech, and supply chain — with measurable business impact.`,
+  path: "/projects",
+  ogImage: ogImageUrl("/projects/opengraph-image"),
+  keywords: [
+    "software projects portfolio",
+    "enterprise SaaS projects",
+    "maritime fleet management software",
+    "healthcare laboratory platform",
+    "supply chain collaboration platform",
+    ...DATA.projects.map((project) => project.title),
+  ],
+});
 
 export default function ProjectsLayout({
   children,

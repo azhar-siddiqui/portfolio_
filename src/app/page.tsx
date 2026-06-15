@@ -1,6 +1,7 @@
 import { BlogPostCard } from "@/components/blog-post-card";
 import { Hero } from "@/components/hero";
 import { IndustriesMarquee } from "@/components/industries-marquee";
+import { JsonLd } from "@/components/json-ld";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { MetricsStrip } from "@/components/metrics-strip";
 import { ProjectCard } from "@/components/project-card";
@@ -10,9 +11,23 @@ import { SkillsSection } from "@/components/skills-section";
 import { getAllPosts } from "@/data/blog";
 import { DATA, getProjectResourceLinks } from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
+import { buildPageMetadata } from "@/lib/seo";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
+
+export const metadata = buildPageMetadata({
+  title: `${DATA.name} — ${DATA.title} Portfolio`,
+  description: `${DATA.tagline} Explore ${DATA.metrics[1].value}${DATA.metrics[1].suffix} shipped products across ${DATA.industries.join(", ")}. ${DATA.description}`,
+  path: "/",
+  keywords: [
+    "product engineer portfolio",
+    "full stack developer India",
+    "React Next.js TypeScript engineer",
+    "SaaS developer for hire",
+    ...DATA.industries.map((industry) => `${industry} software developer`),
+  ],
+});
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -32,6 +47,20 @@ export default async function Page() {
       id="resume-content"
       className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32"
     >
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": `${DATA.url}/#webpage`,
+          url: DATA.url,
+          name: `${DATA.name} — ${DATA.title} Portfolio`,
+          description: DATA.description,
+          inLanguage: "en-US",
+          isPartOf: { "@id": `${DATA.url}/#website` },
+          about: { "@id": `${DATA.url}/#person` },
+          primaryImageOfPage: `${DATA.url}/opengraph-image`,
+        }}
+      />
       <Hero />
 
       <div className="mt-24 sm:mt-32">

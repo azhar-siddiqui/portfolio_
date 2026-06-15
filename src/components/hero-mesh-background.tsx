@@ -23,26 +23,26 @@ const maskStyle = {
     "linear-gradient(to bottom, black 0%, black 45%, rgba(0,0,0,0.55) 75%, transparent 100%)",
 };
 
-// Refined slate-blue hero wash — professional, not decorative.
+// Muted charcoal hero wash — understated, corporate.
 const DARK_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(217 91% 55% / 0.22), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(199 89% 48% / 0.14), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(222 47% 28% / 0.35), transparent 70%)";
+  "radial-gradient(55% 55% at 38% 28%, hsl(213 32% 58% / 0.12), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(222 28% 22% / 0.2), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(222 28% 12% / 0.35), transparent 70%)";
 
 const LIGHT_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(217 91% 72% / 0.12), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(199 89% 68% / 0.1), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(214 32% 82% / 0.18), transparent 70%)";
+  "radial-gradient(55% 55% at 38% 28%, hsl(220 42% 28% / 0.06), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(40 10% 90% / 0.35), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(40 8% 94% / 0.4), transparent 70%)";
 
 const DARK_MESH_COLORS = [
-  "#0a0f1e",
-  "#1d4ed8",
-  "#0ea5e9",
-  "#111827",
-  "#0a0f1e",
+  "#0f1419",
+  "#1e3a5f",
+  "#2d4a6f",
+  "#141a22",
+  "#0f1419",
 ] as const;
 const LIGHT_MESH_COLORS = [
-  "#f8fafc",
-  "#bfdbfe",
-  "#e0f2fe",
-  "#f1f5f9",
-  "#f8fafc",
+  "#fafaf9",
+  "#e7e5e4",
+  "#d6d3d1",
+  "#f5f5f4",
+  "#fafaf9",
 ] as const;
 
 export function HeroMeshBackground() {
@@ -60,7 +60,8 @@ export function HeroMeshBackground() {
     setEnabled(!reduceMotion && isDesktop);
   }, []);
 
-  const isDark = !mounted || resolvedTheme === "dark";
+  // Default to dark until mounted so SSR and the first client pass always match.
+  const isDark = !mounted ? true : resolvedTheme === "dark";
 
   return (
     <div
@@ -72,7 +73,7 @@ export function HeroMeshBackground() {
         className="absolute -top-[15%] bottom-[-10%] left-1/2 -translate-x-1/2 w-[120vw] max-w-[1200px] blur-3xl"
         style={{
           background: isDark ? DARK_GRADIENT : LIGHT_GRADIENT,
-          opacity: isDark ? 0.45 : 0.75,
+          opacity: isDark ? 0.35 : 0.55,
         }}
       >
         {enabled && (
@@ -84,9 +85,9 @@ export function HeroMeshBackground() {
               opacity: isDark ? 1 : 0.45,
             }}
             colors={isDark ? [...DARK_MESH_COLORS] : [...LIGHT_MESH_COLORS]}
-            speed={0.25}
-            distortion={0.85}
-            swirl={0.35}
+            speed={0.12}
+            distortion={0.45}
+            swirl={0.15}
           />
         )}
       </div>
