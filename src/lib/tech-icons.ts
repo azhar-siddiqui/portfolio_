@@ -60,6 +60,11 @@ const TECH_ALIASES: Record<string, { slug: string | null; color?: string | null 
   "google gemini api": { slug: "googlegemini" },
   "google ml kit": { slug: "google" },
   "google calendar api": { slug: "googlecalendar" },
+  vite: { slug: "vite" },
+  deckgl: { slug: null },
+  rbac: { slug: null },
+  "nextauth.js": { slug: null },
+  "azure pipelines": { slug: null },
 };
 
 function normalize(name: string): string {

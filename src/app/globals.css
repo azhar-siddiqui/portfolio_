@@ -4,126 +4,115 @@
 
 @layer base {
   :root {
-    /* Light theme — "Cloud Dancer" warm white base with earthy clay accents,
-       a deep indigo primary, and a mellow aurora wash. Inspired by Pantone's
-       2026 Cloud Dancer + warm-earth direction. All values are HSL triplets
-       consumed via `hsl(var(--token))` in Tailwind. */
-    --background: 36 44% 96%;
-    --foreground: 230 32% 14%;
+    /* Light theme — crisp slate & corporate blue. Clean, confident, and
+       readable for a professional engineering portfolio. */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 38 60% 99%;
-    --card-foreground: 230 32% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 38 60% 99%;
-    --popover-foreground: 230 32% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Indigo, slightly warmer than before so it sits next to clay better. */
-    --primary: 232 72% 52%;
-    --primary-foreground: 36 50% 98%;
+    --primary: 217 91% 45%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 34 44% 92%;
-    --secondary-foreground: 230 32% 14%;
+    --secondary: 214 32% 94%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 34 30% 90%;
-    --muted-foreground: 230 12% 38%;
+    --muted: 214 32% 93%;
+    --muted-foreground: 215 16% 42%;
 
-    /* Earthy clay — the new "warm" accent on the light side. */
-    --accent: 18 78% 58%;
-    --accent-foreground: 36 50% 98%;
+    --accent: 199 89% 42%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 78% 52%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 152 58% 38%;
+    --success: 160 84% 32%;
     --success-foreground: 0 0% 100%;
 
-    /* Semantic temperature tokens kept; renamed values for warmth + sage cool. */
-    --warm: 16 88% 56%;
-    --cool: 188 70% 42%;
+    --warm: 32 95% 44%;
+    --cool: 199 89% 42%;
 
-    /* New: clay token — exposed so components can reach for it directly. */
-    --clay: 18 78% 58%;
-    --sand: 34 56% 86%;
-    --soil: 24 36% 28%;
+    --clay: 32 95% 44%;
+    --sand: 214 32% 90%;
+    --soil: 222 30% 22%;
 
-    --border: 30 24% 84%;
-    --input: 30 24% 84%;
-    --ring: 232 72% 52%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 217 91% 45%;
 
-    --grid-line: 30 22% 84%;
+    --grid-line: 214 28% 90%;
 
-    --chart-1: 232 72% 52%;
-    --chart-2: 18 78% 58%;
-    --chart-3: 188 70% 42%;
-    --chart-4: 42 92% 56%;
-    --chart-5: 152 58% 38%;
+    --chart-1: 217 91% 45%;
+    --chart-2: 199 89% 42%;
+    --chart-3: 160 84% 32%;
+    --chart-4: 32 95% 44%;
+    --chart-5: 262 83% 58%;
 
-    /* Aurora palette — light mode reads as warm sunrise: clay → ochre → indigo */
-    --aura-1: 28 92% 72%;   /* clay-ochre */
-    --aura-2: 38 90% 74%;   /* honey */
-    --aura-3: 232 86% 76%;  /* indigo-mist */
-    --aura-4: 188 72% 70%;  /* sea-glass */
+    /* Ambient wash — subtle blue/slate depth, not decorative aurora. */
+    --aura-1: 217 91% 72%;
+    --aura-2: 199 89% 68%;
+    --aura-3: 214 32% 82%;
+    --aura-4: 222 47% 72%;
 
-    --radius: 0.875rem;
+    --radius: 0.75rem;
   }
 
   .dark {
-    /* Dark theme — deep indigo-violet so the aurora reads. We push slightly
-       cooler than before and lift the foreground a touch to keep contrast
-       comfortable against the richer base. */
-    --background: 235 36% 6%;
-    --foreground: 36 24% 96%;
+    /* Dark theme — deep slate navy with refined blue highlights. */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 234 30% 9%;
-    --card-foreground: 36 24% 96%;
+    --card: 222 40% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 234 32% 8%;
-    --popover-foreground: 36 24% 96%;
+    --popover: 222 40% 8%;
+    --popover-foreground: 210 40% 98%;
 
-    /* Vivid lavender primary — readable against deep indigo. */
-    --primary: 248 92% 76%;
-    --primary-foreground: 235 40% 8%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 8%;
 
-    --secondary: 234 22% 14%;
-    --secondary-foreground: 36 22% 96%;
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 234 22% 14%;
-    --muted-foreground: 232 14% 68%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 65%;
 
-    /* Peachy clay carried across themes. */
-    --accent: 18 88% 70%;
-    --accent-foreground: 235 40% 8%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 222 47% 8%;
 
-    --destructive: 0 70% 56%;
+    --destructive: 0 63% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 152 62% 60%;
-    --success-foreground: 235 40% 8%;
+    --success: 160 72% 45%;
+    --success-foreground: 222 47% 8%;
 
-    --warm: 18 92% 70%;
-    --cool: 188 80% 64%;
+    --warm: 32 95% 55%;
+    --cool: 199 89% 48%;
 
-    --clay: 18 88% 70%;
-    --sand: 34 36% 80%;
-    --soil: 24 30% 70%;
+    --clay: 32 95% 55%;
+    --sand: 217 25% 22%;
+    --soil: 215 20% 72%;
 
-    --border: 234 20% 18%;
-    --input: 234 20% 18%;
-    --ring: 248 92% 76%;
+    --border: 217 33% 16%;
+    --input: 217 33% 16%;
+    --ring: 217 91% 60%;
 
-    --grid-line: 234 20% 16%;
+    --grid-line: 217 33% 14%;
 
-    --chart-1: 248 92% 76%;
-    --chart-2: 18 88% 70%;
-    --chart-3: 188 80% 64%;
-    --chart-4: 42 92% 70%;
-    --chart-5: 152 62% 60%;
+    --chart-1: 217 91% 60%;
+    --chart-2: 199 89% 48%;
+    --chart-3: 160 72% 45%;
+    --chart-4: 32 95% 55%;
+    --chart-5: 262 83% 65%;
 
-    /* Aurora palette — dark mode reads as aurora borealis: teal → violet → magenta */
-    --aura-1: 248 92% 64%;  /* electric lavender */
-    --aura-2: 286 80% 60%;  /* magenta */
-    --aura-3: 188 86% 50%;  /* teal */
-    --aura-4: 168 72% 46%;  /* aurora green */
+    --aura-1: 217 91% 55%;
+    --aura-2: 199 89% 45%;
+    --aura-3: 222 47% 28%;
+    --aura-4: 217 33% 22%;
   }
 }
 
@@ -145,14 +134,12 @@
        browsers while their chrome animates in/out. The aura layer below is
        already `position: fixed` and provides the parallax feel. */
     background-image:
-      radial-gradient(circle, hsl(var(--grid-line) / 0.55) 1px, transparent 1px);
-    background-size: 32px 32px;
+      radial-gradient(circle, hsl(var(--grid-line) / 0.4) 1px, transparent 1px);
+    background-size: 28px 28px;
     background-position: 0 0;
   }
 
-  /* Atmospheric aurora — 4 soft blobs drifting slowly in the background.
-     Light mode = warm sunrise; dark mode = aurora borealis. The drift is
-     paused for users with prefers-reduced-motion. */
+  /* Subtle ambient depth — restrained blue wash for a polished corporate feel. */
   body::before {
     content: "";
     position: fixed;
@@ -161,49 +148,39 @@
     z-index: -1;
     background:
       radial-gradient(
-        46rem 32rem at 6% 6%,
-        hsl(var(--aura-1) / 0.32),
-        transparent 60%
+        50rem 36rem at 8% 0%,
+        hsl(var(--aura-1) / 0.14),
+        transparent 62%
       ),
       radial-gradient(
-        42rem 30rem at 94% 18%,
-        hsl(var(--aura-2) / 0.28),
+        44rem 32rem at 92% 12%,
+        hsl(var(--aura-2) / 0.1),
         transparent 65%
       ),
       radial-gradient(
-        38rem 28rem at 12% 78%,
-        hsl(var(--aura-3) / 0.22),
-        transparent 65%
-      ),
-      radial-gradient(
-        44rem 32rem at 88% 96%,
-        hsl(var(--aura-4) / 0.22),
-        transparent 65%
+        40rem 30rem at 50% 100%,
+        hsl(var(--aura-3) / 0.08),
+        transparent 68%
       );
-    animation: aurora-drift 55s ease-in-out infinite alternate;
+    animation: aurora-drift 60s ease-in-out infinite alternate;
     will-change: transform;
   }
   .dark body::before {
     background:
       radial-gradient(
-        46rem 32rem at 6% 6%,
-        hsl(var(--aura-1) / 0.28),
-        transparent 60%
+        50rem 36rem at 8% 0%,
+        hsl(var(--aura-1) / 0.12),
+        transparent 62%
       ),
       radial-gradient(
-        42rem 30rem at 94% 18%,
-        hsl(var(--aura-2) / 0.22),
+        44rem 32rem at 92% 12%,
+        hsl(var(--aura-2) / 0.08),
         transparent 65%
       ),
       radial-gradient(
-        38rem 28rem at 12% 78%,
-        hsl(var(--aura-3) / 0.18),
-        transparent 65%
-      ),
-      radial-gradient(
-        44rem 32rem at 88% 96%,
-        hsl(var(--aura-4) / 0.18),
-        transparent 65%
+        40rem 30rem at 50% 100%,
+        hsl(var(--aura-3) / 0.1),
+        transparent 68%
       );
   }
 
@@ -270,7 +247,7 @@
 
   .section-eyebrow::before {
     content: "";
-    @apply h-px w-8 bg-border;
+    @apply h-px w-8 bg-primary/50;
   }
 
   /* Unified heading scale — used across every section so the type rhythm
@@ -286,28 +263,25 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-foreground via-foreground to-accent bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent;
   }
 
   .gradient-text-warm {
     background-image: linear-gradient(
       110deg,
       hsl(var(--primary)) 0%,
-      hsl(var(--accent)) 55%,
-      hsl(var(--warm)) 100%
+      hsl(var(--accent)) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* Aurora text gradient — for the rare hero-tier accent word. */
   .gradient-text-aurora {
     background-image: linear-gradient(
       120deg,
-      hsl(var(--aura-3)) 0%,
-      hsl(var(--aura-1)) 55%,
-      hsl(var(--aura-2)) 100%
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -319,12 +293,13 @@
      as a soft frosted pane. */
   .glass-surface {
     @apply backdrop-blur-xl backdrop-saturate-150;
-    background-color: hsl(var(--card) / 0.7);
-    border: 1px solid hsl(var(--border) / 0.7);
+    background-color: hsl(var(--card) / 0.82);
+    border: 1px solid hsl(var(--border) / 0.8);
+    box-shadow: 0 1px 0 hsl(var(--foreground) / 0.03);
   }
   .dark .glass-surface {
-    background-color: hsl(var(--card) / 0.65);
-    border-color: hsl(var(--border) / 0.55);
+    background-color: hsl(var(--card) / 0.72);
+    border-color: hsl(var(--border) / 0.65);
   }
 
   .glass-effect {
@@ -348,9 +323,11 @@
      ResumeCard's hover state, and any inline panel. Single source of truth
      for radius, border, blur, hover lift, and the liquid-glass tint. */
   .bento-card {
-    @apply relative isolate overflow-hidden rounded-2xl border border-border/60 backdrop-blur-md transition-all duration-300;
-    background-color: hsl(var(--card) / 0.62);
-    box-shadow: 0 1px 0 hsl(var(--foreground) / 0.02);
+    @apply relative isolate overflow-hidden rounded-xl border border-border/70 backdrop-blur-md transition-all duration-300;
+    background-color: hsl(var(--card) / 0.88);
+    box-shadow:
+      0 1px 0 hsl(var(--foreground) / 0.02),
+      0 8px 24px -16px hsl(var(--foreground) / 0.08);
   }
   .bento-card::before {
     content: "";
@@ -359,27 +336,23 @@
     pointer-events: none;
     z-index: -1;
     background:
-      radial-gradient(
-        60% 80% at 0% 0%,
-        hsl(var(--primary) / 0.07),
-        transparent 60%
-      ),
-      radial-gradient(
-        50% 70% at 100% 100%,
-        hsl(var(--accent) / 0.06),
-        transparent 60%
+      linear-gradient(
+        135deg,
+        hsl(var(--primary) / 0.04) 0%,
+        transparent 45%,
+        hsl(var(--accent) / 0.03) 100%
       );
-    opacity: 0.9;
+    opacity: 0.85;
     transition: opacity 0.35s ease;
   }
   .bento-card:hover {
-    border-color: hsl(var(--primary) / 0.45);
+    border-color: hsl(var(--primary) / 0.35);
     transform: translateY(-2px);
-    background-color: hsl(var(--card) / 0.85);
+    background-color: hsl(var(--card));
     box-shadow:
       0 1px 0 hsl(var(--foreground) / 0.03),
-      0 22px 48px -28px hsl(var(--primary) / 0.45),
-      0 4px 12px -6px hsl(var(--foreground) / 0.08);
+      0 20px 40px -24px hsl(var(--primary) / 0.28),
+      0 4px 12px -6px hsl(var(--foreground) / 0.06);
   }
   .bento-card:hover::before {
     opacity: 1;

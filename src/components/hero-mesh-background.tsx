@@ -1,8 +1,8 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 
 const MeshGradient = dynamic(
   async () => {
@@ -13,7 +13,7 @@ const MeshGradient = dynamic(
       return () => null;
     }
   },
-  { ssr: false, loading: () => null }
+  { ssr: false, loading: () => null },
 );
 
 const maskStyle = {
@@ -23,16 +23,27 @@ const maskStyle = {
     "linear-gradient(to bottom, black 0%, black 45%, rgba(0,0,0,0.55) 75%, transparent 100%)",
 };
 
-// Aurora-borealis mood for the dark hero — electric lavender, magenta, teal.
+// Refined slate-blue hero wash — professional, not decorative.
 const DARK_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(248 92% 64% / 0.42), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(286 80% 60% / 0.32), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(188 86% 55% / 0.24), transparent 70%)";
+  "radial-gradient(55% 55% at 38% 28%, hsl(217 91% 55% / 0.22), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(199 89% 48% / 0.14), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(222 47% 28% / 0.35), transparent 70%)";
 
-// Warm sunrise for the light hero — clay, honey, indigo-mist.
 const LIGHT_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(28 92% 72% / 0.20), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(232 86% 76% / 0.16), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(38 90% 74% / 0.14), transparent 70%)";
+  "radial-gradient(55% 55% at 38% 28%, hsl(217 91% 72% / 0.12), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(199 89% 68% / 0.1), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(214 32% 82% / 0.18), transparent 70%)";
 
-const DARK_MESH_COLORS = ["#0b0c1a", "#5b4bff", "#a855f7", "#0ea5b7", "#0b0c1a"] as const;
-const LIGHT_MESH_COLORS = ["#fff3e2", "#f5c79e", "#c9bfff", "#e0eef0", "#fff7eb"] as const;
+const DARK_MESH_COLORS = [
+  "#0a0f1e",
+  "#1d4ed8",
+  "#0ea5e9",
+  "#111827",
+  "#0a0f1e",
+] as const;
+const LIGHT_MESH_COLORS = [
+  "#f8fafc",
+  "#bfdbfe",
+  "#e0f2fe",
+  "#f1f5f9",
+  "#f8fafc",
+] as const;
 
 export function HeroMeshBackground() {
   const [enabled, setEnabled] = useState(false);
@@ -42,7 +53,9 @@ export function HeroMeshBackground() {
   useEffect(() => {
     setMounted(true);
     if (typeof window === "undefined") return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const isDesktop = window.matchMedia("(min-width: 768px)").matches;
     setEnabled(!reduceMotion && isDesktop);
   }, []);
@@ -59,7 +72,7 @@ export function HeroMeshBackground() {
         className="absolute -top-[15%] bottom-[-10%] left-1/2 -translate-x-1/2 w-[120vw] max-w-[1200px] blur-3xl"
         style={{
           background: isDark ? DARK_GRADIENT : LIGHT_GRADIENT,
-          opacity: isDark ? 0.55 : 0.95,
+          opacity: isDark ? 0.45 : 0.75,
         }}
       >
         {enabled && (

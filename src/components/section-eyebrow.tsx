@@ -11,8 +11,8 @@ interface Props {
 export function SectionEyebrow({ index, label }: Props) {
   return (
     <div className="flex items-center gap-3 mb-6 sm:mb-8">
-      <span aria-hidden className="h-px w-8 bg-border" />
-      <span className="font-serif text-base sm:text-lg italic leading-none text-foreground/80">
+      <span aria-hidden className="h-px w-8 bg-primary/50" />
+      <span className="font-serif text-base sm:text-lg italic leading-none text-primary/80">
         {index}
       </span>
       <span aria-hidden className="text-muted-foreground/50 leading-none">

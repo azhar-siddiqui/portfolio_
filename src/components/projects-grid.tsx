@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DATA } from "@/data/resume";
+import { DATA, getProjectResourceLinks } from "@/data/resume";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search } from "lucide-react";
 import * as chrono from "chrono-node";
@@ -29,12 +29,12 @@ const PRIMARY_TECH_FILTERS = [
 ];
 
 const PINNED_PROJECT_TITLES = [
-  "Tenderd Scout → Equipment Intelligence App",
-  "Tenderd OpsPro → Operations Workflow App",
-  "Tenderd → Asset Tracking App",
-  "Hafnia → Real-Time Fleet Intelligence Platform",
-  "OceanPass → Maritime Compliance Desktop Platform",
-  "Thinkster → AI Math Coaching for Kids",
+  "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
+  "WeCare → Healthcare Laboratory SaaS Platform",
+  "Global Tanker Fleet Management System",
+  "Quloi → Omni-Channel Supply Chain Platform",
+  "Casa Architect → Interior Design Portfolio Platform",
+  "Zomato Clone → Food Delivery App",
 ];
 
 function parseProjectDate(dates: string): Date {
@@ -171,9 +171,7 @@ export function ProjectsGrid() {
                   description={project.description}
                   dates={project.dates}
                   tags={project.technologies}
-                  resourceLinks={
-                    "resourceLinks" in project ? project.resourceLinks : undefined
-                  }
+                  resourceLinks={getProjectResourceLinks(project)}
                   impact={project.impact}
                   company={project.company}
                 />

@@ -56,7 +56,8 @@ async function generatePdf(
       outline: false,
     });
 
-    const outPath = path.join(OUTPUT_DIR, `Zaheed-Resume-${theme}.pdf`);
+    const resumeBaseName = `${DATA.name.replace(/\s+/g, "-")}-Resume`;
+    const outPath = path.join(OUTPUT_DIR, `${resumeBaseName}-${theme}.pdf`);
     await fs.writeFile(outPath, pdfBuffer);
     console.log(`Wrote ${path.relative(PROJECT_ROOT, outPath)}`);
   } finally {

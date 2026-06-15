@@ -28,13 +28,13 @@ export const ResumeCard = ({
   location,
 }: ResumeCardProps) => {
   return (
-    <article className="group relative border-t border-border/60 first:border-t-0 py-6 sm:py-7 -mx-3 px-3 rounded-lg transition-colors hover:bg-foreground/[0.025]">
+    <article className="group relative border-t border-border/70 first:border-t-0 py-6 sm:py-7 -mx-3 px-3 rounded-xl transition-colors hover:bg-primary/[0.03]">
       <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-y-4 sm:gap-x-10">
         {/* Period — eyebrow on mobile, left rail on desktop */}
         <div className="flex items-center gap-2 sm:block sm:pt-1">
           <span
             aria-hidden
-            className="sm:hidden h-1.5 w-1.5 rounded-full bg-foreground/40"
+            className="sm:hidden h-1.5 w-1.5 rounded-full bg-primary/60"
           />
           <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.14em] text-muted-foreground tabular-nums">
             {period}

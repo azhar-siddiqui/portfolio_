@@ -1,34 +1,32 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, FolderOpen, NotebookPen } from "lucide-react";
+import { FolderOpen, HomeIcon, NotebookPen } from "lucide-react";
 
 export const DATA = {
-  name: "Zaheed Shaikh",
-  alias: "Zahid",
-  initials: "ZS",
-  url: "https://zahidshaikh.space",
-  location: "Pune, India",
-  locationLink: "https://www.google.com/maps/place/pune",
-  tagline: "Senior Product Engineer shipping software that pays for itself.",
+  name: "Sayyed Azhar",
+  alias: "Azhar",
+  initials: "SA",
+  url: "https://sayyedazhar.dev",
+  location: "Aurangabad, India",
+  locationLink: "https://www.google.com/maps/place/aurangabad",
+  title: "Product Engineer",
+  tagline: "Product Engineer building and launching products from scratch.",
   description:
-    "I understand business, not just code, and I build software that directly increases revenue, cuts operational costs, ensures regulatory compliance, and scales operations — for maritime giants, logistics operators, banks, EdTech startups, NGOs, e-commerce stores, and everything in between.",
+    "I don't just write code. I build software that delivers real business impact: boosting revenue, lowering costs, ensuring compliance, and scaling operations for maritime, logistics, healthcare, and hospitality companies.",
   summary:
-    "Over the last 5 years, I've delivered 15+ mission-critical products from scratch across 10 diverse industries, generating measurable ROI like 30–70% faster decisions, 40% less downtime, 3x user engagement, or new revenue streams. I collaborate with founders, CXOs, and investors to translate business challenges into reliable, scalable solutions shipped at high velocity.",
+    "Over the past four years, I've owned the entire development process for products across logistics, maritime, and healthcare — designing interfaces, writing backend logic, managing databases, and automating infrastructure. I lean heavily into modern AI-assisted development tools like Cursor and Claude Code to speed up my workflow, catch bugs early, and ship high-quality features fast.",
   metrics: [
-    { value: 5, suffix: "+", label: "Years shipping production software" },
+    { value: 4, suffix: "+", label: "Years building production software" },
     { value: 15, suffix: "+", label: "Mission-critical products delivered" },
-    { value: 10, suffix: "", label: "Industries · maritime to fintech" },
-    { value: 40, suffix: "%", label: "Avg. operational downtime cut" },
+    { value: 5, suffix: "", label: "Industries · logistics to healthcare" },
+    { value: 40, suffix: "%", label: "Avg. page load time improvement" },
   ],
   industries: [
-    "Maritime",
-    "Banking",
-    "EdTech",
     "Logistics",
-    "Energy",
+    "Maritime",
     "Healthcare",
-    "E-commerce",
-    "NGO",
-    "Compliance",
+    "Supply Chain",
+    "EdTech",
+    "Architecture",
   ],
   testimonials: [] as ReadonlyArray<{
     quote: string;
@@ -145,24 +143,24 @@ export const DATA = {
     { href: "/blog", icon: NotebookPen, label: "Writing" },
   ],
   contact: {
-    email: "reachtozahid@gmail.com",
-    tel: "+91 8806544670",
+    email: "azhartsiddiqui@gmail.com",
+    tel: "+91 7558380826",
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/The-Lone-Druid",
+        url: "https://github.com/azhar-siddiqui",
         icon: Icons.github,
         navbar: true,
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/zahid-shaikh-7a4843178/",
+        url: "https://www.linkedin.com/in/sayyed-azhar-673147179/",
         icon: Icons.linkedin,
         navbar: true,
       },
       Email: {
         name: "Send Email",
-        url: "mailto:reachtozahid@gmail.com",
+        url: "mailto:azhartsiddiqui@gmail.com",
         icon: Icons.email,
         navbar: true,
       },
@@ -170,486 +168,212 @@ export const DATA = {
   },
   work: [
     {
-      company: "Shurutech",
-      href: "https://shurutech.com",
-      badges: ["Current"],
-      location: "Remote",
-      title: "Senior AI Native Product Engineer",
-      logoUrl: "", // Add logo if available
-      start: "Dec 2025",
-      end: "Present",
-      description:
-        "Driving AI-native product delivery at Shurutech with a focus on measurable business outcomes, not experimentation. Leading cross-platform execution for logistics and heavy-equipment workflows, including production mobile products shipped to Play Store and App Store, while embedding quality gates, observability, and release discipline to sustain high-velocity delivery.",
-    },
-    {
       company: "Kiya.ai",
       href: "https://kiya.ai",
-      badges: [],
+      badges: ["Current"],
       location: "Remote",
-      title: "Senior Associate Consultant",
-      logoUrl: "", // Add logo if available
-      start: "Feb 2024",
-      end: "Nov 2025",
+      title: "Associate Consultant",
+      logoUrl: "",
+      start: "Mar 2024",
+      end: "Apr 2026",
       description:
-        "Led enterprise maritime product delivery for global shipping stakeholders, turning fragmented vessel workflows into decision-grade operational platforms. Delivered fleet intelligence and emissions-compliance solutions used across 100+ vessels, helping reduce decision latency by 30%, operational downtime by 40%, and compliance-processing overhead at scale.",
+        "Architected a scalable maritime Enterprise SaaS platform with granular Role-Based Access Control (RBAC), integrating complex multi-tier stakeholder permissions for secure data isolation. Translated ambiguous business requirements directly into interactive, high-performance dashboards for the Global Tanker Fleet Management System, working straight with key stakeholders.",
     },
     {
-      company: "Rightbrain Infotech",
+      company: "Quloi",
+      href: "https://quloi.com",
+      badges: [],
+      location: "Remote",
+      title: "Full Stack Developer",
+      logoUrl: "",
+      start: "Jan 2023",
+      end: "Sep 2023",
+      description:
+        "Built frontend architecture for the Omni-Channel Supply Chain Collaboration platform — a cloud-native logistics SaaS digitizing first-mile operations. Engineered Supplier Management and Purchase Order automation modules, real-time KPI dashboards (OTIF, lead-time accuracy), and granular RBAC for admins, buyers, suppliers, and freight forwarders.",
+    },
+    {
+      company: "Banao Tech (ATG World)",
+      href: "",
+      badges: [],
+      location: "Remote",
+      title: "Sr. Frontend Developer",
+      logoUrl: "",
+      start: "Jan 2022",
+      end: "Dec 2022",
+      description:
+        "Contributed to 10+ web applications across client projects. Reduced page load time on 10 client websites by 30% through optimization techniques, becoming the company expert on load time and web vitals. Implemented responsive design for improved mobile experience and collaborated with UX designers on conversion-focused interfaces.",
+    },
+    {
+      company: "RightBrain InfoTech",
       href: "http://rightbraininfotech.in/",
       badges: [],
       location: "Remote",
-      title: "Senior Software Engineer",
-      logoUrl: "", // Add logo if available
-      start: "Sep 2021",
-      end: "Jan 2024",
+      title: "Associate Software Engineer",
+      logoUrl: "",
+      start: "Jan 2021",
+      end: "Dec 2021",
       description:
-        "Built and scaled multi-domain digital products across finance, logistics, EdTech, and social impact, consistently converting ambiguous business asks into shipping software with clear ROI. Delivered high-retention user experiences, operational workflow automation, and offline-capable systems that improved adoption, reliability, and commercial outcomes.",
-    },
-    {
-      company: "Glixcel",
-      href: "", // Add if available
-      badges: [],
-      location: "Remote",
-      title: "Full-Stack Developer",
-      logoUrl: "", // Add logo if available
-      start: "Aug 2020",
-      end: "Sep 2021",
-      description:
-        "Built an EdTech marketplace from the ground up and helped take it from concept to commercial traction. Delivered core booking, payment, and scheduling flows that connected thousands of tutors and learners and contributed to the company reaching its first profitable quarters.",
+        "Translated complex design mock-ups and wireframes into functional, pixel-perfect web pages. Optimized application performance, improving page load times by 20%. Spearheaded peer code reviews and drove technical problem-solving discussions on architecture challenges.",
     },
   ],
   education: [
     {
-      school: "Abeda Inamdar Senior College of Arts, Science and Commerce",
-      href: "https://abedainamdarcollege.org.in/",
-      degree: "Bachelor of Computer Applications (BCA) — CGPA 9.00/10",
-      logoUrl: "", // Add logo if available
+      school: "Savitribai Phule Pune University",
+      href: "https://www.unipune.ac.in/",
+      degree: "Master of Computer Science",
+      logoUrl: "",
+      start: "2021",
+      end: "2023",
+    },
+    {
+      school: "Savitribai Phule Pune University",
+      href: "https://www.unipune.ac.in/",
+      degree: "Bachelor of Computer Science",
+      logoUrl: "",
       start: "2018",
       end: "2021",
     },
   ],
   projects: [
-    // ── MARITIME ────────────────────────────────────────────────────────────
     {
-      title: "Hafnia → Real-Time Fleet Intelligence Platform",
-      href: "https://hafnia.com/",
-      dates: "Feb 2024 – Nov 2025",
-      company: "Kiya.ai",
+      title: "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
+      href: "https://table-mate-marketing-page-azhar-siddiquis-projects.vercel.app/",
+      dates: "2026 - Present",
+      company: "Personal Project",
       active: true,
-      tags: ["Confidential", "NDA Protected"],
       description:
-        "Delivered a unified fleet decision platform for global operations, enabling faster voyage planning, emissions decisions, and day-to-day performance monitoring for shore-side stakeholders.",
+        "Built a production-ready, offline-first Progressive Web App for restaurants/hotels featuring real-time table management, Kitchen Display System (KDS), granular Permission-Based Access Control (PBAC), multi-tenancy, staff device PIN login, and automated invoicing. Optimized for touch-friendly Android use by waiters, chefs, and owners.",
       technologies: [
-        "React",
-        "React Native",
-        "TypeScript",
-        "Mapbox",
-        "AG Grid",
-        "HighCharts",
-      ],
-      impact:
-        "Contributed to 30% faster operational decisions for one of the world's largest tanker companies, with measurable fuel-efficiency gains and stronger compliance execution across 100+ vessels.",
-      featured: true,
-    },
-    {
-      title: "OceanPass → Maritime Compliance Desktop Platform",
-      href: "https://oceanpass.com/",
-      dates: "Feb 2025 – Jun 2025",
-      company: "Kiya.ai",
-      active: true,
-      tags: ["Confidential", "NDA Protected"],
-      description:
-        "Unified fragmented vessel emissions workflows into a validated reporting flow, enabling shipowners, charterers, banks, and investors to act on compliance risk with clearer and faster operational visibility.",
-      technologies: [
-        "React",
-        "Electron.js",
-        "TypeScript",
-        "SQLite",
+        "NestJS",
         "Prisma",
-        "TanStack Query",
-      ],
-      impact:
-        "Drove a 95% reduction in compliance paperwork and 40% lower operational downtime, with outcomes aligned to OceanPass's mission of validated, real-time emissions intelligence for entire fleets.",
-      featured: true,
-    },
-    // ── LOGISTICS ───────────────────────────────────────────────────────────
-    {
-      title: "SpotFinder → Urban Parking Logistics",
-      dates: "Apr 2022 – Oct 2022",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Created a real-time parking reservation app with instant bookings and payments. Built RBAC admin portal; addressed urban scalability with geolocation APIs and payment gateways, handling high-traffic metro scenarios.",
-      technologies: [
-        "React",
-        "React Native",
-        "TypeScript",
-        "Google Maps",
-        "Stripe",
-        "Razorpay",
-      ],
-      impact:
-        "70% less vehicle search time, new revenue for operators; launched in 6 months.",
-      featured: false,
-    },
-    {
-      title: "Drivers In India → On-demand Verified Chauffeurs",
-      href: "http://driversinindia.com/",
-      dates: "Oct 2021 – Nov 2021",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Revamped the chauffeur booking experience and launched premium service journeys that made 24/7 bookings faster and more reliable for customers and operators.",
-      technologies: [
-        "WordPress",
-        "Angular",
-        "Ionic",
-        "TypeScript",
-        "TailwindCSS",
-        "PWA",
-      ],
-      impact:
-        "Improved conversion and service throughput for a chauffeur platform publicly operating since 2007 across major Indian metros (Mumbai, Pune, Delhi NCR, Bangalore, Kolkata, Hyderabad, Thane, Navi Mumbai).",
-      featured: false,
-    },
-    // ── BANKING & FINANCE ───────────────────────────────────────────────────
-    {
-      title: "BetaRisk CRM → Banking & Corporate Risk",
-      href: "https://www.betarisk.com",
-      dates: "Nov 2021 – Nov 2022",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Improved risk-governance execution for institutional users, giving decision-makers more consistent visibility across risk workflows, controls, and reporting.",
-      technologies: ["React", "TypeScript", "Material UI", "Cypress", "Jest"],
-      impact:
-        "Supported institutional risk operations for regulated segments highlighted by BetaRisk (banks, payment providers, pensions, asset managers, and MFIs), improving consistency and confidence in daily committee decisions.",
-      featured: false,
-    },
-    {
-      title: "BrightUp → Personal Financial Wellness",
-      href: "https://brightup.life",
-      dates: "Jun 2022 – Jul 2023",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Simplified early home-affordability qualification into a guided, low-friction journey so users with strong payment behavior could be evaluated beyond a single credit-score snapshot.",
-      technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS", "PWA"],
-      impact:
-        "Enabled a faster pre-qualification flow with a ~30-second initial estimate and support for users with 12+ months of on-time rent history, helping lenders and applicants move from uncertainty to action sooner.",
-      featured: false,
-    },
-    // ── EDTECH & SOCIAL IMPACT ──────────────────────────────────────────────
-    {
-      title: "Thinkster → AI Math Coaching for Kids",
-      href: "https://hellothinkster.com",
-      dates: "Jan 2023 – Sep 2023",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Built the full student experience for an AI math platform, including interactive lessons and gamification. Used adaptive UX with state management; resolved cross-device compatibility for web/mobile to boost retention.",
-      technologies: [
-        "Angular",
-        "React Native",
-        "TypeScript",
-        "TailwindCSS",
-        "RxJS",
-      ],
-      impact: "3x student participation, highest-retention feature.",
-      featured: true,
-    },
-    {
-      title: "Reading Assistant | Gyan AI",
-      href: "https://www.gyanai.com",
-      dates: "Jun 2022 – Sep 2023",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Built a reading-learning experience centered on trust and clarity, making it easier for learners and educators to rely on grounded outputs and structured assistance.",
-      technologies: ["React", "TypeScript", "TailwindCSS", "Redux", "PWA"],
-      impact:
-        "Aligned with Gyan's enterprise-safe positioning and explainable AI direction, contributing to a product experience designed for high-trust use cases where accuracy and traceability are critical.",
-      featured: false,
-    },
-    {
-      title: "Safe Water Network → Field Operations Platform",
-      href: "https://safewaternetwork.org",
-      dates: "Dec 2022 – Sep 2023",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Modernized field operations so distributed staff could run day-to-day water service workflows with higher reliability in low-connectivity regions and stronger reporting consistency.",
-      technologies: [
-        "Angular",
-        "React Native",
-        "TypeScript",
-        "PWA",
-        "Custom UI Library",
-      ],
-      impact:
-        "Enabled digital operations for a water nonprofit that publicly reports 2M+ people directly reached across 600+ communities (and 60M indirectly reached) by end-2025.",
-      featured: false,
-    },
-    {
-      title: "North Eastern University → Academic Management",
-      href: "https://www.northeastern.edu/",
-      dates: "Apr 2022 – Jun 2023",
-      company: "Rightbrain Infotech",
-      active: true,
-      description:
-        "Built portals for students, teachers, and admins to streamline university operations. Automated scheduling and grading; addressed scalability for large user bases with efficient state management.",
-      technologies: ["Angular", "TypeScript", "Bootstrap", "RxJS"],
-      impact: "35% reduced administrative workload.",
-      featured: false,
-    },
-    {
-      title: "Glixcel → Tutor Marketplace EdTech",
-      href: "https://www.behance.net/gallery/176474575/Glixcel-Online-Class",
-      dates: "Aug 2020 – Sep 2021",
-      company: "Glixcel",
-      active: true,
-      description:
-        "Launched a tutor marketplace from zero, with secure payments and scheduling. Scaled to thousands of users; handled integration challenges with legacy tech to achieve profitability.",
-      technologies: [
-        "HTML/CSS/JS",
-        "jQuery",
-        "Bootstrap",
-        "Flask",
-        "Fetch API",
-      ],
-      impact: "Connected thousands, first profitable quarters for company.",
-      featured: false,
-    },
-    // ── SHURUTECH PRODUCTS ──────────────────────────────────────────────────
-    {
-      title: "Tenderd Scout → Equipment Intelligence App",
-      href: "https://play.google.com/store/apps/details?id=com.tenderd.scout",
-      resourceLinks: [
-        {
-          label: "Play Store",
-          href: "https://play.google.com/store/apps/details?id=com.tenderd.scout",
-        },
-        {
-          label: "App Store",
-          href: "https://apps.apple.com/in/app/tenderd-scout/id6758004007",
-        },
-      ],
-      dates: "Dec 2025 – Present",
-      company: "Shurutech",
-      active: true,
-      description:
-        "Delivered a production mobile experience that improved asset visibility, utilization tracking, and decision speed for field operations and management workflows.",
-      technologies: [
-        "React Native",
-        "TypeScript",
-        "TanStack Query",
-        "Firebase",
-        "Novu",
-        "PostHog",
-        "Last9",
-        "Bitrise CI/CD",
-        "Appium",
-        "WebdriverIO",
-        "Jest",
-      ],
-      impact:
-        "Shipped and published across major app stores, giving operations teams a unified and accessible field workflow across both Android and iOS.",
-      featured: true,
-    },
-    {
-      title: "Tenderd OpsPro → Operations Workflow App",
-      href: "https://play.google.com/store/apps/details?id=com.tenderd.opspro",
-      resourceLinks: [
-        {
-          label: "Play Store",
-          href: "https://play.google.com/store/apps/details?id=com.tenderd.opspro",
-        },
-      ],
-      dates: "Dec 2025 – Present",
-      company: "Shurutech",
-      active: true,
-      description:
-        "Streamlined day-to-day operational execution through a mobile-first flow, reducing coordination friction for tasks, status updates, and on-ground actions.",
-      technologies: [
-        "React Native",
-        "TypeScript",
-        "TanStack Query",
-        "Firebase",
-        "Novu",
-        "PostHog",
-        "Last9",
-        "Bitrise CI/CD",
-        "Appium",
-        "WebdriverIO",
-        "Jest",
-      ],
-      impact:
-        "Enabled faster rollout of standardized on-ground operations through a dedicated app channel built for real-world team usage.",
-      featured: true,
-    },
-    {
-      title: "Tenderd → Asset Tracking App",
-      href: "https://play.google.com/store/apps/details?id=com.tenderdai.track",
-      resourceLinks: [
-        {
-          label: "Play Store",
-          href: "https://play.google.com/store/apps/details?id=com.tenderdai.track",
-        },
-        {
-          label: "App Store",
-          href: "https://apps.apple.com/in/app/tenderd/id6762028798",
-        },
-      ],
-      dates: "Dec 2025 – Present",
-      company: "Shurutech",
-      active: true,
-      description:
-        "Enabled near real-time operational asset tracking and monitoring, reducing delayed updates and improving actionability for distributed field operations.",
-      technologies: [
-        "React Native",
-        "TypeScript",
-        "TanStack Query",
-        "Firebase",
-        "Novu",
-        "PostHog",
-        "Last9",
-        "Bitrise CI/CD",
-        "Appium",
-        "WebdriverIO",
-        "Jest",
-      ],
-      impact:
-        "Deployed as a cross-platform app presence on both Play Store and App Store, improving accessibility and adoption pathways for distributed teams.",
-      featured: true,
-    },
-    // ── PERSONAL PROJECTS ───────────────────────────────────────────────────
-    {
-      title: "BizDro → AI-Powered Business Card Scanner & CRM",
-      href: "https://play.google.com/store/apps/details?id=com.bizdro.businesscardscanner",
-      resourceLinks: [
-        {
-          label: "Play Store",
-          href: "https://play.google.com/store/apps/details?id=com.bizdro.businesscardscanner",
-        },
-      ],
-      dates: "Nov 2025 – Nov 2025",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Shipped to Google Play to help professionals turn business cards into structured contacts quickly, reduce manual follow-up effort, and keep networking workflows organized in one place.",
-      technologies: [
-        "Flutter",
-        "Dart",
-        "Firebase",
-        "Firebase Cloud Functions",
-        "Gemini GenKit",
-        "Google ML Kit",
-        "Google Calendar API",
-      ],
-      impact:
-        "100+ downloads on Google Play with 60–70 active users daily; eliminated manual business card transcription with AI extraction, turning paper contacts into structured, searchable CRM data in seconds.",
-      featured: true,
-    },
-    {
-      title: "openapi-normalizer → Postman-to-OpenAPI Converter & Normalizer (NPM)",
-      href: "https://www.npmjs.com/package/openapi-normalizer",
-      dates: "Apr 2026 – Present",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Built for API teams that need cleaner handoffs from Postman to production workflows, delivering normalized specs with clearer examples and significantly smaller files so documentation, review, and client generation become more reliable.",
-      technologies: [
-        "TypeScript",
-        "Node.js",
-        "OpenAPI",
-        "Postman",
-        "CLI",
-        "pnpm",
-      ],
-      impact:
-        "Bridged Postman-to-OpenAPI workflows with measurable early adoption (7 weekly npm downloads as of May 2026), reducing spec bloat and improving codegen reliability for CI-driven SDK generation.",
-      featured: true,
-    },
-    {
-      title: "Kharcha → Personal Expense Tracker",
-      href: "https://kharcha.space/",
-      dates: "Dec 2025 – Dec 2025",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Delivered a clear, low-friction expense tracking experience that helps everyday users monitor subscriptions and stay financially organized without ads or paywalls.",
-      technologies: [
+        "PostgreSQL",
+        "Redis",
+        "Socket.IO",
         "React",
         "TypeScript",
-        "TanStack Stack",
-        "Convex",
-        "Clerk",
-        "TailwindCSS",
-        "Recharts",
+        "Vite",
+        "TanStack Query",
+        "Zustand",
+        "Tailwind CSS",
+        "ShadCN UI",
+        "Dexie.js",
+        "Workbox",
+        "Docker",
+      ],
+      impact:
+        "Designed full-stack architecture with strict tenant isolation, real-time WebSocket syncing via Redis adapter, robust offline resilience with conflict resolution, Argon2-hashed credentials + JWT/refresh tokens, dynamic PBAC, and automated username generation. Enables zero-downtime operations for busy hospitality environments.",
+      featured: true,
+    },
+    {
+      title: "WeCare Healthcare Laboratory SaaS Platform",
+      dates: "2023 - Present",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Built a comprehensive SaaS-style healthcare platform to digitize laboratory operations — automating the patient lifecycle from registration and secure record management to automated report generation and real-time tracking.",
+      technologies: [
+        "NestJS",
+        "Prisma",
+        "PostgreSQL",
+        "Redis",
+        "Socket.IO",
+        "React",
+        "TypeScript",
+        "Vite",
         "Vitest",
-        "PWA",
+        "TanStack Query",
+        "Zustand",
+        "Tailwind CSS",
+        "ShadCN UI",
+        "Dexie.js",
+        "Workbox",
+        "Docker",
       ],
       impact:
-        "Launched in 3 days and positioned for broad adoption with a free, no-ads experience; supports the platform's public claim of serving thousands of users seeking simpler money tracking.",
+        "Owned 0→1 full-stack architecture with multi-tenant RBAC, AI-powered medical report interpretation via LLM orchestration, dynamic PDF generation, and real-time inventory tracking — shipping weekly with zero-downtime CI/CD.",
       featured: true,
     },
     {
-      title: "SonarQube Issues Exporter → NPM Package for Code Quality Metrics",
-      href: "https://www.npmjs.com/package/sonarqube-issues-exporter",
-      dates: "Aug 2025 – Sep 2025",
-      company: "Personal Project",
+      title: "Global Tanker Fleet Management System",
+      href: "https://hafnia.com/",
+      dates: "Mar 2024 - Present",
+      company: "Kiya.ai",
       active: true,
+      tags: ["Confidential", "NDA Protected"],
       description:
-        "Created for engineering teams with limited DevOps capacity, enabling faster and more consistent code-quality reporting so stakeholders can review issues, track trends, and act on release risk earlier.",
-      technologies: [
-        "Node.js",
-        "TypeScript",
-        "SonarQube API",
-        "CLI",
-        "Axios",
-        "Chart.js",
-        "Commander",
-        "Dotenv",
-        "Handlebars",
-        "Winston",
-        "Zod",
-      ],
-      impact:
-        "Delivered practical code-quality reporting automation with measurable ongoing adoption (21 weekly npm downloads as of May 2026), reducing friction for teams without dedicated SonarQube infrastructure.",
-      featured: false,
-    },
-    {
-      title: "Battery Tools",
-      dates: "May 2026 – Present",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Built a daily operations platform for my father's battery shop to centralize customer handling, quotations, inventory lookup, service workflows, and billing into one fast, installable web experience.",
+        "TypeScript-based React web application for maritime pool participants featuring RBAC, interactive dashboards with global filters and DeckGL maps, action item centers, pool point corrections, and performance reporting.",
       technologies: [
         "React",
         "TypeScript",
-        "Firebase",
-        "PWA",
-        "CRM",
-        "RBAC",
-        "WCAG",
+        "Vite",
+        "TailwindCSS",
+        "Vitest",
+        "AG Grid",
+        "DeckGL",
+        "SonarQube",
+        "New Relic",
+        "Azure Pipelines",
       ],
       impact:
-        "Reduced manual coordination and day-to-day friction through workflow automation, faster lookup tools, and offline-capable operations, improving service speed, accuracy, and repeat-customer experience at the shop.",
-      featured: false,
+        "Architected a scalable maritime Enterprise SaaS platform with granular RBAC and high-performance dashboards, integrating SonarQube, New Relic, and Azure CI/CD pipelines across dev, test, and prod environments.",
+      featured: true,
     },
     {
-      title: "R Batteries Auto Electrical Works → Local SEO Landing Page",
-      href: "https://rbatteries.store/",
-      dates: "Nov 2025 – Nov 2025",
-      company: "Personal Project",
+      title: "Quloi Omni-Channel Supply Chain Platform",
+      href: "https://quloi.com",
+      dates: "Jan 2023 - Sep 2023",
+      company: "Quloi",
       active: true,
       description:
-        "Improved high-intent local discovery and customer conversion through area-targeted pages and direct booking flows that scaled inbound demand across Pune neighborhoods.",
-      technologies: ["Next.js", "TypeScript", "TailwindCSS", "PWA"],
+        "Cloud-native Supply Chain Collaboration platform serving as a centralized command center for global manufacturers and distributors to manage Purchase Orders, shipment bookings, and supplier performance with real-time visibility.",
+      technologies: ["React", "TypeScript", "TailwindCSS", "REST API", "RBAC"],
       impact:
-        "Driving 500+ customer calls per month (and growing), significantly boosted Google Maps visibility and local search rankings across 21 Pune neighbourhoods.",
-      featured: false,
+        "Engineered Supplier Management and PO Automation modules with real-time KPI dashboards (OTIF, lead-time accuracy, shipment milestones), eliminating manual spreadsheet tracking and reducing detention/demurrage costs.",
+      featured: true,
+    },
+    {
+      title: "Casa Architect Interior Design Portfolio Platform",
+      href: "https://casa-architects.in/",
+      dates: "Jan 2022 - Dec 2022",
+      company: "Banao Tech (ATG World)",
+      active: true,
+      description:
+        "Built a high-performance portfolio engine for an architecture and interior design firm with optimized image galleries, dynamic project storytelling, transparent service pricing matrices, and testimonial synchronization.",
+      technologies: ["React", "Next.js", "TypeScript", "TailwindCSS", "PWA"],
+      impact:
+        "Improved lead qualification and conversion rates through transparent service offerings, lazy-loaded high-resolution renders, and a mobile-first layout consistent across all device sizes.",
+      featured: true,
+    },
+    {
+      title: "Zomato Clone → Food Delivery App",
+      dates: "Jan 2022 - Dec 2022",
+      company: "Banao Tech (ATG World)",
+      active: true,
+      description:
+        "Developed a full-featured food delivery application with user registration, social login via Firebase, dynamic home screen with restaurant showcases, sorting/filtering, and a real-time cart with multiple payment options.",
+      technologies: ["React Native", "Firebase", "TypeScript", "REST API"],
+      impact:
+        "Delivered end-to-end food ordering flows — from restaurant discovery and filtering to real-time cart updates and multi-payment checkout — with Firebase-powered authentication and onboarding.",
+      featured: true,
     },
   ],
 } as const;
+
+export type ProjectResourceLink = {
+  readonly label: string;
+  readonly href: string;
+};
+
+export type Project = (typeof DATA)["projects"][number];
+
+export function getProjectResourceLinks(
+  project: Project,
+): readonly ProjectResourceLink[] | undefined {
+  if (!("resourceLinks" in project)) {
+    return undefined;
+  }
+
+  return (
+    project as Project & { resourceLinks: readonly ProjectResourceLink[] }
+  ).resourceLinks;
+}

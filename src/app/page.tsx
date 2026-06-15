@@ -1,28 +1,27 @@
-import { BlurFade } from "@/components/magicui/blur-fade";
+import { BlogPostCard } from "@/components/blog-post-card";
 import { Hero } from "@/components/hero";
 import { IndustriesMarquee } from "@/components/industries-marquee";
+import { BlurFade } from "@/components/magicui/blur-fade";
 import { MetricsStrip } from "@/components/metrics-strip";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { SectionEyebrow } from "@/components/section-eyebrow";
 import { SkillsSection } from "@/components/skills-section";
-import { BlogPostCard } from "@/components/blog-post-card";
-import { DATA } from "@/data/resume";
 import { getAllPosts } from "@/data/blog";
+import { DATA, getProjectResourceLinks } from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import { ArrowUpRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 
 const PINNED_PROJECT_TITLES = [
-  "Tenderd Scout → Equipment Intelligence App",
-  "Tenderd OpsPro → Operations Workflow App",
-  "Tenderd → Asset Tracking App",
-  "Hafnia → Real-Time Fleet Intelligence Platform",
-  "OceanPass → Maritime Compliance Desktop Platform",
-  "Thinkster → AI Math Coaching for Kids",
+  "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
+  "WeCare → Healthcare Laboratory SaaS Platform",
+  "Global Tanker Fleet Management System",
+  "Quloi → Omni-Channel Supply Chain Platform",
+  "Casa Architect → Interior Design Portfolio Platform",
 ];
 
 export default async function Page() {
@@ -47,7 +46,7 @@ export default async function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
             <h2 className="section-heading mb-6 max-w-2xl">
               Engineering at the{" "}
-              <span className="serif-accent text-foreground">intersection</span>{" "}
+              <span className="serif-accent text-primary">intersection</span>{" "}
               of code and business outcomes.
             </h2>
           </BlurFade>
@@ -77,7 +76,7 @@ export default async function Page() {
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
             <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
-              Five years of shipping for teams that need outcomes, not output.
+              Four years of shipping for teams that need outcomes, not output.
             </h2>
           </BlurFade>
           <div className="flex flex-col">
@@ -112,7 +111,7 @@ export default async function Page() {
           <div className="flex flex-col">
             {DATA.education.map((education, id) => (
               <BlurFade
-                key={education.school}
+                key={`${education.school}-${education.degree}-${education.start}`}
                 delay={BLUR_FADE_DELAY * (2 + id * 0.5)}
                 inView
               >
@@ -155,7 +154,7 @@ export default async function Page() {
                 if (bi !== -1) return 1;
                 return 0;
               })
-              .slice(0, 5)
+              .slice(0, PINNED_PROJECT_TITLES.length)
               .map((project, id) => {
                 // First card is the bento "feature" hero (large, 2-row tall on lg+).
                 // Next two are wide half-rows; the last two fill the bottom row.
@@ -178,9 +177,7 @@ export default async function Page() {
                       description={project.description}
                       dates={project.dates}
                       tags={project.technologies}
-                      resourceLinks={
-                        "resourceLinks" in project ? project.resourceLinks : undefined
-                      }
+                      resourceLinks={getProjectResourceLinks(project)}
                       impact={project.impact}
                       company={project.company}
                       featured={id === 0}
@@ -221,7 +218,9 @@ export default async function Page() {
             ) : (
               <div
                 className={`grid grid-cols-1 gap-4 sm:gap-5 ${
-                  latestPosts.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"
+                  latestPosts.length === 2
+                    ? "sm:grid-cols-2"
+                    : "sm:grid-cols-2 lg:grid-cols-3"
                 }`}
               >
                 {latestPosts.map((post, id) => (
@@ -260,7 +259,9 @@ export default async function Page() {
               <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
                 <h2 className="text-3xl sm:text-5xl font-medium tracking-[-0.03em] leading-[1.05] text-foreground max-w-[18ch]">
                   Let&apos;s build{" "}
-                  <span className="serif-accent text-foreground">something</span>{" "}
+                  <span className="serif-accent text-primary">
+                    something
+                  </span>{" "}
                   together.
                 </h2>
               </BlurFade>
@@ -276,14 +277,14 @@ export default async function Page() {
                     href={DATA.contact.social.LinkedIn.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-5 h-11 bg-foreground text-background rounded-full font-medium text-sm transition-colors duration-200 hover:bg-foreground/85 active:bg-foreground/75"
+                    className="group inline-flex items-center gap-2 px-5 h-11 bg-primary text-primary-foreground rounded-full font-medium text-sm shadow-soft transition-colors duration-200 hover:bg-primary/90 active:bg-primary/80"
                   >
                     Connect on LinkedIn
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
                     href={`mailto:${DATA.contact.email}`}
-                    className="group inline-flex items-center gap-2 px-5 h-11 border border-border rounded-full font-medium text-sm transition-colors duration-200 hover:bg-foreground/[0.06] hover:border-foreground/40 active:bg-foreground/[0.1]"
+                    className="group inline-flex items-center gap-2 px-5 h-11 border border-border rounded-full font-medium text-sm transition-colors duration-200 hover:bg-primary/[0.06] hover:border-primary/35 hover:text-primary active:bg-primary/[0.1]"
                   >
                     Send email
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

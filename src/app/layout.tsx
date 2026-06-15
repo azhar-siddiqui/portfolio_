@@ -36,18 +36,17 @@ const fontSerif = FontSerif({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: `${DATA.name} — Senior Product Engineer`,
+    default: `${DATA.name} — ${DATA.title}`,
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
   keywords: [
-    "Senior Product Engineer",
+    DATA.title,
     "Full Stack Developer",
     "React Developer",
     "Next.js Developer",
     "TypeScript",
     DATA.name,
-    `${DATA.alias} Shaikh`,
     DATA.alias,
     "Portfolio",
     "Software Engineer",
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
   authors: [{ name: DATA.name, url: DATA.url }],
   creator: DATA.name,
   openGraph: {
-    title: `${DATA.name} — Senior Product Engineer`,
+    title: `${DATA.name} — ${DATA.title}`,
     description: DATA.description,
     url: DATA.url,
     siteName: DATA.name,
@@ -75,10 +74,9 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name} — Senior Product Engineer`,
+    title: `${DATA.name} — ${DATA.title}`,
     card: "summary_large_image",
     description: DATA.description,
-    creator: "@zaheedshaikh",
   },
   alternates: {
     canonical: DATA.url,
@@ -87,8 +85,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f2e8" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0c1a" },
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0f1e" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -103,21 +101,21 @@ function JsonLd() {
     "@type": "Person",
     "@id": `${DATA.url}/#person`,
     name: DATA.name,
-    alternateName: [`${DATA.alias} Shaikh`, DATA.alias],
+    alternateName: [DATA.alias, `Sayyed ${DATA.alias}`],
     url: DATA.url,
     email: DATA.contact.email,
     image: `${DATA.url}/me.png`,
     description: DATA.description,
-    jobTitle: "Senior Product Engineer",
+    jobTitle: DATA.title,
     worksFor: {
       "@type": "Organization",
-      name: "Shurutech",
-      url: "https://shurutech.com",
+      name: "Kiya.ai",
+      url: "https://kiya.ai",
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
-      name: "Abeda Inamdar Senior College",
-      url: "https://abedainamdarcollege.org.in/",
+      name: "Savitribai Phule Pune University",
+      url: "https://www.unipune.ac.in/",
     },
     address: {
       "@type": "PostalAddress",
@@ -147,7 +145,7 @@ function JsonLd() {
     "@type": "WebSite",
     "@id": `${DATA.url}/#website`,
     url: DATA.url,
-    name: `${DATA.name} — Senior Product Engineer`,
+    name: `${DATA.name} — ${DATA.title}`,
     description: DATA.description,
     publisher: { "@id": `${DATA.url}/#person` },
   };

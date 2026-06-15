@@ -23,7 +23,7 @@ const CATEGORY_LABELS: Record<CategoryKey, string> = {
 function getIcon(iconSlug?: string | null) {
   if (!iconSlug) return null;
   const iconKey = `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(
-    1
+    1,
   )}` as keyof typeof SimpleIcons;
   return (SimpleIcons[iconKey] as { path: string; hex: string }) || null;
 }
@@ -38,11 +38,12 @@ function SkillChip({
   delay: number;
 }) {
   const icon = getIcon(skill.icon);
-  const color = skill.color && isDark ? skill.color : icon ? `#${icon.hex}` : undefined;
+  const color =
+    skill.color && isDark ? skill.color : icon ? `#${icon.hex}` : undefined;
 
   return (
     <BlurFade delay={delay} inView>
-      <div className="group flex items-center gap-2 rounded-md border border-border/60 bg-card/45 backdrop-blur-sm px-3 py-2 transition-all duration-300 hover:border-foreground/30 hover:bg-foreground/[0.04]">
+      <div className="group flex items-center gap-2 rounded-lg border border-border/70 bg-card/70 backdrop-blur-sm px-3 py-2 transition-all duration-300 hover:border-primary/30 hover:bg-primary/[0.04]">
         {icon ? (
           <svg
             viewBox="0 0 24 24"
@@ -71,7 +72,8 @@ export function SkillsSection() {
   }, []);
 
   const isDark =
-    mounted && (theme === "dark" || (theme === "system" && systemTheme === "dark"));
+    mounted &&
+    (theme === "dark" || (theme === "system" && systemTheme === "dark"));
 
   return (
     <section id="skills">
@@ -84,13 +86,18 @@ export function SkillsSection() {
             The stack I reach for, by problem space.
           </h2>
         </BlurFade>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/60 border border-border/60 rounded-2xl overflow-hidden shadow-card">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/70 border border-border/70 rounded-xl overflow-hidden shadow-card">
           {(Object.keys(DATA.skills) as CategoryKey[]).map((cat, ci, all) => {
             const skills = DATA.skills[cat] as readonly SkillEntry[];
             const isOrphan = all.length % 2 !== 0 && ci === all.length - 1;
             return (
-              <BlurFade key={cat} delay={BLUR_FADE_DELAY * (3 + ci)} inView className={isOrphan ? "md:col-span-2" : undefined}>
-                <div className="bg-card/60 backdrop-blur-md p-6 sm:p-8 h-full flex flex-col gap-5">
+              <BlurFade
+                key={cat}
+                delay={BLUR_FADE_DELAY * (3 + ci)}
+                inView
+                className={isOrphan ? "md:col-span-2" : undefined}
+              >
+                <div className="bg-card/80 backdrop-blur-md p-6 sm:p-8 h-full flex flex-col gap-5">
                   <div className="flex items-baseline justify-between">
                     <h3 className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-foreground">
                       {CATEGORY_LABELS[cat]}

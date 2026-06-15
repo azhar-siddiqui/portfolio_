@@ -1,12 +1,12 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { BlurFade } from "@/components/magicui/blur-fade";
 import { HeroMeshBackground } from "@/components/hero-mesh-background";
-import { useMagnetic } from "@/hooks/use-magnetic";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
+import { useMagnetic } from "@/hooks/use-magnetic";
+import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowDown, MapPin } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -15,10 +15,7 @@ export function Hero() {
   const ghostRef = useMagnetic<HTMLAnchorElement>({ strength: 0.18 });
 
   return (
-    <section
-      id="hero"
-      className="relative pt-12 sm:pt-16 pb-4 sm:pb-0"
-    >
+    <section id="hero" className="relative pt-12 sm:pt-16 pb-4 sm:pb-0">
       <HeroMeshBackground />
       <div className="mx-auto w-full max-w-6xl">
         <BlurFade delay={BLUR_FADE_DELAY}>
@@ -35,9 +32,9 @@ export function Hero() {
             <div className="relative shrink-0">
               <div
                 aria-hidden
-                className="absolute inset-[-4px] rounded-full bg-gradient-to-br from-aurora-1/35 via-aurora-3/25 to-aurora-2/35 blur-md"
+                className="absolute inset-[-4px] rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-primary/25 blur-md"
               />
-              <Avatar className="relative size-20 sm:size-28 border border-border/60 shadow-card">
+              <Avatar className="relative size-20 sm:size-28 border-2 border-primary/20 shadow-card ring-2 ring-background">
                 <AvatarImage
                   alt={DATA.name}
                   src={DATA.avatarUrl}
@@ -62,12 +59,8 @@ export function Hero() {
         </BlurFade>
 
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <p className="mt-4 sm:mt-8 text-lg sm:text-2xl xl:text-3xl font-light tracking-[-0.015em] text-foreground/80 max-w-[22ch] sm:max-w-[24ch] leading-[1.25] sm:leading-[1.2]">
-            Senior Product Engineer{" "}
-            <span className="serif-accent text-foreground/95 text-[1.15em]">
-              shipping
-            </span>{" "}
-            software that pays for itself.
+          <p className="mt-4 sm:mt-8 text-lg sm:text-2xl xl:text-3xl font-light tracking-[-0.015em] text-foreground/80 max-w-[22ch] sm:max-w-[28ch] leading-[1.25] sm:leading-[1.2]">
+            {DATA.tagline}
           </p>
         </BlurFade>
 
@@ -82,7 +75,7 @@ export function Hero() {
             <Link
               ref={primaryRef}
               href="#work"
-              className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-11 sm:h-12 bg-foreground text-background rounded-full font-medium text-sm hover:bg-foreground/85 active:bg-foreground/75"
+              className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-11 sm:h-12 bg-primary text-primary-foreground rounded-full font-medium text-sm shadow-soft hover:bg-primary/90 active:bg-primary/80 transition-colors duration-200"
             >
               View work
               <ArrowDown className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-y-0.5" />
@@ -90,7 +83,7 @@ export function Hero() {
             <Link
               ref={ghostRef}
               href="#contact"
-              className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-11 sm:h-12 border border-border rounded-full font-medium text-sm hover:bg-foreground/[0.06] hover:border-foreground/40 active:bg-foreground/[0.1]"
+              className="group inline-flex items-center justify-center gap-2 px-5 sm:px-6 h-11 sm:h-12 border border-border rounded-full font-medium text-sm hover:bg-primary/[0.06] hover:border-primary/35 hover:text-primary active:bg-primary/[0.1] transition-colors duration-200"
             >
               Get in touch
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

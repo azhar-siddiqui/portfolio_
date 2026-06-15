@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zahidshaikh.space/sitemap.xml
+Sitemap: https://azharsayyed.dev/sitemap.xml

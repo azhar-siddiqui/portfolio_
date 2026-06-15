@@ -17,7 +17,7 @@ export function IndustriesMarquee({ items }: { items: readonly string[] }) {
         {doubled.map((item, i) => (
           <div
             key={`${item}-${i}`}
-            className="flex items-center gap-12 sm:gap-16 font-mono text-2xl sm:text-4xl uppercase tracking-[-0.01em] text-muted-foreground/30 whitespace-nowrap select-none"
+            className="flex items-center gap-12 sm:gap-16 font-mono text-2xl sm:text-4xl uppercase tracking-[-0.01em] text-muted-foreground/25 whitespace-nowrap select-none"
           >
             {item}
             <span aria-hidden className="text-muted-foreground/20">

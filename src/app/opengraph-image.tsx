@@ -3,7 +3,7 @@ import { DATA } from "@/data/resume";
 
 export const runtime = "edge";
 
-export const alt = `${DATA.name} — Senior Product Engineer`;
+export const alt = `${DATA.name} — ${DATA.title}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -70,7 +70,7 @@ export default async function Image() {
             marginBottom: "24px",
           }}
         >
-          Senior Product Engineer
+          {DATA.title}
         </div>
 
         {/* Description */}
@@ -83,8 +83,10 @@ export default async function Image() {
             maxWidth: "800px",
           }}
         >
-          5+ years · 15+ products · 10 industries — Building software that
-          drives revenue, cuts costs, and scales operations.
+          {DATA.metrics[0].value}
+          {DATA.metrics[0].suffix} years · {DATA.metrics[1].value}
+          {DATA.metrics[1].suffix} apps · {DATA.metrics[2].value} industries —{" "}
+          {DATA.description.slice(0, 100)}…
         </div>
 
         {/* Bottom bar */}
