@@ -49,6 +49,14 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         accent: "#6b8fa3",
         success: "#4d9a7a",
         accentStrip: "#284563",
+        primaryTint: "rgba(122, 158, 200, 0.08)",
+        primaryTintStrong: "rgba(122, 158, 200, 0.14)",
+        primaryBorder: "rgba(122, 158, 200, 0.35)",
+        primaryRing: "rgba(122, 158, 200, 0.15)",
+        primaryUnderline: "rgba(122, 158, 200, 0.45)",
+        successTint: "rgba(77, 154, 122, 0.08)",
+        successBorder: "rgba(77, 154, 122, 0.22)",
+        surfaceMuted: "rgba(23, 28, 36, 0.85)",
       }
     : {
         bg: "#fafaf9",
@@ -64,6 +72,14 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         accent: "#3d5a73",
         success: "#2f6f54",
         accentStrip: "#284563",
+        primaryTint: "rgba(40, 69, 99, 0.05)",
+        primaryTintStrong: "rgba(40, 69, 99, 0.08)",
+        primaryBorder: "rgba(40, 69, 99, 0.32)",
+        primaryRing: "rgba(40, 69, 99, 0.15)",
+        primaryUnderline: "rgba(40, 69, 99, 0.38)",
+        successTint: "rgba(47, 111, 84, 0.06)",
+        successBorder: "rgba(47, 111, 84, 0.2)",
+        surfaceMuted: "rgba(255, 255, 255, 0.9)",
       };
 
   // ── Featured projects: company first, personal last (same as site) ─
@@ -206,9 +222,9 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
   .avatar-wrap::before {
     content: "";
     position: absolute;
-    inset: -3px;
+    inset: -4px;
     border-radius: 50%;
-    background: linear-gradient(135deg, ${c.primary}44, ${c.accent}33);
+    background: ${c.primaryRing};
     z-index: 0;
   }
   .avatar {
@@ -218,7 +234,8 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     height: 72px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid ${c.bg};
+    border: 2px solid ${c.primaryBorder};
+    box-shadow: 0 0 0 2px ${c.bg};
   }
 
   /* ── Metrics strip ─────────────────────────────────────── */
@@ -297,7 +314,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     padding: 8px 14px;
     border-left: 2px solid ${c.primary};
     max-width: 76ch;
-    background: ${isDark ? "rgba(59,130,246,0.06)" : "rgba(37,99,235,0.04)"};
+    background: ${c.primaryTint};
     border-radius: 0 4px 4px 0;
   }
 
@@ -348,7 +365,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
-    text-decoration-color: ${isDark ? "rgba(96,165,250,0.45)" : "rgba(37,99,235,0.38)"};
+    text-decoration-color: ${c.primaryUnderline};
     transition: color 0.15s ease, text-decoration-color 0.15s ease, text-underline-offset 0.15s ease;
   }
   .entry-company a:hover,
@@ -382,7 +399,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     color: ${c.primary};
     border-radius: 3px;
     line-height: 1;
-    background: ${isDark ? "rgba(59,130,246,0.1)" : "rgba(37,99,235,0.06)"};
+    background: ${c.primaryTintStrong};
   }
 
   /* ── Project specifics ─────────────────────────────────── */
@@ -392,8 +409,8 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     gap: 8px;
     margin-top: 8px;
     padding: 6px 10px;
-    background: ${isDark ? "rgba(52,211,153,0.08)" : "rgba(5,150,105,0.06)"};
-    border: 1px solid ${isDark ? "rgba(52,211,153,0.22)" : "rgba(5,150,105,0.2)"};
+    background: ${c.successTint};
+    border: 1px solid ${c.successBorder};
     border-left: 3px solid ${c.success};
     border-radius: 0 4px 4px 0;
   }
@@ -431,12 +448,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     margin-top: 12px;
     padding: 11px 13px;
     border: 1px solid ${c.border};
-    background: linear-gradient(
-      135deg,
-      ${c.surface} 0%,
-      ${isDark ? "rgba(59,130,246,0.06)" : "rgba(37,99,235,0.04)"} 55%,
-      ${isDark ? "rgba(34,211,238,0.04)" : "rgba(8,145,178,0.03)"} 100%
-    );
+    background: ${c.primaryTint};
     border-left: 3px solid ${c.primary};
     border-radius: 6px;
     font-size: 12px;
@@ -469,7 +481,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     color: ${c.fgDim};
     border: 1px solid ${c.border};
     border-radius: 999px;
-    background: ${isDark ? "rgba(59,130,246,0.06)" : "rgba(15,23,42,0.03)"};
+    background: ${c.primaryTint};
     padding: 3.5px 9px;
     text-decoration: none;
     line-height: 1.4;
@@ -477,8 +489,8 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
   .project-link .arrow { color: ${c.primary}; font-size: 10px; }
   .project-link:hover {
     color: ${c.primary};
-    border-color: ${isDark ? "rgba(96,165,250,0.45)" : "rgba(37,99,235,0.35)"};
-    background: ${isDark ? "rgba(59,130,246,0.1)" : "rgba(37,99,235,0.06)"};
+    border-color: ${c.primaryBorder};
+    background: ${c.primaryTintStrong};
   }
 
   /* ── Skills ────────────────────────────────────────────── */
@@ -529,7 +541,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     padding: 3px 8px;
     border: 1px solid ${c.border};
     border-radius: 6px;
-    background: ${isDark ? "rgba(17,24,39,0.85)" : "rgba(255,255,255,0.9)"};
+    background: ${c.surfaceMuted};
     line-height: 1.45;
     letter-spacing: 0.01em;
   }
@@ -574,14 +586,14 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     align-items: center;
     gap: 3px;
     color: ${c.primary};
-    border: 1px solid ${isDark ? "rgba(96,165,250,0.35)" : "rgba(37,99,235,0.28)"};
+    border: 1px solid ${c.primaryBorder};
     border-radius: 999px;
     padding: 3px 9px;
     font-size: 9px;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-decoration: none;
-    background: ${isDark ? "rgba(59,130,246,0.08)" : "rgba(37,99,235,0.05)"};
+    background: ${c.primaryTint};
   }
   .footer .arrow { margin-left: 1px; }
 
