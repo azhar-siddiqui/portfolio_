@@ -447,7 +447,6 @@ export const DATA = {
     },
     {
       title: "SubTrackr",
-      href: null,
       dates: "June 2026",
       company: "Personal Project",
       active: false,
