@@ -1,5 +1,5 @@
-import Navbar from "@/components/navbar";
 import { JsonLd } from "@/components/json-ld";
+import Navbar from "@/components/navbar";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,14 +10,14 @@ import {
   buildWebSiteSchema,
 } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-import type { Viewport } from "next";
-import {
-  Geist as FontSans,
-  Geist_Mono as FontMono,
-  Instrument_Serif as FontSerif,
-} from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Viewport } from "next";
+import {
+  Geist_Mono as FontMono,
+  Geist as FontSans,
+  Instrument_Serif as FontSerif,
+} from "next/font/google";
 import "./globals.css";
 
 const fontSans = FontSans({
@@ -66,12 +66,11 @@ export default function RootLayout({
         />
       </head>
       <body
-        suppressHydrationWarning
         className={cn(
           "min-h-dvh bg-background font-sans antialiased max-w-full overflow-x-hidden",
           fontSans.variable,
           fontMono.variable,
-          fontSerif.variable
+          fontSerif.variable,
         )}
       >
         <JsonLd

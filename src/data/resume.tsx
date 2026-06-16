@@ -5,7 +5,7 @@ export const DATA = {
   name: "Sayyed Azhar",
   alias: "Azhar",
   initials: "SA",
-  url: "https://sayyedazhar.dev",
+  url: "https://www.azharsayyed.in",
   location: "Aurangabad, India",
   locationLink: "https://www.google.com/maps/place/aurangabad",
   title: "Product Engineer",
@@ -224,7 +224,7 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Global Tanker Fleet Management System",
+      title: "Hafnia → Real-Time Fleet Intelligence Platform",
       href: "https://hafnia.com/",
       dates: "Mar 2024 - Present",
       company: "Kiya.ai",
@@ -243,6 +243,7 @@ export const DATA = {
         "SonarQube",
         "New Relic",
         "Azure Pipelines",
+        "Ionic",
       ],
       impact:
         "Architected a scalable maritime Enterprise SaaS platform with granular RBAC and high-performance dashboards, integrating SonarQube, New Relic, and Azure CI/CD pipelines across dev, test, and prod environments.",
