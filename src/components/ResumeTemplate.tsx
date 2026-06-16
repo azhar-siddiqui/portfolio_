@@ -1,4 +1,4 @@
-import { DATA } from "@/data/resume";
+import { DATA, sortProjectsCompanyFirst } from "@/data/resume";
 import * as SimpleIcons from "simple-icons";
 
 type CategoryKey = keyof typeof DATA.skills;
@@ -10,15 +10,6 @@ const CATEGORY_LABELS: Record<CategoryKey, string> = {
   devops: "DevOps & Cloud",
   testing: "Testing & QA",
 };
-
-const PINNED_PROJECT_TITLES = [
-  "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
-  "WeCare → Healthcare Laboratory SaaS Platform",
-  "Global Tanker Fleet Management System",
-  "Quloi → Omni-Channel Supply Chain Platform",
-  "Casa Architect → Interior Design Portfolio Platform",
-  "Zomato Clone → Food Delivery App",
-];
 
 function getIconSvg(
   iconSlug: string | null | undefined,
@@ -75,19 +66,11 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
         accentStrip: "#284563",
       };
 
-  // ── Featured projects only, pinned order ─────────────────────
+  // ── Featured projects: company first, personal last (same as site) ─
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const featuredProjects = (DATA.projects as unknown as any[])
-    .filter((p) => p.featured)
-    .sort((a: any, b: any) => {
-      const ai = PINNED_PROJECT_TITLES.indexOf(a.title);
-      const bi = PINNED_PROJECT_TITLES.indexOf(b.title);
-      if (ai !== -1 && bi !== -1) return ai - bi;
-      if (ai !== -1) return -1;
-      if (bi !== -1) return 1;
-      return 0;
-    })
-    .slice(0, 5);
+  const featuredProjects = sortProjectsCompanyFirst(
+    (DATA.projects as unknown as any[]).filter((p) => p.featured),
+  ).slice(0, 5);
 
   // ── Helpers ───────────────────────────────────────────────────
   const eyebrow = (index: string, label: string) => `

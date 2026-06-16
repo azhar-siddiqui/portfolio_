@@ -10,7 +10,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DATA, getProjectResourceLinks } from "@/data/resume";
+import {
+  DATA,
+  compareProjectsCompanyFirst,
+  getProjectResourceLinks,
+} from "@/data/resume";
 import { AnimatePresence, motion } from "framer-motion";
 import { Search } from "lucide-react";
 import * as chrono from "chrono-node";
@@ -26,15 +30,6 @@ const PRIMARY_TECH_FILTERS = [
   "TypeScript",
   "React Native",
   "Angular",
-];
-
-const PINNED_PROJECT_TITLES = [
-  "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
-  "WeCare → Healthcare Laboratory SaaS Platform",
-  "Global Tanker Fleet Management System",
-  "Quloi → Omni-Channel Supply Chain Platform",
-  "Casa Architect → Interior Design Portfolio Platform",
-  "Zomato Clone → Food Delivery App",
 ];
 
 function parseProjectDate(dates: string): Date {
@@ -66,22 +61,21 @@ export function ProjectsGrid() {
     });
 
     filtered.sort((a, b) => {
-      const aPin = PINNED_PROJECT_TITLES.indexOf(a.title);
-      const bPin = PINNED_PROJECT_TITLES.indexOf(b.title);
-      const aPersonal = a.company === "Personal Project";
-      const bPersonal = b.company === "Personal Project";
+      const companyOrder = compareProjectsCompanyFirst(a, b);
+      if (companyOrder !== 0) return companyOrder;
 
-      if (aPin !== -1 || bPin !== -1) {
-        if (aPin !== -1 && bPin !== -1) return aPin - bPin;
-        return aPin !== -1 ? -1 : 1;
+      if (sortBy === "newest") {
+        return (
+          parseProjectDate(b.dates).getTime() -
+          parseProjectDate(a.dates).getTime()
+        );
       }
-
-      if (aPersonal !== bPersonal) return aPersonal ? 1 : -1;
-
-      if (sortBy === "newest")
-        return parseProjectDate(b.dates).getTime() - parseProjectDate(a.dates).getTime();
-      if (sortBy === "oldest")
-        return parseProjectDate(a.dates).getTime() - parseProjectDate(b.dates).getTime();
+      if (sortBy === "oldest") {
+        return (
+          parseProjectDate(a.dates).getTime() -
+          parseProjectDate(b.dates).getTime()
+        );
+      }
       return a.title.localeCompare(b.title);
     });
 

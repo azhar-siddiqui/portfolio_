@@ -224,64 +224,6 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
-      href: "https://table-mate-marketing-page-azhar-siddiquis-projects.vercel.app/",
-      dates: "2026 - Present",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Built a production-ready, offline-first Progressive Web App for restaurants/hotels featuring real-time table management, Kitchen Display System (KDS), granular Permission-Based Access Control (PBAC), multi-tenancy, staff device PIN login, and automated invoicing. Optimized for touch-friendly Android use by waiters, chefs, and owners.",
-      technologies: [
-        "NestJS",
-        "Prisma",
-        "PostgreSQL",
-        "Redis",
-        "Socket.IO",
-        "React",
-        "TypeScript",
-        "Vite",
-        "TanStack Query",
-        "Zustand",
-        "Tailwind CSS",
-        "ShadCN UI",
-        "Dexie.js",
-        "Workbox",
-        "Docker",
-      ],
-      impact:
-        "Designed full-stack architecture with strict tenant isolation, real-time WebSocket syncing via Redis adapter, robust offline resilience with conflict resolution, Argon2-hashed credentials + JWT/refresh tokens, dynamic PBAC, and automated username generation. Enables zero-downtime operations for busy hospitality environments.",
-      featured: true,
-    },
-    {
-      title: "WeCare Healthcare Laboratory SaaS Platform",
-      dates: "2023 - Present",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Built a comprehensive SaaS-style healthcare platform to digitize laboratory operations — automating the patient lifecycle from registration and secure record management to automated report generation and real-time tracking.",
-      technologies: [
-        "NestJS",
-        "Prisma",
-        "PostgreSQL",
-        "Redis",
-        "Socket.IO",
-        "React",
-        "TypeScript",
-        "Vite",
-        "Vitest",
-        "TanStack Query",
-        "Zustand",
-        "Tailwind CSS",
-        "ShadCN UI",
-        "Dexie.js",
-        "Workbox",
-        "Docker",
-      ],
-      impact:
-        "Owned 0→1 full-stack architecture with multi-tenant RBAC, AI-powered medical report interpretation via LLM orchestration, dynamic PDF generation, and real-time inventory tracking — shipping weekly with zero-downtime CI/CD.",
-      featured: true,
-    },
-    {
       title: "Global Tanker Fleet Management System",
       href: "https://hafnia.com/",
       dates: "Mar 2024 - Present",
@@ -320,6 +262,81 @@ export const DATA = {
       featured: true,
     },
     {
+      title: "HobbyCue",
+      href: "https://hobbycue.com/",
+      dates: "Jan 2022 - Dec 2022",
+      company: "ATG Word (Banao Tech)",
+      active: true,
+      description:
+        "Developed HobbyCue, a comprehensive community platform that connects hobby enthusiasts with experts, teachers, venues, products, and events. The platform enables users to discover, connect, book classes/workshops, buy/rent equipment, and build a vibrant hobby-based community across various interests like arts, sports, music, cooking, and more.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node Js",
+        "Mongo DB",
+        "Firebase",
+        "Google Auth",
+        "Facebook Auth",
+      ],
+      impact:
+        "Built a feature-rich marketplace and community platform that simplifies discovering local hobby resources and connecting like-minded people. Delivered core modules for People, Places, Products, and Programs with seamless search, booking, and listing functionalities, helping users easily explore and engage in their passions.",
+      featured: true,
+    },
+    {
+      title: "Epact - MIS & CRM Platform",
+      href: "https://epact.app/",
+      dates: "Jan 2022 - Dec 2022",
+      company: "ATG Word (Banao Tech)",
+      active: true,
+      description:
+        "Developed and enhanced Epact, a comprehensive cloud-based Management Information System (MIS) and CRM platform designed for education and training providers. The system streamlines learner management, enrolment, attendance, funding compliance, reporting, and operations for adult learning colleges, apprenticeship programs, recovery colleges, and cycle training providers.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Firebase",
+        "PostgreSQL",
+        "Prisma",
+      ],
+      impact:
+        "Built a robust, scalable all-in-one platform that serves 30k+ students and handles 9.6M+ successful transactions. Significantly reduced administrative burden, improved compliance with funding bodies, enabled real-time insights, and delivered seamless enrolment, attendance tracking, and reporting workflows for multiple education sectors.",
+      featured: true,
+    },
+    {
+      title: "SalonTreat Web",
+      href: "https://salontreat.com/",
+      dates: "Jan 2022 - Dec 2022",
+      company: "ATG Word (Banao Tech)",
+      active: true,
+      description:
+        "Developed the web platform for SalonTreat - an on-demand beauty booking service allowing users to browse and book salon professionals for at-home services like haircuts, facials, manicures, and more.",
+      technologies: [
+        "GatsbyGatsby",
+        "TypeScript",
+        "CSS",
+        "Firebase",
+        "Django",
+        "PostgreSQL",
+      ],
+      impact:
+        "Created a responsive, user-friendly web application that provides easy access to premium beauty services with seamless booking experience.",
+      featured: false,
+    },
+    {
+      title: "SalonTreat - Mobile App",
+      href: "https://play.google.com/store/apps/details?id=com.salontreat.app",
+      dates: "Jan 2022 - Dec 2022",
+      company: "ATG Word (Banao Tech)",
+      active: true,
+      description:
+        "Built the Android mobile application for SalonTreat, enabling users to book salon services at home with just a few taps. Features service browsing, professional selection, booking management, and a premium user experience.",
+      technologies: ["React Native", "TypeScript"],
+      impact:
+        "Launched a production Android app with 50+ downloads, delivering convenient doorstep beauty services and improving customer accessibility.",
+      featured: true,
+    },
+    {
       title: "Casa Architect Interior Design Portfolio Platform",
       href: "https://casa-architects.in/",
       dates: "Jan 2022 - Dec 2022",
@@ -340,15 +357,32 @@ export const DATA = {
       featured: true,
     },
     {
-      title: "Zomato Clone → Food Delivery App",
-      dates: "Jan 2022 - Dec 2022",
+      title: "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
+      href: "https://table-mate-marketing-page-azhar-siddiquis-projects.vercel.app/",
+      dates: "2026 - Present",
       company: "Personal Project",
       active: true,
       description:
-        "Developed a full-featured food delivery application with user registration, social login via Firebase, dynamic home screen with restaurant showcases, sorting/filtering, and a real-time cart with multiple payment options.",
-      technologies: ["React Native", "Firebase", "TypeScript", "REST API"],
+        "Built a production-ready, offline-first Progressive Web App for restaurants/hotels featuring real-time table management, Kitchen Display System (KDS), granular Permission-Based Access Control (PBAC), multi-tenancy, staff device PIN login, and automated invoicing. Optimized for touch-friendly Android use by waiters, chefs, and owners.",
+      technologies: [
+        "NestJS",
+        "Prisma",
+        "PostgreSQL",
+        "Redis",
+        "Socket.IO",
+        "React",
+        "TypeScript",
+        "Vite",
+        "TanStack Query",
+        "Zustand",
+        "Tailwind CSS",
+        "ShadCN UI",
+        "Dexie.js",
+        "Workbox",
+        "Docker",
+      ],
       impact:
-        "Delivered end-to-end food ordering flows — from restaurant discovery and filtering to real-time cart updates and multi-payment checkout — with Firebase-powered authentication and onboarding.",
+        "Designed full-stack architecture with strict tenant isolation, real-time WebSocket syncing via Redis adapter, robust offline resilience with conflict resolution, Argon2-hashed credentials + JWT/refresh tokens, dynamic PBAC, and automated username generation. Enables zero-downtime operations for busy hospitality environments.",
       featured: true,
     },
     {
@@ -371,23 +405,63 @@ export const DATA = {
       featured: true,
     },
     {
-      title: "Envelope - MIS & CRM Platform",
-      href: "https://epact.app/",
-      dates: "Jan 2022 - Dec 2022",
-      company: "ATG Word (Banao Tech)",
+      title: "WeCare Healthcare Laboratory SaaS Platform",
+      dates: "2023 - Present",
+      company: "Personal Project",
       active: true,
       description:
-        "Developed and enhanced Envelope, a comprehensive cloud-based Management Information System (MIS) and CRM platform designed for education and training providers. The system streamlines learner management, enrolment, attendance, funding compliance, reporting, and operations for adult learning colleges, apprenticeship programs, recovery colleges, and cycle training providers.",
+        "Built a comprehensive SaaS-style healthcare platform to digitize laboratory operations — automating the patient lifecycle from registration and secure record management to automated report generation and real-time tracking.",
       technologies: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "Firebase",
-        "PostgreSQL",
+        "NestJS",
         "Prisma",
+        "PostgreSQL",
+        "Redis",
+        "Socket.IO",
+        "React",
+        "TypeScript",
+        "Vite",
+        "Vitest",
+        "TanStack Query",
+        "Zustand",
+        "Tailwind CSS",
+        "ShadCN UI",
+        "Dexie.js",
+        "Workbox",
+        "Docker",
       ],
       impact:
-        "Built a robust, scalable all-in-one platform that serves 30k+ students and handles 9.6M+ successful transactions. Significantly reduced administrative burden, improved compliance with funding bodies, enabled real-time insights, and delivered seamless enrolment, attendance tracking, and reporting workflows for multiple education sectors.",
+        "Owned 0→1 full-stack architecture with multi-tenant RBAC, AI-powered medical report interpretation via LLM orchestration, dynamic PDF generation, and real-time inventory tracking — shipping weekly with zero-downtime CI/CD.",
+      featured: true,
+    },
+    {
+      title: "Zomato Clone → Food Delivery App",
+      dates: "Jan 2022 - Dec 2022",
+      company: "Personal Project",
+      active: true,
+      description:
+        "Developed a full-featured food delivery application with user registration, social login via Firebase, dynamic home screen with restaurant showcases, sorting/filtering, and a real-time cart with multiple payment options.",
+      technologies: ["React Native", "Firebase", "TypeScript", "REST API"],
+      impact:
+        "Delivered end-to-end food ordering flows — from restaurant discovery and filtering to real-time cart updates and multi-payment checkout — with Firebase-powered authentication and onboarding.",
+      featured: true,
+    },
+    {
+      title: "SubTrackr",
+      href: null,
+      dates: "June 2026",
+      company: "Personal Project",
+      active: false,
+      description:
+        "Developed SubTrackr, a clean and intuitive mobile application to manage and track all your subscriptions. Users can add, categorize, monitor renewal dates, view monthly/annual spending, and receive reminders with secure authentication.",
+      technologies: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "NativeWind",
+        "Clerk",
+      ],
+      impact:
+        "Built a fully functional subscription management app using modern React Native stack with secure Clerk authentication. Implemented dummy data architecture for quick prototyping, clean UI with NativeWind, and effective tracking features helping users avoid unwanted charges and stay on top of their recurring expenses.",
       featured: true,
     },
   ],
@@ -399,6 +473,30 @@ export type ProjectResourceLink = {
 };
 
 export type Project = (typeof DATA)["projects"][number];
+
+export const PERSONAL_PROJECT_COMPANY = "Personal Project" as const;
+
+const PROJECT_ORDER = new Map(
+  DATA.projects.map((project, index) => [project.title, index]),
+);
+
+export function isPersonalProject(project: Project): boolean {
+  return project.company === PERSONAL_PROJECT_COMPANY;
+}
+
+/** Company projects first, personal projects last — matches DATA.projects order within each group. */
+export function compareProjectsCompanyFirst(a: Project, b: Project): number {
+  const aPersonal = isPersonalProject(a);
+  const bPersonal = isPersonalProject(b);
+  if (aPersonal !== bPersonal) return aPersonal ? 1 : -1;
+  return (PROJECT_ORDER.get(a.title) ?? 0) - (PROJECT_ORDER.get(b.title) ?? 0);
+}
+
+export function sortProjectsCompanyFirst<T extends Project>(
+  projects: readonly T[],
+): T[] {
+  return [...projects].sort(compareProjectsCompanyFirst);
+}
 
 export function getProjectResourceLinks(
   project: Project,

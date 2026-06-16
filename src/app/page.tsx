@@ -9,7 +9,11 @@ import { ResumeCard } from "@/components/resume-card";
 import { SectionEyebrow } from "@/components/section-eyebrow";
 import { SkillsSection } from "@/components/skills-section";
 import { getAllPosts } from "@/data/blog";
-import { DATA, getProjectResourceLinks } from "@/data/resume";
+import {
+  DATA,
+  getProjectResourceLinks,
+  sortProjectsCompanyFirst,
+} from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
 import { buildPageMetadata } from "@/lib/seo";
 import { ArrowUpRight } from "lucide-react";
@@ -31,13 +35,7 @@ export const metadata = buildPageMetadata({
 
 const BLUR_FADE_DELAY = 0.04;
 
-const PINNED_PROJECT_TITLES = [
-  "TableMate → Multi-Tenant Hotel & Restaurant POS PWA",
-  "WeCare → Healthcare Laboratory SaaS Platform",
-  "Global Tanker Fleet Management System",
-  "Quloi → Omni-Channel Supply Chain Platform",
-  "Casa Architect → Interior Design Portfolio Platform",
-];
+const FEATURED_PROJECT_COUNT = 5;
 
 export default async function Page() {
   const blogEnabled = await isBlogEnabled();
@@ -173,17 +171,10 @@ export default async function Page() {
             </h2>
           </BlurFade>
           <div className="bento-grid">
-            {DATA.projects
-              .filter((project) => project.featured)
-              .sort((a, b) => {
-                const ai = PINNED_PROJECT_TITLES.indexOf(a.title);
-                const bi = PINNED_PROJECT_TITLES.indexOf(b.title);
-                if (ai !== -1 && bi !== -1) return ai - bi;
-                if (ai !== -1) return -1;
-                if (bi !== -1) return 1;
-                return 0;
-              })
-              .slice(0, PINNED_PROJECT_TITLES.length)
+            {sortProjectsCompanyFirst(
+              DATA.projects.filter((project) => project.featured),
+            )
+              .slice(0, FEATURED_PROJECT_COUNT)
               .map((project, id) => {
                 // First card is the bento "feature" hero (large, 2-row tall on lg+).
                 // Next two are wide half-rows; the last two fill the bottom row.
