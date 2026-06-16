@@ -226,7 +226,7 @@ export const DATA = {
     {
       title: "Hafnia → Real-Time Fleet Intelligence Platform",
       href: "https://hafnia.com/",
-      dates: "Mar 2024 - Present",
+      dates: "Mar 2024 - Apr 2026",
       company: "Kiya.ai",
       active: true,
       tags: ["Confidential", "NDA Protected"],
@@ -462,6 +462,29 @@ export const DATA = {
       ],
       impact:
         "Built a fully functional subscription management app using modern React Native stack with secure Clerk authentication. Implemented dummy data architecture for quick prototyping, clean UI with NativeWind, and effective tracking features helping users avoid unwanted charges and stay on top of their recurring expenses.",
+      featured: true,
+    },
+    {
+      title: "Marriage Hall Booking Platform",
+      href: "https://marriage-hall-booking.vercel.app/",
+      dates: "May 2026",
+      company: "Personal Project",
+      active: true,
+      description:
+        "A modern, full-featured marriage hall booking platform that allows users to browse venues, check availability, view photos, pricing, and amenities. Includes admin dashboard for hall owners to manage bookings and listings.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Prisma",
+        "Supabase",
+        "TanStack Query",
+        "ShadCN UI",
+        "Zustand",
+        "PWA",
+      ],
+      impact:
+        "Built a complete end-to-end booking system with real-time availability checking, smooth user experience, and admin management tools. Helps customers easily find and book marriage halls while giving owners better control over their listings and bookings.",
       featured: true,
     },
   ],
