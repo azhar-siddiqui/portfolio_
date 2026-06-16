@@ -72,9 +72,9 @@ export default async function Page() {
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
             <h2 className="section-heading mb-6 max-w-2xl">
-              Engineering at the{" "}
-              <span className="serif-accent text-primary">intersection</span>{" "}
-              of code and business outcomes.
+              I build software that{" "}
+              <span className="serif-accent text-primary">works</span> in
+              production.
             </h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
@@ -103,7 +103,7 @@ export default async function Page() {
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
             <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
-              Four years of shipping for teams that need outcomes, not output.
+              Four years of shipping production software.
             </h2>
           </BlurFade>
           <div className="flex flex-col">
@@ -167,7 +167,7 @@ export default async function Page() {
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
             <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
-              A few projects that moved the numbers.
+              Selected work from recent years.
             </h2>
           </BlurFade>
           <div className="bento-grid">

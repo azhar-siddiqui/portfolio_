@@ -83,7 +83,7 @@ export function SkillsSection() {
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
           <h2 className="section-heading mb-10 sm:mb-12 max-w-2xl">
-            The stack I reach for, by problem space.
+            What I work with day to day.
           </h2>
         </BlurFade>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/70 border border-border/70 rounded-xl overflow-hidden shadow-card">
