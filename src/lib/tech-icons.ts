@@ -1,5 +1,5 @@
-import * as SimpleIcons from "simple-icons";
-import { DATA } from "@/data/resume";
+import { SKILLS_DATA } from "@/data/skills-data";
+import { getSimpleIcon } from "@/lib/simple-icon-registry";
 
 export interface TechIcon {
   path: string;
@@ -11,7 +11,7 @@ export interface TechIcon {
 // Build a flat lookup from skill name → slug + dark-mode color override, so
 // the projects section stays in lockstep with the toolkit section.
 const SKILL_LOOKUP: Record<string, { slug: string | null; color: string | null }> =
-  Object.values(DATA.skills)
+  Object.values(SKILLS_DATA)
     .flat()
     .reduce<Record<string, { slug: string | null; color: string | null }>>(
       (acc, skill) => {
@@ -21,7 +21,7 @@ const SKILL_LOOKUP: Record<string, { slug: string | null; color: string | null }
         };
         return acc;
       },
-      {}
+      {},
     );
 
 // Project-only techs (or aliases) not present in DATA.skills. Slug = simple-icons key
@@ -47,15 +47,12 @@ const TECH_ALIASES: Record<string, { slug: string | null; color?: string | null 
   "custom ui library": { slug: null },
   commander: { slug: "gnubash" },
   winston: { slug: "gnubash" },
-  // Mobile / Flutter
   flutter: { slug: "flutter" },
   dart: { slug: "dart" },
-  // Firebase services (no dedicated icons — all map to firebase brand)
   firestore: { slug: "firebase" },
   "firebase cloud functions": { slug: "firebase" },
   "firebase storage": { slug: "firebase" },
   "firebase auth": { slug: "firebase" },
-  // Google AI & services
   "gemini genkit": { slug: "googlegemini" },
   "google gemini api": { slug: "googlegemini" },
   "google ml kit": { slug: "google" },
@@ -83,8 +80,7 @@ function lookupSlug(name: string): { slug: string | null; color: string | null }
 export function getTechIcon(name: string): TechIcon | null {
   const entry = lookupSlug(name);
   if (!entry || !entry.slug) return null;
-  const iconKey = `si${entry.slug.charAt(0).toUpperCase()}${entry.slug.slice(1)}` as keyof typeof SimpleIcons;
-  const icon = SimpleIcons[iconKey] as { path: string; hex: string } | undefined;
+  const icon = getSimpleIcon(entry.slug);
   if (!icon) return null;
   return {
     path: icon.path,

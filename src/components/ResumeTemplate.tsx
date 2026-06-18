@@ -1,5 +1,5 @@
 import { DATA, sortProjectsCompanyFirst } from "@/data/resume";
-import * as SimpleIcons from "simple-icons";
+import { getSimpleIcon } from "@/lib/simple-icon-registry";
 
 type CategoryKey = keyof typeof DATA.skills;
 
@@ -17,9 +17,7 @@ function getIconSvg(
   isDark: boolean
 ): string {
   if (!iconSlug) return "";
-  const key =
-    `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(1)}` as keyof typeof SimpleIcons;
-  const icon = SimpleIcons[key] as { path: string; hex: string } | undefined;
+  const icon = getSimpleIcon(iconSlug);
   if (!icon) return "";
   const fill = overrideColor && isDark ? overrideColor : `#${icon.hex}`;
   return `<svg viewBox="0 0 24 24" width="11" height="11" fill="${fill}" style="display:inline-block;flex-shrink:0;vertical-align:middle" aria-hidden="true"><path d="${icon.path}"/></svg>`;

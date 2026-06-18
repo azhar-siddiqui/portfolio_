@@ -1,10 +1,10 @@
+import { getSimpleIconByKey } from "@/lib/simple-icon-registry";
 import {
   ExternalLink,
   FileText,
   Globe,
   type LucideIcon,
 } from "lucide-react";
-import * as SimpleIcons from "simple-icons";
 
 export type LinkKind =
   | "play-store"
@@ -33,17 +33,11 @@ export interface LinkMeta {
   icon: LinkIcon;
 }
 
-// Brand SVG paths from simple-icons (3.4k brand marks ship as raw paths).
-const SI = SimpleIcons as unknown as Record<
-  string,
-  { path: string; title: string; hex: string } | undefined
->;
 const siPath = (slug: string, fallbackTitle: string): LinkIcon => {
-  const entry = SI[slug];
+  const entry = getSimpleIconByKey(slug);
   return entry
-    ? { kind: "path", path: entry.path, title: entry.title }
-    : // Defensive fallback — should never trigger because we verify at build.
-      {
+    ? { kind: "path", path: entry.path, title: entry.title ?? fallbackTitle }
+    : {
         kind: "path",
         path: "M12 0a12 12 0 100 24 12 12 0 000-24z",
         title: fallbackTitle,
