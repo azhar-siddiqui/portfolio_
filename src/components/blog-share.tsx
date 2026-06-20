@@ -1,8 +1,8 @@
 "use client";
 
+import { getSimpleIconByKey } from "@/lib/simple-icon-registry";
 import { useEffect, useState } from "react";
 import { Check, Link as LinkIcon, Share2 } from "lucide-react";
-import * as SimpleIcons from "simple-icons";
 
 interface Props {
   title: string;
@@ -110,7 +110,7 @@ export function BlogShare({ title, url, description }: Props) {
 }
 
 function BrandGlyph({ slug, title }: { slug: string; title: string }) {
-  const entry = (SimpleIcons as unknown as Record<string, { path: string } | undefined>)[slug];
+  const entry = getSimpleIconByKey(slug);
   if (!entry) return null;
   return (
     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 shrink-0" fill="currentColor" aria-hidden>

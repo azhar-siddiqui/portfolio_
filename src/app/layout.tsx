@@ -41,6 +41,8 @@ const fontSerif = FontSerif({
 
 export const metadata = buildRootMetadata();
 
+export const revalidate = 3600;
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fafaf9" },

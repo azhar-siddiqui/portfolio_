@@ -2,10 +2,10 @@
 
 import { HeroMeshBackground } from "@/components/hero-mesh-background";
 import { BlurFade } from "@/components/magicui/blur-fade";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DATA } from "@/data/resume";
+import { HERO_DATA } from "@/data/hero-data";
 import { useMagnetic } from "@/hooks/use-magnetic";
 import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -22,7 +22,7 @@ export function Hero() {
           <div className="flex items-center gap-1.5">
             <MapPin className="h-3 w-3 text-muted-foreground/60 shrink-0" />
             <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-muted-foreground">
-              {DATA.location.toUpperCase()}
+              {HERO_DATA.location.toUpperCase()}
             </span>
           </div>
         </BlurFade>
@@ -34,19 +34,20 @@ export function Hero() {
                 aria-hidden
                 className="absolute inset-[-4px] rounded-full bg-primary/15 blur-md"
               />
-              <Avatar className="relative size-20 sm:size-28 border-2 border-primary/20 shadow-card ring-2 ring-background">
-                <AvatarImage
-                  alt={DATA.name}
-                  src={DATA.avatarUrl}
-                  className="object-cover"
+              <div className="relative size-20 sm:size-28 rounded-full border-2 border-primary/20 shadow-card ring-2 ring-background overflow-hidden">
+                <Image
+                  src={HERO_DATA.avatarUrl}
+                  alt={HERO_DATA.name}
+                  width={112}
+                  height={112}
+                  priority
+                  sizes="(max-width: 640px) 80px, 112px"
+                  className="size-full object-cover"
                 />
-                <AvatarFallback className="text-[10px] font-medium">
-                  {DATA.initials}
-                </AvatarFallback>
-              </Avatar>
+              </div>
             </div>
             <h1 className="text-[2rem] sm:text-6xl md:text-7xl xl:text-8xl font-medium tracking-[-0.04em] leading-[1] sm:leading-[0.95] text-foreground max-w-[14ch] break-words">
-              {DATA.name}
+              {HERO_DATA.name}
             </h1>
           </div>
         </BlurFade>
@@ -54,19 +55,19 @@ export function Hero() {
         <BlurFade delay={BLUR_FADE_DELAY * 2.5}>
           <p className="mt-2 sm:mt-3 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] text-muted-foreground/55">
             Known as{" "}
-            <span className="text-muted-foreground/80">{DATA.alias}</span>
+            <span className="text-muted-foreground/80">{HERO_DATA.alias}</span>
           </p>
         </BlurFade>
 
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
           <p className="mt-4 sm:mt-8 text-lg sm:text-2xl xl:text-3xl font-light tracking-[-0.015em] text-foreground/80 max-w-[22ch] sm:max-w-[28ch] leading-[1.25] sm:leading-[1.2]">
-            {DATA.tagline}
+            {HERO_DATA.tagline}
           </p>
         </BlurFade>
 
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <p className="mt-6 sm:mt-10 text-sm sm:text-base text-muted-foreground leading-[1.6] sm:leading-relaxed max-w-2xl">
-            {DATA.description}
+            {HERO_DATA.description}
           </p>
         </BlurFade>
 

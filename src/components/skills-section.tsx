@@ -2,15 +2,15 @@
 
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { SectionEyebrow } from "@/components/section-eyebrow";
-import { DATA } from "@/data/resume";
+import { SKILLS_DATA } from "@/data/skills-data";
+import { getSimpleIcon } from "@/lib/simple-icon-registry";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import * as SimpleIcons from "simple-icons";
 
 const BLUR_FADE_DELAY = 0.03;
 
 type SkillEntry = { name: string; color?: string | null; icon?: string | null };
-type CategoryKey = keyof typeof DATA.skills;
+type CategoryKey = keyof typeof SKILLS_DATA;
 
 const CATEGORY_LABELS: Record<CategoryKey, string> = {
   ai: "AI Native & LLMs",
@@ -19,14 +19,6 @@ const CATEGORY_LABELS: Record<CategoryKey, string> = {
   devops: "DevOps & Cloud",
   testing: "Testing & QA",
 };
-
-function getIcon(iconSlug?: string | null) {
-  if (!iconSlug) return null;
-  const iconKey = `si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(
-    1,
-  )}` as keyof typeof SimpleIcons;
-  return (SimpleIcons[iconKey] as { path: string; hex: string }) || null;
-}
 
 function SkillChip({
   skill,
@@ -37,7 +29,7 @@ function SkillChip({
   isDark: boolean;
   delay: number;
 }) {
-  const icon = getIcon(skill.icon);
+  const icon = skill.icon ? getSimpleIcon(skill.icon) : null;
   const color =
     skill.color && isDark ? skill.color : icon ? `#${icon.hex}` : undefined;
 
@@ -52,7 +44,7 @@ function SkillChip({
             suppressHydrationWarning
             aria-hidden
           >
-            <path d={skill.icon ? icon.path : ""} />
+            <path d={icon.path} />
           </svg>
         ) : null}
         <span className="text-xs sm:text-sm font-medium text-foreground/85">
@@ -87,8 +79,8 @@ export function SkillsSection() {
           </h2>
         </BlurFade>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/70 border border-border/70 rounded-xl overflow-hidden shadow-card">
-          {(Object.keys(DATA.skills) as CategoryKey[]).map((cat, ci, all) => {
-            const skills = DATA.skills[cat] as readonly SkillEntry[];
+          {(Object.keys(SKILLS_DATA) as CategoryKey[]).map((cat, ci, all) => {
+            const skills = SKILLS_DATA[cat] as readonly SkillEntry[];
             const isOrphan = all.length % 2 !== 0 && ci === all.length - 1;
             return (
               <BlurFade
