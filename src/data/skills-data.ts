@@ -31,7 +31,7 @@ export const SKILLS_DATA = {
   backend: [
     { name: "Node.js", color: null, icon: "nodedotjs" },
     { name: "TypeScript", color: null, icon: "typescript" },
-    { name: "Dart", color: null, icon: "dart" },
+    // { name: "Dart", color: null, icon: "dart" },
     { name: "Express.js", color: "#ffffff", icon: "express" },
     { name: "NestJS", color: null, icon: "nestjs" },
     { name: "Flask", color: "#ffffff", icon: "flask" },
