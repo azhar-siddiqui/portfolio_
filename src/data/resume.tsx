@@ -397,7 +397,7 @@ export const DATA = {
       title: "MedicareLab → Pathology Lab Management Platform",
       href: "https://lab-app-ten.vercel.app/", // replace with live URL
       dates: "Jun 2026 - Present", // adjust to your real timeline
-      company: "Personal / Independent", // or your company name
+      company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Healthcare", "Full-Stack"],
       description:
@@ -427,7 +427,7 @@ export const DATA = {
       title: "GoldVault → Gold & Silver Shop Management Platform",
       href: "https://goldflow-pro.vercel.app/", // live URL
       dates: "Jun 2026 - Present",
-      company: "Personal / Independent", // or your company name
+      company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Retail / Jewellery", "Full-Stack"],
       description:
@@ -458,7 +458,7 @@ export const DATA = {
       title: "TireBiz → Tire Shop Management Platform",
       href: "https://lab-app-ten.vercel.app/", // replace with live URL
       dates: "Jul 2026 - Present",
-      company: "Personal / Independent", // or your company name
+      company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Retail / Wholesale Tyres", "Full-Stack"],
       description:
@@ -490,7 +490,7 @@ export const DATA = {
       title: "ElectroHub → Mobile & Electronics Shop Management Platform",
       href: "https://your-live-url.vercel.app/", // replace with live URL
       dates: "Jul 2026 - Present",
-      company: "Personal / Independent", // or your company name
+      company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Retail / Electronics", "Full-Stack"],
       description:
