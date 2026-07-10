@@ -393,6 +393,132 @@ export const DATA = {
         "Built a complete end-to-end booking system with real-time availability checking, smooth user experience, and admin management tools. Helps customers easily find and book marriage halls while giving owners better control over their listings and bookings.",
       featured: true,
     },
+    {
+      title: "MedicareLab → Pathology Lab Management Platform",
+      href: "https://lab-app-ten.vercel.app/", // replace with live URL
+      dates: "Jun 2026 - Present", // adjust to your real timeline
+      company: "Personal / Independent", // or your company name
+      active: true,
+      tags: ["SaaS", "Healthcare", "Full-Stack"],
+      description:
+        "Full-stack Next.js platform for diagnostic pathology labs covering patient/case registration, hierarchical test catalogs with gender-specific reference ranges, billing & collections, multi-template print-ready reports with QR codes, and business analytics for daily revenue, expenses, dues, and referral commissions.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Better Auth",
+        "TailwindCSS",
+        "shadcn/ui",
+        "TanStack Table",
+        "TipTap",
+        "Zod",
+        "React Hook Form",
+        "Resend",
+        "ImageKit",
+        "kbar",
+      ],
+      impact:
+        "Built an end-to-end lab operations SaaS that unifies case intake, result entry, branded report printing, and financial reporting—with server actions, tag-based caching, email-verified auth, and multi-theme UI designed for real diagnostic lab workflows.",
+      featured: true,
+    },
+    {
+      title: "GoldVault → Gold & Silver Shop Management Platform",
+      href: "https://goldflow-pro.vercel.app/", // live URL
+      dates: "Jun 2026 - Present",
+      company: "Personal / Independent", // or your company name
+      active: true,
+      tags: ["SaaS", "Retail / Jewellery", "Full-Stack"],
+      description:
+        "Full-stack Next.js platform for Indian gold & silver jewellery shops covering inventory (gold/silver/platinum with SKU, purity & weight), flexible GST billing with manual rate-per-gram and making charges, customer CRM with phone lookup, daily rate board, branded print-ready invoice PDFs, invoice cancel/return with credit notes, and sales analytics for revenue, bill count, and metal weight sold.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "JWT + bcrypt",
+        "TailwindCSS",
+        "shadcn/ui",
+        "TanStack Table",
+        "Recharts",
+        "React Hook Form",
+        "Zod",
+        "Resend",
+        "@react-pdf/renderer",
+        "nuqs",
+        "PWA",
+      ],
+      impact:
+        "Built an end-to-end jewellery shop operations SaaS that unifies stock, counter billing, customer history, and GST invoicing—with server-side Decimal math, Prisma transactions for stock-safe sales, email-verified auth, letterhead PDF printing, and a luxury dark UI designed for real shop-counter workflows.",
+      featured: true,
+    },
+    {
+      title: "TireBiz → Tire Shop Management Platform",
+      href: "https://lab-app-ten.vercel.app/", // replace with live URL
+      dates: "Jul 2026 - Present",
+      company: "Personal / Independent", // or your company name
+      active: true,
+      tags: ["SaaS", "Retail / Wholesale Tyres", "Full-Stack"],
+      description:
+        "Full-stack Next.js platform for Indian tire wholesalers and retailers covering inventory (brand, size, SKU, retail/wholesale pricing & low-stock alerts), GST-compliant billing with auto CGST/SGST/IGST (intra/inter-state), customer CRM with retail vs wholesale types, manual udhaar/credit tracking (Cash/UPI/Bank), QR-shareable public invoices with branded PDF downloads, and sales/GST reports exportable for GSTR-1, GSTR-3B, and ITR.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Supabase Auth",
+        "TailwindCSS",
+        "shadcn/ui",
+        "TanStack Table",
+        "React Hook Form",
+        "Zod",
+        "Resend",
+        "@react-pdf/renderer",
+        "qrcode",
+        "Arcjet",
+        "date-fns",
+        "PWA",
+      ],
+      impact:
+        "Built an end-to-end tire shop operations SaaS that unifies stock, GST counter billing, customer history, and udhaar collections—with Prisma-backed multi-tenant data isolation (RLS), server-side GST math for CGST/SGST/IGST, stock-aware invoicing, email-verified Supabase auth, print-ready invoice PDFs + public QR links, tablecn-style advanced data tables with CSV export, Arcjet abuse protection, and a responsive PWA UI designed for real shop-floor workflows in India.",
+      featured: true,
+    },
+    {
+      title: "ElectroHub → Mobile & Electronics Shop Management Platform",
+      href: "https://your-live-url.vercel.app/", // replace with live URL
+      dates: "Jul 2026 - Present",
+      company: "Personal / Independent", // or your company name
+      active: true,
+      tags: ["SaaS", "Retail / Electronics", "Full-Stack"],
+      description:
+        "Full-stack Next.js platform for Indian mobile, laptop, and electronics retailers covering inventory (category, brand, model, variant, condition, retail/wholesale pricing & low-stock alerts), IMEI/serial unit tracking with bulk import, GST-compliant billing with auto CGST/SGST/IGST (intra/inter-state) and HSN codes, customer CRM with retail vs wholesale types, manual udhaar/credit tracking (Cash/UPI/Bank/Card), repair job workflow (Received → Delivered), warranty tracking, QR-shareable public invoices with branded PDF downloads, and sales/GST reports exportable for GSTR-1, GSTR-3B, and ITR.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "Neon",
+        "Better Auth",
+        "TailwindCSS",
+        "shadcn/ui",
+        "TanStack Table",
+        "React Hook Form",
+        "Zod",
+        "Resend",
+        "@react-pdf/renderer",
+        "qrcode.react",
+        "Recharts",
+        "date-fns",
+        "PWA",
+      ],
+      impact:
+        "Built an end-to-end electronics shop operations SaaS that unifies stock, IMEI/serial lifecycle, GST counter billing, warranty dates, repair jobs, and udhaar collections—with Prisma-backed multi-tenant data isolation, Luhn-validated IMEI capture at sale time, server-side GST math for CGST/SGST/IGST, stock- and serial-aware invoicing, email-verified Better Auth + Resend, print-ready invoice PDFs + public QR links, tablecn-style advanced data tables with CSV export, warranty-expiry and category sales reporting, and a responsive PWA UI designed for real counter and service-floor workflows in India.",
+      featured: true,
+    },
   ],
 } as const;
 
