@@ -312,35 +312,6 @@ export const DATA = {
       featured: true,
     },
     {
-      title: "WeCare Healthcare Laboratory SaaS Platform",
-      dates: "2023 - Present",
-      company: "Personal Project",
-      active: true,
-      description:
-        "Built a comprehensive SaaS-style healthcare platform to digitize laboratory operations — automating the patient lifecycle from registration and secure record management to automated report generation and real-time tracking.",
-      technologies: [
-        "NestJS",
-        "Prisma",
-        "PostgreSQL",
-        "Redis",
-        "Socket.IO",
-        "React",
-        "TypeScript",
-        "Vite",
-        "Vitest",
-        "TanStack Query",
-        "Zustand",
-        "Tailwind CSS",
-        "ShadCN UI",
-        "Dexie.js",
-        "Workbox",
-        "Docker",
-      ],
-      impact:
-        "Owned 0→1 full-stack architecture with multi-tenant RBAC, AI-powered medical report interpretation via LLM orchestration, dynamic PDF generation, and real-time inventory tracking — shipping weekly with zero-downtime CI/CD.",
-      featured: true,
-    },
-    {
       title: "Zomato Clone → Food Delivery App",
       dates: "Jan 2022 - Dec 2022",
       company: "Personal Project",
@@ -394,9 +365,9 @@ export const DATA = {
       featured: true,
     },
     {
-      title: "MedicareLab → Pathology Lab Management Platform",
-      href: "https://lab-app-ten.vercel.app/", // replace with live URL
-      dates: "Jun 2026 - Present", // adjust to your real timeline
+      title: "WeCare Healthcare Laboratory SaaS Platform",
+      href: "https://we-care-lab-app.vercel.app/", // replace with live URL
+      dates: "Mar 2026 - June 2026", // adjust to your real timeline
       company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Healthcare", "Full-Stack"],
@@ -425,8 +396,8 @@ export const DATA = {
     },
     {
       title: "GoldVault → Gold & Silver Shop Management Platform",
-      href: "https://goldflow-pro.vercel.app/", // live URL
-      dates: "Jun 2026 - Present",
+      href: "https://goldflow-pro.vercel.app", // live URL
+      dates: "Jun 2026 - Jun 2026",
       company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Retail / Jewellery", "Full-Stack"],
@@ -456,8 +427,8 @@ export const DATA = {
     },
     {
       title: "TireBiz → Tire Shop Management Platform",
-      href: "https://lab-app-ten.vercel.app/", // replace with live URL
-      dates: "Jul 2026 - Present",
+      href: "https://tire-biz.vercel.app", // replace with live URL
+      dates: "Jul 2026 - Jul 2026",
       company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Retail / Wholesale Tyres", "Full-Stack"],
@@ -488,8 +459,8 @@ export const DATA = {
     },
     {
       title: "ElectroHub → Mobile & Electronics Shop Management Platform",
-      href: "https://your-live-url.vercel.app/", // replace with live URL
-      dates: "Jul 2026 - Present",
+      href: "https://electronixbiz-alpha.vercel.app", // replace with live URL
+      dates: "Jul 2026 - July 2026",
       company: "Personal Project", // or your company name
       active: true,
       tags: ["SaaS", "Retail / Electronics", "Full-Stack"],
