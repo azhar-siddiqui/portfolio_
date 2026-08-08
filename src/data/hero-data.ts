@@ -1,5 +1,5 @@
 export const HERO_DATA = {
-  name: "Sayyed Azhar",
+  name: "Azhar Sayyed",
   alias: "Azhar",
   initials: "SA",
   location: "Aurangabad, India",
