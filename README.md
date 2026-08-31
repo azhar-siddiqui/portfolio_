@@ -1,6 +1,6 @@
-# Sayyed Azhar — Corporate Portfolio
+# Azhar Sayyed — Corporate Portfolio
 
-Personal portfolio and professional site for **Sayyed Azhar**, a Product Engineer who builds full-stack software across logistics, maritime, healthcare, and hospitality.
+Personal portfolio and professional site for **Azhar Sayyed**, a Product Engineer who builds full-stack software across logistics, maritime, healthcare, and hospitality.
 
 **Live site:** [azharsayyed.in](https://www.azharsayyed.in)
 
@@ -23,16 +23,16 @@ A modern, content-driven portfolio built with Next.js. Most site content — bio
 
 ## Tech Stack
 
-| Layer | Technologies |
-| --- | --- |
-| Framework | [Next.js 16](https://nextjs.org/), [React 19](https://react.dev/), TypeScript |
-| Styling | [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/), [Magic UI](https://magicui.design/) |
-| Motion | [Framer Motion](https://www.framer.com/motion/) |
-| Content | MDX, [gray-matter](https://github.com/jonschlinkert/gray-matter), [unified](https://unifiedjs.com/) pipeline |
-| Diagrams | [Mermaid](https://mermaid.js.org/) |
-| Feature flags | [LaunchDarkly](https://launchdarkly.com/) (server-side SDK) |
-| Tooling | pnpm, ESLint, Puppeteer (resume generation) |
-| Deployment | [Vercel](https://vercel.com/) |
+| Layer         | Technologies                                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Framework     | [Next.js 16](https://nextjs.org/), [React 19](https://react.dev/), TypeScript                                      |
+| Styling       | [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/), [Magic UI](https://magicui.design/) |
+| Motion        | [Framer Motion](https://www.framer.com/motion/)                                                                    |
+| Content       | MDX, [gray-matter](https://github.com/jonschlinkert/gray-matter), [unified](https://unifiedjs.com/) pipeline       |
+| Diagrams      | [Mermaid](https://mermaid.js.org/)                                                                                 |
+| Feature flags | [LaunchDarkly](https://launchdarkly.com/) (server-side SDK)                                                        |
+| Tooling       | pnpm, ESLint, Puppeteer (resume generation)                                                                        |
+| Deployment    | [Vercel](https://vercel.com/)                                                                                      |
 
 ## Project Structure
 
@@ -79,9 +79,9 @@ Copy the example env file and fill in values as needed:
 cp .env.local.example .env.local
 ```
 
-| Variable | Required | Description |
-| --- | --- | --- |
-| `LAUNCHDARKLY_SDK_KEY` | No | Server-side SDK key for feature flags. When unset, the blog defaults to **off** and `/blog` shows a coming-soon page. |
+| Variable               | Required | Description                                                                                                           |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| `LAUNCHDARKLY_SDK_KEY` | No       | Server-side SDK key for feature flags. When unset, the blog defaults to **off** and `/blog` shows a coming-soon page. |
 
 ## Customization
 
@@ -116,12 +116,12 @@ Output is written to `public/resumes/` as light and dark theme PDFs.
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the development server |
-| `pnpm build` | Create a production build |
-| `pnpm start` | Serve the production build |
-| `pnpm lint` | Run ESLint |
+| Command                | Description                     |
+| ---------------------- | ------------------------------- |
+| `pnpm dev`             | Start the development server    |
+| `pnpm build`           | Create a production build       |
+| `pnpm start`           | Serve the production build      |
+| `pnpm lint`            | Run ESLint                      |
 | `pnpm generate:resume` | Generate light/dark PDF resumes |
 
 ## Deployment
@@ -130,7 +130,7 @@ The site is designed for [Vercel](https://vercel.com/). Connect the repository, 
 
 ## Acknowledgments
 
-This project started from [dillionverma/portfolio](https://github.com/dillionverma/portfolio) and has been customized for Sayyed Azhar's professional brand and project history.
+This project started from [dillionverma/portfolio](https://github.com/dillionverma/portfolio) and has been customized for Azhar Sayyed's professional brand and project history.
 
 ## License
 
