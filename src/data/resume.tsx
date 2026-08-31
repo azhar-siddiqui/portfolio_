@@ -48,7 +48,7 @@ export const DATA = {
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/sayyed-azhar-673147179/",
+        url: "https://www.linkedin.com/in/azhar-sayyed-673147179/",
         icon: Icons.linkedin,
         navbar: true,
       },
