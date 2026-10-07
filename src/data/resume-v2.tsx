@@ -59,7 +59,7 @@ export const DATA = {
     {
       company: "Kiya.ai",
       href: "https://kiya.ai",
-      badges: ["Current"],
+      badges: [],
       location: "Remote",
       title: "Associate Consultant",
       logoUrl: "",
