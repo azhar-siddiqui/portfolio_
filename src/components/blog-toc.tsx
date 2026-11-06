@@ -98,7 +98,7 @@ export function BlogToc({ headings }: Props) {
         onClick={() => setDrawerOpen(true)}
         aria-label="Open table of contents"
         aria-expanded={drawerOpen}
-        className="glass-surface xl:hidden fixed bottom-24 right-4 z-40 inline-flex items-center gap-2 h-11 pl-4 pr-5 rounded-full text-foreground/85 hover:text-foreground shadow-card transition-colors"
+        className="glass-surface fixed bottom-24 right-4 z-40 inline-flex h-11 items-center gap-2 border border-border pl-4 pr-5 text-foreground/85 shadow-card transition-colors hover:border-primary/50 hover:text-foreground sm:bottom-6 xl:hidden"
         style={{ marginBottom: "env(safe-area-inset-bottom)" }}
       >
         <List className="h-4 w-4" />

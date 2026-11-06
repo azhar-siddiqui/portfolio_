@@ -39,21 +39,21 @@ function Counter({ to, suffix = "", prefix = "" }: { to: number; suffix?: string
 
 export function MetricsStrip({ metrics }: { metrics: readonly Metric[] }) {
   return (
-    <section aria-label="Career metrics" className="border-y border-border/70 bg-card/30 backdrop-blur-sm">
+    <section aria-label="Career metrics" className="border-y border-border/80 bg-card/40">
       <div className="mx-auto w-full max-w-6xl">
-        <ul className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-border/60">
+        <ul className="grid grid-cols-2 divide-x divide-y divide-border/70 md:grid-cols-4 md:divide-y-0">
           {metrics.map((m, i) => (
             <li
               key={m.label}
-              className="px-4 py-7 sm:px-8 sm:py-10 flex flex-col gap-2.5 sm:gap-3 group"
+              className="flex flex-col gap-2.5 px-4 py-7 sm:gap-3 sm:px-8 sm:py-10"
             >
-              <div className="font-serif italic text-base sm:text-lg leading-none text-primary/60 tabular-nums">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary tabular-nums">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <div className="font-mono text-[2rem] sm:text-5xl font-medium tracking-[-0.03em] text-primary leading-none">
+              <div className="font-serif text-[2.4rem] font-medium leading-none tracking-[-0.04em] text-foreground sm:text-6xl">
                 <Counter to={m.value} prefix={m.prefix} suffix={m.suffix} />
               </div>
-              <div className="text-[11px] sm:text-sm text-muted-foreground leading-tight">
+              <div className="text-[11px] leading-tight text-muted-foreground sm:text-sm">
                 {m.label}
               </div>
             </li>

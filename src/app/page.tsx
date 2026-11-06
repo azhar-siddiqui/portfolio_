@@ -3,7 +3,6 @@ import { Hero } from "@/components/hero";
 import { IndustriesMarquee } from "@/components/industries-marquee";
 import { JsonLd } from "@/components/json-ld";
 import { BlurFade } from "@/components/magicui/blur-fade";
-import { MetricsStrip } from "@/components/metrics-strip";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { SectionEyebrow } from "@/components/section-eyebrow";
@@ -22,7 +21,7 @@ import Markdown from "react-markdown";
 
 export const metadata = buildPageMetadata({
   title: `${DATA.name} — ${DATA.title} Portfolio`,
-  description: `${DATA.tagline} Explore ${DATA.metrics[1].value}${DATA.metrics[1].suffix} shipped products across ${DATA.industries.join(", ")}. ${DATA.description}`,
+  description: `${DATA.tagline} ${DATA.description}`,
   path: "/",
   keywords: [
     "product engineer portfolio",
@@ -43,7 +42,7 @@ export default async function Page() {
   return (
     <main
       id="resume-content"
-      className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32"
+      className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 sm:pb-20 sm:pt-20"
     >
       <JsonLd
         data={{
@@ -61,20 +60,14 @@ export default async function Page() {
       />
       <Hero />
 
-      <div className="mt-24 sm:mt-32">
-        <MetricsStrip metrics={DATA.metrics} />
-      </div>
-
-      <section id="about" className="mt-24 sm:mt-32">
+      <section id="about" className="mt-20 sm:mt-28">
         <div className="mx-auto w-full max-w-6xl">
           <BlurFade delay={BLUR_FADE_DELAY} inView>
             <SectionEyebrow index="01" label="About" />
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
             <h2 className="section-heading mb-6 max-w-2xl">
-              I build software that{" "}
-              <span className="serif-accent text-primary">works</span> in
-              production.
+              I build software that works in production.
             </h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
@@ -82,13 +75,6 @@ export default async function Page() {
               <Markdown>{DATA.summary}</Markdown>
             </div>
           </BlurFade>
-          {DATA.work[0] && (
-            <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
-              <p className="mt-8 font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                Currently · {DATA.work[0].title} at {DATA.work[0].company}
-              </p>
-            </BlurFade>
-          )}
         </div>
       </section>
 
@@ -277,12 +263,8 @@ export default async function Page() {
           <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16">
             <div>
               <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-                <h2 className="text-3xl sm:text-5xl font-medium tracking-[-0.03em] leading-[1.05] text-foreground max-w-[18ch]">
-                  Let&apos;s build{" "}
-                  <span className="serif-accent text-primary">
-                    something
-                  </span>{" "}
-                  together.
+                <h2 className="max-w-[16ch] text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl">
+                  Let&apos;s build something together.
                 </h2>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
@@ -297,14 +279,14 @@ export default async function Page() {
                     href={DATA.contact.social.LinkedIn.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-5 h-11 bg-primary text-primary-foreground rounded-full font-medium text-sm shadow-soft transition-colors duration-200 hover:bg-primary/90 active:bg-primary/80"
+                    className="btn-fill group h-11"
                   >
                     Connect on LinkedIn
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
                     href={`mailto:${DATA.contact.email}`}
-                    className="group inline-flex items-center gap-2 px-5 h-11 border border-border rounded-full font-medium text-sm transition-colors duration-200 hover:bg-primary/[0.06] hover:border-primary/35 hover:text-primary active:bg-primary/[0.1]"
+                    className="btn-line group h-11"
                   >
                     Send email
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

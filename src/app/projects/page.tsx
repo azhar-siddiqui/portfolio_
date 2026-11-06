@@ -14,7 +14,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function ProjectsPage() {
   return (
-    <main className="flex flex-col min-h-dvh px-4 sm:px-6 py-16 sm:py-24 pb-32">
+    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pt-16 pb-32 sm:pt-28 sm:pb-20">
       <JsonLd
         data={[
           buildCollectionPageSchema({

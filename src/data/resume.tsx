@@ -8,8 +8,11 @@ export const DATA = {
   url: "https://www.azharsayyed.in",
   locationLink: "https://www.google.com/maps/place/aurangabad",
   title: "Product Engineer",
-  summary:
-    "Over the past four years, I've owned the entire development process for products across logistics, maritime, and healthcare — designing interfaces, writing backend logic, managing databases, and automating infrastructure. I lean heavily into modern AI-assisted development tools like Cursor and Claude Code to speed up my workflow, catch bugs early, and ship high-quality features fast.",
+  summary: `Product Engineer based in Aurangabad, open to full-time roles in India and remote.
+
+I have shipped production frontend since 2021. Since April 2026 I have been building CentLabs Pro with AI coding tools. It is a fully offline Electron app for a pathology lab's daily work, and it is a product, not a company. A lab can register patients, enter results, lock a signed report, bill, and keep an encrypted backup on its own PC. A separate web tool reads a cell-counter photo and fills the readings. About 10 to 15 labs use it on a working day, and more features are in progress.
+
+I take a feature from the screen, through the API, to production, and I use AI tools to ship that work faster. The stack I work in every week is React, Next.js, TypeScript, React Native, Node.js, and Electron.`,
   metrics: [
     { value: 4, suffix: "+", label: "Years building production software" },
     { value: 15, suffix: "+", label: "Mission-critical products delivered" },
@@ -81,7 +84,7 @@ export const DATA = {
       title: "Full Stack Developer",
       logoUrl: "",
       start: "Jan 2023",
-      end: "Sep 2023",
+      end: "Feb 2024",
       description:
         "Built frontend architecture for the Omni-Channel Supply Chain Collaboration platform — a cloud-native logistics SaaS digitizing first-mile operations. Engineered Supplier Management and Purchase Order automation modules, real-time KPI dashboards (OTIF, lead-time accuracy), and granular RBAC for admins, buyers, suppliers, and freight forwarders.",
     },
@@ -238,7 +241,13 @@ export const DATA = {
       active: true,
       description:
         "Built the Android mobile application for SalonTreat, enabling users to book salon services at home with just a few taps. Features service browsing, professional selection, booking management, and a premium user experience.",
-      technologies: ["React Native", "TypeScript"],
+      technologies: [
+        "React Native",
+        "TypeScript",
+        "Firebase",
+        "Django",
+        "PostgreSQL",
+      ],
       impact:
         "Launched a production Android app with 50+ downloads, delivering convenient doorstep beauty services and improving customer accessibility.",
       featured: true,

@@ -14,7 +14,7 @@ export const DATA = {
   summary:
     "Over the past four years, I've owned the entire development process for products across logistics, maritime, and healthcare — designing interfaces, writing backend logic, managing databases, and automating infrastructure. I lean heavily into modern AI-assisted development tools like Cursor and Claude Code to speed up my workflow, catch bugs early, and ship high-quality features fast.",
 
-  avatarUrl: "/me.jpg",
+  avatarUrl: "/me.png",
 
   skills: [
     "AI & LLMs — Claude Code CLI, Cursor, GitHub Copilot, Gemini, Codex",
@@ -76,7 +76,7 @@ export const DATA = {
       title: "Full Stack Developer",
       logoUrl: "",
       start: "Jan 2023",
-      end: "Sep 2023",
+      end: "Feb 2024",
       description:
         "Built frontend architecture for the Omni-Channel Supply Chain Collaboration platform — a cloud-native logistics SaaS digitizing first-mile operations. Engineered Supplier Management and Purchase Order automation modules, real-time KPI dashboards (OTIF, lead-time accuracy), and granular RBAC for admins, buyers, suppliers, and freight forwarders.",
     },
@@ -217,10 +217,16 @@ export const DATA = {
       title: "SalonTreat - Mobile App",
       dates: "Jan 2022 - Dec 2022",
       href: "https://play.google.com/store/apps/details?id=com.salontreat.app",
-      technologies: ["React Native", "TypeScript"],
+      technologies: [
+        "React Native",
+        "TypeScript",
+        "Firebase",
+        "Django",
+        "PostgreSQL",
+      ],
       description:
         "Built the Android mobile application for SalonTreat, enabling users to book salon services at home with just a few taps. Launched a production Android app with 50+ downloads, delivering convenient doorstep beauty services.",
-      tools: ["React Native", "TypeScript"],
+      tools: ["React Native", "TypeScript", "Firebase", "Django", "PostgreSQL"],
     },
     {
       title: "Casa Architect Interior Design Portfolio Platform",

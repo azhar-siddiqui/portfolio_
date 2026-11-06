@@ -1,5 +1,6 @@
-import { ImageResponse } from "next/og";
 import { DATA } from "@/data/resume";
+import { palette } from "@/lib/theme";
+import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
@@ -18,7 +19,7 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "60px 80px",
-          background: "linear-gradient(135deg, #0f1419 0%, #171c24 50%, #0f1419 100%)",
+          background: palette.light.background,
           fontFamily: "system-ui, -apple-system, sans-serif",
           position: "relative",
           overflow: "hidden",
@@ -31,14 +32,14 @@ export default async function Image() {
             left: 0,
             right: 0,
             height: "4px",
-            background: "#284563",
+            background: palette.light.primary,
           }}
         />
         <div
           style={{
             fontSize: "64px",
             fontWeight: 800,
-            color: "#f5f5f4",
+            color: palette.light.foreground,
             letterSpacing: "-2px",
             lineHeight: 1.1,
             marginBottom: "16px",
@@ -50,7 +51,7 @@ export default async function Image() {
           style={{
             fontSize: "32px",
             fontWeight: 600,
-            color: "#7a9ec8",
+            color: palette.light.primary,
             marginBottom: "24px",
           }}
         >
@@ -60,15 +61,12 @@ export default async function Image() {
           style={{
             fontSize: "20px",
             fontWeight: 400,
-            color: "#a8a29e",
+            color: palette.light.mutedForeground,
             lineHeight: 1.5,
             maxWidth: "800px",
           }}
         >
-          {DATA.metrics[0].value}
-          {DATA.metrics[0].suffix} years · {DATA.metrics[1].value}
-          {DATA.metrics[1].suffix} apps · {DATA.metrics[2].value} industries —{" "}
-          {DATA.description.slice(0, 100)}…
+          {DATA.tagline}
         </div>
         <div
           style={{
@@ -77,7 +75,7 @@ export default async function Image() {
             left: "80px",
             fontSize: "18px",
             fontWeight: 500,
-            color: "#78716c",
+            color: palette.light.mutedForeground,
           }}
         >
           {DATA.url.replace("https://", "")}

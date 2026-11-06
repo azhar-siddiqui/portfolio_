@@ -197,11 +197,6 @@ export function buildPersonSchema(): JsonLd {
     image: absoluteUrl(DATA.avatarUrl),
     description: DATA.description,
     jobTitle: DATA.title,
-    worksFor: {
-      "@type": "Organization",
-      name: DATA.work[0]?.company ?? "Kiya.ai",
-      url: DATA.work[0]?.href || "https://kiya.ai",
-    },
     alumniOf: DATA.education.map((edu) => ({
       "@type": "CollegeOrUniversity",
       name: edu.school,

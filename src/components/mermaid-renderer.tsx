@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { palette } from "@/lib/theme";
 import { useTheme } from "next-themes";
+import { useEffect, useRef } from "react";
 
 /**
  * Hydrates every `<div class="mermaid-diagram" data-mermaid-source="…">` that
@@ -54,22 +55,15 @@ export function MermaidRenderer({
       if (cancelled) return;
 
       // Mermaid measures text widths in an offscreen DOM pass during layout.
-      // If our web font (Geist Sans) hasn't loaded yet, it measures with the
-      // fallback font, freezes the layout, then the real font swaps in —
-      // producing the "boxes too small / edges misaligned / scattered" symptom
-      // most visible on Windows / cold-cache machines.
-      //
-      // `document.fonts.ready` alone is insufficient: it only awaits *pending*
-      // font loads. If no element above the fold has triggered Geist yet, it
-      // resolves immediately with Geist still unloaded. We explicitly request
-      // Geist at the weights/sizes Mermaid will measure, *then* await ready.
+      // If Outfit hasn't loaded yet, it measures with the fallback font,
+      // freezes the layout, then the real font swaps in and the boxes end up
+      // too small. `document.fonts.ready` only waits for loads already in
+      // flight, so we probe the real family first.
       if (typeof document !== "undefined" && "fonts" in document) {
-        // next/font registers Geist under an internal hashed family name, not
-        // literally "Geist", so document.fonts.load('"Geist"') resolves empty
-        // immediately and never triggers the actual download.  Inserting a
-        // hidden DOM probe that uses var(--font-sans) causes the browser to
-        // resolve the real family name and start loading the font; then
-        // document.fonts.ready reliably waits for it to finish.
+        // next/font registers Outfit under a hashed family name, not the
+        // literal "Outfit", so document.fonts.load('"Outfit"') resolves empty.
+        // A hidden probe that uses var(--font-sans) starts the real load, and
+        // document.fonts.ready then waits for it to finish.
         const probe = document.createElement("span");
         probe.setAttribute("aria-hidden", "true");
         probe.style.cssText =
@@ -92,10 +86,9 @@ export function MermaidRenderer({
       // Mermaid embeds this string directly into the SVG `font-family`
       // attribute. CSS variables like `var(--font-sans)` are NOT resolved in
       // that context, so the SVG text would silently fall back to the browser
-      // default. Hardcode the actual font (Geist) loaded by next/font in
-      // src/app/layout.tsx so prod renders match the page font.
+      // default. Inter is the face loaded by next/font in layout.tsx.
       const mermaidFontFamily =
-        '"Geist", "Geist Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+        '"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
 
       mermaid.initialize({
         startOnLoad: false,
@@ -105,24 +98,24 @@ export function MermaidRenderer({
         // with `strict` in production builds.
         securityLevel: "loose",
         theme: resolvedTheme === "dark" ? "dark" : "default",
-        themeVariables:
-          resolvedTheme === "dark"
-            ? {
-                background: "transparent",
-                primaryColor: "#1c2430",
-                primaryTextColor: "#f5f5f4",
-                primaryBorderColor: "#7a9ec8",
-                lineColor: "#a8a29e",
-                fontFamily: mermaidFontFamily,
-              }
-            : {
-                background: "transparent",
-                primaryColor: "#f5f5f4",
-                primaryTextColor: "#1c1917",
-                primaryBorderColor: "#284563",
-                lineColor: "#57534e",
-                fontFamily: mermaidFontFamily,
-              },
+        themeVariables: {
+          background: "transparent",
+          primaryColor:
+            resolvedTheme === "dark" ? palette.dark.card : palette.light.card,
+          primaryTextColor:
+            resolvedTheme === "dark"
+              ? palette.dark.foreground
+              : palette.light.foreground,
+          primaryBorderColor:
+            resolvedTheme === "dark"
+              ? palette.dark.primary
+              : palette.light.primary,
+          lineColor:
+            resolvedTheme === "dark"
+              ? palette.dark.mutedForeground
+              : palette.light.mutedForeground,
+          fontFamily: mermaidFontFamily,
+        },
         fontFamily: mermaidFontFamily,
       });
 

@@ -4,14 +4,12 @@ import { DATA } from "@/data/resume";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 sm:mt-32 border-t border-border/50 pt-12 sm:pt-16">
+    <footer className="mt-24 sm:mt-32 border-t border-primary/30 pt-12 sm:pt-16">
       <div className="mx-auto w-full max-w-6xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-medium tracking-[-0.03em] leading-[1.1] text-foreground">
-              Let&apos;s build{" "}
-              <span className="serif-accent text-foreground">something</span>{" "}
-              together.
+            <h2 className="text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-3xl">
+              Let&apos;s build something together.
             </h2>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-sm">
               If you&apos;re building something where engineering decisions meet
@@ -22,14 +20,14 @@ export function SiteFooter() {
                 href={DATA.contact.social.LinkedIn.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-5 h-10 bg-foreground text-background rounded-full font-medium text-sm transition-colors duration-200 hover:bg-foreground/85 active:bg-foreground/75"
+                className="btn-fill group h-10"
               >
                 Connect on LinkedIn
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
                 href={`mailto:${DATA.contact.email}`}
-                className="group inline-flex items-center gap-2 px-5 h-10 border border-border rounded-full font-medium text-sm transition-colors duration-200 hover:bg-foreground/[0.06] hover:border-foreground/40 active:bg-foreground/[0.1]"
+                className="btn-line group h-10"
               >
                 Send email
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

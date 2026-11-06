@@ -62,6 +62,10 @@ const config = {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
         warm: "hsl(var(--warm))",
         cool: "hsl(var(--cool))",
         clay: "hsl(var(--clay))",

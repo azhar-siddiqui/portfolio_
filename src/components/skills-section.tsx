@@ -35,7 +35,7 @@ function SkillChip({
 
   return (
     <BlurFade delay={delay} inView>
-      <div className="group flex items-center gap-2 rounded-lg border border-border/70 bg-card/70 backdrop-blur-sm px-3 py-2 transition-all duration-300 hover:border-primary/30 hover:bg-primary/[0.04]">
+      <div className="group flex items-center gap-2 rounded-sm border border-border/70 bg-card px-3 py-2 transition-colors duration-200 hover:border-primary/45 hover:bg-primary/[0.06]">
         {icon ? (
           <svg
             viewBox="0 0 24 24"

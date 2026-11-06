@@ -1,5 +1,6 @@
 import { DATA, sortProjectsCompanyFirst } from "@/data/resume";
 import { getSimpleIcon } from "@/lib/simple-icon-registry";
+import { alpha, palette } from "@/lib/theme";
 
 type CategoryKey = keyof typeof DATA.skills;
 
@@ -14,7 +15,7 @@ const CATEGORY_LABELS: Record<CategoryKey, string> = {
 function getIconSvg(
   iconSlug: string | null | undefined,
   overrideColor: string | null | undefined,
-  isDark: boolean
+  isDark: boolean,
 ): string {
   if (!iconSlug) return "";
   const icon = getSimpleIcon(iconSlug);
@@ -31,54 +32,30 @@ interface ResumeTemplateProps {
 export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
   const isDark = theme === "dark";
 
-  // ── Color tokens (aligned with portfolio navy/stone theme) ────
-  const c = isDark
-    ? {
-        bg: "#0f1419",
-        surface: "#171c24",
-        fg: "#f5f5f4",
-        fgDim: "#e7e5e4",
-        muted: "#a8a29e",
-        mutedDim: "#78716c",
-        border: "#292524",
-        rule: "#1c1917",
-        primary: "#7a9ec8",
-        primarySoft: "#1c2430",
-        accent: "#6b8fa3",
-        success: "#4d9a7a",
-        accentStrip: "#284563",
-        primaryTint: "rgba(122, 158, 200, 0.08)",
-        primaryTintStrong: "rgba(122, 158, 200, 0.14)",
-        primaryBorder: "rgba(122, 158, 200, 0.35)",
-        primaryRing: "rgba(122, 158, 200, 0.15)",
-        primaryUnderline: "rgba(122, 158, 200, 0.45)",
-        successTint: "rgba(77, 154, 122, 0.08)",
-        successBorder: "rgba(77, 154, 122, 0.22)",
-        surfaceMuted: "rgba(23, 28, 36, 0.85)",
-      }
-    : {
-        bg: "#fafaf9",
-        surface: "#ffffff",
-        fg: "#1c1917",
-        fgDim: "#292524",
-        muted: "#57534e",
-        mutedDim: "#78716c",
-        border: "#e7e5e4",
-        rule: "#f5f5f4",
-        primary: "#284563",
-        primarySoft: "#f5f5f4",
-        accent: "#3d5a73",
-        success: "#2f6f54",
-        accentStrip: "#284563",
-        primaryTint: "rgba(40, 69, 99, 0.05)",
-        primaryTintStrong: "rgba(40, 69, 99, 0.08)",
-        primaryBorder: "rgba(40, 69, 99, 0.32)",
-        primaryRing: "rgba(40, 69, 99, 0.15)",
-        primaryUnderline: "rgba(40, 69, 99, 0.38)",
-        successTint: "rgba(47, 111, 84, 0.06)",
-        successBorder: "rgba(47, 111, 84, 0.2)",
-        surfaceMuted: "rgba(255, 255, 255, 0.9)",
-      };
+  const p = isDark ? palette.dark : palette.light;
+  const c = {
+    bg: p.background,
+    surface: p.card,
+    fg: p.foreground,
+    fgDim: p.foreground,
+    muted: p.mutedForeground,
+    mutedDim: p.mutedForeground,
+    border: p.border,
+    rule: p.border,
+    primary: p.primary,
+    primarySoft: p.secondary,
+    accent: p.primary,
+    success: p.success,
+    accentStrip: p.primary,
+    primaryTint: alpha(p.primary, 0.08),
+    primaryTintStrong: alpha(p.primary, 0.14),
+    primaryBorder: alpha(p.primary, 0.36),
+    primaryRing: alpha(p.primary, 0.16),
+    primaryUnderline: alpha(p.primary, 0.45),
+    successTint: alpha(p.success, 0.1),
+    successBorder: alpha(p.success, 0.24),
+    surfaceMuted: alpha(p.card, 0.9),
+  };
 
   // ── Featured projects: company first, personal last (same as site) ─
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -106,7 +83,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     .filter(([key]) => key !== "Email")
     .map(
       ([, social]) =>
-        `<a href="${social.url}" class="meta-link">${social.name}<span class="arrow"> ↗</span></a>`
+        `<a href="${social.url}" class="meta-link">${social.name}<span class="arrow"> ↗</span></a>`,
     )
     .join('<span class="meta-sep">·</span>');
 
@@ -304,6 +281,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
 
   /* ── Summary ───────────────────────────────────────────── */
   .summary {
+    width: 100%;
     font-family: var(--serif);
     font-style: italic;
     font-size: 14px;
@@ -311,7 +289,6 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     color: ${c.fgDim};
     padding: 8px 14px;
     border-left: 2px solid ${c.primary};
-    max-width: 76ch;
     background: ${c.primaryTint};
     border-radius: 0 4px 4px 0;
   }
@@ -621,14 +598,14 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
       <h1 class="header-name">${DATA.name}</h1>
       <p class="header-tagline">${DATA.tagline.replace(
         /shipping software that pays for itself/,
-        '<span class="accent">shipping software that pays for itself</span>'
+        '<span class="accent">shipping software that pays for itself</span>',
       )}</p>
       <div class="meta-row">
         <span>${DATA.location}</span>
         <span class="meta-sep">·</span>
         <a class="meta-link" href="mailto:${DATA.contact.email}">${
-    DATA.contact.email
-  }</a>
+          DATA.contact.email
+        }</a>
         ${
           DATA.contact.tel
             ? `<span class="meta-sep">·</span><span>${DATA.contact.tel}</span>`
@@ -647,22 +624,6 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
     }
   </header>
 
-  <!-- ════ METRICS ════ -->
-  <div class="metrics">
-    ${DATA.metrics
-      .map(
-        (m, i) => `
-      <div class="metric">
-        <div class="metric-index">${String(i + 1).padStart(2, "0")}</div>
-        <div class="metric-value">${m.value}<span class="suffix">${
-          m.suffix
-        }</span></div>
-        <div class="metric-label">${m.label}</div>
-      </div>`
-      )
-      .join("")}
-  </div>
-
   <!-- ════ SUMMARY ════ -->
   <section>
     ${eyebrow(sections.summary, "Summary")}
@@ -678,18 +639,18 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
       <div class="entry">
         <div class="entry-rail">
           <span class="entry-period">${job.start}<br>${
-          job.end || "Present"
-        }</span>
+            job.end || "Present"
+          }</span>
           <span class="entry-loc">${job.location}</span>
         </div>
         <div class="entry-body">
           <div class="entry-title">${job.title}${
-          job.badges && job.badges.length > 0
-            ? `<span class="entry-badges">${job.badges
-                .map((b: string) => `<span class="badge">${b}</span>`)
-                .join("")}</span>`
-            : ""
-        }</div>
+            job.badges && job.badges.length > 0
+              ? `<span class="entry-badges">${job.badges
+                  .map((b: string) => `<span class="badge">${b}</span>`)
+                  .join("")}</span>`
+              : ""
+          }</div>
           <div class="entry-company">${
             job.href
               ? `<a href="${job.href}">${job.company}<span class="arrow"> ↗</span></a>`
@@ -697,7 +658,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           }</div>
           <div class="entry-desc">${job.description}</div>
         </div>
-      </div>`
+      </div>`,
       )
       .join("")}
   </section>
@@ -717,7 +678,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               return `<span class="skill">${iconSvg}${s.name}</span>`;
             })
             .join("")}
-        </div>`
+        </div>`,
         )
         .join("")}
     </div>
@@ -749,15 +710,15 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
               resourceLinks.length > 0
                 ? resourceLinks
                 : project.href
-                ? [{ label: "Project Link", href: project.href }]
-                : [];
+                  ? [{ label: "Project Link", href: project.href }]
+                  : [];
             if (links.length === 0) return "";
             return `<div class="project-links">${links
               .map(
                 (l: { label?: string; href: string }, i: number) =>
                   `<a class="project-link" href="${l.href}">${
                     l.label || `Link ${i + 1}`
-                  }<span class="arrow">↗</span></a>`
+                  }<span class="arrow">↗</span></a>`,
               )
               .join("")}</div>`;
           })()}
@@ -770,12 +731,12 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
             <span class="label">Stack</span>${project.technologies
               .map(
                 (t: string, i: number) =>
-                  `${i > 0 ? '<span class="tech-sep">·</span>' : ""}${t}`
+                  `${i > 0 ? '<span class="tech-sep">·</span>' : ""}${t}`,
               )
               .join("")}
           </div>
         </div>
-      </div>`
+      </div>`,
       )
       .join("")}
     <div class="projects-cta">
@@ -802,7 +763,7 @@ export function ResumeTemplate({ theme, avatarBase64 }: ResumeTemplateProps) {
           }</div>
           <div class="edu-degree">${edu.degree}</div>
         </div>
-      </div>`
+      </div>`,
       )
       .join("")}
   </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import { alpha, palette } from "@/lib/theme";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -24,25 +25,23 @@ const maskStyle = {
 };
 
 // Muted charcoal hero wash — understated, corporate.
-const DARK_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(213 32% 58% / 0.12), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(222 28% 22% / 0.2), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(222 28% 12% / 0.35), transparent 70%)";
+const DARK_GRADIENT = `radial-gradient(50% 50% at 18% 20%, ${alpha(palette.dark.primary, 0.16)}, transparent 70%)`;
 
-const LIGHT_GRADIENT =
-  "radial-gradient(55% 55% at 38% 28%, hsl(220 42% 28% / 0.06), transparent 65%), radial-gradient(45% 60% at 68% 60%, hsl(40 10% 90% / 0.35), transparent 60%), radial-gradient(60% 50% at 50% 90%, hsl(40 8% 94% / 0.4), transparent 70%)";
+const LIGHT_GRADIENT = `radial-gradient(50% 50% at 18% 20%, ${alpha(palette.light.primary, 0.1)}, transparent 70%)`;
 
 const DARK_MESH_COLORS = [
-  "#0f1419",
-  "#1e3a5f",
-  "#2d4a6f",
-  "#141a22",
-  "#0f1419",
+  palette.dark.background,
+  palette.dark.card,
+  palette.dark.secondary,
+  palette.dark.primary,
+  palette.dark.background,
 ] as const;
 const LIGHT_MESH_COLORS = [
-  "#fafaf9",
-  "#e7e5e4",
-  "#d6d3d1",
-  "#f5f5f4",
-  "#fafaf9",
+  palette.light.background,
+  palette.light.card,
+  palette.light.secondary,
+  palette.light.primary,
+  palette.light.background,
 ] as const;
 
 export function HeroMeshBackground() {

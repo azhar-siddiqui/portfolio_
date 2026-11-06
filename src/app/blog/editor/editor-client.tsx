@@ -118,7 +118,7 @@ export default function BlogEditorClient() {
   }, []);
 
   return (
-    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
+    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 sm:pb-20 pt-12 sm:pt-28">
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
@@ -164,7 +164,7 @@ export default function BlogEditorClient() {
             <FileText className="h-3 w-3" />
             Editor
           </div>
-          <h1 className="mt-4 text-3xl sm:text-4xl font-medium tracking-[-0.025em] gradient-text-warm">
+          <h1 className="mt-4 font-serif text-3xl sm:text-4xl font-medium tracking-[-0.03em] text-foreground">
             Write a post — preview as you type.
           </h1>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">

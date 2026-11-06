@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
   const next = idx >= 0 ? all[idx - 1] : undefined;
 
   return (
-    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 pt-12 sm:pt-20">
+    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 sm:pb-20 pt-12 sm:pt-28">
       <JsonLd
         data={[
           buildBlogPostingSchema({
@@ -139,7 +139,7 @@ export default async function BlogPostPage({ params }: RouteParams) {
           </BlurFade>
 
           <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
-            <h1 className="mt-5 text-3xl sm:text-5xl font-medium tracking-[-0.025em] leading-[1.08] gradient-text-warm">
+            <h1 className="mt-5 font-serif text-3xl sm:text-5xl font-medium tracking-[-0.03em] leading-[1.02] text-foreground">
               {frontmatter.title}
             </h1>
           </BlurFade>

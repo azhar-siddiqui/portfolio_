@@ -13,7 +13,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function NotFound() {
   return (
-    <main className="flex flex-col min-h-dvh items-center justify-center px-4 sm:px-6 pb-32 pt-16 sm:pt-24 text-center">
+    <main className="flex flex-col min-h-dvh items-center justify-center px-4 sm:px-6 pb-32 sm:pb-20 pt-16 sm:pt-28 text-center">
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: "Home", path: "/" },
@@ -23,7 +23,7 @@ export default function NotFound() {
       <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
         404
       </p>
-      <h1 className="mt-4 text-3xl sm:text-5xl font-medium tracking-[-0.03em] text-foreground">
+      <h1 className="mt-4 font-serif text-3xl sm:text-5xl font-medium tracking-[-0.03em] text-foreground">
         Page not found
       </h1>
       <p className="mt-4 text-base text-muted-foreground max-w-md leading-relaxed">
@@ -31,7 +31,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="mt-8 inline-flex items-center justify-center px-6 h-11 bg-primary text-primary-foreground rounded-full font-medium text-sm shadow-soft hover:bg-primary/90 transition-colors"
+        className="btn-fill mt-8 h-11 px-6"
       >
         Back to home
       </Link>

@@ -2,118 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    /* Light theme — warm stone neutrals with a restrained navy accent. */
-    --background: 40 10% 98%;
-    --foreground: 222 22% 14%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222 22% 14%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 22% 14%;
-
-    --primary: 220 42% 28%;
-    --primary-foreground: 40 10% 98%;
-
-    --secondary: 40 8% 94%;
-    --secondary-foreground: 222 22% 14%;
-
-    --muted: 40 8% 93%;
-    --muted-foreground: 220 9% 42%;
-
-    --accent: 200 18% 38%;
-    --accent-foreground: 40 10% 98%;
-
-    --destructive: 0 65% 48%;
-    --destructive-foreground: 0 0% 100%;
-
-    --success: 158 42% 32%;
-    --success-foreground: 0 0% 100%;
-
-    --warm: 38 52% 40%;
-    --cool: 200 18% 38%;
-
-    --clay: 38 52% 40%;
-    --sand: 40 8% 90%;
-    --soil: 222 18% 24%;
-
-    --border: 40 8% 88%;
-    --input: 40 8% 88%;
-    --ring: 220 42% 28%;
-
-    --grid-line: 40 8% 91%;
-
-    --chart-1: 220 42% 28%;
-    --chart-2: 200 18% 38%;
-    --chart-3: 158 42% 32%;
-    --chart-4: 38 52% 40%;
-    --chart-5: 222 18% 42%;
-
-    /* Ambient wash — neutral depth, barely perceptible. */
-    --aura-1: 220 20% 82%;
-    --aura-2: 40 12% 88%;
-    --aura-3: 200 14% 78%;
-    --aura-4: 222 18% 72%;
-
-    --radius: 0.75rem;
-  }
-
-  .dark {
-    /* Dark theme — charcoal navy with soft steel-blue highlights. */
-    --background: 222 28% 7%;
-    --foreground: 40 10% 96%;
-
-    --card: 222 24% 10%;
-    --card-foreground: 40 10% 96%;
-
-    --popover: 222 24% 9%;
-    --popover-foreground: 40 10% 96%;
-
-    --primary: 213 32% 58%;
-    --primary-foreground: 222 28% 8%;
-
-    --secondary: 222 20% 14%;
-    --secondary-foreground: 40 10% 96%;
-
-    --muted: 222 20% 14%;
-    --muted-foreground: 220 10% 62%;
-
-    --accent: 200 16% 48%;
-    --accent-foreground: 222 28% 8%;
-
-    --destructive: 0 58% 52%;
-    --destructive-foreground: 0 0% 100%;
-
-    --success: 158 38% 42%;
-    --success-foreground: 222 28% 8%;
-
-    --warm: 38 48% 52%;
-    --cool: 200 16% 48%;
-
-    --clay: 38 48% 52%;
-    --sand: 222 18% 20%;
-    --soil: 220 10% 72%;
-
-    --border: 222 18% 16%;
-    --input: 222 18% 16%;
-    --ring: 213 32% 58%;
-
-    --grid-line: 222 18% 14%;
-
-    --chart-1: 213 32% 58%;
-    --chart-2: 200 16% 48%;
-    --chart-3: 158 38% 42%;
-    --chart-4: 38 48% 52%;
-    --chart-5: 222 18% 55%;
-
-    --aura-1: 222 22% 22%;
-    --aura-2: 220 18% 18%;
-    --aura-3: 213 20% 24%;
-    --aura-4: 222 18% 16%;
-  }
-}
+/* Color tokens live in src/lib/theme.ts and are injected on :root. */
 
 @layer base {
   * {
@@ -126,81 +15,8 @@
        bar collapses and the visual viewport temporarily exceeds <body>. */
   }
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "cv11" 1;
-    /* Subtle dot-grid — kept, but softer. `background-attachment: fixed`
-       intentionally avoided here: it causes severe flicker on iOS/Android
-       browsers while their chrome animates in/out. The aura layer below is
-       already `position: fixed` and provides the parallax feel. */
-    background-image:
-      radial-gradient(circle, hsl(var(--grid-line) / 0.28) 1px, transparent 1px);
-    background-size: 32px 32px;
-    background-position: 0 0;
-  }
-
-  /* Subtle ambient depth — static neutral wash, no motion. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: -10%;
-    pointer-events: none;
-    z-index: -1;
-    background:
-      radial-gradient(
-        52rem 38rem at 10% -5%,
-        hsl(var(--aura-1) / 0.1),
-        transparent 68%
-      ),
-      radial-gradient(
-        46rem 34rem at 90% 8%,
-        hsl(var(--aura-2) / 0.07),
-        transparent 70%
-      ),
-      radial-gradient(
-        42rem 32rem at 50% 100%,
-        hsl(var(--aura-3) / 0.06),
-        transparent 72%
-      );
-  }
-  .dark body::before {
-    background:
-      radial-gradient(
-        52rem 38rem at 10% -5%,
-        hsl(var(--aura-1) / 0.14),
-        transparent 68%
-      ),
-      radial-gradient(
-        46rem 34rem at 90% 8%,
-        hsl(var(--aura-2) / 0.08),
-        transparent 70%
-      ),
-      radial-gradient(
-        42rem 32rem at 50% 100%,
-        hsl(var(--aura-3) / 0.1),
-        transparent 72%
-      );
-  }
-
-  @keyframes aurora-drift {
-    0%   { transform: translate3d(0, 0, 0) scale(1); }
-    50%  { transform: translate3d(-2%, 1.5%, 0) scale(1.04); }
-    100% { transform: translate3d(2%, -1.5%, 0) scale(1.02); }
-  }
-
-  /* Soft top→bottom fade so the dot-grid and aura settle into the background
-     near the page edges instead of fighting the content. */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      hsl(var(--background) / 0.25) 55%,
-      hsl(var(--background) / 0.78) 100%
-    );
+    @apply bg-background text-base leading-relaxed text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   :focus-visible {
@@ -223,15 +39,14 @@
     font-feature-settings: "ss01" 1, "ss03" 1;
   }
 
-  /* Instrument Serif — used as an accent face for italicised display words
-     and section-eyebrow numerals. The font is loaded in `src/app/layout.tsx`. */
   .font-serif {
-    font-family: var(--font-serif), ui-serif, Georgia, serif;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-style: normal;
   }
   .serif-accent {
-    font-family: var(--font-serif), ui-serif, Georgia, serif;
-    font-style: italic;
-    letter-spacing: -0.01em;
+    font-family: inherit;
+    font-style: normal;
+    letter-spacing: inherit;
   }
 
   .eyebrow {
@@ -250,13 +65,35 @@
   /* Unified heading scale — used across every section so the type rhythm
      reads as one system. */
   .display-heading {
-    @apply text-4xl sm:text-6xl md:text-7xl font-medium tracking-[-0.035em] leading-[1] text-foreground;
+    @apply text-4xl sm:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] text-foreground;
   }
   .section-heading {
-    @apply text-3xl sm:text-4xl font-medium tracking-[-0.02em] text-foreground;
+    @apply text-[2rem] sm:text-4xl font-semibold tracking-[-0.02em] leading-[1.2] text-foreground;
   }
   .subsection-heading {
-    @apply text-xl sm:text-2xl font-medium tracking-[-0.015em] text-foreground leading-snug;
+    @apply text-xl sm:text-2xl font-semibold tracking-[-0.02em] leading-snug text-foreground;
+  }
+
+  .btn-fill {
+    @apply inline-flex items-center justify-center gap-2 px-5 text-sm font-medium transition-colors duration-200;
+    border-radius: var(--radius);
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  .btn-fill:hover {
+    background-color: hsl(var(--primary) / 0.88);
+  }
+  .btn-line {
+    @apply inline-flex items-center justify-center gap-2 border px-5 text-sm font-medium transition-colors duration-200;
+    border-radius: var(--radius);
+    border-color: hsl(var(--foreground) / 0.22);
+    color: hsl(var(--foreground));
+    background-color: transparent;
+  }
+  .btn-line:hover {
+    border-color: hsl(var(--primary) / 0.7);
+    background-color: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
   }
 
   .gradient-text {
@@ -306,39 +143,13 @@
      ResumeCard's hover state, and any inline panel. Single source of truth
      for radius, border, blur, hover lift, and the liquid-glass tint. */
   .bento-card {
-    @apply relative isolate overflow-hidden rounded-xl border border-border/70 backdrop-blur-md transition-all duration-300;
-    background-color: hsl(var(--card) / 0.88);
-    box-shadow:
-      0 1px 0 hsl(var(--foreground) / 0.02),
-      0 8px 24px -16px hsl(var(--foreground) / 0.08);
-  }
-  .bento-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    background:
-      linear-gradient(
-        135deg,
-        hsl(var(--primary) / 0.04) 0%,
-        transparent 45%,
-        hsl(var(--accent) / 0.03) 100%
-      );
-    opacity: 0.85;
-    transition: opacity 0.35s ease;
+    @apply relative isolate overflow-hidden border border-border transition-colors duration-200;
+    border-radius: calc(var(--radius) * 1.5);
+    background-color: hsl(var(--card));
+    box-shadow: 0 1px 3px hsl(var(--foreground) / 0.06);
   }
   .bento-card:hover {
-    border-color: hsl(var(--primary) / 0.28);
-    transform: translateY(-2px);
-    background-color: hsl(var(--card));
-    box-shadow:
-      0 1px 0 hsl(var(--foreground) / 0.03),
-      0 16px 36px -24px hsl(var(--foreground) / 0.14),
-      0 4px 12px -6px hsl(var(--foreground) / 0.06);
-  }
-  .bento-card:hover::before {
-    opacity: 1;
+    border-color: hsl(var(--foreground) / 0.28);
   }
 
   /* Bento grid — auto-flowing 12-col layout with generous gaps. Cards opt
@@ -413,7 +224,8 @@
      a "go check this out" affordance needs to be obvious. Visually consistent
      with the outline-button aesthetic used across the site. */
   .link-pill {
-    @apply inline-flex items-center gap-1.5 h-8 px-3 rounded-full border text-[12px] font-medium tracking-tight transition-colors duration-200;
+    @apply inline-flex items-center gap-1.5 h-8 px-3 border text-[12px] font-medium tracking-tight transition-colors duration-200;
+    border-radius: 2px;
     border-color: hsl(var(--border));
     background-color: hsl(var(--card) / 0.55);
     color: hsl(var(--foreground) / 0.85);
@@ -427,7 +239,8 @@
   /* Unified tag/chip vocabulary — used by blog tags, project tags, eyebrow
      metadata. Matches the link-pill aesthetic but at a smaller scale. */
   .chip {
-    @apply inline-flex items-center rounded-full border border-border/60 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em];
+    @apply inline-flex items-center border border-border/60 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em];
+    border-radius: 2px;
     background-color: hsl(var(--card) / 0.5);
     color: hsl(var(--foreground) / 0.78);
   }
@@ -669,13 +482,9 @@ figure.zoomable-image {
   overflow: hidden;
   /* Always use a light border/background — SVG diagrams are designed for
      light backgrounds so dark-mode card colors make them unreadable. */
-  border: 1px solid #e2e8f0;
-  background-color: #ffffff;
+  border: 1px solid hsl(var(--diagram-border));
+  background-color: hsl(var(--diagram-surface));
   cursor: zoom-in;
-}
-.dark .zi-wrapper {
-  border-color: #334155;
-  background-color: #f1f5f9;
 }
 
 .zi-thumbnail {
@@ -781,13 +590,9 @@ figure.zoomable-image {
   will-change: transform;
   transform-origin: center center;
   user-select: none;
-  /* Light background so SVG diagram colours are legible even in dark mode */
-  background-color: #ffffff;
-  border-radius: 8px;
+  background-color: hsl(var(--diagram-surface));
+  border-radius: var(--radius);
   padding: 12px;
-}
-.dark .zi-stage {
-  background-color: #f1f5f9;
 }
 .zi-stage:active {
   cursor: grabbing;
@@ -937,11 +742,11 @@ figure.zoomable-image {
 /* Prose blockquote — leans into the new serif accent for a confident
    editorial tone instead of the muted gray default. */
 .prose blockquote {
-  font-family: var(--font-serif), ui-serif, Georgia, serif;
-  font-style: italic;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-style: normal;
   font-weight: 400;
   font-size: 1.125em;
-  line-height: 1.55;
+  line-height: 1.6;
   border-left-width: 2px;
   border-left-color: hsl(var(--primary) / 0.5);
   color: hsl(var(--foreground) / 0.85);
@@ -970,6 +775,20 @@ code {
 
 pre > code {
   counter-reset: line;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 code[data-theme*=" "],

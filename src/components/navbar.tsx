@@ -28,5 +28,5 @@ export default async function Navbar() {
       };
     });
 
-  return <NavbarClient items={items} />;
+  return <NavbarClient items={items} name={DATA.name} />;
 }
