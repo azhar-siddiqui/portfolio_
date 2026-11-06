@@ -161,7 +161,7 @@ I take a feature from the screen, through the API, to production, and I use AI t
     {
       title: "Quloi Omni-Channel Supply Chain Platform",
       href: "https://quloi.com",
-      dates: "Jan 2023 - Sep 2023",
+      dates: "Jan 2023 - Feb 2024",
       company: "Quloi",
       active: true,
       description:

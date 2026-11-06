@@ -156,7 +156,7 @@ export const DATA = {
     },
     {
       title: "Quloi Omni-Channel Supply Chain Platform",
-      dates: "Jan 2023 - Sep 2023",
+      dates: "Jan 2023 - Feb 2024",
       href: "https://quloi.com",
       technologies: ["React", "TypeScript", "TailwindCSS", "REST API", "RBAC"],
       description:
