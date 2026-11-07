@@ -5,11 +5,11 @@ import { alpha, palette } from "@/lib/theme";
 type CategoryKey = keyof typeof DATA.skills;
 
 const CATEGORY_LABELS: Record<CategoryKey, string> = {
-  ai: "AI Native & LLMs",
   frontend: "Frontend",
-  backend: "Backend & Data",
-  devops: "DevOps & Cloud",
-  testing: "Testing & QA",
+  backend: "Backend",
+  testing: "Testing",
+  shipping: "Shipping",
+  tools: "Coding tools",
 };
 
 function getIconSvg(

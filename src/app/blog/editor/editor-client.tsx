@@ -118,12 +118,12 @@ export default function BlogEditorClient() {
   }, []);
 
   return (
-    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 sm:pb-20 pt-12 sm:pt-28">
+    <main className="flex min-h-dvh flex-col px-4 pb-16 pt-20 sm:px-6">
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/blog"
-            className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-0.5" />
             Back to writing
@@ -164,8 +164,8 @@ export default function BlogEditorClient() {
             <FileText className="h-3 w-3" />
             Editor
           </div>
-          <h1 className="mt-4 font-serif text-3xl sm:text-4xl font-medium tracking-[-0.03em] text-foreground">
-            Write a post — preview as you type.
+          <h1 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-foreground">
+            Write a post. Preview as you type.
           </h1>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-2xl">
             Drafts persist in your browser. When you&apos;re happy with the

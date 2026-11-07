@@ -1,7 +1,5 @@
 "use client";
 
-import { ProjectCard } from "@/components/project-card";
-import { BlurFade } from "@/components/magicui/blur-fade";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -13,14 +11,10 @@ import {
 import {
   DATA,
   compareProjectsCompanyFirst,
-  getProjectResourceLinks,
 } from "@/data/resume";
-import { AnimatePresence, motion } from "framer-motion";
 import { Search } from "lucide-react";
 import * as chrono from "chrono-node";
 import { useMemo, useState } from "react";
-
-const BLUR_FADE_DELAY = 0.04;
 
 type Filter = "all" | "featured" | string;
 
@@ -29,11 +23,10 @@ const PRIMARY_TECH_FILTERS = [
   "Next.js",
   "TypeScript",
   "React Native",
-  "Angular",
 ];
 
 function parseProjectDate(dates: string): Date {
-  const parsed = chrono.parseDate(dates.split(" – ")[0]);
+  const parsed = chrono.parseDate(dates.split(" - ")[0] ?? dates);
   return parsed ?? new Date(0);
 }
 
@@ -49,13 +42,13 @@ export function ProjectsGrid() {
         project.title.toLowerCase().includes(search.toLowerCase()) ||
         project.description.toLowerCase().includes(search.toLowerCase()) ||
         project.technologies.some((tech) =>
-          tech.toLowerCase().includes(search.toLowerCase())
+          tech.toLowerCase().includes(search.toLowerCase()),
         );
 
       const matchesFilter =
         filter === "all" ||
         (filter === "featured" && project.featured) ||
-        (project.technologies as unknown as string[]).includes(filter);
+        (project.technologies as readonly string[]).includes(filter);
 
       return matchesSearch && matchesFilter;
     });
@@ -84,109 +77,104 @@ export function ProjectsGrid() {
 
   const filters: { value: Filter; label: string }[] = [
     { value: "all", label: "All" },
-    { value: "featured", label: "Featured" },
-    ...PRIMARY_TECH_FILTERS.map((t) => ({ value: t, label: t })),
+    { value: "featured", label: "Client work" },
+    ...PRIMARY_TECH_FILTERS.map((tech) => ({ value: tech, label: tech })),
   ];
 
   return (
-    <>
-      <BlurFade delay={BLUR_FADE_DELAY * 4}>
-        <div className="mt-12 sm:mt-16 flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
-              <Input
-                placeholder="Search by title, tech, or keyword…"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="h-11 pl-10 text-sm border-border/60 bg-card/70 rounded-sm focus-visible:border-primary/50"
-              />
-            </div>
-            <Select
-              value={sortBy}
-              onValueChange={(value) =>
-                setSortBy(value as "newest" | "oldest" | "title")
-              }
-            >
-              <SelectTrigger className="w-full sm:w-44 h-11 border-border/60 bg-card/70 rounded-sm text-sm">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="newest">Newest first</SelectItem>
-                <SelectItem value="oldest">Oldest first</SelectItem>
-                <SelectItem value="title">A → Z</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {filters.map((f) => {
-              const active = filter === f.value;
-              return (
-                <button
-                  key={f.value}
-                  onClick={() => setFilter(f.value)}
-                  className={`h-9 px-4 rounded-sm font-mono text-[11px] uppercase tracking-[0.14em] transition-all duration-200 border ${
-                    active
-                      ? "bg-foreground text-background border-foreground"
-                      : "bg-card/50 backdrop-blur-md text-muted-foreground hover:text-foreground border-border/60 hover:border-foreground/30"
-                  }`}
-                >
-                  {f.label}
-                </button>
-              );
-            })}
-          </div>
+    <div className="mt-8">
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="relative min-w-0 flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search title or stack"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            className="h-10 border-border bg-background pl-10 text-sm"
+          />
         </div>
-      </BlurFade>
-
-      <div className="mt-12 sm:mt-16">
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 auto-rows-min"
+        <Select
+          value={sortBy}
+          onValueChange={(value) =>
+            setSortBy(value as "newest" | "oldest" | "title")
+          }
         >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, id) => (
-              <motion.div
-                key={project.title}
-                layout
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{
-                  duration: 0.35,
-                  delay: Math.min(id * 0.03, 0.3),
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <ProjectCard
-                  href={"href" in project ? project.href : undefined}
-                  title={project.title}
-                  description={project.description}
-                  dates={project.dates}
-                  tags={project.technologies}
-                  resourceLinks={getProjectResourceLinks(project)}
-                  impact={project.impact}
-                  company={project.company}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {filteredProjects.length === 0 && (
-          <BlurFade delay={BLUR_FADE_DELAY}>
-            <div className="text-center py-24 border-t border-border/60">
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                No matches
-              </p>
-              <p className="mt-3 text-muted-foreground/70 text-sm">
-                Try a different search or clear the active filter.
-              </p>
-            </div>
-          </BlurFade>
-        )}
+          <SelectTrigger className="h-10 w-full border-border bg-background text-sm sm:w-40">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="newest">Newest first</SelectItem>
+            <SelectItem value="oldest">Oldest first</SelectItem>
+            <SelectItem value="title">A to Z</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
-    </>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {filters.map((item) => {
+          const active = filter === item.value;
+          return (
+            <button
+              key={item.value}
+              type="button"
+              onClick={() => setFilter(item.value)}
+              className={
+                active
+                  ? "h-8 border border-foreground bg-foreground px-3 text-sm text-background"
+                  : "h-8 border border-border px-3 text-sm text-muted-foreground hover:text-foreground"
+              }
+              style={{ borderRadius: "var(--radius)" }}
+            >
+              {item.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {filteredProjects.length === 0 ? (
+        <p className="mt-10 border-t border-border py-10 text-sm text-muted-foreground">
+          Nothing matches that search.
+        </p>
+      ) : (
+        <ol className="mt-6 border-t border-border">
+          {filteredProjects.map((project) => {
+            const href = "href" in project ? project.href : undefined;
+            return (
+              <li key={project.title} className="border-b border-border py-6">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h2 className="text-base font-semibold text-foreground">
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-border underline-offset-4 hover:decoration-foreground"
+                      >
+                        {project.title}
+                      </a>
+                    ) : (
+                      project.title
+                    )}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">{project.dates}</p>
+                </div>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {project.company}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground">
+                  {project.description}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {project.impact}
+                </p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {project.technologies.join(" · ")}
+                </p>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+    </div>
   );
 }

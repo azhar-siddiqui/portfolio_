@@ -145,9 +145,9 @@ export function buildRootMetadata(): Metadata {
     keywords: [
       "hire product engineer",
       "remote software engineer India",
-      "maritime software developer",
-      "healthcare SaaS developer",
-      "logistics platform engineer",
+      "React TypeScript developer",
+      "CentLabs Pro",
+      "frontend engineer India",
     ],
   });
 
@@ -219,8 +219,8 @@ export function buildPersonSchema(): JsonLd {
       "Node.js",
       "Full Stack Development",
       "Product Engineering",
-      "SaaS Development",
-      "AI-assisted Development",
+      "Electron",
+      "React Native",
     ],
   };
 }

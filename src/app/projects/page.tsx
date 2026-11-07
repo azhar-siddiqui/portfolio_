@@ -1,6 +1,4 @@
 import { JsonLd } from "@/components/json-ld";
-import { BlurFade } from "@/components/magicui/blur-fade";
-import { SectionEyebrow } from "@/components/section-eyebrow";
 import { ProjectsGrid } from "@/components/projects-grid";
 import { SiteFooter } from "@/components/site-footer";
 import { DATA } from "@/data/resume";
@@ -10,11 +8,9 @@ import {
   buildProjectsItemListSchema,
 } from "@/lib/seo";
 
-const BLUR_FADE_DELAY = 0.04;
-
 export default function ProjectsPage() {
   return (
-    <main className="flex flex-col min-h-dvh px-4 sm:px-6 pt-16 pb-32 sm:pt-28 sm:pb-20">
+    <main className="mx-auto flex min-h-dvh w-full min-w-0 max-w-3xl flex-col overflow-x-clip px-4 pb-16 pt-20 sm:px-6">
       <JsonLd
         data={[
           buildCollectionPageSchema({
@@ -29,23 +25,14 @@ export default function ProjectsPage() {
           ]),
         ]}
       />
-      <div className="mx-auto w-full max-w-6xl">
-        <BlurFade delay={BLUR_FADE_DELAY}>
-          <SectionEyebrow index="*" label="Projects archive" />
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 2}>
-          <h1 className="display-heading max-w-3xl">
-            Everything I&apos;ve{" "}
-            <span className="serif-accent text-foreground">shipped</span>,
-            indexed.
-          </h1>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <p className="mt-6 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-            {DATA.projects.length} projects across maritime, finance, logistics,
-            EdTech and more. Filter by stack or search by keyword.
-          </p>
-        </BlurFade>
+      <div className="w-full min-w-0">
+        <h1 className="text-3xl font-semibold tracking-[-0.03em] text-foreground sm:text-4xl">
+          Projects
+        </h1>
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+          Client work is listed first. Anything marked Personal Project is a
+          demo I built to practice. Those demos are not live businesses.
+        </p>
 
         <ProjectsGrid />
       </div>

@@ -5,6 +5,6 @@ export const HERO_DATA = {
   location: "Aurangabad, India",
   tagline: "Product Engineer building and launching products from scratch.",
   description:
-    "I don't just write code. I build software that delivers real business impact: boosting revenue, lowering costs, ensuring compliance, and scaling operations for maritime, logistics, healthcare, and hospitality companies.",
+    "Product Engineer in Aurangabad, open to full-time roles in India and remote. Production frontend since 2021. Latest product is CentLabs Pro, offline software for pathology labs.",
   avatarUrl: "/me.png",
 } as const;

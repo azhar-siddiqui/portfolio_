@@ -1,21 +1,11 @@
 import { BlogPostCard } from "@/components/blog-post-card";
 import { Hero } from "@/components/hero";
-import { IndustriesMarquee } from "@/components/industries-marquee";
 import { JsonLd } from "@/components/json-ld";
-import { BlurFade } from "@/components/magicui/blur-fade";
-import { ProjectCard } from "@/components/project-card";
-import { ResumeCard } from "@/components/resume-card";
-import { SectionEyebrow } from "@/components/section-eyebrow";
 import { SkillsSection } from "@/components/skills-section";
 import { getAllPosts } from "@/data/blog";
-import {
-  DATA,
-  getProjectResourceLinks,
-  sortProjectsCompanyFirst,
-} from "@/data/resume";
+import { DATA } from "@/data/resume";
 import { isBlogEnabled } from "@/lib/feature-flags";
 import { buildPageMetadata } from "@/lib/seo";
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
@@ -25,24 +15,21 @@ export const metadata = buildPageMetadata({
   path: "/",
   keywords: [
     "product engineer portfolio",
-    "full stack developer India",
     "React Next.js TypeScript engineer",
-    "SaaS developer for hire",
-    ...DATA.industries.map((industry) => `${industry} software developer`),
+    "frontend developer Aurangabad",
+    "CentLabs Pro",
   ],
 });
-
-const BLUR_FADE_DELAY = 0.04;
-
-const FEATURED_PROJECT_COUNT = 5;
 
 export default async function Page() {
   const blogEnabled = await isBlogEnabled();
   const latestPosts = blogEnabled ? (await getAllPosts()).slice(0, 3) : [];
+  const selectedWork = DATA.projects.filter((project) => project.featured);
+
   return (
     <main
       id="resume-content"
-      className="flex flex-col min-h-dvh px-4 sm:px-6 pb-32 sm:pb-20 sm:pt-20"
+      className="mx-auto flex min-h-dvh w-full min-w-0 max-w-3xl flex-col overflow-x-clip px-4 pb-16 pt-20 sm:px-6"
     >
       <JsonLd
         data={{
@@ -60,275 +47,201 @@ export default async function Page() {
       />
       <Hero />
 
-      <section id="about" className="mt-20 sm:mt-28">
-        <div className="mx-auto w-full max-w-6xl">
-          <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <SectionEyebrow index="01" label="About" />
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-            <h2 className="section-heading mb-6 max-w-2xl">
-              I build software that works in production.
-            </h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
-            <div className="prose prose-lg text-pretty font-sans text-base text-muted-foreground dark:prose-invert max-w-2xl leading-relaxed">
-              <Markdown>{DATA.summary}</Markdown>
-            </div>
-          </BlurFade>
+      <section id="about" className="mt-16 w-full min-w-0 border-t border-border pt-10">
+        <h2 className="text-sm font-medium text-muted-foreground">About</h2>
+        <div className="mt-4 max-w-full space-y-4 text-base leading-relaxed text-foreground [&_p]:max-w-full">
+          <Markdown>{DATA.summary}</Markdown>
         </div>
       </section>
 
-      <div className="mt-16 sm:mt-24">
-        <IndustriesMarquee items={DATA.industries} />
-      </div>
-
-      <section id="work" className="mt-16 sm:mt-24">
-        <div className="mx-auto w-full max-w-6xl">
-          <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <SectionEyebrow index="02" label="Experience" />
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-            <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
-              Four years of shipping production software.
-            </h2>
-          </BlurFade>
-          <div className="flex flex-col">
-            {DATA.work.map((work, id) => (
-              <BlurFade
-                key={work.company}
-                delay={BLUR_FADE_DELAY * (2 + id * 0.5)}
-                inView
-              >
-                <ResumeCard
-                  logoUrl={work.logoUrl}
-                  altText={work.company}
-                  title={work.company}
-                  subtitle={work.title}
-                  href={work.href}
-                  badges={work.badges}
-                  period={`${work.start} — ${work.end ?? "Present"}`}
-                  description={work.description}
-                  location={work.location}
-                />
-              </BlurFade>
-            ))}
-          </div>
-        </div>
+      <section id="work" className="mt-16 border-t border-border pt-10">
+        <h2 className="text-sm font-medium text-muted-foreground">Work</h2>
+        <ol className="mt-2">
+          {DATA.work.map((job) => (
+            <li
+              key={`${job.company}-${job.start}`}
+              className="grid gap-2 border-b border-border py-6 sm:grid-cols-[9.5rem_1fr] sm:gap-8"
+            >
+              <p className="text-sm text-muted-foreground">
+                {job.start} — {job.end ?? "Present"}
+              </p>
+              <div>
+                <h3 className="text-base font-semibold text-foreground">
+                  {job.href && job.company !== "Self-employed" ? (
+                    <a
+                      href={job.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-border underline-offset-4 hover:decoration-foreground"
+                    >
+                      {job.company}
+                    </a>
+                  ) : (
+                    job.company
+                  )}
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {job.title} · {job.location}
+                </p>
+                {job.company === "Self-employed" && job.href ? (
+                  <a
+                    href={job.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block text-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+                  >
+                    centlabspro.com
+                  </a>
+                ) : null}
+                <p className="mt-3 text-sm leading-relaxed text-foreground">
+                  {job.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <section id="education" className="mt-24 sm:mt-32">
-        <div className="mx-auto w-full max-w-6xl">
-          <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <SectionEyebrow index="03" label="Education" />
-          </BlurFade>
-          <div className="flex flex-col">
-            {DATA.education.map((education, id) => (
-              <BlurFade
-                key={`${education.school}-${education.degree}-${education.start}`}
-                delay={BLUR_FADE_DELAY * (2 + id * 0.5)}
-                inView
-              >
-                <ResumeCard
-                  href={education.href}
-                  logoUrl={education.logoUrl}
-                  altText={education.school}
-                  title={education.school}
-                  subtitle={education.degree}
-                  period={`${education.start} — ${education.end}`}
-                />
-              </BlurFade>
-            ))}
-          </div>
-        </div>
+      <section id="education" className="mt-10">
+        <h2 className="text-sm font-medium text-muted-foreground">Education</h2>
+        <ul className="mt-4 space-y-4">
+          {DATA.education.map((education) => (
+            <li key={`${education.degree}-${education.start}`}>
+              <p className="text-sm font-medium text-foreground">
+                {education.degree}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {education.school} · {education.start} — {education.end}
+              </p>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section id="skills" className="mt-24 sm:mt-32">
+      <section id="skills" className="mt-16 border-t border-border pt-10">
         <SkillsSection />
       </section>
 
-      <section id="projects" className="mt-24 sm:mt-32">
-        <div className="mx-auto w-full max-w-6xl">
-          <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <SectionEyebrow index="05" label="Selected work" />
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-            <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
-              Selected work from recent years.
-            </h2>
-          </BlurFade>
-          <div className="bento-grid">
-            {sortProjectsCompanyFirst(
-              DATA.projects.filter((project) => project.featured),
-            )
-              .slice(0, FEATURED_PROJECT_COUNT)
-              .map((project, id) => {
-                // First card is the bento "feature" hero (large, 2-row tall on lg+).
-                // Next two are wide half-rows; the last two fill the bottom row.
-                const span =
-                  id === 0
-                    ? "bento-feature"
-                    : id === 1 || id === 2
-                      ? "bento-half"
-                      : "bento-half";
-                return (
-                  <BlurFade
-                    key={project.title}
-                    delay={BLUR_FADE_DELAY * (2 + id * 0.4)}
-                    inView
-                    className={span}
-                  >
-                    <ProjectCard
-                      href={"href" in project ? project.href : undefined}
-                      title={project.title}
-                      description={project.description}
-                      dates={project.dates}
-                      tags={project.technologies}
-                      resourceLinks={getProjectResourceLinks(project)}
-                      impact={project.impact}
-                      company={project.company}
-                      featured={id === 0}
-                    />
-                  </BlurFade>
-                );
-              })}
-          </div>
-          <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
-            <div className="mt-12">
-              <Link
-                href="/projects"
-                className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-foreground animated-underline"
-              >
-                View all projects
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </div>
-          </BlurFade>
+      <section id="projects" className="mt-16 border-t border-border pt-10">
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 className="text-sm font-medium text-muted-foreground">
+            Selected work
+          </h2>
+          <Link
+            href="/projects"
+            className="text-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            All projects
+          </Link>
         </div>
+        <ol className="mt-2">
+          {selectedWork.map((project, index) => {
+            const href = "href" in project ? project.href : undefined;
+            const lead = index === 0;
+            return (
+              <li
+                key={project.title}
+                className={
+                  lead
+                    ? "my-4 border border-border bg-card p-5 sm:p-6"
+                    : "border-b border-border py-6"
+                }
+                style={lead ? { borderRadius: "var(--radius)" } : undefined}
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-base font-semibold text-foreground">
+                    {href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-border underline-offset-4 hover:decoration-foreground"
+                      >
+                        {project.title}
+                      </a>
+                    ) : (
+                      project.title
+                    )}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">{project.dates}</p>
+                </div>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {project.company}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground">
+                  {project.description}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {project.impact}
+                </p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {project.technologies.join(" · ")}
+                </p>
+              </li>
+            );
+          })}
+        </ol>
       </section>
 
       {latestPosts.length > 0 && (
-        <section id="writing" className="mt-24 sm:mt-32">
-          <div className="mx-auto w-full max-w-6xl">
-            <BlurFade delay={BLUR_FADE_DELAY} inView>
-              <SectionEyebrow index="06" label="Latest writing" />
-            </BlurFade>
-            <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-              <h2 className="section-heading mb-10 sm:mb-14 max-w-2xl">
-                Notes from the build.
-              </h2>
-            </BlurFade>
-            {latestPosts.length === 1 ? (
-              <BlurFade delay={BLUR_FADE_DELAY * 2.5} inView>
-                <BlogPostCard post={latestPosts[0]} featured />
-              </BlurFade>
-            ) : (
-              <div
-                className={`grid grid-cols-1 gap-4 sm:gap-5 ${
-                  latestPosts.length === 2
-                    ? "sm:grid-cols-2"
-                    : "sm:grid-cols-2 lg:grid-cols-3"
-                }`}
-              >
-                {latestPosts.map((post, id) => (
-                  <BlurFade
-                    key={post.slug}
-                    delay={BLUR_FADE_DELAY * (2 + id * 0.5)}
-                    inView
-                  >
-                    <BlogPostCard post={post} />
-                  </BlurFade>
-                ))}
-              </div>
-            )}
-            <BlurFade delay={BLUR_FADE_DELAY * 5} inView>
-              <div className="mt-10">
-                <Link
-                  href="/blog"
-                  className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-foreground animated-underline"
-                >
-                  Read all posts
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              </div>
-            </BlurFade>
+        <section id="writing" className="mt-16 border-t border-border pt-10">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="text-sm font-medium text-muted-foreground">
+              Writing
+            </h2>
+            <Link
+              href="/blog"
+              className="text-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+            >
+              All posts
+            </Link>
+          </div>
+          <div className="mt-6 grid grid-cols-1 gap-4">
+            {latestPosts.map((post) => (
+              <BlogPostCard key={post.slug} post={post} />
+            ))}
           </div>
         </section>
       )}
 
-      <section id="contact" className="mt-24 sm:mt-32">
-        <div className="mx-auto w-full max-w-6xl">
-          <BlurFade delay={BLUR_FADE_DELAY} inView>
-            <SectionEyebrow index="07" label="Contact" />
-          </BlurFade>
-          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16">
-            <div>
-              <BlurFade delay={BLUR_FADE_DELAY * 2} inView>
-                <h2 className="max-w-[16ch] text-2xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl">
-                  Let&apos;s build something together.
-                </h2>
-              </BlurFade>
-              <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
-                <p className="mt-6 text-base text-muted-foreground leading-relaxed max-w-md">
-                  If you&apos;re building something where engineering decisions
-                  meet business outcomes, I&apos;d like to hear about it.
-                </p>
-              </BlurFade>
-              <BlurFade delay={BLUR_FADE_DELAY * 4} inView>
-                <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3">
-                  <a
-                    href={DATA.contact.social.LinkedIn.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-fill group h-11"
-                  >
-                    Connect on LinkedIn
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                  <a
-                    href={`mailto:${DATA.contact.email}`}
-                    className="btn-line group h-11"
-                  >
-                    Send email
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                </div>
-              </BlurFade>
-            </div>
-            <BlurFade delay={BLUR_FADE_DELAY * 3} inView>
-              <dl className="grid grid-cols-1 gap-6 sm:gap-8 border-t md:border-t-0 md:border-l border-border/60 pt-8 md:pt-0 md:pl-10">
-                <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
-                    Response time
-                  </dt>
-                  <dd className="text-sm sm:text-base text-foreground">
-                    Usually within 24 hours
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
-                    Timezone
-                  </dt>
-                  <dd className="text-sm sm:text-base text-foreground">
-                    IST · UTC+5:30
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
-                    Email
-                  </dt>
-                  <dd>
-                    <a
-                      href={`mailto:${DATA.contact.email}`}
-                      className="text-sm sm:text-base text-foreground animated-underline"
-                    >
-                      {DATA.contact.email}
-                    </a>
-                  </dd>
-                </div>
-              </dl>
-            </BlurFade>
-          </div>
-        </div>
+      <section id="contact" className="mt-16 border-t border-border pt-10">
+        <h2 className="text-sm font-medium text-muted-foreground">Contact</h2>
+        <p className="mt-4 max-w-md text-base leading-relaxed text-foreground">
+          Open to full-time roles in India and remote.
+        </p>
+        <ul className="mt-6 space-y-2 text-sm">
+          <li>
+            <a
+              href={`mailto:${DATA.contact.email}`}
+              className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+            >
+              {DATA.contact.email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={DATA.contact.social.LinkedIn.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+            >
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a
+              href={DATA.contact.social.GitHub.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+            >
+              GitHub
+            </a>
+          </li>
+        </ul>
+        <p className="mt-6 text-sm text-muted-foreground">
+          Aurangabad, India · IST (UTC+5:30)
+        </p>
       </section>
     </main>
   );

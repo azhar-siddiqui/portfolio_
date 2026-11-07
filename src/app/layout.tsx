@@ -1,6 +1,5 @@
 import { JsonLd } from "@/components/json-ld";
 import Navbar from "@/components/navbar";
-import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -80,7 +79,6 @@ export default function RootLayout({
           enableSystem={true}
         >
           <TooltipProvider delayDuration={0}>
-            <ScrollProgress />
             {children}
             <Navbar />
           </TooltipProvider>

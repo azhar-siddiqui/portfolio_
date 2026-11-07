@@ -58,7 +58,7 @@ export default async function Image() {
             marginBottom: "24px",
           }}
         >
-          {totalCount} Products · {featuredCount} Featured · 10+ Industries
+          {featuredCount} client products · {totalCount} listed in total
         </div>
         <div
           style={{
@@ -69,7 +69,7 @@ export default async function Image() {
             maxWidth: "800px",
           }}
         >
-          Maritime, logistics, fintech, EdTech, e-commerce, healthcare — mission-critical software that drives measurable business results.
+          Production work first. Personal demos are labeled and are not live businesses.
         </div>
         <div
           style={{

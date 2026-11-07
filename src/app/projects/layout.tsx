@@ -3,15 +3,15 @@ import { buildPageMetadata, ogImageUrl } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
   title: "Projects — Software Portfolio",
-  description: `Explore ${DATA.projects.length} mission-critical products by ${DATA.name} across maritime, logistics, healthcare, hospitality, EdTech, and supply chain — with measurable business impact.`,
+  description: `Production work and personal demos by ${DATA.name}. Client frontends, CentLabs Pro, and practice builds are labeled separately.`,
   path: "/projects",
   ogImage: ogImageUrl("/projects/opengraph-image"),
   keywords: [
     "software projects portfolio",
-    "enterprise SaaS projects",
-    "maritime fleet management software",
-    "healthcare laboratory platform",
-    "supply chain collaboration platform",
+    "CentLabs Pro",
+    "React TypeScript frontend",
+    "pathology lab software",
+    "product engineer projects",
     ...DATA.projects.map((project) => project.title),
   ],
 });
