@@ -3,8 +3,8 @@ export const HERO_DATA = {
   alias: "Azhar",
   initials: "SA",
   location: "Aurangabad, India",
-  tagline: "Product Engineer building and launching products from scratch.",
+  tagline: "Full stack engineer who owns features end to end, from the user's problem to production.",
   description:
-    "Product Engineer in Aurangabad, open to full-time roles in India and remote. Production frontend since 2021. Latest product is CentLabs Pro, offline software for pathology labs.",
+    "Full stack engineer in Aurangabad, open to on-site roles in Pune, anywhere in India, or remote. Shipping production software since 2023 with TypeScript, Next.js, Node.js, and PostgreSQL. Latest product is CentLabs Pro, offline software for pathology labs.",
   avatarUrl: "/me.png",
 } as const;

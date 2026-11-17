@@ -207,7 +207,7 @@ export default async function Page() {
       <section id="contact" className="mt-16 border-t border-border pt-10">
         <h2 className="text-sm font-medium text-muted-foreground">Contact</h2>
         <p className="mt-4 max-w-md text-base leading-relaxed text-foreground">
-          Open to full-time roles in India and remote.
+          Open to full-time roles: on-site in Pune, anywhere in India, or remote.
         </p>
         <ul className="mt-6 space-y-2 text-sm">
           <li>
@@ -216,16 +216,6 @@ export default async function Page() {
               className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
             >
               {DATA.contact.email}
-            </a>
-          </li>
-          <li>
-            <a
-              href={DATA.contact.social.LinkedIn.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
-            >
-              LinkedIn
             </a>
           </li>
           <li>

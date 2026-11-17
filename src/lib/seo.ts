@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const SITE_URL = DATA.url;
 export const SITE_NAME = DATA.name;
-export const SITE_LAST_MODIFIED = "2026-06-15";
+export const SITE_LAST_MODIFIED = "2026-11-17";
 
 const SKILL_KEYWORDS = Object.values(DATA.skills)
   .flat()

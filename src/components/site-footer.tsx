@@ -22,16 +22,6 @@ export async function SiteFooter() {
         </li>
         <li>
           <a
-            href={DATA.contact.social.LinkedIn.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
-          >
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          <a
             href={DATA.contact.social.GitHub.url}
             target="_blank"
             rel="noopener noreferrer"
