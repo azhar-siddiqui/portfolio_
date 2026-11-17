@@ -5,7 +5,7 @@ import { FolderOpen, HomeIcon, NotebookPen } from "lucide-react";
 
 export const DATA = {
   ...HERO_DATA,
-  url: "https://www.azharsayyed.in",
+  url: "https://portfolio-azhars.vercel.app",
   locationLink: "https://www.google.com/maps/place/aurangabad",
   title: "Full Stack Engineer",
   summary: `Full stack engineer based in Aurangabad, open to on-site roles in Pune, anywhere in India, or remote.

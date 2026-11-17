@@ -2,7 +2,7 @@
 
 Personal portfolio and professional site for **Azhar Sayyed**, a Product Engineer who builds full-stack software across logistics, maritime, healthcare, and hospitality.
 
-**Live site:** [azharsayyed.in](https://www.azharsayyed.in)
+**Live site:** [portfolio-azhars.vercel.app](https://portfolio-azhars.vercel.app)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fazhar-siddiqui%2Fdeveloper-corporate-portfolio)
 
